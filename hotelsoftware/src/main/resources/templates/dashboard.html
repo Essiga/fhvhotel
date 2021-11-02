@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>Dashboard</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex">
+
+    <nav class="flex-row h-screen w-1/5 bg-green-500"> <!-- Navbar -->
+
+        <div>
+            <a href="dashboard.html" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-gray-300">Dashboard</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+        </div>
+
+    </nav>
+
+    <div class="flex-row w-4/5"> <!-- Content -->
+
+        <div class="h-2/5 border border-blue-700">  <!-- Check-Ins -->
+            <h1 class="font-extrabold text-4xl text-blue-500 ">Check-Ins</h1>
+        </div>
+
+        <div class="h-2/5 border border-blue-700"> <!-- Check-Outs -->
+            <h1 class="font-extrabold text-4xl text-blue-500">Check-Outs</h1>
+        </div>
+
+        <div class="h-1/5 border border-blue-700"> <!-- Buttons -->
+
+            <div class="flex h-full w-full justify-around">
+
+                <a href="createbooking.html" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Booking</a>
+
+                <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Customer</a>
+
+                <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">...</a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
