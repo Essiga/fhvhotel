@@ -1,10 +1,13 @@
 package at.fhv.hotelsoftware.domain;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Objects;
 
+@Component
 public class Booking {
     private String id;
     private String customer;
