@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
+
 @Controller
 public class BookingController {
 
@@ -16,7 +18,9 @@ public class BookingController {
     @GetMapping("/index")
     public void createBooking(){
 
-        Id id = new Id();
+        List<Booking> test = createBookingService.findAllBookings();
+        System.out.println("test");
+        //Id id = new Id();
         //Booking booking = Booking.builder().withId(id).withCustomer("adrian").build();
 
         //createBookingService.createBooking(booking);

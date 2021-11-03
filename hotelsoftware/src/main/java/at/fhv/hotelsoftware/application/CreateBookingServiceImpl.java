@@ -7,6 +7,8 @@ import at.fhv.hotelsoftware.infrastructure.BookingRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class CreateBookingServiceImpl implements CreateBookingService {
 
@@ -17,6 +19,9 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         this.bookingRepository = bookingRepository;
     }
 
+    public List<Booking> findAllBookings(){
+        return bookingRepository.findAllBookings();
+    }
 
     /* public void createBooking(Booking booking){
         bookingRepository.addToDatabase(booking);

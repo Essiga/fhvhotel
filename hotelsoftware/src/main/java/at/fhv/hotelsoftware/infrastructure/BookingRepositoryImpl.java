@@ -12,6 +12,7 @@ import javax.persistence.TypedQuery;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
@@ -35,9 +36,12 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findAllBookings() {
-        TypedQuery<Booking>
-                query = em.createQuery("SELECT e FROM Booking e", Booking.class);
-        return query.getResultList();
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking", Booking.class);
+        List<Booking> resultList = query.getResultList();
+        if (1 != resultList.size()) {
+            return null;
+        }
+        return resultList;
     }
 
 
