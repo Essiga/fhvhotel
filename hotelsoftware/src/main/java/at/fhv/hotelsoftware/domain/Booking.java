@@ -9,14 +9,15 @@ import java.util.Objects;
 
 @Component
 public class Booking {
-    private String id;
+    private Id id;
     private String customer;
-    private LocalDateTime date;
+    private FromDate fromDate;
+    private ToDate toDate;
+    private CancellationDeadLine cancellationDeadLine;
     private RoomCategory roomCategory;
     private Integer roomCount;
-    private LocalDateTime cancellationDeadline;
-    private String voucherCode;
-    private LinkedList<String> extraServices;
+    private VoucherCode voucherCode;
+    //private LinkedList<String> extraServices;
 
     public static Builder builder(){return new Builder();}
 
@@ -31,7 +32,7 @@ public class Booking {
         public Builder() {
             this.instance = new Booking();
         }
-        public Builder withId(String id){
+        public Builder withId(Id id){
             this.instance.id = id;
             return this;
         }
@@ -39,8 +40,16 @@ public class Booking {
             this.instance.customer = customer;
             return this;
         }
-        public Builder withDate(LocalDateTime date){
-            this.instance.date = date;
+        public Builder withFromDate(FromDate date){
+            this.instance.fromDate = date;
+            return this;
+        }
+        public Builder withToDate(ToDate date){
+            this.instance.toDate = date;
+            return this;
+        }
+        public Builder withancellationDeadLine(CancellationDeadLine date){
+            this.instance.cancellationDeadLine = date;
             return this;
         }
         public Builder withRoomCategory(RoomCategory roomCategory){
@@ -51,18 +60,17 @@ public class Booking {
             this.instance.roomCount = roomCount;
             return this;
         }
-        public Builder withCancellationDeadline(LocalDateTime cancellationDeadline){
-            this.instance.cancellationDeadline = cancellationDeadline;
-            return this;
-        }
-        public Builder withVoucherCode(String voucherCode){
+        public Builder withVoucherCode(VoucherCode voucherCode){
             this.instance.voucherCode = voucherCode;
             return this;
         }
+        /*
         public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;
             return this;
         }
+
+         */
         public Booking build(){
             Objects.requireNonNull(this.instance.id, "type must be set in booking");
             return this.instance;
@@ -74,12 +82,12 @@ public class Booking {
         return "Booking{" +
                 "id='" + id + '\'' +
                 ", customer='" + customer + '\'' +
-                ", date=" + date +
+                //", date=" + date +
                 ", roomCategory=" + roomCategory +
                 ", roomCount=" + roomCount +
                 ", cancellationDeadline=" + cancellationDeadline +
                 ", voucherCode='" + voucherCode + '\'' +
-                ", extraServices=" + extraServices +
+                //", extraServices=" + extraServices +
                 '}';
     }
 }
