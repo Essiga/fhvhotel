@@ -5,5 +5,5 @@ import at.fhv.hotelsoftware.domain.api.BookingRepository;
 
 public interface CreateBookingService{
 
-    void createBooking(Booking booking);
+   // void createBooking(Booking booking);
 }

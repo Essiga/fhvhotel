@@ -17,9 +17,9 @@ public class BookingController {
     public void createBooking(){
 
         Id id = new Id();
-        Booking booking = Booking.builder().withId(id).withCustomer("adrian").build();
+        //Booking booking = Booking.builder().withId(id).withCustomer("adrian").build();
 
-        createBookingService.createBooking(booking);
+        //createBookingService.createBooking(booking);
 
     }
 

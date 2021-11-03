@@ -1,15 +1,14 @@
 package at.fhv.hotelsoftware.domain;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.time.LocalDateTime;
-import java.util.LinkedList;
 import java.util.Objects;
 
 @Component
 public class Booking {
-    private Id id;
+
+    private Id bookingId;
     private String customer;
     private FromDate fromDate;
     private ToDate toDate;
@@ -17,14 +16,17 @@ public class Booking {
     private RoomCategory roomCategory;
     private Integer roomCount;
     private VoucherCode voucherCode;
+    private BookingStatus bookingStatus;
+    private Long id;
     //private LinkedList<String> extraServices;
 
-    public static Builder builder(){return new Builder();}
+     public static Builder builder(){return new Builder();}
 
-    public Booking(){
-
+    private Booking( ){
     }
-    public static class Builder{
+
+
+  public static class Builder{
 
         private final Booking instance;
 
@@ -33,7 +35,7 @@ public class Booking {
             this.instance = new Booking();
         }
         public Builder withId(Id id){
-            this.instance.id = id;
+            this.instance.bookingId = id;
             return this;
         }
         public Builder withCustomer(String customer){
@@ -64,28 +66,35 @@ public class Booking {
             this.instance.voucherCode = voucherCode;
             return this;
         }
-        /*
-        public Builder withExtraServices(LinkedList<String> extraServices){
-            this.instance.extraServices = extraServices;
+        public Builder withBookingStatus(BookingStatus bookingStatus){
+            this.instance.bookingStatus = bookingStatus;
             return this;
         }
 
-         */
+        /* public Builder withExtraServices(LinkedList<String> extraServices){
+            this.instance.extraServices = extraServices;
+            return this;
+        } */
+
+
         public Booking build(){
-            Objects.requireNonNull(this.instance.id, "type must be set in booking");
+            Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");
             return this.instance;
         }
     }
 
+
+
+
     @Override
     public String toString() {
         return "Booking{" +
-                "id='" + id + '\'' +
+                "id='" + bookingId + '\'' +
                 ", customer='" + customer + '\'' +
                 //", date=" + date +
                 ", roomCategory=" + roomCategory +
                 ", roomCount=" + roomCount +
-                ", cancellationDeadline=" + cancellationDeadline +
+               // ", cancellationDeadline=" + cancellationDeadline +
                 ", voucherCode='" + voucherCode + '\'' +
                 //", extraServices=" + extraServices +
                 '}';

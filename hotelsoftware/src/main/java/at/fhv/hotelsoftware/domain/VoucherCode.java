@@ -1,10 +1,10 @@
 package at.fhv.hotelsoftware.domain;
 
 public class VoucherCode {
-    String string;
+    String voucherCode;
 
     public VoucherCode(){}
     public VoucherCode(String string){
-        this.string = string;
+        this.voucherCode = string;
     }
 }

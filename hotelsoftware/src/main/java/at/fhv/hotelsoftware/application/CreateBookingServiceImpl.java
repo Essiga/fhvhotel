@@ -18,7 +18,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     }
 
 
-    public void createBooking(Booking booking){
+    /* public void createBooking(Booking booking){
         bookingRepository.addToDatabase(booking);
-    }
+    } */
 }
