@@ -1,10 +1,10 @@
 package at.fhv.hotelsoftware.domain;
 
 public class Id {
-    String string;
+    private String bookingId;
 
     public Id(){}
     public Id(String string){
-        this.string = string;
+        this.bookingId = string;
     }
 }
