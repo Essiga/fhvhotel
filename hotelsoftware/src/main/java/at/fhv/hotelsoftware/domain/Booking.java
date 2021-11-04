@@ -13,10 +13,10 @@ public class Booking {
     private FromDate fromDate;
     private ToDate toDate;
     private CancellationDeadLine cancellationDeadLine;
-   // private RoomCategory roomCategory;
+    private RoomCategory roomCategory;
     private Integer roomCount;
     private VoucherCode voucherCode;
-   // private BookingStatus bookingStatus;
+   private BookingStatus bookingStatus;
     private Long id;
     //private LinkedList<String> extraServices;
 
@@ -54,10 +54,10 @@ public class Booking {
             this.instance.cancellationDeadLine = date;
             return this;
         }
-//        public Builder withRoomCategory(RoomCategory roomCategory){
-//            this.instance.roomCategory = roomCategory;
-//            return this;
-//        }
+        public Builder withRoomCategory(RoomCategory roomCategory){
+            this.instance.roomCategory = roomCategory;
+            return this;
+        }
         public Builder withRoomCount(Integer roomCount){
             this.instance.roomCount = roomCount;
             return this;
@@ -66,10 +66,10 @@ public class Booking {
             this.instance.voucherCode = voucherCode;
             return this;
         }
-//        public Builder withBookingStatus(BookingStatus bookingStatus){
-//            this.instance.bookingStatus = bookingStatus;
-//            return this;
-//        }
+        public Builder withBookingStatus(BookingStatus bookingStatus){
+            this.instance.bookingStatus = bookingStatus;
+            return this;
+        }
 
         /* public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;
