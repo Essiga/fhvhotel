@@ -1,68 +1,93 @@
 package at.fhv.hotelsoftware.view;
 
-import java.util.List;
-import java.util.Optional;
-
-import at.fhv.hotelsoftware.application.api.CheckInService;
-import at.fhv.hotelsoftware.application.api.CreateBookingService;
-import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.domain.Booking;
-import org.springframework.beans.factory.annotation.Autowired;
+import at.fhv.hotelsoftware.domain.model.Customer;
+import at.fhv.hotelsoftware.domain.model.Dummy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import at.fhv.hotelsoftware.application.CreateBookingServiceImpl;
-
 
 @Controller
 public class BookingController {
 
-    private static final String ROOM_URL = "/room";
+    private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
-    private static final String EXTRA_SERVICES_URL = "/extraServices";
-    private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
-    private static final String CREATE_BOOKING_URL = "/createBooking";
-    private static final String ERROR_URL = "/error";
+    private static final String CHOOSE_ROOM_URL = "/chooseRoom";
+    private static final String EXTRA_SERVICE_URL = "/extraService";
+    private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
+    private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
+
+    //private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
+    //private static final String CREATE_BOOKING_URL = "/createBooking";
+    //private static final String ERROR_URL = "/error";
 
     private static final String ERROR_VIEW = "errorView";
 
-
-
-
-    @Autowired
-    private CreateBookingService createBookingService;
-
-    @Autowired
-    private CheckInService checkInService;
-
-    @GetMapping (CREATE_BOOKING_URL)
-    public void createBooking (@RequestParam("customer") String customer, @RequestParam ("id") String id) {
-        Booking booking = Booking.builder().withId(id).withCustomer(customer).build();
-        createBookingService.createBooking(booking);
+    @GetMapping(DASHBOARD_URL)
+    public String showDashboard() {
+        return "dashboard";
     }
 
-    @PostMapping(CREATE_BOOKING_URL)
-    public
+    // @PostMapping("/createCustomer")
+    // public ModelAndView showCustomerForm(Model model) {
+    //     Customer customer = new Customer();
+    //     model.addAttribute("customer", customer);
+    //     return new ModelAndView("/createCustomer");
+    // }
 
-    @GetMapping(ERROR_URL)
-    public String displayError(@RequestParam("message") String message, Model model) {
-        model.addAttribute("message", message);
-        return ERROR_VIEW;
+    @GetMapping(CREATE_CUSTOMER_URL)
+    public ModelAndView showCustomerForm(Model model) {
+        Dummy dummy = new Dummy();
+        model.addAttribute("dummy", dummy);
+        return new ModelAndView("createCustomer");
+    }
+/*
+    @PostMapping("/createCustomer")
+    public String submitCustomer(@ModelAttribute("customer") Customer customer, Model model) {
+        System.out.println("CUSTOMER" + customer);
+        model.addAttribute("customer", customer);
+        return "chooseRoom";
+    }
+*/
+
+    @PostMapping(CHOOSE_ROOM_URL)
+    public ModelAndView submitChooseRoom(@ModelAttribute("dummy") Dummy dummy, Model model) {
+        model.addAttribute("dummy", dummy);
+        return new ModelAndView("chooseRoom");
     }
 
+    // @PostMapping("/chooseRoom")
+    // public String submitChooseRoom(@ModelAttribute("customer") Customer customer, Model model) {
+    //     System.out.println("customer existing in room POST: " + customer);
+    //     model.addAttribute("customer", customer);
 
-   /* @GetMapping(EXTRA_SERVICES_URL)
-    public String viewExtraService(Model model) {return EXTRA_SERVICES_URL; }
+    //     return "/extraService";
+    // }
 
-    @PostMapping (ADD_EXTRA_SERVICES_URL)
-    public ModelAndView addExtraService (@ModelAttribute AddExtraServiceForm addExtraServiceForm) {}
+    // @GetMapping("/extraService")
+    // public ModelAndView showExtraServices(@ModelAttribute("customer") Customer customer, Model model) {
+    //     System.out.println("customer existing in extra GET: " + customer);
+    //     model.addAttribute("customer", customer);
+    //     return new ModelAndView("/extraService");
+    // }
 
-    @PostMapping (CREATE_CUSTOMER_URL)
-    public ModelAndView createCustomer (@)*/
+    @PostMapping(EXTRA_SERVICE_URL)
+    public ModelAndView submitExtraService(@ModelAttribute("dummy") Dummy dummy, Model model) {
+        model.addAttribute("dummy", dummy);
+        return new ModelAndView("extraService");
+    }
 
+    @PostMapping(BOOKING_SUMMARY_URL)
+    public ModelAndView submitBookingSummary(@ModelAttribute("dummy") Dummy dummy, Model model) {
+        model.addAttribute("dummy", dummy);
+        return new ModelAndView("bookingSummary");
+    }
+
+    @PostMapping(WRITE_BOOKING_IN_DB)
+    public ModelAndView writeBookingInDatabase(@ModelAttribute("dummy") Dummy dummy, Model model) {
+        model.addAttribute("dummy", dummy);
+        return new ModelAndView("dashboard");
+    }
 }
