@@ -39,4 +39,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
 
         bookingRepository.addBooking(booking);
     }
+
+
 }
