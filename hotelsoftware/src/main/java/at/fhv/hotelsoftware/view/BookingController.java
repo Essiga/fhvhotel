@@ -1,7 +1,9 @@
 package at.fhv.hotelsoftware.view;
 
+import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.domain.model.Customer;
 import at.fhv.hotelsoftware.domain.model.Dummy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BookingController {
+
+    @Autowired
+    CreateBookingService createBookingService;
 
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
@@ -88,6 +93,9 @@ public class BookingController {
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("dummy") Dummy dummy, Model model) {
         model.addAttribute("dummy", dummy);
+
+        createBookingService.createBooking(dummy);
+
         return new ModelAndView("dashboard");
     }
 }

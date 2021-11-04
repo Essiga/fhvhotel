@@ -65,7 +65,7 @@ public class Booking {
             return this;
         }
 
-        public Builder withancellationDeadLine(LocalDateTime date) {
+        public Builder withCancellationDeadLine(LocalDateTime date) {
             this.instance.cancellationDeadLine = date;
             return this;
         }
