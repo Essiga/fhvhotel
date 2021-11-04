@@ -2,6 +2,8 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.domain.Booking;
+import at.fhv.hotelsoftware.domain.Id;
+import at.fhv.hotelsoftware.domain.VoucherCode;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.infrastructure.BookingRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,15 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         return bookingRepository.findAllBookings();
     }
 
-    /* public void createBooking(Booking booking){
-        bookingRepository.addToDatabase(booking);
-    } */
+    public void createBooking(){
+
+        Booking booking = Booking.builder().
+                withLongId(99L).
+                withId(new Id("99")).
+                withCustomer("Test").
+                withVoucherCode(new VoucherCode("voucherCode")).
+                build();
+
+        bookingRepository.addBooking(booking);
+    }
 }

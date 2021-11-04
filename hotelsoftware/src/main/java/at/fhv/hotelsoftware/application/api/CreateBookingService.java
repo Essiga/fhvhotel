@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface CreateBookingService{
 
-   // void createBooking(Booking booking);
+   void createBooking();
    Optional<List<Booking>> findAllBookings();
 }
