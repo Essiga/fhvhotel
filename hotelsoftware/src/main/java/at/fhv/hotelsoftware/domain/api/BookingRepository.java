@@ -5,10 +5,13 @@ import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 
 public interface BookingRepository {
    // void addToDatabase(Booking booking);
 
-    List<Booking> findAllBookings();
+    Optional<List<Booking>> findAllBookings();
+    void addBooking(Booking booking);
+    Optional<List<Booking>> findTodaysCheckIns();
 }

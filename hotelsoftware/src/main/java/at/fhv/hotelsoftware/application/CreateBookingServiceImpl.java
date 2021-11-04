@@ -6,8 +6,10 @@ import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.infrastructure.BookingRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CreateBookingServiceImpl implements CreateBookingService {
@@ -19,7 +21,8 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         this.bookingRepository = bookingRepository;
     }
 
-    public List<Booking> findAllBookings(){
+    @Transactional
+    public Optional<List<Booking>> findAllBookings(){
         return bookingRepository.findAllBookings();
     }
 

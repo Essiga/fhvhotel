@@ -4,9 +4,10 @@ import at.fhv.hotelsoftware.domain.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CreateBookingService{
 
    // void createBooking(Booking booking);
-   public List<Booking> findAllBookings();
+   Optional<List<Booking>> findAllBookings();
 }
