@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Extra Services</title>
+</head>
+<body>
+<h1>Extra Services in progress :)</h1>
+
+<form action="#" th:action="@{/bookingSummary}" th:object="${dummy}" method="post">
+
+    <input type="hidden" id="fname" name="fname" th:field="*{fname}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{lname}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{voucherCode}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{streetAdr}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{zip}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{city}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{country}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{phoneNumber}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{email}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{singleRoomCount}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{doubleRoomCount}"/>
+    <input type="hidden" id="lname" name="lname" th:field="*{luxusRoomCount}"/>
+
+    <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+
+        <div class="w-1/6">
+            <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
+        </div>
+
+    </div>
+</form>
+</body>
+</html>

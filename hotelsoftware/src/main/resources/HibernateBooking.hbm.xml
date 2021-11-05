@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="at.fhv.hotelsoftware.domain.Booking" table="tbl_booking" lazy="true">
+
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.Id">
+            <property name="bookingId" column="bookingId" type="java.lang.String"/>
+        </component>
+
+        <property name="customer" column="customer" type="java.lang.String"/>
+
+        <property name="fromDate" column="fromDate" type="java.time.LocalDateTime"/>
+
+        <property name="toDate" column="toDate" type="java.time.LocalDateTime"/>
+
+        <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDateTime"/>
+
+
+        <property name="roomCategory" column="roomCategory">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">at.fhv.hotelsoftware.domain.RoomCategory</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <property name="bookingStatus" column="bookingStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">at.fhv.hotelsoftware.domain.BookingStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+
+        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.VoucherCode">
+            <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
+        </component>
+
+
+        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
+
+
+        <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
+            class="at.fhv.hotelsoftware.domain.customer"/> -->
+    </class>
+</hibernate-mapping>
