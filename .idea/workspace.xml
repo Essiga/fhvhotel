@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39970ea2-4582-4e0d-b409-3e8ee2c630ca" name="Changes" comment="Create Booking Basic UI finished">
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createbooking.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="changing branches">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +41,22 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="working_dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="JPA Structure" value="true" />
+      </map>
+    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -65,6 +76,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -79,7 +91,19 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.dashboard.html">
+  <component name="RunManager" selected="JavaScript Debug.chooseRoom.html">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
+      <module name="hotelsoftware.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="chooseRoom.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/chooseRoom.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="createbooking.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/createbooking.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -99,13 +123,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.main" />
+      <item itemvalue="JavaScript Debug.createbooking.html" />
+      <item itemvalue="JavaScript Debug.dashboard.html" />
+      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="JavaScript Debug.chooseRoom.html" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.chooseRoom.html" />
         <item itemvalue="JavaScript Debug.dashboard.html" />
         <item itemvalue="JavaScript Debug.createbooking.html" />
         <item itemvalue="Spring Boot.HotelsoftwareApplication" />
         <item itemvalue="JavaScript Debug.dashboard.html" />
-        <item itemvalue="Spring Boot.HotelsoftwareApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -118,6 +149,8 @@
       <option name="presentableId" value="Default" />
       <updated>1635163984226</updated>
       <workItem from="1635163986406" duration="1007000" />
+      <workItem from="1636120133808" duration="338000" />
+      <workItem from="1636120499922" duration="1529000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -147,7 +180,14 @@
       <option name="project" value="LOCAL" />
       <updated>1635706994087</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="changing branches">
+      <created>1636120254541</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1636120254541</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +221,7 @@
     <MESSAGE value="test" />
     <MESSAGE value="test2" />
     <MESSAGE value="Create Booking Basic UI finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Booking Basic UI finished" />
+    <MESSAGE value="changing branches" />
+    <option name="LAST_COMMIT_MESSAGE" value="changing branches" />
   </component>
 </project>
