@@ -1,8 +1,7 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
-import at.fhv.hotelsoftware.domain.model.Customer;
-import at.fhv.hotelsoftware.domain.model.Dummy;
+import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,8 +43,8 @@ public class BookingController {
 
     @GetMapping(CREATE_CUSTOMER_URL)
     public ModelAndView showCustomerForm(Model model) {
-        Dummy dummy = new Dummy();
-        model.addAttribute("dummy", dummy);
+        BookingForm bookingForm = new BookingForm();
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("createCustomer");
     }
 /*
@@ -58,8 +57,8 @@ public class BookingController {
 */
 
     @PostMapping(CHOOSE_ROOM_URL)
-    public ModelAndView submitChooseRoom(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitChooseRoom(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("chooseRoom");
     }
 
@@ -79,23 +78,20 @@ public class BookingController {
     // }
 
     @PostMapping(EXTRA_SERVICE_URL)
-    public ModelAndView submitExtraService(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitExtraService(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("extraService");
     }
 
     @PostMapping(BOOKING_SUMMARY_URL)
-    public ModelAndView submitBookingSummary(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitBookingSummary(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("bookingSummary");
     }
 
     @PostMapping(WRITE_BOOKING_IN_DB)
-    public ModelAndView writeBookingInDatabase(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
-
-        createBookingService.createBooking(dummy);
-
+    public ModelAndView writeBookingInDatabase(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        createBookingService.createBooking(bookingForm);
         return new ModelAndView("dashboard");
     }
 }

@@ -4,6 +4,7 @@ import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -55,13 +56,13 @@ public class Booking {
             return this;
         }
 
-        public Builder withFromDate(LocalDateTime date) {
-            this.instance.fromDate = date;
+        public Builder withFromDate(LocalDateTime fromDate) {
+            this.instance.fromDate = fromDate;
             return this;
         }
 
-        public Builder withToDate(LocalDateTime date) {
-            this.instance.toDate = date;
+        public Builder withToDate(LocalDateTime toDate) {
+            this.instance.toDate = toDate;
             return this;
         }
 
@@ -89,6 +90,7 @@ public class Booking {
             this.instance.bookingStatus = bookingStatus;
             return this;
         }
+
 
         /* public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;

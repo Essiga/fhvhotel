@@ -7,20 +7,20 @@
 <body>
 <h1>Extra Services in progress :)</h1>
 
-<form action="#" th:action="@{/bookingSummary}" th:object="${dummy}" method="post">
+<form action="#" th:action="@{/bookingSummary}" th:object="${bookingForm}" method="post">
 
     <input type="hidden" id="fname" name="fname" th:field="*{fname}"/>
     <input type="hidden" id="lname" name="lname" th:field="*{lname}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{voucherCode}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{streetAdr}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{zip}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{city}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{country}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{phoneNumber}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{email}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{singleRoomCount}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{doubleRoomCount}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{luxusRoomCount}"/>
+    <input type="hidden" id="voucher" name="voucher" th:field="*{voucherCode}"/>
+    <input type="hidden" id="streetAdr" name="streetAdr" th:field="*{streetAdr}"/>
+    <input type="hidden" id="zip" name="zip" th:field="*{zip}"/>
+    <input type="hidden" id="city" name="city" th:field="*{city}"/>
+    <input type="hidden" id="country" name="country" th:field="*{country}"/>
+    <input type="hidden" id="phone" name="phone" th:field="*{phoneNumber}"/>
+    <input type="hidden" id="email" name="email" th:field="*{email}"/>
+    <input type="hidden" id="single" name="single" th:field="*{singleRoomCount}"/>
+    <input type="hidden" id="double" name="double" th:field="*{doubleRoomCount}"/>
+    <input type="hidden" id="luxus" name="luxus" th:field="*{luxusRoomCount}"/>
 
     <div class="mt-4 flex row justify-between"> <!-- Button Line -->
 
