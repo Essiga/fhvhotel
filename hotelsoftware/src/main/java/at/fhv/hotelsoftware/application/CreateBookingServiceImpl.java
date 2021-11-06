@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +34,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm){
 
-        //TODO: convert string date to localDate (cancellationDeadline, fromDate, toDate)
         //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
                 withLongId(99L).
@@ -41,7 +42,8 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
                 withBookingStatus(BookingStatus.PENDING).
-                withFromDate(bookingForm.getFromDate()).withToDate(bookingForm.getToDate()).
+                withFromDate(LocalDateTime.of(LocalDate.parse(bookingForm.getFromDate()), LocalTime.now())).
+                withToDate(LocalDateTime.of(LocalDate.parse(bookingForm.getToDate()), LocalTime.now())).
                 withRoomCategory(RoomCategory.SINGLE).
                 withRoomCount(bookingForm.getSingleRoomCount()).
                 build();

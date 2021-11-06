@@ -17,8 +17,8 @@ public class BookingForm {
     private Integer singleRoomCount;
     private Integer doubleRoomCount;
     private Integer luxusRoomCount;
-    private LocalDate fromDate;
-    private LocalDate toDate;
+    private String fromDate;
+    private String toDate;
 
     public String getFname() {
         return fname;
@@ -116,11 +116,11 @@ public class BookingForm {
         this.luxusRoomCount = luxusRoomCount;
     }
 
-    public LocalDate getFromDate() {return fromDate;}
+    public String getFromDate() {return fromDate;}
 
-    public void setFromDate(LocalDate fromDate) {this.fromDate = fromDate;}
+    public void setFromDate(String fromDate) {this.fromDate = fromDate;}
 
-    public LocalDate getToDate() {return toDate;}
+    public String getToDate() {return toDate;}
 
-    public void setToDate(LocalDate toDate) {this.toDate = toDate;}
+    public void setToDate(String toDate) {this.toDate = toDate;}
 }
