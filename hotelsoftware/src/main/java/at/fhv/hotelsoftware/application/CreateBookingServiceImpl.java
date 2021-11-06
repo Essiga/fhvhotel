@@ -38,7 +38,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         Booking booking = Booking.builder().
                 withLongId(99L).
                 withId(new Id("99")).
-                withCustomer(bookingForm.getFname() + bookingForm.getLname()).
+                withCustomer(bookingForm.getFname() + " " + bookingForm.getLname()).
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
                 withBookingStatus(BookingStatus.PENDING).
