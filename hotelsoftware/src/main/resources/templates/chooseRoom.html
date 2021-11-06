@@ -42,9 +42,10 @@
   </nav>
 
   <div class="flex w-4/5"> <!-- Content -->
+
     <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-      <form action="#" th:action="@{/extraService}" th:object="${bookingForm}" method="post">
+      <form th:action="@{/extraService}" th:object="${bookingForm}" method="post">
 
         <input type="hidden" id="fname" name="fname" th:field="*{fname}"/>
         <input type="hidden" id="lname" name="lname" th:field="*{lname}"/>
@@ -56,48 +57,47 @@
         <input type="hidden" id="phone" name="phone" th:field="*{phoneNumber}"/>
         <input type="hidden" id="email" name="email" th:field="*{email}"/>
 
-        <div class="h-1/2 p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+        <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
-          <h2 class="mb-4 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
+          <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
 
-          <div class="flex row"> <!-- Form Line -->
+          <div class="flex"> <!-- Form Line -->
 
             <div class="w-1/3">
-              <h2 class="mb-4 text-xl font-semibold">Single </h2>
-              <input type="number" id="single" class="border-2 border-gray-400 w-8" th:field="*{singleRoomCount}">
-              <label for="single" class=" block text-sm text-gray-500">Room count</label>
+              <h2 class="mb-2 font-semibold">Single </h2>
+              <input type="number" id="single" class="border-2 border-gray-400 w-16" th:field="*{singleRoomCount}">
+              <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
             </div>
 
             <div class="w-1/3">
-              <h2 class="mb-4 text-xl font-semibold">Double</h2>
-              <input type="number" id="double" class="border-2 border-gray-400 w-8" th:field="*{doubleRoomCount}">
-              <label for="double" class=" block text-sm text-gray-500">Room count</label>
+              <h2 class="mb-2 font-semibold">Double</h2>
+              <input type="number" id="double" class="border-2 border-gray-400 w-16" th:field="*{doubleRoomCount}">
+              <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
             </div>
 
-            <div class="w-1/3 ">
-              <h2 class="mb-4 text-xl font-semibold">Luxus   </h2>
-              <input type="number" id="luxus" class="border-2 border-gray-400 w-8" th:field="*{luxusRoomCount}">
-              <label for="luxus" class=" block text-sm text-gray-500">Room count</label>
+            <div class="w-1/3">
+              <h2 class="mb-2 font-semibold">Luxus</h2>
+              <input type="number" id="luxus" class="border-2 border-gray-400 w-16" th:field="*{luxusRoomCount}">
+              <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
             </div>
 
           </div>
 
         </div>
 
+        <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
 
-        <div class="p-2 mt-4 border border-gray-300">   <!-- Logical Block -->
-
-          <h2 class="mb-4 text-xl font-semibold">Stay duration</h2>
+          <h2 class="mb-6 text-xl font-semibold">Stay Duration</h2>
 
           <div class="flex row"> <!-- Form Line -->
 
           <div class="w-1/2">
-            <input type="date" id="fromDate" class="border-2 border-gray-400 mb-2" th:field="*{fromDate}">
+            <input type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{fromDate}">
             <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
           </div>
 
           <div class="w-1/2">
-            <input type="date" id="toDate" class="border-2 border-gray-400 mb-2" th:field="*{toDate}">
+            <input type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{toDate}">
             <label for="toDate" class="block text-sm text-gray-500">To Date</label>
           </div>
 
@@ -105,27 +105,22 @@
 
         </div>
 
-
-        <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+        <div class="mt-8 flex row justify-between"> <!-- Button Line -->
 
           <div class="w-5/6">
-            <a href="createCustomer" class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
+            <a href="createCustomer" class="w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
           </div>
 
           <div class="w-1/6">
-            <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
+            <button type="submit" class="w-full p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
           </div>
 
         </div>
       </form>
-
     </div>
   </div>
-
 </div>
-
 </div>
-
 </body>
 
 </html>

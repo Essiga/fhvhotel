@@ -40,7 +40,7 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">  <!-- Form Block -->
 
-            <form action="#" th:action="@{/chooseRoom}" th:object="${bookingForm}" method="post">
+            <form th:action="@{/chooseRoom}" th:object="${bookingForm}" method="post">
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -146,14 +146,14 @@
 
                 </div>
 
-                <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+                <div class="mt-8 flex row justify-between"> <!-- Button Line -->
 
                     <div class="w-5/6">
-                        <a href="/" class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
+                        <a href="/" class="w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
                     </div>
 
                     <div class="w-1/6">
-                        <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
+                        <button type="submit" class="w-full p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
                     </div>
 
                 </div>
