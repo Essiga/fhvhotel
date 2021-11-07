@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="save state">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,8 +129,8 @@
       <item itemvalue="JavaScript Debug.chooseRoom.html" />
       <item itemvalue="JavaScript Debug.createCustomer.html" />
       <item itemvalue="JavaScript Debug.bookingSummary.html" />
-      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
       <item itemvalue="JavaScript Debug.dashboard.html (1)" />
+      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -156,7 +153,7 @@
       <workItem from="1635163986406" duration="1007000" />
       <workItem from="1636120133808" duration="338000" />
       <workItem from="1636120499922" duration="1529000" />
-      <workItem from="1636231829537" duration="10146000" />
+      <workItem from="1636231829537" duration="10204000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -221,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636165257479</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="save state">
+      <created>1636244174224</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1636244174224</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
