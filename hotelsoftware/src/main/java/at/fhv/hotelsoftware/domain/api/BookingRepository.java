@@ -1,11 +1,8 @@
 package at.fhv.hotelsoftware.domain.api;
 
-import at.fhv.hotelsoftware.domain.Booking;
-import org.springframework.stereotype.Component;
+import at.fhv.hotelsoftware.domain.model.Booking;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 
 
 public interface BookingRepository {

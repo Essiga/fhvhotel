@@ -4,13 +4,13 @@
 
 
 <hibernate-mapping default-access="field" default-cascade="all">
-    <class name="at.fhv.hotelsoftware.domain.Booking" table="tbl_booking" lazy="true">
+    <class name="at.fhv.hotelsoftware.domain.model.Booking" table="tbl_booking" lazy="true">
 
         <id name="id" type="long" column="id">
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.Id">
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.Id">
             <property name="bookingId" column="bookingId" type="java.lang.String"/>
         </component>
 
@@ -25,20 +25,20 @@
 
         <property name="roomCategory" column="roomCategory">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.RoomCategory</param>
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
                 <param name="type">12</param>
             </type>
         </property>
 
         <property name="bookingStatus" column="bookingStatus">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.BookingStatus</param>
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.BookingStatus</param>
                 <param name="type">12</param>
             </type>
         </property>
 
 
-        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.VoucherCode">
+        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
             <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
         </component>
 

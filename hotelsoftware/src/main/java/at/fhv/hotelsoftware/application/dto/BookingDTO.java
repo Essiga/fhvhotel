@@ -1,9 +1,11 @@
 package at.fhv.hotelsoftware.application.dto;
 
-import at.fhv.hotelsoftware.domain.*;
+import at.fhv.hotelsoftware.domain.model.BookingStatus;
+import at.fhv.hotelsoftware.domain.model.Id;
+import at.fhv.hotelsoftware.domain.model.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.VoucherCode;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.Objects;
 
 public final class BookingDTO {

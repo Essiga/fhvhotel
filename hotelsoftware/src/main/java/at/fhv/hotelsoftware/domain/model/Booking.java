@@ -1,7 +1,5 @@
-package at.fhv.hotelsoftware.domain;
+package at.fhv.hotelsoftware.domain.model;
 
-import org.apache.tomcat.jni.Local;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

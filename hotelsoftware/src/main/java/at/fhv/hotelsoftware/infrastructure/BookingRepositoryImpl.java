@@ -1,20 +1,14 @@
 package at.fhv.hotelsoftware.infrastructure;
 
-import at.fhv.hotelsoftware.domain.Booking;
-import at.fhv.hotelsoftware.domain.Id;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
-import java.util.Optional;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
