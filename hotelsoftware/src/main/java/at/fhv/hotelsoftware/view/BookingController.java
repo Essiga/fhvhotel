@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
+import at.fhv.hotelsoftware.domain.Booking;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class BookingController {
@@ -30,8 +34,10 @@ public class BookingController {
     private static final String ERROR_VIEW = "errorView";
 
     @GetMapping(DASHBOARD_URL)
-    public String showDashboard() {
-        return "dashboard";
+    public ModelAndView showDashboard(Model model) {
+        List<Booking> listOfBookings = createBookingService.findAllBookings().orElse(Collections.emptyList());
+        model.addAttribute("bookings", listOfBookings);
+        return new ModelAndView("dashboard");
     }
 
     // @PostMapping("/createCustomer")

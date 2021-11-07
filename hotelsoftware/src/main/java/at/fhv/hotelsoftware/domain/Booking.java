@@ -31,6 +31,98 @@ public class Booking {
     public Booking() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Id getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(Id bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public LocalDateTime getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(LocalDateTime fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public LocalDateTime getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(LocalDateTime toDate) {
+        this.toDate = toDate;
+    }
+
+    public LocalDateTime getCancellationDeadLine() {
+        return cancellationDeadLine;
+    }
+
+    public void setCancellationDeadLine(LocalDateTime cancellationDeadLine) {
+        this.cancellationDeadLine = cancellationDeadLine;
+    }
+
+    public RoomCategory getRoomCategory() {
+        return roomCategory;
+    }
+
+    public void setRoomCategory(RoomCategory roomCategory) {
+        this.roomCategory = roomCategory;
+    }
+
+    public Integer getRoomCount() {
+        return roomCount;
+    }
+
+    public void setRoomCount(Integer roomCount) {
+        this.roomCount = roomCount;
+    }
+
+    public VoucherCode getVoucherCode() {
+        return voucherCode;
+    }
+
+    public void setVoucherCode(VoucherCode voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Booking{" +
+                "customer='" + customer + '\'' +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
+                ", roomCategory=" + roomCategory +
+                ", roomCount=" + roomCount +
+                ", voucherCode=" + voucherCode +
+                ", bookingStatus=" + bookingStatus +
+                '}';
+    }
 
     public static class Builder {
 
