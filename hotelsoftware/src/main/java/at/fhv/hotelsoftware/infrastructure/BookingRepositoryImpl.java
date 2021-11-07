@@ -37,26 +37,19 @@ public class BookingRepositoryImpl implements BookingRepository {
     private EntityManager em;
 
     @Override
-    public Optional<List<Booking>> findAllBookings() {
+    public List<Booking> findAllBookings() {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking", Booking.class);
         List<Booking> resultList = query.getResultList();
 
-        if(0 == resultList.size()){
-            return Optional.empty();
-        }
-        return Optional.of(resultList);
+        return resultList;
     }
 
     @Override
-    public Optional<List<Booking>> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE from_date Like '2021-11-04%' ", Booking.class);
+    public List<Booking> findTodaysCheckIns() {
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE from_date = CURRENT_DATE() ", Booking.class);
         List<Booking> resultList = query.getResultList();
 
-        System.out.println(resultList.size());
-        if(0 == resultList.size()){
-            return Optional.empty();
-        }
-        return Optional.of(resultList);
+        return resultList;
     }
 
 

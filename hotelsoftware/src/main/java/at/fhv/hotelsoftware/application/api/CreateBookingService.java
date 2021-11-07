@@ -9,5 +9,5 @@ import java.util.Optional;
 public interface CreateBookingService{
 
    void createBooking(BookingForm bookingForm);
-   Optional<List<Booking>> findAllBookings();
+
 }

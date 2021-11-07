@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Component
@@ -14,9 +13,9 @@ public class Booking {
     private Long id;
     private Id bookingId;
     private String customer;
-    private LocalDateTime fromDate;
-    private LocalDateTime toDate;
-    private LocalDateTime cancellationDeadLine;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+    private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
     private Integer roomCount;
     private VoucherCode voucherCode;
@@ -55,27 +54,27 @@ public class Booking {
         this.customer = customer;
     }
 
-    public LocalDateTime getFromDate() {
+    public LocalDate getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDateTime fromDate) {
+    public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
 
-    public LocalDateTime getToDate() {
+    public LocalDate getToDate() {
         return toDate;
     }
 
-    public void setToDate(LocalDateTime toDate) {
+    public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
 
-    public LocalDateTime getCancellationDeadLine() {
+    public LocalDate getCancellationDeadLine() {
         return cancellationDeadLine;
     }
 
-    public void setCancellationDeadLine(LocalDateTime cancellationDeadLine) {
+    public void setCancellationDeadLine(LocalDate cancellationDeadLine) {
         this.cancellationDeadLine = cancellationDeadLine;
     }
 
@@ -148,17 +147,17 @@ public class Booking {
             return this;
         }
 
-        public Builder withFromDate(LocalDateTime fromDate) {
+        public Builder withFromDate(LocalDate fromDate) {
             this.instance.fromDate = fromDate;
             return this;
         }
 
-        public Builder withToDate(LocalDateTime toDate) {
+        public Builder withToDate(LocalDate toDate) {
             this.instance.toDate = toDate;
             return this;
         }
 
-        public Builder withCancellationDeadLine(LocalDateTime date) {
+        public Builder withCancellationDeadLine(LocalDate date) {
             this.instance.cancellationDeadLine = date;
             return this;
         }

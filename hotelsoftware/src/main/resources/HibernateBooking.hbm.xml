@@ -16,11 +16,11 @@
 
         <property name="customer" column="customer" type="java.lang.String"/>
 
-        <property name="fromDate" column="fromDate" type="java.time.LocalDateTime"/>
+        <property name="fromDate" column="fromDate" type="java.time.LocalDate"/>
 
-        <property name="toDate" column="toDate" type="java.time.LocalDateTime"/>
+        <property name="toDate" column="toDate" type="java.time.LocalDate"/>
 
-        <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDateTime"/>
+        <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
 
         <property name="roomCategory" column="roomCategory">

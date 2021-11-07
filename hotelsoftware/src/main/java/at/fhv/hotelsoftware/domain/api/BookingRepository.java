@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface BookingRepository {
    // void addToDatabase(Booking booking);
 
-    Optional<List<Booking>> findAllBookings();
+    List<Booking> findAllBookings();
     void addBooking(Booking booking);
-    Optional<List<Booking>> findTodaysCheckIns();
+    List<Booking> findTodaysCheckIns();
 }

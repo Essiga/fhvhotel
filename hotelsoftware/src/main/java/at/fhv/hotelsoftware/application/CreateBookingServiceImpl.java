@@ -27,7 +27,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     }
 
     @Transactional
-    public Optional<List<Booking>> findAllBookings(){
+    public List<Booking> findAllBookings(){
         return bookingRepository.findAllBookings();
     }
 
@@ -42,8 +42,8 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
                 withBookingStatus(BookingStatus.PENDING).
-                withFromDate(LocalDateTime.of(LocalDate.parse(bookingForm.getFromDate()), LocalTime.now())).
-                withToDate(LocalDateTime.of(LocalDate.parse(bookingForm.getToDate()), LocalTime.now())).
+                withFromDate(LocalDate.parse(bookingForm.getFromDate())).
+                withToDate(LocalDate.parse(bookingForm.getToDate())).
                 withRoomCategory(RoomCategory.SINGLE).
                 withRoomCount(bookingForm.getSingleRoomCount()).
                 build();

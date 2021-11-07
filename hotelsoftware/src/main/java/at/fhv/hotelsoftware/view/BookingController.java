@@ -1,6 +1,8 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
+import at.fhv.hotelsoftware.application.api.ViewBookingService;
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.domain.Booking;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class BookingController {
     @Autowired
     CreateBookingService createBookingService;
 
+    @Autowired
+    ViewBookingService viewBookingService;
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -35,7 +40,7 @@ public class BookingController {
 
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
-        List<Booking> listOfBookings = createBookingService.findAllBookings().orElse(Collections.emptyList());
+        List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("bookings", listOfBookings);
         return new ModelAndView("dashboard");
     }
