@@ -1,6 +1,9 @@
-package at.fhv.hotelsoftware.domain.model;
+package at.fhv.hotelsoftware.view.form;
 
-public class Dummy {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class BookingForm {
 
     private String fname;
     private String lname;
@@ -11,9 +14,11 @@ public class Dummy {
     private String country;
     private String phoneNumber;
     private String email;
-    private String singleRoomCount;
-    private String doubleRoomCount;
-    private String luxusRoomCount;
+    private Integer singleRoomCount;
+    private Integer doubleRoomCount;
+    private Integer luxusRoomCount;
+    private String fromDate;
+    private String toDate;
 
     public String getFname() {
         return fname;
@@ -87,27 +92,35 @@ public class Dummy {
         this.email = email;
     }
 
-    public String getSingleRoomCount() {
+    public Integer getSingleRoomCount() {
         return singleRoomCount;
     }
 
-    public void setSingleRoomCount(String singleRoomCount) {
+    public void setSingleRoomCount(Integer singleRoomCount) {
         this.singleRoomCount = singleRoomCount;
     }
 
-    public String getDoubleRoomCount() {
+    public Integer getDoubleRoomCount() {
         return doubleRoomCount;
     }
 
-    public void setDoubleRoomCount(String doubleRoomCount) {
+    public void setDoubleRoomCount(Integer doubleRoomCount) {
         this.doubleRoomCount = doubleRoomCount;
     }
 
-    public String getLuxusRoomCount() {
+    public Integer getLuxusRoomCount() {
         return luxusRoomCount;
     }
 
-    public void setLuxusRoomCount(String luxusRoomCount) {
+    public void setLuxusRoomCount(Integer luxusRoomCount) {
         this.luxusRoomCount = luxusRoomCount;
     }
+
+    public String getFromDate() {return fromDate;}
+
+    public void setFromDate(String fromDate) {this.fromDate = fromDate;}
+
+    public String getToDate() {return toDate;}
+
+    public void setToDate(String toDate) {this.toDate = toDate;}
 }

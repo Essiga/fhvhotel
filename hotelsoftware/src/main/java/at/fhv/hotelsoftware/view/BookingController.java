@@ -1,8 +1,9 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
-import at.fhv.hotelsoftware.domain.model.Customer;
-import at.fhv.hotelsoftware.domain.model.Dummy;
+import at.fhv.hotelsoftware.application.api.ViewBookingService;
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +12,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class BookingController {
 
     @Autowired
     CreateBookingService createBookingService;
+
+    @Autowired
+    ViewBookingService viewBookingService;
 
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
@@ -31,8 +37,10 @@ public class BookingController {
     private static final String ERROR_VIEW = "errorView";
 
     @GetMapping(DASHBOARD_URL)
-    public String showDashboard() {
-        return "dashboard";
+    public ModelAndView showDashboard(Model model) {
+        List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
+        model.addAttribute("bookings", listOfBookings);
+        return new ModelAndView("dashboard");
     }
 
     // @PostMapping("/createCustomer")
@@ -44,8 +52,8 @@ public class BookingController {
 
     @GetMapping(CREATE_CUSTOMER_URL)
     public ModelAndView showCustomerForm(Model model) {
-        Dummy dummy = new Dummy();
-        model.addAttribute("dummy", dummy);
+        BookingForm bookingForm = new BookingForm();
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("createCustomer");
     }
 /*
@@ -58,8 +66,8 @@ public class BookingController {
 */
 
     @PostMapping(CHOOSE_ROOM_URL)
-    public ModelAndView submitChooseRoom(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitChooseRoom(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("chooseRoom");
     }
 
@@ -79,23 +87,20 @@ public class BookingController {
     // }
 
     @PostMapping(EXTRA_SERVICE_URL)
-    public ModelAndView submitExtraService(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitExtraService(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("extraService");
     }
 
     @PostMapping(BOOKING_SUMMARY_URL)
-    public ModelAndView submitBookingSummary(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
+    public ModelAndView submitBookingSummary(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("bookingSummary");
     }
 
     @PostMapping(WRITE_BOOKING_IN_DB)
-    public ModelAndView writeBookingInDatabase(@ModelAttribute("dummy") Dummy dummy, Model model) {
-        model.addAttribute("dummy", dummy);
-
-        createBookingService.createBooking(dummy);
-
-        return new ModelAndView("dashboard");
+    public ModelAndView writeBookingInDatabase(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        createBookingService.createBooking(bookingForm);
+        return new ModelAndView("redirect:"+"/");
     }
 }

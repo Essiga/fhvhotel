@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware.domain;
+package at.fhv.hotelsoftware.domain.model;
 
 public class Id {
     private String bookingId;
