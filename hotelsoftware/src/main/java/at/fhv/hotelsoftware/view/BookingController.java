@@ -101,6 +101,6 @@ public class BookingController {
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
         createBookingService.createBooking(bookingForm);
-        return new ModelAndView("dashboard");
+        return new ModelAndView("redirect:"+"/");
     }
 }
