@@ -18,6 +18,7 @@ public class Booking {
     private Integer roomCount;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private TestClass testClass;
 
     //private LinkedList<String> extraServices;
 
