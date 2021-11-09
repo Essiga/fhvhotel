@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>Room</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+<div class="flex">
+
+    <nav class="flex-row h-screen w-1/5 bg-green-500"> <!-- Navbar -->
+
+        <div>
+            <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+        </div>
+
+        <div>
+            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+        </div>
+
+    </nav>
+
+    <div class="flex w-4/5"> <!-- Content -->
+
+        <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">  <!-- Form Block -->
+
+            <form th:action="@{/chooseRoom}" th:object="${bookingForm}" method="post">
+
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
+
+                    <div class="flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input type="text" id="gname" class="border-2 border-gray-400 w-4/6">
+                            <label for="gname" class="block text-sm text-gray-500">Name</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:field="*{voucherCode}">
+                            <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
+
+                    <div class="flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input type="text" id="fname" class="border-2 border-gray-400 w-4/6" th:field="*{fname}">
+                            <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input type="text" id="lname" class="border-2 border-gray-400 w-4/6" th:field="*{lname}">
+                            <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
+
+                    <div class="flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
+                            <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
+                            <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-4 flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input type="text" id="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
+                            <label for="city" class="block text-sm text-gray-500">City</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input type="text" id="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
+                            <label for="country" class=" block text-sm text-gray-500">Country</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <div class="flex-row">  <!-- Block Descriptions -->
+
+                        <div class="w-3/6 inline-block">
+                            <h2 class="mb-4 font-semibold">Phone Number</h2>
+                        </div>
+
+                        <div class="w-1/3 inline-block">
+                            <h2 class="mb-4 font-semibold">Email</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2">
+                            <input type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
+                            <label for="phone" class="block text-sm text-gray-500">Number</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input type="text" id="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
+                            <label for="email" class=" block text-sm text-gray-500">Email</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="mt-8 flex row justify-between"> <!-- Button Line -->
+
+                    <div class="w-5/6">
+                        <a href="/" class="w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
+                    </div>
+
+                    <div class="w-1/6">
+                        <button type="submit" class="w-full p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

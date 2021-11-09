@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <title>Dashboard</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex">
+
+  <nav class="flex-row h-screen w-1/5 bg-green-500"> <!-- Navbar -->
+
+    <div>
+      <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+    </div>
+
+    <div>
+      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+    </div>
+
+    <div>
+      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer Overview</a>
+    </div>
+
+    <div>
+      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+    </div>
+
+    <div>
+      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+    </div>
+
+  </nav>
+
+  <div class="flex-row w-4/5"> <!-- Content -->
+
+    <div class="pl-2 h-2/5 border border-blue-700">  <!-- Check-Ins -->
+      <h1 class="font-extrabold text-4xl text-blue-500 ">Check-Ins</h1>
+
+      <div class="m-4 h-4/5">
+
+        <table class="w-full table-fixed bg-white">
+
+          <tr class="bg-blue-100 text-xl">
+            <th class="w-1/5 border-2 py-2 border-blue-200">Customer</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">From Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">To Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Booking Status</th>
+            <th class="w-1/10 border-2 py-2 border-blue-200"></th>
+          </tr>
+
+          <tr class="text-center m-4" th:each="booking : ${bookings}">
+            <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getFromDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getToDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
+            <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">Check-In</a></td>
+          </tr>
+
+        </table>
+      </div>
+
+    </div>
+
+    <div class="pl-2 h-2/5 border border-blue-700"> <!-- Check-Outs -->
+      <h1 class="font-extrabold text-4xl text-blue-500">Check-Outs</h1>
+    </div>
+
+    <div class="h-1/5 border border-blue-700"> <!-- Buttons -->
+
+      <div class="flex h-full w-full justify-around">
+
+        <a href="createCustomer" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Booking</a>
+
+        <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Customer</a>
+
+        <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">...</a>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
