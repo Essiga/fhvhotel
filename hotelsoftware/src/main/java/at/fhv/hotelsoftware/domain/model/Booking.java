@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.domain.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -16,8 +17,12 @@ public class Booking {
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
     private Integer roomCount;
+    private Integer singleRoom;
+    private Integer doubleRoom;
+    private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private List<RoomId> roomIds;
 
     //private LinkedList<String> extraServices;
 
@@ -108,6 +113,38 @@ public class Booking {
         this.bookingStatus = bookingStatus;
     }
 
+    public Integer getSingleRoom() {
+        return singleRoom;
+    }
+
+    public void setSingleRoom(Integer singleRoom) {
+        this.singleRoom = singleRoom;
+    }
+
+    public Integer getDoubleRoom() {
+        return doubleRoom;
+    }
+
+    public void setDoubleRoom(Integer doubleRoom) {
+        this.doubleRoom = doubleRoom;
+    }
+
+    public Integer getLuxusRoom() {
+        return luxusRoom;
+    }
+
+    public void setLuxusRoom(Integer luxusRoom) {
+        this.luxusRoom = luxusRoom;
+    }
+
+    public List<RoomId> getRoomIds() {
+        return roomIds;
+    }
+
+    public void setRoomIds(List<RoomId> roomIds) {
+        this.roomIds = roomIds;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
@@ -179,6 +216,23 @@ public class Booking {
             this.instance.bookingStatus = bookingStatus;
             return this;
         }
+
+        public Builder withSingleRoom(Integer singleRoom) {
+            this.instance.singleRoom = singleRoom;
+            return this;
+        }
+
+        public Builder withDoubleRoom(Integer doubleRoom) {
+            this.instance.doubleRoom = doubleRoom;
+            return this;
+        }
+
+        public Builder withLuxusRoom(Integer luxusRoom) {
+            this.instance.luxusRoom = luxusRoom;
+            return this;
+        }
+
+
 
 
         /* public Builder withExtraServices(LinkedList<String> extraServices){
