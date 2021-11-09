@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39970ea2-4582-4e0d-b409-3e8ee2c630ca" name="Changes" comment="created basic classes for testing">
+    <list default="true" id="39970ea2-4582-4e0d-b409-3e8ee2c630ca" name="Changes" comment="created getters for testclasses for hibernate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/TestClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/TestClass.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateBooking.hbm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateBooking.hbm.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636466684780</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="created getters for testclasses for hibernate">
+      <created>1636466829276</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636466829276</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,6 +393,7 @@
     <MESSAGE value="save state" />
     <MESSAGE value="almost finished" />
     <MESSAGE value="created basic classes for testing" />
-    <option name="LAST_COMMIT_MESSAGE" value="created basic classes for testing" />
+    <MESSAGE value="created getters for testclasses for hibernate" />
+    <option name="LAST_COMMIT_MESSAGE" value="created getters for testclasses for hibernate" />
   </component>
 </project>
