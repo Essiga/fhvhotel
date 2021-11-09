@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Booking {
 
     private Long id;
-    private Id bookingId;
+    private BookingId bookingId;
     private String customer;
     private LocalDate fromDate;
     private LocalDate toDate;
@@ -36,11 +36,11 @@ public class Booking {
         this.id = id;
     }
 
-    public Id getBookingId() {
-        return bookingId;
+    public BookingId getBookingId() {
+        return this.bookingId;
     }
 
-    public void setBookingId(Id bookingId) {
+    public void setBookingId(BookingId bookingId) {
         this.bookingId = bookingId;
     }
 
@@ -130,8 +130,8 @@ public class Booking {
             this.instance = new Booking();
         }
 
-        public Builder withId(Id id) {
-            this.instance.bookingId = id;
+        public Builder withId(BookingId bookingId) {
+            this.instance.bookingId = bookingId;
             return this;
         }
 

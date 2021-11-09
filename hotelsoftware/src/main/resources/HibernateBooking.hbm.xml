@@ -10,8 +10,8 @@
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.Id">
-            <property name="bookingId" column="bookingId" type="java.lang.String"/>
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
         <property name="customer" column="customer" type="java.lang.String"/>

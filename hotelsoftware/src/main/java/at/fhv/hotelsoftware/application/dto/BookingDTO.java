@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.application.dto;
 
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.domain.model.BookingStatus;
-import at.fhv.hotelsoftware.domain.model.Id;
 import at.fhv.hotelsoftware.domain.model.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.VoucherCode;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 public final class BookingDTO {
 
     private Long id;
-    private Id bookingId;
+    private BookingId bookingId;
     private String customer;
     private LocalDate fromDate;
     private LocalDate toDate;
@@ -23,7 +23,7 @@ public final class BookingDTO {
 
     public BookingDTO(){}
 
-    public BookingDTO(Id bookingId,
+    public BookingDTO(BookingId bookingId,
                       String customer,
                       LocalDate fromDate,
                       LocalDate toDate,
@@ -48,7 +48,7 @@ public final class BookingDTO {
         return id;
     }
 
-    public Id getBookingId() {
+    public BookingId getBookingId() {
         return bookingId;
     }
 
