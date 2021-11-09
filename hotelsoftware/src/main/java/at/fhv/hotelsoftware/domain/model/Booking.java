@@ -232,6 +232,11 @@ public class Booking {
             return this;
         }
 
+        public Builder withRoomIds(List<RoomId> roomIds) {
+            this.instance.roomIds = roomIds;
+            return this;
+        }
+
 
 
 
