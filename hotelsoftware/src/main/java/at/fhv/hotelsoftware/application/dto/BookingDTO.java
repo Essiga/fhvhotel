@@ -10,6 +10,11 @@ import java.util.Objects;
 
 public final class BookingDTO {
 
+    private String fname;
+    private String lname;
+    private String email;
+    private String phoneNumber;
+
     private Long id;
     private Id bookingId;
     private String customer;

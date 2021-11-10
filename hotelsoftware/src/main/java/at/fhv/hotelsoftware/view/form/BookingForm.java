@@ -1,5 +1,7 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.domain.model.BookingStatus;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -19,6 +21,7 @@ public class BookingForm {
     private Integer luxusRoomCount;
     private String fromDate;
     private String toDate;
+
 
     public String getFname() {
         return fname;
@@ -123,4 +126,7 @@ public class BookingForm {
     public String getToDate() {return toDate;}
 
     public void setToDate(String toDate) {this.toDate = toDate;}
+
+
+
 }

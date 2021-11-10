@@ -55,4 +55,20 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getBookingStatus()))
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public BookingDTO findBooking() {
+        Booking bookings = bookingRepository.findBooking();
+        return new
+                                BookingDTO(bookings.getBookingId(),
+                                bookings.getCustomer(),
+                                bookings.getFromDate(),
+                                bookings.getToDate(),
+                                bookings.getCancellationDeadLine(),
+                                bookings.getRoomCategory(),
+                                bookings.getRoomCount(),
+                                bookings.getVoucherCode(),
+                                bookings.getBookingStatus());
+    }
 }

@@ -11,4 +11,5 @@ public interface BookingRepository {
     List<Booking> findAllBookings();
     void addBooking(Booking booking);
     List<Booking> findTodaysCheckIns();
+    Booking findBooking();
 }

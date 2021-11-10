@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,18 @@ public class BookingController {
     @Autowired
     ViewBookingService viewBookingService;
 
+
+
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
     private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
+    private static final String CHECK_IN_GUEST = "/checkInGuest";
+    private static final String CHANGE_STATUS_IN_DB= "/changeStatusInDb";
+    private static final String CHANGE_ROOM_STATUS_IN_DB="changeRoomStatusInDb";
 
     //private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
     //private static final String CREATE_BOOKING_URL = "/createBooking";
@@ -103,4 +110,16 @@ public class BookingController {
         createBookingService.createBooking(bookingForm);
         return new ModelAndView("redirect:"+"/");
     }
+
+    @GetMapping (CHECK_IN_GUEST)
+    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model){
+        BookingDTO booking = viewBookingService.findBooking();
+        model.addAttribute("bookingForm", booking);
+        return new ModelAndView("checkInGuest");
+    }
+
+
+
+
+
 }

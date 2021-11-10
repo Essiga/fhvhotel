@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Check-In</title>
@@ -43,7 +43,7 @@
 
         <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{/writeBookingInDatabase}" th:object="${bookingForm}" method="post">
+        <form th:action="@{/checkInGuest}" th:object="${bookingForm}" method="get">
 
 
 
