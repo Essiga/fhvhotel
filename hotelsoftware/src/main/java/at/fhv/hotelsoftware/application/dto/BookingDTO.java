@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.application.dto;
 
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.domain.model.BookingStatus;
-import at.fhv.hotelsoftware.domain.model.Id;
 import at.fhv.hotelsoftware.domain.model.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.VoucherCode;
 
@@ -11,25 +11,23 @@ import java.util.Objects;
 public final class BookingDTO {
 
     private Long id;
-    private Id bookingId;
+    private BookingId bookingId;
     private String customer;
     private LocalDate fromDate;
     private LocalDate toDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
-    private Integer roomCount;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
 
     public BookingDTO(){}
 
-    public BookingDTO(Id bookingId,
+    public BookingDTO(BookingId bookingId,
                       String customer,
                       LocalDate fromDate,
                       LocalDate toDate,
                       LocalDate cancellationDeadLine,
                       RoomCategory roomCategory,
-                      Integer roomCount,
                       VoucherCode voucherCode,
                       BookingStatus bookingStatus) {
 
@@ -39,7 +37,6 @@ public final class BookingDTO {
         this.toDate = toDate;
         this.cancellationDeadLine = cancellationDeadLine;
         this.roomCategory = roomCategory;
-        this.roomCount = roomCount;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
     }
@@ -48,7 +45,7 @@ public final class BookingDTO {
         return id;
     }
 
-    public Id getBookingId() {
+    public BookingId getBookingId() {
         return bookingId;
     }
 
@@ -70,10 +67,6 @@ public final class BookingDTO {
 
     public RoomCategory getRoomCategory() {
         return roomCategory;
-    }
-
-    public Integer getRoomCount() {
-        return roomCount;
     }
 
     public VoucherCode getVoucherCode() {
@@ -114,10 +107,7 @@ public final class BookingDTO {
             this.instance.roomCategory = roomCategory;
             return this;
         }
-        public BookingDTO.Builder withRoomCount(Integer roomCount){
-            this.instance.roomCount = roomCount;
-            return this;
-        }
+
         public BookingDTO.Builder withCancellationDeadline(LocalDate cancellationDeadLine){
             this.instance.cancellationDeadLine = cancellationDeadLine;
             return this;
@@ -126,6 +116,12 @@ public final class BookingDTO {
             this.instance.voucherCode = voucherCode;
             return this;
         }
+
+        /*public BookingDTO.Builder withBookingStatus(BookingStatus bookingStatus){
+            this.instance.bookingStatus = bookingStatus;
+            return this;
+        }*/
+
         public BookingDTO build(){
             Objects.requireNonNull(this.instance.id, "type must be set in booking");
             return this.instance;

@@ -33,7 +33,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
                 withLongId(99L).
-                withId(new Id("99")).
+                withId(new BookingId()).
                 withCustomer(bookingForm.getFname() + " " + bookingForm.getLname()).
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
@@ -41,7 +41,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withFromDate(LocalDate.parse(bookingForm.getFromDate())).
                 withToDate(LocalDate.parse(bookingForm.getToDate())).
                 withRoomCategory(RoomCategory.SINGLE).
-                withRoomCount(bookingForm.getSingleRoomCount()).
                 build();
 
         bookingRepository.addBooking(booking);

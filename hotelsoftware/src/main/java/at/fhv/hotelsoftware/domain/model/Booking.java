@@ -3,21 +3,25 @@ package at.fhv.hotelsoftware.domain.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Component
 public class Booking {
 
     private Long id;
-    private Id bookingId;
+    private BookingId bookingId;
     private String customer;
     private LocalDate fromDate;
     private LocalDate toDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
-    private Integer roomCount;
+    private Integer singleRoom;
+    private Integer doubleRoom;
+    private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private List<RoomId> roomIds;
 
     //private LinkedList<String> extraServices;
 
@@ -36,76 +40,54 @@ public class Booking {
         this.id = id;
     }
 
-    public Id getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(Id bookingId) {
-        this.bookingId = bookingId;
+    public BookingId getBookingId() {
+        return this.bookingId;
     }
 
     public String getCustomer() {
         return customer;
     }
 
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
     public LocalDate getFromDate() {
         return fromDate;
-    }
-
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
     }
 
     public LocalDate getToDate() {
         return toDate;
     }
 
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
-    }
-
     public LocalDate getCancellationDeadLine() {
         return cancellationDeadLine;
     }
 
-    public void setCancellationDeadLine(LocalDate cancellationDeadLine) {
-        this.cancellationDeadLine = cancellationDeadLine;
-    }
 
     public RoomCategory getRoomCategory() {
         return roomCategory;
     }
 
-    public void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
-    }
-
-    public Integer getRoomCount() {
-        return roomCount;
-    }
-
-    public void setRoomCount(Integer roomCount) {
-        this.roomCount = roomCount;
-    }
 
     public VoucherCode getVoucherCode() {
         return voucherCode;
-    }
-
-    public void setVoucherCode(VoucherCode voucherCode) {
-        this.voucherCode = voucherCode;
     }
 
     public BookingStatus getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
+    public Integer getSingleRoom() {
+        return singleRoom;
+    }
+
+    public Integer getDoubleRoom() {
+        return doubleRoom;
+    }
+
+    public Integer getLuxusRoom() {
+        return luxusRoom;
+    }
+
+    public List<RoomId> getRoomIds() {
+        return roomIds;
     }
 
     @Override
@@ -115,7 +97,6 @@ public class Booking {
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +
                 ", roomCategory=" + roomCategory +
-                ", roomCount=" + roomCount +
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
                 '}';
@@ -130,8 +111,8 @@ public class Booking {
             this.instance = new Booking();
         }
 
-        public Builder withId(Id id) {
-            this.instance.bookingId = id;
+        public Builder withId(BookingId bookingId) {
+            this.instance.bookingId = bookingId;
             return this;
         }
 
@@ -165,10 +146,6 @@ public class Booking {
             return this;
         }
 
-        public Builder withRoomCount(Integer roomCount) {
-            this.instance.roomCount = roomCount;
-            return this;
-        }
 
         public Builder withVoucherCode(VoucherCode voucherCode) {
             this.instance.voucherCode = voucherCode;
@@ -180,12 +157,30 @@ public class Booking {
             return this;
         }
 
+        public Builder withSingleRoom(Integer singleRoom) {
+            this.instance.singleRoom = singleRoom;
+            return this;
+        }
+
+        public Builder withDoubleRoom(Integer doubleRoom) {
+            this.instance.doubleRoom = doubleRoom;
+            return this;
+        }
+
+        public Builder withLuxusRoom(Integer luxusRoom) {
+            this.instance.luxusRoom = luxusRoom;
+            return this;
+        }
+
+        public Builder withRoomIds(List<RoomId> roomIds) {
+            this.instance.roomIds = roomIds;
+            return this;
+        }
 
         /* public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;
             return this;
         } */
-
 
         public Booking build() {
             Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");
