@@ -47,5 +47,8 @@ public class CreateBookingServiceImpl implements CreateBookingService {
         bookingRepository.addBooking(booking);
     }
 
-
+    @Transactional
+    public BookingId ChangeBookingStatus(BookingId bookingId) {
+        return bookingRepository.checkedIn(bookingId);
+    }
 }

@@ -237,14 +237,10 @@ public class Booking {
             return this;
         }
 
-
-
-
         /* public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;
             return this;
         } */
-
 
         public Booking build() {
             Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");

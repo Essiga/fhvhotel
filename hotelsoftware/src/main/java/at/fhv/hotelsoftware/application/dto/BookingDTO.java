@@ -126,6 +126,12 @@ public final class BookingDTO {
             this.instance.voucherCode = voucherCode;
             return this;
         }
+
+        /*public BookingDTO.Builder withBookingStatus(BookingStatus bookingStatus){
+            this.instance.bookingStatus = bookingStatus;
+            return this;
+        }*/
+
         public BookingDTO build(){
             Objects.requireNonNull(this.instance.id, "type must be set in booking");
             return this.instance;
