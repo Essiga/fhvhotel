@@ -1,22 +1,60 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import java.util.Objects;
+import java.util.UUID;
+
 public class Room {
-    private int roomNumber;
-    private Long id;
+    private RoomId roomId;
+    private RoomCategory roomCategory;
+    private Integer roomNumber;
 
-    public Long getId() {
-        return id;
+    public static Builder builder() {
+        return new Builder();
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Room() {
     }
 
-    public Room(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public RoomId getRoomId() {
+        return roomId;
     }
 
-    public int getRoomNumber() {
+    public RoomCategory getRoomCategory() {
+        return roomCategory;
+    }
+
+    public Integer getRoomNumber() {
         return roomNumber;
+    }
+
+
+    public static class Builder {
+
+        private final Room instance;
+
+        public Builder() {
+            this.instance = new Room();
+        }
+
+        public Builder withUID(RoomId roomId) {
+            this.instance.roomId = roomId;
+            return this;
+        }
+
+        public Builder withRoomCategory(RoomCategory roomCategory) {
+            this.instance.roomCategory = roomCategory;
+            return this;
+        }
+
+        public Builder withRoomNumber(Integer roomNumber) {
+            this.instance.roomNumber = roomNumber;
+            return this;
+        }
+
+
+        public Room build() {
+            Objects.requireNonNull(this.instance.roomId, "type must be set in room");
+            return this.instance;
+        }
     }
 }

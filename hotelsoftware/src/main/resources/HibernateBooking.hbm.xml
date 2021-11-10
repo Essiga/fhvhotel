@@ -10,8 +10,8 @@
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.Id">
-            <property name="bookingId" column="bookingId" type="java.lang.String"/>
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
         <property name="customer" column="customer" type="java.lang.String"/>
@@ -43,31 +43,8 @@
         </component>
 
 
-        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
-
-        <component name="testClass" class="at.fhv.hotelsoftware.domain.model.TestClass">
-            <property name="rooms" column="testClass" type="List"/>
-            <set name="rooms" table="room" inverse="true" cascade="save-update" lazy="true" fetch="select">
-                <key>
-                    <column name="ROOM_ID" not-null="true" />
-                </key>
-                <one-to-many class="at.fhv.hotelsoftware.domain.model.Room" />
-            </set>
-        </component>
-
-
-
-
 
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
-    </class>
-
-    <class name="at.fhv.hotelsoftware.domain.model.Room" table="ans501">
-        <id name="id" type="java.lang.Long" column="id" unsaved-value="-1">
-            <generator class="increment"></generator>
-        </id>
-        <property name="roomNumber"></property>
-
     </class>
 </hibernate-mapping>

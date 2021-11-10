@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import org.springframework.stereotype.Component;
 
 
@@ -46,8 +47,10 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
-
-
+    @Override
+    public void checkIn(BookingId bookingId) {
+        TypedQuery<Booking> query = this.em.createQuery("UPDATE Booking SET booking_status = 'CHECKDIN' WHERE booking_id = bookingId", Booking.class);
+    }
 
     @Override
     public void addBooking(Booking booking) {
