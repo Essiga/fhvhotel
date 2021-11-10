@@ -43,8 +43,6 @@
         </component>
 
 
-        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
-
 
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->

@@ -17,7 +17,6 @@ public final class BookingDTO {
     private LocalDate toDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
-    private Integer roomCount;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
 
@@ -29,7 +28,6 @@ public final class BookingDTO {
                       LocalDate toDate,
                       LocalDate cancellationDeadLine,
                       RoomCategory roomCategory,
-                      Integer roomCount,
                       VoucherCode voucherCode,
                       BookingStatus bookingStatus) {
 
@@ -39,7 +37,6 @@ public final class BookingDTO {
         this.toDate = toDate;
         this.cancellationDeadLine = cancellationDeadLine;
         this.roomCategory = roomCategory;
-        this.roomCount = roomCount;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
     }
@@ -70,10 +67,6 @@ public final class BookingDTO {
 
     public RoomCategory getRoomCategory() {
         return roomCategory;
-    }
-
-    public Integer getRoomCount() {
-        return roomCount;
     }
 
     public VoucherCode getVoucherCode() {
@@ -114,10 +107,7 @@ public final class BookingDTO {
             this.instance.roomCategory = roomCategory;
             return this;
         }
-        public BookingDTO.Builder withRoomCount(Integer roomCount){
-            this.instance.roomCount = roomCount;
-            return this;
-        }
+
         public BookingDTO.Builder withCancellationDeadline(LocalDate cancellationDeadLine){
             this.instance.cancellationDeadLine = cancellationDeadLine;
             return this;

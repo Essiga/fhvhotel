@@ -41,14 +41,10 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withFromDate(LocalDate.parse(bookingForm.getFromDate())).
                 withToDate(LocalDate.parse(bookingForm.getToDate())).
                 withRoomCategory(RoomCategory.SINGLE).
-                withRoomCount(bookingForm.getSingleRoomCount()).
                 build();
 
         bookingRepository.addBooking(booking);
     }
 
-    @Transactional
-    public BookingId ChangeBookingStatus(BookingId bookingId) {
-        return bookingRepository.checkedIn(bookingId);
-    }
+
 }

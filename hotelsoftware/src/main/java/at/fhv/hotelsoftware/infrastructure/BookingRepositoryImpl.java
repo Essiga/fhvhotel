@@ -48,9 +48,8 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public BookingId checkedIn(BookingId bookingId) {
+    public void checkIn(BookingId bookingId) {
         TypedQuery<Booking> query = this.em.createQuery("UPDATE Booking SET booking_status = 'CHECKDIN' WHERE booking_id = bookingId", Booking.class);
-        return bookingId;
     }
 
     @Override

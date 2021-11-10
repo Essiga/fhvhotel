@@ -7,6 +7,6 @@ public interface CreateBookingService{
 
    void createBooking(BookingForm bookingForm);
 
-   BookingId ChangeBookingStatus(BookingId bookingId);
+
 
 }

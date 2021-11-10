@@ -16,7 +16,6 @@ public class Booking {
     private LocalDate toDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
-    private Integer roomCount;
     private Integer singleRoom;
     private Integer doubleRoom;
     private Integer luxusRoom;
@@ -45,104 +44,50 @@ public class Booking {
         return this.bookingId;
     }
 
-    public void setBookingId(BookingId bookingId) {
-        this.bookingId = bookingId;
-    }
-
     public String getCustomer() {
         return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
     }
 
     public LocalDate getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate;
-    }
-
     public LocalDate getToDate() {
         return toDate;
-    }
-
-    public void setToDate(LocalDate toDate) {
-        this.toDate = toDate;
     }
 
     public LocalDate getCancellationDeadLine() {
         return cancellationDeadLine;
     }
 
-    public void setCancellationDeadLine(LocalDate cancellationDeadLine) {
-        this.cancellationDeadLine = cancellationDeadLine;
-    }
 
     public RoomCategory getRoomCategory() {
         return roomCategory;
     }
 
-    public void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
-    }
-
-    public Integer getRoomCount() {
-        return roomCount;
-    }
-
-    public void setRoomCount(Integer roomCount) {
-        this.roomCount = roomCount;
-    }
 
     public VoucherCode getVoucherCode() {
         return voucherCode;
-    }
-
-    public void setVoucherCode(VoucherCode voucherCode) {
-        this.voucherCode = voucherCode;
     }
 
     public BookingStatus getBookingStatus() {
         return bookingStatus;
     }
 
-    public void setBookingStatus(BookingStatus bookingStatus) {
-        this.bookingStatus = bookingStatus;
-    }
-
     public Integer getSingleRoom() {
         return singleRoom;
-    }
-
-    public void setSingleRoom(Integer singleRoom) {
-        this.singleRoom = singleRoom;
     }
 
     public Integer getDoubleRoom() {
         return doubleRoom;
     }
 
-    public void setDoubleRoom(Integer doubleRoom) {
-        this.doubleRoom = doubleRoom;
-    }
-
     public Integer getLuxusRoom() {
         return luxusRoom;
     }
 
-    public void setLuxusRoom(Integer luxusRoom) {
-        this.luxusRoom = luxusRoom;
-    }
-
     public List<RoomId> getRoomIds() {
         return roomIds;
-    }
-
-    public void setRoomIds(List<RoomId> roomIds) {
-        this.roomIds = roomIds;
     }
 
     @Override
@@ -152,7 +97,6 @@ public class Booking {
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +
                 ", roomCategory=" + roomCategory +
-                ", roomCount=" + roomCount +
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
                 '}';
@@ -202,10 +146,6 @@ public class Booking {
             return this;
         }
 
-        public Builder withRoomCount(Integer roomCount) {
-            this.instance.roomCount = roomCount;
-            return this;
-        }
 
         public Builder withVoucherCode(VoucherCode voucherCode) {
             this.instance.voucherCode = voucherCode;

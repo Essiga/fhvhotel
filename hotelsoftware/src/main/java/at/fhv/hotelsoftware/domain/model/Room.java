@@ -7,7 +7,6 @@ public class Room {
     private RoomId roomId;
     private RoomCategory roomCategory;
     private Integer roomNumber;
-    private Integer roomCount;
 
     public static Builder builder() {
         return new Builder();
@@ -20,33 +19,14 @@ public class Room {
         return roomId;
     }
 
-    public void setRoomId(RoomId roomId) {
-        this.roomId = roomId;
-    }
-
     public RoomCategory getRoomCategory() {
         return roomCategory;
-    }
-
-    public void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
     }
 
     public Integer getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public Integer getRoomCount() {
-        return roomCount;
-    }
-
-    public void setRoomCount(Integer roomCount) {
-        this.roomCount = roomCount;
-    }
 
     public static class Builder {
 
@@ -71,10 +51,6 @@ public class Room {
             return this;
         }
 
-        public Builder withRoomCount(Integer roomCount){
-            this.instance.roomCount = roomCount;
-            return this;
-        }
 
         public Room build() {
             Objects.requireNonNull(this.instance.roomId, "type must be set in room");
