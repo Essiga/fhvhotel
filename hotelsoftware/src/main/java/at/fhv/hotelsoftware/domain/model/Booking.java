@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.domain.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -111,7 +112,7 @@ public class Booking {
             this.instance = new Booking();
         }
 
-        public Builder withId(BookingId bookingId) {
+        public Builder withBookingId(BookingId bookingId) {
             this.instance.bookingId = bookingId;
             return this;
         }
@@ -174,6 +175,12 @@ public class Booking {
 
         public Builder withRoomIds(List<RoomId> roomIds) {
             this.instance.roomIds = roomIds;
+            return this;
+        }
+        //TODO: remove
+        public Builder withSingleRoomId(RoomId roomIds) {
+            this.instance.roomIds = new LinkedList<RoomId>();
+            this.instance.roomIds.add(roomIds);
             return this;
         }
 

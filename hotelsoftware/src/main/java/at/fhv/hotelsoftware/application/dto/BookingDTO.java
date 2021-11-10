@@ -1,11 +1,9 @@
 package at.fhv.hotelsoftware.application.dto;
 
-import at.fhv.hotelsoftware.domain.model.BookingId;
-import at.fhv.hotelsoftware.domain.model.BookingStatus;
-import at.fhv.hotelsoftware.domain.model.RoomCategory;
-import at.fhv.hotelsoftware.domain.model.VoucherCode;
+import at.fhv.hotelsoftware.domain.model.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 public final class BookingDTO {
@@ -19,6 +17,7 @@ public final class BookingDTO {
     private RoomCategory roomCategory;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private List<RoomId> roomIds;
 
     public BookingDTO(){}
 
@@ -29,7 +28,8 @@ public final class BookingDTO {
                       LocalDate cancellationDeadLine,
                       RoomCategory roomCategory,
                       VoucherCode voucherCode,
-                      BookingStatus bookingStatus) {
+                      BookingStatus bookingStatus,
+                      List<RoomId> roomIds) {
 
         this.bookingId = bookingId;
         this.customer = customer;
@@ -39,6 +39,7 @@ public final class BookingDTO {
         this.roomCategory = roomCategory;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
+        this.roomIds = roomIds;
     }
 
     public Long getId() {
@@ -77,7 +78,9 @@ public final class BookingDTO {
         return bookingStatus;
     }
 
-
+    public List<RoomId> getRoomIds() {
+        return roomIds;
+    }
 
     public static class Builder{
 
@@ -114,6 +117,11 @@ public final class BookingDTO {
         }
         public BookingDTO.Builder withVoucherCode(VoucherCode voucherCode){
             this.instance.voucherCode = voucherCode;
+            return this;
+        }
+
+        public BookingDTO.Builder withRoomIds(List<RoomId> roomIds){
+            this.instance.roomIds = roomIds;
             return this;
         }
 

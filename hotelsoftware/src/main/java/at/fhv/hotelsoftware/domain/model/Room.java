@@ -4,6 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Room {
+    public long id;
     private RoomId roomId;
     private RoomCategory roomCategory;
     private Integer roomNumber;
@@ -13,6 +14,10 @@ public class Room {
     }
 
     public Room() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public RoomId getRoomId() {
@@ -36,7 +41,7 @@ public class Room {
             this.instance = new Room();
         }
 
-        public Builder withUID(RoomId roomId) {
+        public Builder withRoomId(RoomId roomId) {
             this.instance.roomId = roomId;
             return this;
         }

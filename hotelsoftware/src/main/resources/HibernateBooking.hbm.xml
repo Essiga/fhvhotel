@@ -20,6 +20,8 @@
 
         <property name="toDate" column="toDate" type="java.time.LocalDate"/>
 
+
+
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
 
@@ -42,9 +44,58 @@
             <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
         </component>
 
+        <!-- <property name="roomIds" column="roomIds" type="java.util.List"/> -->
+
+<!--        <component name="roomIds" class="at.fhv.hotelsoftware.domain.model.RoomId">-->
+<!--            <property name="roomId" column="roomId" type="java.util.UUID"/>-->
+<!--        </component>-->
 
 
+        <bag name="roomIds" lazy="true" cascade="persist">
+            <key column="bookingId" foreign-key="bookingId" not-null="false" />
+            <one-to-many class="at.fhv.hotelsoftware.domain.model.Room" />
+        </bag>
+
+
+<!--        <list name="roomIds" table="tbl_room" inverse="true" cascade="persist" lazy="true" fetch="select">-->
+<!--            <key>-->
+<!--                <column name="bookingId" not-null="true" />-->
+<!--            </key>-->
+<!--            <list-index column="listIndex"></list-index>-->
+<!--            <one-to-many class="at.fhv.hotelsoftware.domain.model.Room"/>-->
+<!--        </list>-->
+
+
+        <property name="singleRoom" column="singleRoom" type="integer"/>
+        <property name="doubleRoom" column="doubleRoom" type="integer"/>
+        <property name="luxusRoom" column="luxusRoom" type="integer"/>
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
+    </class>
+
+
+    <class name="at.fhv.hotelsoftware.domain.model.Room" table="tbl_room" lazy="true">
+        <id name="id" type="long" column="id" unsaved-value="null">
+            <generator class="native"/>
+        </id>
+
+        <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
+            <property name="roomId" column="roomId" type="java.util.UUID"/>
+        </component>
+
+
+
+        <property name="roomCategory" column="roomCategory">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+<!--          <many-to-one name="booking" class="at.fhv.hotelsoftware.domain.model.Booking" fetch="select">-->
+<!--            <column name="DEPT_ID" not-null="true" />-->
+<!--        </many-to-one>-->
+
+        <property name="roomNumber" column="roomNumber" type="integer"/>
     </class>
 </hibernate-mapping>
