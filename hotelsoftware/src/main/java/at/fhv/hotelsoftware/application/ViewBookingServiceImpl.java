@@ -56,12 +56,12 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
+   /* @Transactional(readOnly = true)
     @Override
     public BookingDTO findBooking() {
         Booking bookings = bookingRepository.findBooking();
-        return new
-                                BookingDTO(bookings.getBookingId(),
+        return new BookingDTO(
+                                bookings.getBookingId(),
                                 bookings.getCustomer(),
                                 bookings.getFromDate(),
                                 bookings.getToDate(),
@@ -70,5 +70,24 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getRoomCount(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus());
+    }*/
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<BookingDTO> findBooking(){
+        List<Booking> allBookings = bookingRepository.findBooking();
+        return allBookings
+                .stream()
+                .map(bookings ->
+                        new BookingDTO(bookings.getBookingId(),
+                                bookings.getCustomer(),
+                                bookings.getFromDate(),
+                                bookings.getToDate(),
+                                bookings.getCancellationDeadLine(),
+                                bookings.getRoomCategory(),
+                                bookings.getRoomCount(),
+                                bookings.getVoucherCode(),
+                                bookings.getBookingStatus()))
+                .collect(Collectors.toList());
     }
 }

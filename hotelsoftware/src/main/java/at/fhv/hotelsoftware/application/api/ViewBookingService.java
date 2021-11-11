@@ -9,5 +9,5 @@ public interface ViewBookingService {
     @Transactional(readOnly = true)
     List<BookingDTO> findTodaysCheckIns();
     List<BookingDTO> findAllBookings();
-    BookingDTO findBooking();
+    List<BookingDTO> findBooking();
 }

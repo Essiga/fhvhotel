@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -111,10 +112,10 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-    @GetMapping (CHECK_IN_GUEST)
+    @GetMapping  ("checkInGuest.html")
     public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model){
-        BookingDTO booking = viewBookingService.findBooking();
-        model.addAttribute("bookingForm", booking);
+       // List<BookingDTO> listOfBooking = viewBookingService.findBooking();
+        model.addAttribute("bookingForm", viewBookingService.findBooking());
         return new ModelAndView("checkInGuest");
     }
 
