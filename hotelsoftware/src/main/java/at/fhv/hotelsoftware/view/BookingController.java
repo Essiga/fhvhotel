@@ -112,10 +112,10 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-    @GetMapping  ("checkInGuest.html")
+    @GetMapping  ("/checkInGuest")
     public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model){
-       // List<BookingDTO> listOfBooking = viewBookingService.findBooking();
-        model.addAttribute("bookingForm", viewBookingService.findBooking());
+       List<BookingDTO> listOfBooking = viewBookingService.findBooking();
+        model.addAttribute("bookingForm", listOfBooking.get(0));
         return new ModelAndView("checkInGuest");
     }
 

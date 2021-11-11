@@ -14,6 +14,17 @@ public final class BookingDTO {
     private Long id;
     private Id bookingId;
     private String customer;
+    private String fname;
+    private String lname;
+    private String streetAdr;
+    private String zip;
+    private String city;
+    private String country;
+    private String phoneNumber;
+    private String email;
+    private int singleRoomCount;
+    private int doubleRoomCount;
+    private int luxusRoomCount;
     private LocalDate fromDate;
     private LocalDate toDate;
     private LocalDate cancellationDeadLine;
@@ -47,6 +58,50 @@ public final class BookingDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public String getStreetAdr() {
+        return streetAdr;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public int getSingleRoomCount() {
+        return singleRoomCount;
+    }
+
+    public int getDoubleRoomCount() {
+        return doubleRoomCount;
+    }
+
+    public int getLuxusRoomCount() {
+        return luxusRoomCount;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public Id getBookingId() {

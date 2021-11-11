@@ -59,7 +59,7 @@
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:field="*{voucherCode}">
+                        <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:value="*{voucherCode}">
                         <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
                     </div>
 
@@ -74,12 +74,12 @@
                 <div class="flex row"> <!-- Form Line -->
 
                     <div class="w-1/2 ">
-                        <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6" th:field="*{fname}">
+                        <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6" th:value="*{fname}">
                         <label for="fname" class="block text-sm text-gray-500">First Name</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6" th:field="*{lname}">
+                        <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6" th:value="*{lname}">
                         <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
                     </div>
 
@@ -94,12 +94,12 @@
                 <div class="flex row"> <!-- Form Line -->
 
                     <div class="w-1/2 ">
-                        <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
+                        <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:value="*{streetAdr}">
                         <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
+                        <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:value="*{zip}">
                         <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                     </div>
 
@@ -108,12 +108,12 @@
                 <div class="mt-4 flex row"> <!-- Form Line -->
 
                     <div class="w-1/2 ">
-                        <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
+                        <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6" th:value="*{city}">
                         <label for="city" class="block text-sm text-gray-500">City</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
+                        <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6" th:value="*{country}">
                         <label for="country" class=" block text-sm text-gray-500">Country</label>
                     </div>
 
@@ -138,12 +138,12 @@
                 <div class="flex row"> <!-- Form Line -->
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
+                        <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:value="*{phoneNumber}">
                         <label for="phone" class="block text-sm text-gray-500">Number</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
+                        <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6" th:value="*{email}">
                         <label for="email" class=" block text-sm text-gray-500">Email</label>
                     </div>
 
@@ -160,19 +160,19 @@
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Single </h2>
-                        <input readonly type="number" id="single" class="border-2 border-gray-400 w-16" th:field="*{singleRoomCount}">
+                        <input readonly type="number" id="single" class="border-2 border-gray-400 w-16" th:value="*{singleRoomCount}">
                         <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Double</h2>
-                        <input readonly type="number" id="double" class="border-2 border-gray-400 w-16" th:field="*{doubleRoomCount}">
+                        <input readonly type="number" id="double" class="border-2 border-gray-400 w-16" th:value="*{doubleRoomCount}">
                         <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Luxus</h2>
-                        <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16" th:field="*{luxusRoomCount}">
+                        <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16" th:value="*{luxusRoomCount}">
                         <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
@@ -187,12 +187,12 @@
                 <div class="flex row"> <!-- Form Line -->
 
                     <div class="w-1/2">
-                        <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{fromDate}">
+                        <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{fromDate}">
                         <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{toDate}">
+                        <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{toDate}">
                         <label for="toDate" class="block text-sm text-gray-500">To Date</label>
                     </div>
 
