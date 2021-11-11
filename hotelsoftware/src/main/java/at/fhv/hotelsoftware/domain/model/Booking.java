@@ -22,7 +22,7 @@ public class Booking {
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private List<RoomId> roomIds;
+    private List<Room> rooms;
 
     //private LinkedList<String> extraServices;
 
@@ -30,14 +30,14 @@ public class Booking {
         return new Builder();
     }
 
-    public Booking() {
+    private Booking() {
     }
 
-    public Long getId() {
+    private Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    private void setId(Long id) {
         this.id = id;
     }
 
@@ -87,8 +87,8 @@ public class Booking {
         return luxusRoom;
     }
 
-    public List<RoomId> getRoomIds() {
-        return roomIds;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
     @Override
@@ -173,14 +173,14 @@ public class Booking {
             return this;
         }
 
-        public Builder withRoomIds(List<RoomId> roomIds) {
-            this.instance.roomIds = roomIds;
+        public Builder withRooms(List<Room> rooms) {
+            this.instance.rooms = rooms;
             return this;
         }
         //TODO: remove
-        public Builder withSingleRoomId(RoomId roomIds) {
-            this.instance.roomIds = new LinkedList<RoomId>();
-            this.instance.roomIds.add(roomIds);
+        public Builder withSingleRoom(Room room) {
+            this.instance.rooms = new LinkedList<Room>();
+            this.instance.rooms.add(room);
             return this;
         }
 

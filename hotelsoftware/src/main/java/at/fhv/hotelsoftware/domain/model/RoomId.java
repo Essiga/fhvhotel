@@ -11,4 +11,12 @@ public class RoomId {
     public RoomId(UUID roomId){
         this.roomId = roomId;
     }
+
+    public UUID getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(UUID roomId) {
+        this.roomId = roomId;
+    }
 }

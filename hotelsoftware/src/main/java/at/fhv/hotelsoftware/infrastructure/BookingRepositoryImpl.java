@@ -54,7 +54,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public void addBooking(Booking booking) {
-        this.em.persist(booking);         //merge instead of persist!!
+        this.em.merge(booking);         //merge instead of persist!!
     }
 }
 

@@ -11,4 +11,12 @@ public class BookingId {
     public BookingId(UUID bookingId){
         this.bookingId = bookingId;
     }
+
+    public UUID getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(UUID bookingId) {
+        this.bookingId = bookingId;
+    }
 }

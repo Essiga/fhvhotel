@@ -50,7 +50,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withFromDate(LocalDate.parse(bookingForm.getFromDate())).
                 withToDate(LocalDate.parse(bookingForm.getToDate())).
                 withRoomCategory(RoomCategory.SINGLE).
-                withSingleRoomId(room.getRoomId()).
+                withSingleRoom(room).
                 build();
 
         bookingRepository.addBooking(booking);

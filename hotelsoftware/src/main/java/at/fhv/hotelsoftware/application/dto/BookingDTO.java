@@ -17,7 +17,7 @@ public final class BookingDTO {
     private RoomCategory roomCategory;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private List<RoomId> roomIds;
+    private List<Room> rooms;
 
     public BookingDTO(){}
 
@@ -29,7 +29,7 @@ public final class BookingDTO {
                       RoomCategory roomCategory,
                       VoucherCode voucherCode,
                       BookingStatus bookingStatus,
-                      List<RoomId> roomIds) {
+                      List<Room> rooms) {
 
         this.bookingId = bookingId;
         this.customer = customer;
@@ -39,7 +39,7 @@ public final class BookingDTO {
         this.roomCategory = roomCategory;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
-        this.roomIds = roomIds;
+        this.rooms = rooms;
     }
 
     public Long getId() {
@@ -78,8 +78,8 @@ public final class BookingDTO {
         return bookingStatus;
     }
 
-    public List<RoomId> getRoomIds() {
-        return roomIds;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
     public static class Builder{
@@ -120,8 +120,8 @@ public final class BookingDTO {
             return this;
         }
 
-        public BookingDTO.Builder withRoomIds(List<RoomId> roomIds){
-            this.instance.roomIds = roomIds;
+        public BookingDTO.Builder withRoomIds(List<Room> rooms){
+            this.instance.rooms = rooms;
             return this;
         }
 

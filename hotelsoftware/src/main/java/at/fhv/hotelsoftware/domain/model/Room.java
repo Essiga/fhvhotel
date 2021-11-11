@@ -16,22 +16,37 @@ public class Room {
     public Room() {
     }
 
-    public Long getId() {
+    private Long getId() {
         return id;
     }
 
-    public RoomId getRoomId() {
+    private RoomId getRoomId() {
         return roomId;
     }
 
-    public RoomCategory getRoomCategory() {
+    private RoomCategory getRoomCategory() {
         return roomCategory;
     }
 
-    public Integer getRoomNumber() {
+    private Integer getRoomNumber() {
         return roomNumber;
     }
 
+    private void setRoomCategory(RoomCategory roomCategory) {
+        this.roomCategory = roomCategory;
+    }
+
+    private void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    private void setRoomId(RoomId roomId) {
+        this.roomId = roomId;
+    }
+
+    private void setId(long id) {
+        this.id = id;
+    }
 
     public static class Builder {
 

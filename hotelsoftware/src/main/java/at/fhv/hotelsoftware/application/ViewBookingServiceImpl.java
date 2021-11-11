@@ -33,7 +33,7 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                         bookings.getRoomCategory(),
                                         bookings.getVoucherCode(),
                                         bookings.getBookingStatus(),
-                                        bookings.getRoomIds()))
+                                        bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +53,7 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getRoomCategory(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus(),
-                                bookings.getRoomIds()))
+                                bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 }
