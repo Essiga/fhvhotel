@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +41,10 @@ public class BookingController {
     public ModelAndView showDashboard(Model model) {
         List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("bookings", listOfBookings);
+
+        List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
+        model.addAttribute("checkouts", listOfCheckouts);
+
         return new ModelAndView("dashboard");
     }
 

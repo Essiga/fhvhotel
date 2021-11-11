@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ViewBookingService {
     List<BookingDTO> findTodaysCheckIns();
+    List<BookingDTO> findTodaysCheckOuts();
+
     List<BookingDTO> findAllBookings();
-
-
 
 }
