@@ -43,12 +43,6 @@ public class BookingController {
         return new ModelAndView("dashboard");
     }
 
-    // @PostMapping("/createCustomer")
-    // public ModelAndView showCustomerForm(Model model) {
-    //     Customer customer = new Customer();
-    //     model.addAttribute("customer", customer);
-    //     return new ModelAndView("/createCustomer");
-    // }
 
     @GetMapping(CREATE_CUSTOMER_URL)
     public ModelAndView showCustomerForm(Model model) {
@@ -56,35 +50,12 @@ public class BookingController {
         model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("createCustomer");
     }
-/*
-    @PostMapping("/createCustomer")
-    public String submitCustomer(@ModelAttribute("customer") Customer customer, Model model) {
-        System.out.println("CUSTOMER" + customer);
-        model.addAttribute("customer", customer);
-        return "chooseRoom";
-    }
-*/
 
     @PostMapping(CHOOSE_ROOM_URL)
     public ModelAndView submitChooseRoom(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
         model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("chooseRoom");
     }
-
-    // @PostMapping("/chooseRoom")
-    // public String submitChooseRoom(@ModelAttribute("customer") Customer customer, Model model) {
-    //     System.out.println("customer existing in room POST: " + customer);
-    //     model.addAttribute("customer", customer);
-
-    //     return "/extraService";
-    // }
-
-    // @GetMapping("/extraService")
-    // public ModelAndView showExtraServices(@ModelAttribute("customer") Customer customer, Model model) {
-    //     System.out.println("customer existing in extra GET: " + customer);
-    //     model.addAttribute("customer", customer);
-    //     return new ModelAndView("/extraService");
-    // }
 
     @PostMapping(EXTRA_SERVICE_URL)
     public ModelAndView submitExtraService(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateBookingServiceImpl implements CreateBookingService {
@@ -30,10 +32,11 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm){
 
+
+
         //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
-                withLongId(99L).
-                withId(new BookingId()).
+                withBookingId(new BookingId(UUID.randomUUID())).
                 withCustomer(bookingForm.getFname() + " " + bookingForm.getLname()).
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
