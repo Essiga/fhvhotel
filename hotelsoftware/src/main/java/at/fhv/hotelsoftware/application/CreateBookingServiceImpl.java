@@ -32,12 +32,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm){
 
-        Room room = Room.builder().
-                withRoomCategory(RoomCategory.LUXUS).
-                withRoomId(new RoomId(UUID.randomUUID())).
-                withRoomNumber(2).
-                build();
-
 
 
         //TODO: Input validation (later not this sprint)
@@ -50,7 +44,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withFromDate(LocalDate.parse(bookingForm.getFromDate())).
                 withToDate(LocalDate.parse(bookingForm.getToDate())).
                 withRoomCategory(RoomCategory.SINGLE).
-                withSingleRoom(room).
                 build();
 
         bookingRepository.addBooking(booking);
