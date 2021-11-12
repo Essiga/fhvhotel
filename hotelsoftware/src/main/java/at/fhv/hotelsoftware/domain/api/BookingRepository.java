@@ -7,10 +7,14 @@ import java.util.List;
 
 
 public interface BookingRepository {
-   // void addToDatabase(Booking booking);
-
-    List<Booking> findAllBookings();
-    void addBooking(Booking booking);
     List<Booking> findTodaysCheckIns();
+    List<Booking> findTodaysCheckOuts();
+    List<Booking> findAllBookings();
+
+
+
+    void addBooking(Booking booking);
     void checkIn(BookingId bookingId);
+
+
 }

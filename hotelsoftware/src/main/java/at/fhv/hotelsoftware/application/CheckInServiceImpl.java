@@ -21,3 +21,4 @@ public class CheckInServiceImpl {
         bookingRepository.checkIn(bookingId);
     }
 }
+ //Booking aufrufen und ändern

@@ -53,6 +53,14 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
+    public List<Booking> findTodaysCheckOuts() {
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE to_date = CURRENT_DATE() ", Booking.class);
+        List<Booking> resultList = query.getResultList();
+
+        return resultList;
+    }
+
+    @Override
     public void addBooking(Booking booking) {
         this.em.merge(booking);         //merge instead of persist!!
     }
