@@ -49,16 +49,16 @@
 
           <tr class="bg-blue-100 text-xl">
             <th class="w-1/5 border-2 py-2 border-blue-200">Customer</th>
-            <th class="w-1/5 border-2 py-2 border-blue-200">From Date</th>
-            <th class="w-1/5 border-2 py-2 border-blue-200">To Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Check-In Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Check-Out Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Booking Status</th>
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
           <tr class="text-center m-4" th:each="booking : ${bookings}">
             <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getFromDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getToDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
             <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">Check-In</a></td>
           </tr>
@@ -77,16 +77,16 @@
 
           <tr class="bg-blue-100 text-xl">
             <th class="w-1/5 border-2 py-2 border-blue-200">Customer</th>
-            <th class="w-1/5 border-2 py-2 border-blue-200">From Date</th>
-            <th class="w-1/5 border-2 py-2 border-blue-200">To Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Check-In Date</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Check-Out Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Booking Status</th>
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
           <tr class="text-center m-4" th:each="booking : ${bookings}">
             <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getFromDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getToDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
+            <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
             <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white">Check-Out</a></td>
           </tr>
