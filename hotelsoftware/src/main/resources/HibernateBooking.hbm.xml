@@ -20,6 +20,8 @@
 
         <property name="toDate" column="toDate" type="java.time.LocalDate"/>
 
+
+
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
 
@@ -44,7 +46,20 @@
 
 
 
+        <list name="rooms" table="tbl_room" inverse="false" cascade="all,delete-orphan" lazy="true" fetch="select">
+            <key>
+                <column name="bookingId" not-null="false" />
+            </key>
+            <list-index column="listIndex"></list-index>
+            <one-to-many class="at.fhv.hotelsoftware.domain.model.Room"/>
+        </list>
+
+
+        <property name="singleRoom" column="singleRoom" type="integer"/>
+        <property name="doubleRoom" column="doubleRoom" type="integer"/>
+        <property name="luxusRoom" column="luxusRoom" type="integer"/>
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
     </class>
+
 </hibernate-mapping>

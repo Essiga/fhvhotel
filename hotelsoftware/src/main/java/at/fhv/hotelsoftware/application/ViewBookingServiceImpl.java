@@ -32,7 +32,8 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                         bookings.getCancellationDeadLine(),
                                         bookings.getRoomCategory(),
                                         bookings.getVoucherCode(),
-                                        bookings.getBookingStatus()))
+                                        bookings.getBookingStatus(),
+                                        bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 
@@ -51,7 +52,8 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
                                 bookings.getVoucherCode(),
-                                bookings.getBookingStatus()))
+                                bookings.getBookingStatus(),
+                                bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 

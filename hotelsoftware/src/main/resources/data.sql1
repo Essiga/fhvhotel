@@ -1,0 +1,13 @@
+-- insert into TBL_ROOM
+-- values(1, 1, 'LUXUS', 1, 1, null),
+-- (2, 2, 'LUXUS', 2, 2, null),
+-- (3, 3, 'LUXUS', 3, 3, null);
+--
+-- insert into TBL_BOOKING
+-- values(null,1, 'Tobias Kurz', '2021-11-04', '2021-11-08', null, 'SINGLE', 'CONFIRMED', null, null, null, null, 1, null),
+-- (null,2, 'Achim Unterkofler', '2021-11-04', '2021-11-09', null, 'SINGLE', 'CONFIRMED', null, null, null, null, 2, null),
+-- (null,3, 'Adrian Essig', '2007-12-03', '2007-12-03', null, 'SINGLE', 'CONFIRMED', null, null, null, null, 3, null);
+--
+--
+--
+--
