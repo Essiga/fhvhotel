@@ -23,8 +23,8 @@ public final class BookingDTO {
 
     public BookingDTO(BookingId bookingId,
                       String customer,
-                      LocalDate fromDate,
-                      LocalDate toDate,
+                      LocalDate checkInDate,
+                      LocalDate checkOutDate,
                       LocalDate cancellationDeadLine,
                       RoomCategory roomCategory,
                       VoucherCode voucherCode,
@@ -33,8 +33,8 @@ public final class BookingDTO {
 
         this.bookingId = bookingId;
         this.customer = customer;
-        this.fromDate = fromDate;
-        this.toDate = toDate;
+        this.fromDate = checkInDate;
+        this.toDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
         this.roomCategory = roomCategory;
         this.voucherCode = voucherCode;
@@ -54,11 +54,11 @@ public final class BookingDTO {
         return customer;
     }
 
-    public LocalDate getFromDate() {
+    public LocalDate getCheckInDate() {
         return fromDate;
     }
 
-    public LocalDate getToDate() {
+    public LocalDate getCheckOutDate() {
         return toDate;
     }
 

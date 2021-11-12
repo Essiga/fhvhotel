@@ -16,9 +16,9 @@
 
         <property name="customer" column="customer" type="java.lang.String"/>
 
-        <property name="fromDate" column="fromDate" type="java.time.LocalDate"/>
+        <property name="checkInDate" column="checkInDate" type="java.time.LocalDate"/>
 
-        <property name="toDate" column="toDate" type="java.time.LocalDate"/>
+        <property name="checkOutDate" column="checkOutDate" type="java.time.LocalDate"/>
 
 
 

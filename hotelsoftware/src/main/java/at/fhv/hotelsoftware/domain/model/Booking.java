@@ -13,8 +13,8 @@ public class Booking {
     private Long id;
     private BookingId bookingId;
     private String customer;
-    private LocalDate fromDate;
-    private LocalDate toDate;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
     private Integer singleRoom;
@@ -49,12 +49,12 @@ public class Booking {
         return customer;
     }
 
-    public LocalDate getFromDate() {
-        return fromDate;
+    public LocalDate getCheckInDate() {
+        return checkInDate;
     }
 
-    public LocalDate getToDate() {
-        return toDate;
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
     }
 
     public LocalDate getCancellationDeadLine() {
@@ -95,8 +95,8 @@ public class Booking {
     public String toString() {
         return "Booking{" +
                 "customer='" + customer + '\'' +
-                ", fromDate=" + fromDate +
-                ", toDate=" + toDate +
+                ", fromDate=" + checkInDate +
+                ", toDate=" + checkOutDate +
                 ", roomCategory=" + roomCategory +
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
@@ -127,13 +127,13 @@ public class Booking {
             return this;
         }
 
-        public Builder withFromDate(LocalDate fromDate) {
-            this.instance.fromDate = fromDate;
+        public Builder withCheckInDate(LocalDate checkInDate) {
+            this.instance.checkInDate = checkInDate;
             return this;
         }
 
-        public Builder withToDate(LocalDate toDate) {
-            this.instance.toDate = toDate;
+        public Builder withCheckOutDate(LocalDate checkOutDate) {
+            this.instance.checkOutDate = checkOutDate;
             return this;
         }
 

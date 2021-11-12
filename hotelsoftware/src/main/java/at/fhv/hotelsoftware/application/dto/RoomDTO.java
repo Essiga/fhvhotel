@@ -31,32 +31,16 @@ public final class RoomDTO {
         return roomId;
     }
 
-    public void setUid(RoomId roomId) {
-        this.roomId = roomId;
-    }
-
     public RoomCategory getRoomCategory() {
         return roomCategory;
-    }
-
-    public void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
     }
 
     public Integer getRoomNumber() {
         return roomNumber;
     }
 
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
     public Integer getRoomCount() {
         return roomCount;
-    }
-
-    public void setRoomCount(Integer roomCount) {
-        this.roomCount = roomCount;
     }
 
     public static class Builder {

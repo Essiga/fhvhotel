@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,8 +40,8 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
                 withBookingStatus(BookingStatus.PENDING).
-                withFromDate(LocalDate.parse(bookingForm.getFromDate())).
-                withToDate(LocalDate.parse(bookingForm.getToDate())).
+                withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
+                withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
                 withRoomCategory(RoomCategory.SINGLE).
                 build();
 
