@@ -160,19 +160,19 @@
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Single </h2>
-                        <input readonly type="number" id="single" class="border-2 border-gray-400 w-16" th:value="*{singleRoomCount}">
+                        <input readonly type="number" id="single" class="border-2 border-gray-400 w-16" th:value="*{singleRoom}">
                         <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Double</h2>
-                        <input readonly type="number" id="double" class="border-2 border-gray-400 w-16" th:value="*{doubleRoomCount}">
+                        <input readonly type="number" id="double" class="border-2 border-gray-400 w-16" th:value="*{doubleRoom}">
                         <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
                     <div class="w-1/3">
                         <h2 class="mb-2 font-semibold">Luxus</h2>
-                        <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16" th:value="*{luxusRoomCount}">
+                        <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16" th:value="*{luxusRoom}">
                         <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
                     </div>
 
@@ -187,12 +187,12 @@
                 <div class="flex row"> <!-- Form Line -->
 
                     <div class="w-1/2">
-                        <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{fromDate}">
+                        <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{checkInDate}">
                         <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
                     </div>
 
                     <div class="w-1/2">
-                        <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{toDate}">
+                        <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:value="*{checkOutDate}">
                         <label for="toDate" class="block text-sm text-gray-500">To Date</label>
                     </div>
 

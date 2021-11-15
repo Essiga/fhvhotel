@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +31,9 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                         bookings.getCheckOutDate(),
                                         bookings.getCancellationDeadLine(),
                                         bookings.getRoomCategory(),
+                                        bookings.getSingleRoom(),
+                                        bookings.getDoubleRoom(),
+                                        bookings.getLuxusRoom(),
                                         bookings.getVoucherCode(),
                                         bookings.getBookingStatus(),
                                         bookings.getRooms()))
@@ -50,6 +54,9 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
+                                bookings.getSingleRoom(),
+                                bookings.getDoubleRoom(),
+                                bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus(),
                                 bookings.getRooms()))
@@ -69,6 +76,9 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
+                                bookings.getSingleRoom(),
+                                bookings.getDoubleRoom(),
+                                bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus(),
                                 bookings.getRooms()))
@@ -93,20 +103,19 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<BookingDTO> findBooking(){
-        List<Booking> allBookings = bookingRepository.findBooking();
-        return allBookings
-                .stream()
-                .map(bookings ->
-                        new BookingDTO(bookings.getBookingId(),
-                                bookings.getCustomer(),
-                                bookings.getFromDate(),
-                                bookings.getToDate(),
-                                bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
-                                bookings.getRoomCount(),
-                                bookings.getVoucherCode(),
-                                bookings.getBookingStatus()))
-                .collect(Collectors.toList());
+    public BookingDTO findBookingById(String bookingId){
+        Booking booking = bookingRepository.findBookingById(bookingId);
+        return new BookingDTO(booking.getBookingId(),
+                                booking.getCustomer(),
+                                booking.getCheckInDate(),
+                                booking.getCheckOutDate(),
+                                booking.getCancellationDeadLine(),
+                                booking.getRoomCategory(),
+                                booking.getSingleRoom(),
+                                booking.getDoubleRoom(),
+                                booking.getLuxusRoom(),
+                                booking.getVoucherCode(),
+                                booking.getBookingStatus(),
+                                booking.getRooms());
     }
 }

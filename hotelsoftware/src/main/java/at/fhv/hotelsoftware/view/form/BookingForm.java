@@ -1,7 +1,10 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.domain.model.BookingId;
+
 public class BookingForm {
 
+    private BookingId bookingId;
     private String fname;
     private String lname;
     private String voucherCode;
@@ -16,6 +19,14 @@ public class BookingForm {
     private Integer luxusRoomCount;
     private String checkInDate;
     private String checkOutDate;
+
+    public BookingId getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(BookingId bookingId) {
+        this.bookingId = bookingId;
+    }
 
     public String getFname() {
         return fname;

@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import org.springframework.stereotype.Component;
 
 
@@ -9,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
@@ -60,10 +62,12 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public List<Booking> findBookingById(BookingId bookingId){
+    public Booking findBookingById(String bookingId){
 
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID='?id' ", Booking.class);
-        List<Booking> resultList = query.getResultList();
+        BookingId bId = new BookingId(bookingId);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bId", Booking.class);
+        query.setParameter("bId", bId.getBookingId());
+        Booking resultList = query.getSingleResult();
 
         return resultList;
     }

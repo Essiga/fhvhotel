@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -98,9 +99,9 @@ public class BookingController {
     }
 
     @GetMapping  ("/checkInGuest")
-    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model){
-       List<BookingDTO> listOfBooking = viewBookingService.findBooking();
-        model.addAttribute("bookingForm", listOfBooking.get(0));
+    public ModelAndView checkInGuest(@RequestParam("id") String bookingId, Model model){
+        BookingDTO booking = viewBookingService.findBookingById(bookingId);
+        model.addAttribute("bookingForm", booking);
         return new ModelAndView("checkInGuest");
     }
 
