@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CreateBookingServiceImpl implements CreateBookingService {
@@ -30,18 +31,18 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm){
 
+
+
         //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
-                withLongId(99L).
-                withId(new Id("99")).
+                withBookingId(new BookingId(UUID.randomUUID())).
                 withCustomer(bookingForm.getFname() + " " + bookingForm.getLname()).
                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCancellationDeadLine(null).
                 withBookingStatus(BookingStatus.PENDING).
-                withFromDate(LocalDate.parse(bookingForm.getFromDate())).
-                withToDate(LocalDate.parse(bookingForm.getToDate())).
+                withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
+                withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
                 withRoomCategory(RoomCategory.SINGLE).
-                withRoomCount(bookingForm.getSingleRoomCount()).
                 build();
 
         bookingRepository.addBooking(booking);

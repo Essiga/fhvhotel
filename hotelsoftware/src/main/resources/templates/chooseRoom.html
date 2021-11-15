@@ -12,8 +12,9 @@
 <body class="bg-gray-100">
 
 <div class="flex">
+  <aside class="h-screen sticky top-0 w-1/5">
 
-  <nav class="flex-row h-screen w-1/5 bg-green-500">
+  <nav class="flex-row h-screen w-full bg-green-500">
     <!-- Navbar -->
 
     <div>
@@ -40,6 +41,7 @@
     </div>
 
   </nav>
+  </aside>
 
   <div class="flex w-4/5"> <!-- Content -->
 
@@ -92,13 +94,13 @@
           <div class="flex row"> <!-- Form Line -->
 
           <div class="w-1/2">
-            <input type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{fromDate}">
-            <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
+            <input type="date" id="checkInDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{checkInDate}">
+            <label for="checkInDate" class="block text-sm text-gray-500">Check-In Date</label>
           </div>
 
           <div class="w-1/2">
-            <input type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{toDate}">
-            <label for="toDate" class="block text-sm text-gray-500">To Date</label>
+            <input type="date" id="checkOutDate" class="p-2 border-2 border-gray-400 mb-2" th:field="*{checkOutDate}">
+            <label for="checkOutDate" class="block text-sm text-gray-500">Check-Out Date</label>
           </div>
 
           </div>

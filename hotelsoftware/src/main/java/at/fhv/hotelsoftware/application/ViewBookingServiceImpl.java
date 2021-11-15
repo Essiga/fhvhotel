@@ -26,13 +26,13 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                 .map(bookings ->
                         new BookingDTO(bookings.getBookingId(),
                                         bookings.getCustomer(),
-                                        bookings.getFromDate(),
-                                        bookings.getToDate(),
+                                        bookings.getCheckInDate(),
+                                        bookings.getCheckOutDate(),
                                         bookings.getCancellationDeadLine(),
                                         bookings.getRoomCategory(),
-                                        bookings.getRoomCount(),
                                         bookings.getVoucherCode(),
-                                        bookings.getBookingStatus()))
+                                        bookings.getBookingStatus(),
+                                        bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 
@@ -46,13 +46,32 @@ public class ViewBookingServiceImpl implements ViewBookingService {
                 .map(bookings ->
                         new BookingDTO(bookings.getBookingId(),
                                 bookings.getCustomer(),
-                                bookings.getFromDate(),
-                                bookings.getToDate(),
+                                bookings.getCheckInDate(),
+                                bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
-                                bookings.getRoomCount(),
                                 bookings.getVoucherCode(),
-                                bookings.getBookingStatus()))
+                                bookings.getBookingStatus(),
+                                bookings.getRooms()))
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<BookingDTO> findTodaysCheckOuts() {
+        List<Booking> allBookings = bookingRepository.findTodaysCheckOuts();
+        return allBookings
+                .stream()
+                .map(bookings ->
+                        new BookingDTO(bookings.getBookingId(),
+                                bookings.getCustomer(),
+                                bookings.getCheckInDate(),
+                                bookings.getCheckOutDate(),
+                                bookings.getCancellationDeadLine(),
+                                bookings.getRoomCategory(),
+                                bookings.getVoucherCode(),
+                                bookings.getBookingStatus(),
+                                bookings.getRooms()))
                 .collect(Collectors.toList());
     }
 

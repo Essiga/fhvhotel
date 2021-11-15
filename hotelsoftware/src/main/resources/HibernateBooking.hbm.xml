@@ -10,15 +10,17 @@
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.Id">
-            <property name="bookingId" column="bookingId" type="java.lang.String"/>
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
         <property name="customer" column="customer" type="java.lang.String"/>
 
-        <property name="fromDate" column="fromDate" type="java.time.LocalDate"/>
+        <property name="checkInDate" column="checkInDate" type="java.time.LocalDate"/>
 
-        <property name="toDate" column="toDate" type="java.time.LocalDate"/>
+        <property name="checkOutDate" column="checkOutDate" type="java.time.LocalDate"/>
+
+
 
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
@@ -43,10 +45,21 @@
         </component>
 
 
-        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
+
+        <list name="rooms" table="tbl_room" inverse="false" cascade="all,delete-orphan" lazy="true" fetch="select">
+            <key>
+                <column name="bookingId" not-null="false" />
+            </key>
+            <list-index column="listIndex"></list-index>
+            <one-to-many class="at.fhv.hotelsoftware.domain.model.Room"/>
+        </list>
 
 
+        <property name="singleRoom" column="singleRoom" type="integer"/>
+        <property name="doubleRoom" column="doubleRoom" type="integer"/>
+        <property name="luxusRoom" column="luxusRoom" type="integer"/>
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
     </class>
+
 </hibernate-mapping>

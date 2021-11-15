@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="serious troubles with thymeleaf &amp; spring">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="changed variable names: &#10;toDate --&gt; checkOutDate&#10;fromDate --&gt; checkInDate&#10;&#10;Customer --&gt; Guest&#10;&#10;removed unnecessary getters and setters&#10;&#10;changed merged to persist @ booking repository">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Id.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Id.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,17 +23,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="hotelsoftware" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="hotelsoftware" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -46,15 +33,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Check-in_UI_Thymeleaf" />
+        <entry key="$PROJECT_DIR$" value="input_validation_backend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,6 +55,14 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+        <option value="dev" />
+      </list>
+    </option>
+  </component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
       <RepoCoordinatesHolder>
@@ -78,13 +74,11 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
-        <entry key="JPA Palette" value="true" />
         <entry key="JPA Structure" value="true" />
       </map>
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="JPA Palette" value="false" />
         <entry key="JPA Structure" value="false" />
       </map>
     </option>
@@ -92,7 +86,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$PROJECT_DIR$/../../../../apache-maven-3.8.1" />
+        <option name="mavenHome" value="$USER_HOME$/apache-maven-3.8.1" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -116,6 +110,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="full.screen.before.presentation.mode" value="false" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
@@ -123,23 +119,25 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
-      <module name="hotelsoftware.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+  <component name="RunManager" selected="Spring Boot.HotelsoftwareApplication">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
+      <module name="hotelsoftware.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -161,18 +159,24 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="JavaScript Debug.bookingSummary.html" />
+      <item itemvalue="JavaScript Debug.dashboard.html" />
       <item itemvalue="JavaScript Debug.chooseRoom.html" />
       <item itemvalue="JavaScript Debug.createCustomer.html" />
-      <item itemvalue="JavaScript Debug.dashboard.html" />
+      <item itemvalue="JavaScript Debug.bookingSummary.html" />
       <item itemvalue="JavaScript Debug.dashboard.html (1)" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.dashboard.html" />
+        <item itemvalue="JavaScript Debug.dashboard.html (1)" />
+        <item itemvalue="JavaScript Debug.createCustomer.html" />
+        <item itemvalue="JavaScript Debug.bookingSummary.html" />
+        <item itemvalue="JavaScript Debug.chooseRoom.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SpringBeansView">
-    <option name="beanDetailsProportion" value="0.3" />
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="save state" />
@@ -185,6 +189,8 @@
       <workItem from="1636120499922" duration="1529000" />
       <workItem from="1636231829537" duration="10204000" />
       <workItem from="1636294387858" duration="6611000" />
+      <workItem from="1636485693376" duration="2790000" />
+      <workItem from="1636550049000" duration="3611000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -263,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1636300719392</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="merged with dev">
+      <created>1636720730831</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1636720730831</updated>
+    </task>
+    <task id="LOCAL-00013" summary="changed variable names: &#10;toDate --&gt; checkOutDate&#10;fromDate --&gt; checkInDate&#10;&#10;Customer --&gt; Guest&#10;&#10;removed unnecessary getters and setters&#10;&#10;changed merged to persist @ booking repository">
+      <created>1636726965162</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636726965162</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -375,7 +395,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/task01" />
+                        <option value="origin/Room" />
                       </list>
                     </value>
                   </entry>
@@ -395,21 +415,28 @@
     <MESSAGE value="changing branches" />
     <MESSAGE value="save state" />
     <MESSAGE value="almost finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="almost finished" />
+    <MESSAGE value="RoomId, BookingId, RoomDTO, Room" />
+    <MESSAGE value="merging" />
+    <MESSAGE value="merged with dev" />
+    <MESSAGE value="changed variable names: &#10;toDate --&gt; checkOutDate&#10;fromDate --&gt; checkInDate&#10;&#10;Customer --&gt; Guest&#10;&#10;removed unnecessary getters and setters&#10;&#10;changed merged to persist @ booking repository" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed variable names: &#10;toDate --&gt; checkOutDate&#10;fromDate --&gt; checkInDate&#10;&#10;Customer --&gt; Guest&#10;&#10;removed unnecessary getters and setters&#10;&#10;changed merged to persist @ booking repository" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="17" />
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CreateBookingServiceImpl.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalArgumentException" package="java.lang" />
+          <option name="timeStamp" value="9" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
-        <PinnedItemInfo parentTag="org.apache.catalina.connector.ResponseFacade" memberName="response" />
         <PinnedItemInfo parentTag="java.lang.IllegalArgumentException" memberName="cause" />
       </pinned-members>
     </pin-to-top-manager>

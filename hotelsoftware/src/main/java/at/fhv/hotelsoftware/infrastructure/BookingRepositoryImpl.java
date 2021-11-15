@@ -40,7 +40,20 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE from_date = CURRENT_DATE() ", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() ", Booking.class);
+        List<Booking> resultList = query.getResultList();
+
+        return resultList;
+    }
+
+    @Override
+    public void checkIn(BookingId bookingId) {
+        TypedQuery<Booking> query = this.em.createQuery("UPDATE Booking SET booking_status = 'CHECKDIN' WHERE booking_id = bookingId", Booking.class);
+    }
+
+    @Override
+    public List<Booking> findTodaysCheckOuts() {
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_out_date = CURRENT_DATE() ", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;

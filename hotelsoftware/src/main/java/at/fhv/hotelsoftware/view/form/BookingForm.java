@@ -1,11 +1,5 @@
 package at.fhv.hotelsoftware.view.form;
 
-import at.fhv.hotelsoftware.domain.model.BookingStatus;
-import at.fhv.hotelsoftware.domain.model.Id;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 public class BookingForm {
 
     private String fname;
@@ -20,9 +14,8 @@ public class BookingForm {
     private Integer singleRoomCount;
     private Integer doubleRoomCount;
     private Integer luxusRoomCount;
-    private String fromDate;
-    private String toDate;
-
+    private String checkInDate;
+    private String checkOutDate;
 
     public String getFname() {
         return fname;
@@ -120,14 +113,11 @@ public class BookingForm {
         this.luxusRoomCount = luxusRoomCount;
     }
 
-    public String getFromDate() {return fromDate;}
+    public String getCheckInDate() {return checkInDate;}
 
-    public void setFromDate(String fromDate) {this.fromDate = fromDate;}
+    public void setCheckInDate(String checkInDate) {this.checkInDate = checkInDate;}
 
-    public String getToDate() {return toDate;}
+    public String getCheckOutDate() {return checkOutDate;}
 
-    public void setToDate(String toDate) {this.toDate = toDate;}
-
-
-
+    public void setCheckOutDate(String checkOutDate) {this.checkOutDate = checkOutDate;}
 }
