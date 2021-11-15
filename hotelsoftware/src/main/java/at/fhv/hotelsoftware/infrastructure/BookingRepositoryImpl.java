@@ -48,7 +48,8 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findBooking(){
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID='99' ", Booking.class);
+
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID='?id' ", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;

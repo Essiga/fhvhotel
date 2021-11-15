@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.view.form;
 
 import at.fhv.hotelsoftware.domain.model.BookingStatus;
+import at.fhv.hotelsoftware.domain.model.Id;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="almost finished">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="serious troubles with thymeleaf &amp; spring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/data.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuest.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuest.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
@@ -45,7 +45,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Hibernate_Mapping" />
+        <entry key="$PROJECT_DIR$" value="Check-in_UI_Thymeleaf" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,11 +69,13 @@
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
       <map>
+        <entry key="JPA Palette" value="true" />
         <entry key="JPA Structure" value="true" />
       </map>
     </option>
     <option name="myId2Visible">
       <map>
+        <entry key="JPA Palette" value="false" />
         <entry key="JPA Structure" value="false" />
       </map>
     </option>
@@ -380,8 +382,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="12" />
+          <line>53</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
