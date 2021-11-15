@@ -7,4 +7,8 @@ public class Id {
     public Id(String string){
         this.bookingId = string;
     }
+
+    public String getBookingId() {
+        return bookingId;
+    }
 }
