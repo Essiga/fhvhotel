@@ -1,22 +1,40 @@
 package at.fhv.hotelsoftware.view.form;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class BookingForm {
 
-    @NotEmpty(message = "Fname cannot be empty")
-    @Size(min = 1, message = "Fname must have at least 5 characters")
+    @NotEmpty(message = "fname cannot be empty")
     private String fname;
 
+    @NotEmpty(message = "lname cannot be empty")
     private String lname;
+
+    @NotEmpty(message = "voucher code cannot be empty")
+    @Size(min = 8, message = "voucher code must have at least 8 characters")
     private String voucherCode;
+
+    @NotEmpty(message = "street address cannot be empty")
     private String streetAdr;
+
+    @NotEmpty(message = "zip cannot be empty")
     private String zip;
+
+    @NotEmpty(message = "city cannot be empty")
     private String city;
+
+    @NotEmpty(message = "country cannot be empty")
     private String country;
+
+    @NotEmpty(message = "phoneNumber cannot be empty")
     private String phoneNumber;
+
+    @NotEmpty(message = "email cannot be empty")
+    @Email(message = "invalid syntax")
     private String email;
+
     private Integer singleRoomCount;
     private Integer doubleRoomCount;
     private Integer luxusRoomCount;

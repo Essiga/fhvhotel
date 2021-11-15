@@ -58,6 +58,7 @@
                         <div class="w-1/2">
                             <input type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:field="*{voucherCode}">
                             <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('voucherCode')}" th:errors="*{voucherCode}"></div>
                         </div>
 
                     </div>
@@ -79,6 +80,7 @@
                         <div class="w-1/2">
                             <input type="text" id="lname" class="border-2 border-gray-400 w-4/6" th:field="*{lname}">
                             <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('lname')}" th:errors="*{lname}"></div>
                         </div>
 
                     </div>
@@ -94,11 +96,13 @@
                         <div class="w-1/2 ">
                             <input type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('streetAdr')}" th:errors="*{streetAdr}"></div>
                         </div>
 
                         <div class="w-1/2">
                             <input type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
+                            <div class="w-2/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"></div>
                         </div>
 
                     </div>
@@ -108,11 +112,13 @@
                         <div class="w-1/2 ">
                             <input type="text" id="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></div>
                         </div>
 
                         <div class="w-1/2">
                             <input type="text" id="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></div>
                         </div>
 
                     </div>
@@ -138,11 +144,13 @@
                         <div class="w-1/2">
                             <input type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"></div>
                         </div>
 
                         <div class="w-1/2">
                             <input type="text" id="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
                         </div>
 
                     </div>
