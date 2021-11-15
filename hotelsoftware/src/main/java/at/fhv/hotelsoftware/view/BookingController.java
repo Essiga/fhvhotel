@@ -105,7 +105,8 @@ public class BookingController {
         return new ModelAndView("checkInGuest");
     }
 
-
+    //TODO: create new post function that calls the checkIn function from the application layer. (see writeBookingInDatabase() Function)
+    // this functions then needs to be called by the form action in the checkInGuest.html
 
 
 

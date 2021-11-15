@@ -61,9 +61,11 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
+    //TODO: Return Optional<Booking> and not Booking because it could be null
     @Override
     public Booking findBookingById(String bookingId){
 
+        //TODO: create the BookingId object in the application layer and not in the repository
         BookingId bId = new BookingId(bookingId);
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bId", Booking.class);
         query.setParameter("bId", bId.getBookingId());
