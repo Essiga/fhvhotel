@@ -1,8 +1,6 @@
 package at.fhv.hotelsoftware.view.form;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 public class BookingForm {
 
@@ -35,9 +33,15 @@ public class BookingForm {
     @Email(message = "invalid syntax")
     private String email;
 
-    private Integer singleRoomCount;
-    private Integer doubleRoomCount;
-    private Integer luxusRoomCount;
+    @Min(value = 0, message = "value cannot be less than 0")
+    private Integer singleRoomCount = 0;
+
+    @Min(value = 0, message = "value cannot be less than 0")
+    private Integer doubleRoomCount = 0;
+
+    @Min(value = 0, message = "value cannot be less than 0")
+    private Integer luxusRoomCount = 0;
+
     private String checkInDate;
     private String checkOutDate;
 

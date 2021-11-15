@@ -69,7 +69,11 @@ public class BookingController {
     }
 
     @PostMapping(EXTRA_SERVICE_URL)
-    public ModelAndView submitExtraService(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+    public ModelAndView submitExtraService(@ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return new ModelAndView("chooseRoom");
+        }
+
         model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("extraService");
     }
