@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.view;
 
+import at.fhv.hotelsoftware.application.api.CheckInService;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
@@ -24,6 +25,9 @@ public class BookingController {
     @Autowired
     ViewBookingService viewBookingService;
 
+    @Autowired
+    CheckInService checkInService;
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -41,6 +45,8 @@ public class BookingController {
     public ModelAndView showDashboard(Model model) {
         List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("bookings", listOfBookings);
+
+        //checkInService.checkIn(listOfBookings.get(0).getBookingId());
 
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkouts", listOfCheckouts);

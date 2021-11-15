@@ -4,5 +4,5 @@ import at.fhv.hotelsoftware.domain.model.BookingId;
 
 public interface CheckInService {
     //
-    void ChangeBookingStatus(BookingId bookingId);
+    void checkIn(BookingId bookingId);
 }

@@ -84,7 +84,7 @@
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
-          <tr class="text-center m-4" th:each="booking : ${bookings}">
+          <tr class="text-center m-4" th:each="booking : ${checkouts}">
             <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>

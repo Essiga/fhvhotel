@@ -103,6 +103,10 @@ public class Booking {
                 '}';
     }
 
+    public void checkIn(){
+        this.bookingStatus = BookingStatus.CHECKEDIN;
+    }
+
     public static class Builder {
 
         private final Booking instance;
