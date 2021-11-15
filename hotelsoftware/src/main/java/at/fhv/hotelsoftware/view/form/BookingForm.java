@@ -1,8 +1,14 @@
 package at.fhv.hotelsoftware.view.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class BookingForm {
 
+    @NotEmpty(message = "Fname cannot be empty")
+    @Size(min = 1, message = "Fname must have at least 5 characters")
     private String fname;
+
     private String lname;
     private String voucherCode;
     private String streetAdr;

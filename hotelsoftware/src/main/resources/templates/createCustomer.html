@@ -73,6 +73,7 @@
                         <div class="w-1/2 ">
                             <input type="text" id="fname" class="border-2 border-gray-400 w-4/6" th:field="*{fname}">
                             <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                            <div class="w-4/6 p-1 font-bold text-red-700 bg-yellow-300 border border-blue-300" th:if="${#fields.hasErrors('fname')}" th:errors="*{fname}"></div>
                         </div>
 
                         <div class="w-1/2">

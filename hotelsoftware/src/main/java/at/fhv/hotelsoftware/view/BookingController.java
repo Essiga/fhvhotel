@@ -8,11 +8,13 @@ import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -57,7 +59,11 @@ public class BookingController {
     }
 
     @PostMapping(CHOOSE_ROOM_URL)
-    public ModelAndView submitChooseRoom(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+    public ModelAndView submitChooseRoom(@ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            return new ModelAndView("createCustomer");
+        }
+
         model.addAttribute("bookingForm", bookingForm);
         return new ModelAndView("chooseRoom");
     }
