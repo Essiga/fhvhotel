@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Component
 public class CheckInServiceImpl implements CheckInService {
 
@@ -21,8 +23,8 @@ public class CheckInServiceImpl implements CheckInService {
     @Override
     @Transactional
     public void checkIn(BookingId bookingId) {
-        Booking booking = bookingRepository.findBookingById(bookingId);
-        booking.checkIn();
+        Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
+        booking.get().checkIn();
     }
 }
  //Booking aufrufen und ändern
