@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class CustomerForm {
     @NotEmpty(message = "First name cannot be empty")
     private String fname;
-
+    //
     @NotEmpty(message = "Last name cannot be empty")
     private String lname;
 
