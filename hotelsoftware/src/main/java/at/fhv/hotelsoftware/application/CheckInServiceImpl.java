@@ -23,8 +23,11 @@ public class CheckInServiceImpl implements CheckInService {
     @Override
     @Transactional
     public void checkIn(BookingId bookingId) {
+
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
-        booking.get().checkIn();
+        if(!booking.isEmpty()) {
+            booking.get().checkIn();
+        }
     }
 }
  //Booking aufrufen und ändern

@@ -51,7 +51,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId) {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
-        Optional<Booking> booking = Optional.ofNullable(query.getSingleResult());
+        Optional<Booking> booking = query.getResultStream().findFirst();
 
         return booking;
     }

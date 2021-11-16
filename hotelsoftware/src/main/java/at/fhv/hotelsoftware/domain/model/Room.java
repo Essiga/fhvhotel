@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Room {
-    public long id;
+    public Long id;
     //private RoomId roomId;
     private RoomCategory roomCategory;
     private Integer roomNumber;

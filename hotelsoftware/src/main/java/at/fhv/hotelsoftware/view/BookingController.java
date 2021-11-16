@@ -46,13 +46,13 @@ public class BookingController {
         List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("bookings", listOfBookings);
 
-        /*
+
        //for testing purposes - review
      if(listOfBookings.size() != 0) {
      checkInService.checkIn(listOfBookings.get(0).getBookingId());
         }
 
-         */
+
 
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkouts", listOfCheckouts);

@@ -105,6 +105,7 @@ public class Booking {
 
     public void checkIn(){
         this.bookingStatus = BookingStatus.CHECKEDIN;
+        //TODO: Change RoomStatus
     }
 
     public static class Builder {

@@ -21,6 +21,6 @@
             </type>
         </property>
 
-        <property name="roomNumber" column="roomNumber" type="integer"/>
+        <property name="roomNumber" column="roomNumber" type="java.lang.Integer"/>
     </class>
 </hibernate-mapping>

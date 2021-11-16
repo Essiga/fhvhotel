@@ -1,11 +1,13 @@
 insert into TBL_BOOKING
-values(NULL,1, 'Tobias Kurz', '2021-11-15', '2021-11-20', '2021-11-03', 'Single',1,0,0, 'CONFIRMED', NULL);
+values(NULL,NULL, 'Adrian Essig', CURRENT_DATE(), CURRENT_DATE(), '2021-11-03', 'SINGLE',1,0,0, 'CONFIRMED', NULL);
 
 insert into TBL_ROOM
-values(NULL,'SINGLE',101,1,null),
-(NULL,'SINGLE',102,1,null),
-(NULL,'DOUBLE',201,null,null),
-(NULL,'DOUBLE',202,null,null),
-(NULL,'LUXUS',301,null,null);
+values(00000002,'SINGLE',101,1,null),
+      (00000003,'SINGLE',102,1,null),
+      (00000004,'DOUBLE',201,null,null),
+      (00000005,'DOUBLE',202,null,null),
+      (00000006,'LUXUS',301,null,null);
+
+
 
 
