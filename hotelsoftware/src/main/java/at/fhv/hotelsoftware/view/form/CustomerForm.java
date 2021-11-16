@@ -14,8 +14,6 @@ public class CustomerForm {
     @NotEmpty(message = "Last name cannot be empty")
     private String lname;
 
-    @NotEmpty(message = "Voucher code cannot be empty")
-    @Size(min = 8, message = "Voucher code must have at least 8 characters")
     private String voucherCode;
 
     @NotEmpty(message = "Street address cannot be empty")

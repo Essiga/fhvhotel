@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
-@Constraint(validatedBy = DateValidatorImpl.class)
+@Constraint(validatedBy = DateValidator.class)
 public @interface DateNotNullOrEarlierThanToday {
 
 
