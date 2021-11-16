@@ -56,11 +56,11 @@
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
-          <tr class="text-center m-4" th:each="booking : ${bookings}">
-            <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
+          <tr class="text-center m-4" th:each="checkIn : ${checkIns}">
+            <td class="border py-2 px-4" th:text="*{checkIn.customer}"></td>
+            <td class="border py-2 px-4" th:text="${checkIn.checkInDate}"></td>
+            <td class="border py-2 px-4" th:text="${checkIn.checkOutDate}"></td>
+            <td class="border py-2 px-4" th:text="${checkIn.bookingStatus}"></td>
             <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">Check-In</a></td>
           </tr>
 
@@ -84,11 +84,11 @@
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
-          <tr class="text-center m-4" th:each="booking : ${checkouts}">
-            <td class="border py-2 px-4" th:text="${booking.getCustomer()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>
-            <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
+          <tr class="text-center m-4" th:each="checkOut : ${checkOuts}">
+            <td class="border py-2 px-4" th:text="${checkOut.customer}"></td>
+            <td class="border py-2 px-4" th:text="${checkOut.checkInDate}"></td>
+            <td class="border py-2 px-4" th:text="${checkOut.checkOutDate}"></td>
+            <td class="border py-2 px-4" th:text="${checkOut.bookingStatus}"></td>
             <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white">Check-Out</a></td>
           </tr>
 

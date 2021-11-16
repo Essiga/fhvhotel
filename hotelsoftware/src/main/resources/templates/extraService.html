@@ -9,15 +9,15 @@
 
 <form th:action="@{/bookingSummary}" th:object="${bookingForm}" method="post">
 
-    <input type="hidden" id="fname" name="fname" th:field="*{fname}"/>
-    <input type="hidden" id="lname" name="lname" th:field="*{lname}"/>
-    <input type="hidden" id="voucher" name="voucher" th:field="*{voucherCode}"/>
-    <input type="hidden" id="streetAdr" name="streetAdr" th:field="*{streetAdr}"/>
-    <input type="hidden" id="zip" name="zip" th:field="*{zip}"/>
-    <input type="hidden" id="city" name="city" th:field="*{city}"/>
-    <input type="hidden" id="country" name="country" th:field="*{country}"/>
-    <input type="hidden" id="phone" name="phone" th:field="*{phoneNumber}"/>
-    <input type="hidden" id="email" name="email" th:field="*{email}"/>
+    <input type="hidden" id="fname" name="fname" th:field="${customerForm.fname}"/>
+    <input type="hidden" id="lname" name="lname" th:field="${customerForm.lname}"/>
+    <input type="hidden" id="voucher" name="voucher" th:field="${customerForm.voucherCode}"/>
+    <input type="hidden" id="streetAdr" name="streetAdr" th:field="${customerForm.streetAdr}"/>
+    <input type="hidden" id="zip" name="zip" th:field="${customerForm.zip}"/>
+    <input type="hidden" id="city" name="city" th:field="${customerForm.city}"/>
+    <input type="hidden" id="country" name="country" th:field="${customerForm.country}"/>
+    <input type="hidden" id="phone" name="phone" th:field="${customerForm.phoneNumber}"/>
+    <input type="hidden" id="email" name="email" th:field="${customerForm.email}"/>
     <input type="hidden" id="single" name="single" th:field="*{singleRoomCount}"/>
     <input type="hidden" id="double" name="double" th:field="*{doubleRoomCount}"/>
     <input type="hidden" id="luxus" name="luxus" th:field="*{luxusRoomCount}"/>
