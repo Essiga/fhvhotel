@@ -8,9 +8,9 @@
             <generator class="native"/>
         </id>
 
-        <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
+   <!--     <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
             <property name="roomId" column="roomId" type="java.util.UUID"/>
-        </component>
+        </component> -->
 
 
 
