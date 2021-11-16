@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
@@ -48,9 +49,9 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public Booking findBookingById(BookingId bookingId) {
+    public Optional<Booking> findBookingById(BookingId bookingId) {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
-        Booking booking = query.getSingleResult();
+        Optional<Booking> booking = Optional.ofNullable(query.getSingleResult());
 
         return booking;
     }
