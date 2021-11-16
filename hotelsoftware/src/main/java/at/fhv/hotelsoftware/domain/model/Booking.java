@@ -22,7 +22,7 @@ public class Booking {
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private List<Room> rooms;
+     private List<Room> rooms;
 
     //private LinkedList<String> extraServices;
 
@@ -87,7 +87,7 @@ public class Booking {
         return luxusRoom;
     }
 
-    public List<Room> getRooms() {
+   public List<Room> getRooms() {
         return rooms;
     }
 
@@ -101,6 +101,11 @@ public class Booking {
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
                 '}';
+    }
+
+    public void checkIn(){
+        this.bookingStatus = BookingStatus.CHECKEDIN;
+        //TODO: Change RoomStatus
     }
 
     public static class Builder {

@@ -4,8 +4,8 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Room {
-    public long id;
-    private RoomId roomId;
+    public Long id;
+    //private RoomId roomId;
     private RoomCategory roomCategory;
     private Integer roomNumber;
 
@@ -20,9 +20,9 @@ public class Room {
         return id;
     }
 
-    private RoomId getRoomId() {
+   /* private RoomId getRoomId() {
         return roomId;
-    }
+    } */
 
     private RoomCategory getRoomCategory() {
         return roomCategory;
@@ -40,9 +40,9 @@ public class Room {
         this.roomNumber = roomNumber;
     }
 
-    private void setRoomId(RoomId roomId) {
+   /* private void setRoomId(RoomId roomId) {
         this.roomId = roomId;
-    }
+    } */
 
     private void setId(long id) {
         this.id = id;
@@ -56,10 +56,10 @@ public class Room {
             this.instance = new Room();
         }
 
-        public Builder withRoomId(RoomId roomId) {
+      /*  public Builder withRoomId(RoomId roomId) {
             this.instance.roomId = roomId;
             return this;
-        }
+        } */
 
         public Builder withRoomCategory(RoomCategory roomCategory) {
             this.instance.roomCategory = roomCategory;
@@ -73,7 +73,7 @@ public class Room {
 
 
         public Room build() {
-            Objects.requireNonNull(this.instance.roomId, "type must be set in room");
+  //          Objects.requireNonNull(this.instance.roomId, "type must be set in room");
             return this.instance;
         }
     }
