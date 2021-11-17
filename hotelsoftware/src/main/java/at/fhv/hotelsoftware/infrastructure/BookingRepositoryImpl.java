@@ -9,8 +9,10 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
@@ -42,7 +44,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() ", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() and booking_status != 'CHECKEDIN' ", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;

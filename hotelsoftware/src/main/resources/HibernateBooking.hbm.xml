@@ -6,7 +6,7 @@
 <hibernate-mapping default-access="field" default-cascade="all">
     <class name="at.fhv.hotelsoftware.domain.model.Booking" table="tbl_booking" lazy="true">
 
-        <id name="id" type="long" column="id">
+        <id name="id" type="java.lang.Long" column="id" unsaved-value="-1">
             <generator class="native"/>
         </id>
 

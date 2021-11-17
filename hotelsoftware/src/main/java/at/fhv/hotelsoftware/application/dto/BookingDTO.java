@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 public final class BookingDTO {
 
     private Long id;
+    private String fname;
+    private String lname;
     private BookingId bookingId;
     private String customer;
     private LocalDate checkInDate;
@@ -17,8 +19,17 @@ public final class BookingDTO {
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
     private VoucherCode voucherCode;
+    private Integer singleRoom;
+    private Integer doubleRoom;
+    private Integer luxusRoom;
     private BookingStatus bookingStatus;
     private List<Room> rooms;
+    private String phoneNumber;
+    private String email;
+    private String country;
+    private String city;
+    private String streetAdr;
+    private String zip;
 
     public BookingDTO(){}
 
@@ -28,6 +39,9 @@ public final class BookingDTO {
                       LocalDate checkOutDate,
                       LocalDate cancellationDeadLine,
                       RoomCategory roomCategory,
+                      Integer singleRoom,
+                      Integer doubleRoom,
+                      Integer luxusRoom,
                       VoucherCode voucherCode,
                       BookingStatus bookingStatus,
                       List<Room> rooms) {
@@ -38,6 +52,9 @@ public final class BookingDTO {
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
         this.roomCategory = roomCategory;
+        this.singleRoom = singleRoom;
+        this.doubleRoom = doubleRoom;
+        this.luxusRoom = luxusRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
         this.rooms = rooms;
@@ -47,6 +64,136 @@ public final class BookingDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreetAdr() {
+        return streetAdr;
+    }
+
+    public void setStreetAdr(String streetAdr) {
+        this.streetAdr = streetAdr;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setBookingId(BookingId bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
+
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public void setCancellationDeadLine(LocalDate cancellationDeadLine) {
+        this.cancellationDeadLine = cancellationDeadLine;
+    }
+
+    public void setRoomCategory(RoomCategory roomCategory) {
+        this.roomCategory = roomCategory;
+    }
+
+    public void setVoucherCode(VoucherCode voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+
+    public Integer getSingleRoom() {
+        return singleRoom;
+    }
+
+    public void setSingleRoom(Integer singleRoom) {
+        this.singleRoom = singleRoom;
+    }
+
+    public Integer getDoubleRoom() {
+        return doubleRoom;
+    }
+
+    public void setDoubleRoom(Integer doubleRoom) {
+        this.doubleRoom = doubleRoom;
+    }
+
+    public Integer getLuxusRoom() {
+        return luxusRoom;
+    }
+
+    public void setLuxusRoom(Integer luxusRoom) {
+        this.luxusRoom = luxusRoom;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
     }
 
     public BookingId getBookingId() {
@@ -93,6 +240,9 @@ public final class BookingDTO {
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
                 booking.getRoomCategory(),
+                booking.getSingleRoom(),
+                booking.getDoubleRoom(),
+                booking.getLuxusRoom(),
                 booking.getVoucherCode(),
                 booking.getBookingStatus(),
                 booking.getRooms());
@@ -108,6 +258,9 @@ public final class BookingDTO {
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
+                                bookings.getSingleRoom(),
+                                bookings.getDoubleRoom(),
+                                bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus(),
                                 bookings.getRooms()))

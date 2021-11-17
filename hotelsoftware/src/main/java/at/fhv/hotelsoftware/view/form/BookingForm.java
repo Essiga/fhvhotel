@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.view.annotations.DateNotNullOrEarlierThanToday;
 import lombok.*;
 
@@ -23,5 +24,6 @@ public class BookingForm {
     @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
     private String checkOutDate;
 
+    private BookingId bookingId;
 
 }

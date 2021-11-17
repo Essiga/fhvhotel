@@ -4,6 +4,8 @@ import at.fhv.hotelsoftware.application.api.CheckInService;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.domain.model.Booking;
+import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -37,10 +40,9 @@ public class BookingController {
     private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
+    private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
+    private static final String CHECK_IN_GUEST= "/checkInGuest";
 
-    //private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
-    //private static final String CREATE_BOOKING_URL = "/createBooking";
-    //private static final String ERROR_URL = "/error";
 
     private static final String ERROR_VIEW = "errorView";
 
@@ -48,15 +50,6 @@ public class BookingController {
     public ModelAndView showDashboard(Model model) {
         List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("checkIns", listOfBookings);
-
-
-       //for testing purposes - review
-     if(listOfBookings.size() != 0) {
-     checkInService.checkIn(listOfBookings.get(0).getBookingId());
-        }
-
-
-
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", listOfCheckouts);
 
@@ -121,5 +114,27 @@ public class BookingController {
         }
         createBookingService.createBooking(bookingForm, customerForm);
         return new ModelAndView("redirect:"+"/");
+    }
+
+    @GetMapping  (CHECK_IN_GUEST_OVERVIEW)
+    public ModelAndView checkInGuestOverview(@RequestParam("id") String bookingId, Model model) {
+
+        try {
+            BookingDTO booking = viewBookingService.findBookingById(bookingId);
+            model.addAttribute("bookingForm", booking);
+            return new ModelAndView("checkInGuestOverview");
+        } catch (BookingNotFoundException e){
+            return new ModelAndView("redirect:"+"/");
+        }
+    }
+
+    //TODO: Add Room assignment
+    @PostMapping (CHECK_IN_GUEST)
+    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+
+        checkInService.checkIn(bookingForm.getBookingId());
+
+        return new ModelAndView("redirect:"+"/");
+
     }
 }

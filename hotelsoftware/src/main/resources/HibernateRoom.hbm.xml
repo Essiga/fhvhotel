@@ -4,7 +4,7 @@
 
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm">
     <class name="at.fhv.hotelsoftware.domain.model.Room" table="tbl_room" lazy="true">
-        <id name="id" type="long" column="id" unsaved-value="null">
+        <id name="id" type="java.lang.Long" column="id" unsaved-value="null">
             <generator class="native"/>
         </id>
 
