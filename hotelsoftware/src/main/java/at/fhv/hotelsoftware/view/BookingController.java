@@ -115,7 +115,7 @@ public class BookingController {
     }
 
     //TODO: Add Room assignment and check-in function
-    @GetMapping (CHECK_IN_GUEST)
+    @PostMapping (CHECK_IN_GUEST)
     public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
 
         //Function here

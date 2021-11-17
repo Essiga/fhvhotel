@@ -43,9 +43,9 @@
 
         <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{checkInGuestOverview(id=(${bookingForm.bookingId.bookingId}))}" th:object="${bookingForm}" method="get">
+        <form th:action="@{checkInGuest(id=(${bookingForm.bookingId.bookingId}))}" th:object="${bookingForm}" method="post">
 
-            <input type="hidden" id="id" name="id" th:field="*{bookingF.bookingId.bookingId}"/>
+            <input type="hidden" id="id" name="id" th:field="*{bookingId.bookingId}"/>
 
             <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
