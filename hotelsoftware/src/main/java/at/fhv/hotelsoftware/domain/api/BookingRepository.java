@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.BookingId;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface BookingRepository {
@@ -14,5 +15,5 @@ public interface BookingRepository {
     List<Booking> findTodaysCheckIns();
     void checkIn(BookingId bookingId);
     List<Booking> findTodaysCheckOuts();
-    Booking findBookingById(String bookingId);
+    Optional<Booking> findBookingById(BookingId bookingId);
 }

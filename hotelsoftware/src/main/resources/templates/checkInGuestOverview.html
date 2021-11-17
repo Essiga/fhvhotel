@@ -43,9 +43,9 @@
 
         <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{/checkInGuest}" th:object="${bookingForm}" method="post">
+        <form th:action="@{checkInGuestOverview(id=(${bookingForm.bookingId.bookingId}))}" th:object="${bookingForm}" method="get">
 
-
+            <input type="hidden" id="id" name="id" th:field="*{bookingF.bookingId.bookingId}"/>
 
             <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -255,7 +255,7 @@
                 </div>
 
                 <div class="w-2/6">
-                    <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Check-In</button>
+                    <button type="submit"   class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Check-In</button>
                 </div>
 
             </div>

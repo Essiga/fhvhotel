@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.domain.model.Booking;
+import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,9 +35,9 @@ public class BookingController {
     private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
-    private static final String CHECK_IN_GUEST = "/checkInGuest";
-    private static final String CHANGE_STATUS_IN_DB= "/changeStatusInDb";
-    private static final String CHANGE_ROOM_STATUS_IN_DB="changeRoomStatusInDb";
+    private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
+    private static final String CHECK_IN_GUEST= "/checkInGuest";
+
 
     //private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
     //private static final String CREATE_BOOKING_URL = "/createBooking";
@@ -98,16 +99,27 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-    @GetMapping  ("/checkInGuest")
-    public ModelAndView checkInGuest(@RequestParam("id") String bookingId, Model model){
-        BookingDTO booking = viewBookingService.findBookingById(bookingId);
-        model.addAttribute("bookingForm", booking);
-        return new ModelAndView("checkInGuest");
+    @GetMapping  (CHECK_IN_GUEST_OVERVIEW)
+    public ModelAndView checkInGuestOverview(@RequestParam("id") String bookingId, Model model) {
+
+        try {
+            BookingDTO booking = viewBookingService.findBookingById(bookingId);
+            model.addAttribute("bookingForm", booking);
+            return new ModelAndView("checkInGuestOverview");
+        } catch (BookingNotFoundException e){
+            return new ModelAndView("redirect:"+"/");
+        }
+
+
+
     }
 
-    //TODO: create new post function that calls the checkIn function from the application layer. (see writeBookingInDatabase() Function)
-    // this functions then needs to be called by the form action in the checkInGuest.html
+    //TODO: Add Room assignment and check-in function
+    @GetMapping (CHECK_IN_GUEST)
+    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
 
+        //Function here
+        return new ModelAndView("redirect:"+"/");
 
-
+    }
 }

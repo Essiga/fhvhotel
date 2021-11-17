@@ -9,7 +9,9 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -61,17 +63,13 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
-    //TODO: Return Optional<Booking> and not Booking because it could be null
+
     @Override
-    public Booking findBookingById(String bookingId){
+    public Optional<Booking> findBookingById(BookingId bookingId){
 
-        //TODO: create the BookingId object in the application layer and not in the repository
-        BookingId bId = new BookingId(bookingId);
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bId", Booking.class);
-        query.setParameter("bId", bId.getBookingId());
-        Booking resultList = query.getSingleResult();
-
-        return resultList;
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bookingId", Booking.class);
+        query.setParameter("bookingId", bookingId.getBookingId());
+        return query.getResultStream().findFirst();
     }
 
 

@@ -62,7 +62,7 @@
             <td class="border py-2 px-4" th:text="${booking.getCheckInDate()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getCheckOutDate()}"></td>
             <td class="border py-2 px-4" th:text="${booking.getBookingStatus()}"></td>
-            <td class="border py-2 px-20" ><a th:href="@{checkInGuest(id=(${booking.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">Check-In</a></td>
+            <td class="border py-2 px-20" ><a th:href="@{checkInGuestOverview(id=(${booking.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">Check-In</a></td>
           </tr>
 
         </table>
