@@ -8,12 +8,14 @@ import java.util.Optional;
 
 
 public interface BookingRepository {
-   // void addToDatabase(Booking booking);
-
-    List<Booking> findAllBookings();
-    void addBooking(Booking booking);
     List<Booking> findTodaysCheckIns();
-    void checkIn(BookingId bookingId);
     List<Booking> findTodaysCheckOuts();
+    List<Booking> findAllBookings();
+
+
+
+    void addBooking(Booking booking);
+    void checkIn(BookingId bookingId);
     Optional<Booking> findBookingById(BookingId bookingId);
+
 }

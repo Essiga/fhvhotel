@@ -5,6 +5,7 @@ import at.fhv.hotelsoftware.domain.model.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public final class BookingDTO {
 
@@ -58,6 +59,8 @@ public final class BookingDTO {
         this.bookingStatus = bookingStatus;
         this.rooms = rooms;
     }
+
+
 
     public Long getId() {
         return id;
@@ -227,6 +230,35 @@ public final class BookingDTO {
         return rooms;
     }
 
+
+    public static BookingDTO fromBooking(Booking booking){
+        return new BookingDTO(booking.getBookingId(),
+                booking.getCustomer(),
+                booking.getCheckInDate(),
+                booking.getCheckOutDate(),
+                booking.getCancellationDeadLine(),
+                booking.getRoomCategory(),
+                booking.getVoucherCode(),
+                booking.getBookingStatus(),
+                booking.getRooms());
+    }
+
+    public static List<BookingDTO> fromBookingList(List<Booking> booking){
+        return booking
+                .stream()
+                .map(bookings ->
+                        new BookingDTO(bookings.getBookingId(),
+                                bookings.getCustomer(),
+                                bookings.getCheckInDate(),
+                                bookings.getCheckOutDate(),
+                                bookings.getCancellationDeadLine(),
+                                bookings.getRoomCategory(),
+                                bookings.getVoucherCode(),
+                                bookings.getBookingStatus(),
+                                bookings.getRooms()))
+                .collect(Collectors.toList());
+    }
+
     public static class Builder{
 
         private final BookingDTO instance;
@@ -279,5 +311,6 @@ public final class BookingDTO {
             Objects.requireNonNull(this.instance.id, "type must be set in booking");
             return this.instance;
         }
+
     }
 }

@@ -8,9 +8,9 @@
             <generator class="native"/>
         </id>
 
-        <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
+   <!--     <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
             <property name="roomId" column="roomId" type="java.util.UUID"/>
-        </component>
+        </component> -->
 
 
 
@@ -21,6 +21,6 @@
             </type>
         </property>
 
-        <property name="roomNumber" column="roomNumber" type="integer"/>
+        <property name="roomNumber" column="roomNumber" type="java.lang.Integer"/>
     </class>
 </hibernate-mapping>

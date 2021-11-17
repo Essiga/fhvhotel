@@ -51,8 +51,11 @@ public class BookingRepositoryImpl implements BookingRepository {
     }
 
     @Override
-    public void checkIn(BookingId bookingId) {
-        TypedQuery<Booking> query = this.em.createQuery("UPDATE Booking SET booking_status = 'CHECKDIN' WHERE booking_id = bookingId", Booking.class);
+    public Optional<Booking> findBookingById(BookingId bookingId) {
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
+        Optional<Booking> booking = query.getResultStream().findFirst();
+
+        return booking;
     }
 
     @Override
@@ -63,20 +66,20 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
-
+/*
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId){
 
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bookingId", Booking.class);
         query.setParameter("bookingId", bookingId.getBookingId());
         return query.getResultStream().findFirst();
-    }
+    }*/
 
 
 
     @Override
     public void addBooking(Booking booking) {
-        this.em.merge(booking);         //merge instead of persist!!
+        this.em.persist(booking);
     }
 }
 
