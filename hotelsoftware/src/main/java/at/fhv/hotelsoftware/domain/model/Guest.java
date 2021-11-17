@@ -1,10 +1,5 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-
 public class Guest {
 
     private Long id;

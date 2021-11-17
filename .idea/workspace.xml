@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- create Guest&#10;- create GuestId">
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/GuestType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Guest.java" afterDir="false" />
-    </list>
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- Guest created" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -273,7 +269,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637173013762</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="- Guest created">
+      <created>1637174581978</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1637174581978</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -409,7 +412,8 @@
     <MESSAGE value="sql and rooms updated" />
     <MESSAGE value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
     <MESSAGE value="- create Guest&#10;- create GuestId" />
-    <option name="LAST_COMMIT_MESSAGE" value="- create Guest&#10;- create GuestId" />
+    <MESSAGE value="- Guest created" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Guest created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
