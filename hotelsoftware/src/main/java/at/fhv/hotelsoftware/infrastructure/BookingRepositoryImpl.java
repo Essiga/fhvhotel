@@ -44,7 +44,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() ", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() and booking_status != 'CHECKEDIN' ", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;
@@ -65,17 +65,6 @@ public class BookingRepositoryImpl implements BookingRepository {
 
         return resultList;
     }
-
-/*
-    @Override
-    public Optional<Booking> findBookingById(BookingId bookingId){
-
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE BOOKING_ID=:bookingId", Booking.class);
-        query.setParameter("bookingId", bookingId.getBookingId());
-        return query.getResultStream().findFirst();
-    }*/
-
-
 
     @Override
     public void addBooking(Booking booking) {

@@ -86,6 +86,8 @@ public final class BookingDTO {
         this.email = email;
     }
 
+
+
     public String getCountry() {
         return country;
     }
@@ -238,6 +240,9 @@ public final class BookingDTO {
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
                 booking.getRoomCategory(),
+                booking.getSingleRoom(),
+                booking.getDoubleRoom(),
+                booking.getLuxusRoom(),
                 booking.getVoucherCode(),
                 booking.getBookingStatus(),
                 booking.getRooms());
@@ -253,6 +258,9 @@ public final class BookingDTO {
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
                                 bookings.getRoomCategory(),
+                                bookings.getSingleRoom(),
+                                bookings.getDoubleRoom(),
+                                bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus(),
                                 bookings.getRooms()))

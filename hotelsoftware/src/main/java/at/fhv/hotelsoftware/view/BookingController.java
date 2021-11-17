@@ -44,25 +44,12 @@ public class BookingController {
     private static final String CHECK_IN_GUEST= "/checkInGuest";
 
 
-    //private static final String ADD_EXTRA_SERVICES_URL = "/addExtraServices";
-    //private static final String CREATE_BOOKING_URL = "/createBooking";
-    //private static final String ERROR_URL = "/error";
-
     private static final String ERROR_VIEW = "errorView";
 
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
         List<BookingDTO> listOfBookings = viewBookingService.findTodaysCheckIns();
         model.addAttribute("checkIns", listOfBookings);
-
-
-       //for testing purposes - review
-     if(listOfBookings.size() != 0) {
-     checkInService.checkIn(listOfBookings.get(0).getBookingId());
-        }
-
-
-
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", listOfCheckouts);
 
@@ -139,16 +126,14 @@ public class BookingController {
         } catch (BookingNotFoundException e){
             return new ModelAndView("redirect:"+"/");
         }
-
-
-
     }
 
-    //TODO: Add Room assignment and check-in function
+    //TODO: Add Room assignment
     @PostMapping (CHECK_IN_GUEST)
     public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
 
-        //Function here
+        checkInService.checkIn(bookingForm.getBookingId());
+
         return new ModelAndView("redirect:"+"/");
 
     }

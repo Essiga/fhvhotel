@@ -42,22 +42,6 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         return BookingDTO.fromBookingList(allBookings);
     }
 
-   /* @Transactional(readOnly = true)
-    @Override
-    public BookingDTO findBooking() {
-        Booking bookings = bookingRepository.findBooking();
-        return new BookingDTO(
-                                bookings.getBookingId(),
-                                bookings.getCustomer(),
-                                bookings.getFromDate(),
-                                bookings.getToDate(),
-                                bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
-                                bookings.getRoomCount(),
-                                bookings.getVoucherCode(),
-                                bookings.getBookingStatus());
-    }*/
-
     @Transactional(readOnly = true)
     @Override
     public BookingDTO findBookingById(String bookingIdString) throws BookingNotFoundException {
@@ -70,17 +54,6 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         }
 
         Booking booking = result.get();
-        return new BookingDTO(booking.getBookingId(),
-                                booking.getCustomer(),
-                                booking.getCheckInDate(),
-                                booking.getCheckOutDate(),
-                                booking.getCancellationDeadLine(),
-                                booking.getRoomCategory(),
-                                booking.getSingleRoom(),
-                                booking.getDoubleRoom(),
-                                booking.getLuxusRoom(),
-                                booking.getVoucherCode(),
-                                booking.getBookingStatus(),
-                                booking.getRooms());
+        return BookingDTO.fromBooking(booking);
     }
 }
