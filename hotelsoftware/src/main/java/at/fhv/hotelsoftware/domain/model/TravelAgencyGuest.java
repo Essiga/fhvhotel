@@ -1,5 +1,10 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
 public class TravelAgencyGuest extends Customer{
 
     private Long id;

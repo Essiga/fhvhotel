@@ -12,7 +12,7 @@ public class Booking {
 
     private Long id;
     private BookingId bookingId;
-    private String customer;
+    private Customer customer;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -45,7 +45,7 @@ public class Booking {
         return this.bookingId;
     }
 
-    public String getCustomer() {
+    public Customer getCustomer() {
         return customer;
     }
 
@@ -130,7 +130,7 @@ public class Booking {
             return this;
         }
 
-        public Builder withCustomer(String customer) {
+        public Builder withCustomer(Customer customer) {
             this.instance.customer = customer;
             return this;
         }

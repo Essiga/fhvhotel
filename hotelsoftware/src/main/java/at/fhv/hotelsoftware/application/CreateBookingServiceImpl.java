@@ -32,13 +32,23 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm, CustomerForm customerForm){
 
+        Customer customer = new Guest().builder()
+                .withFirstName(customerForm.getFname())
+                .withLastName(customerForm.getLname())
+                .withVoucherCode(customerForm.getVoucherCode())
+                .withStreetAddress(customerForm.getStreetAdr())
+                .withZip(customerForm.getZip())
+                .withCity(customerForm.getCity())
+                .withCountry(customerForm.getCountry())
+                .withPhoneNumber(customerForm.getPhoneNumber())
+                .withEmail(customerForm.getEmail())
+                .build();
 
 
-        //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).
                 withCancellationDeadLine(null).
-                withCustomer(customerForm.getFname() + " " + customerForm.getLname()).
+                withCustomer(customer).
                 withBookingStatus(BookingStatus.PENDING).
                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).

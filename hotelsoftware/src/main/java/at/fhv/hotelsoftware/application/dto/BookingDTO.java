@@ -11,7 +11,6 @@ public final class BookingDTO {
 
     private Long id;
     private BookingId bookingId;
-    private String customer;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -23,7 +22,6 @@ public final class BookingDTO {
     public BookingDTO(){}
 
     public BookingDTO(BookingId bookingId,
-                      String customer,
                       LocalDate checkInDate,
                       LocalDate checkOutDate,
                       LocalDate cancellationDeadLine,
@@ -33,7 +31,6 @@ public final class BookingDTO {
                       List<Room> rooms) {
 
         this.bookingId = bookingId;
-        this.customer = customer;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
@@ -51,10 +48,6 @@ public final class BookingDTO {
 
     public BookingId getBookingId() {
         return bookingId;
-    }
-
-    public String getCustomer() {
-        return customer;
     }
 
     public LocalDate getCheckInDate() {
@@ -88,7 +81,6 @@ public final class BookingDTO {
 
     public static BookingDTO fromBooking(Booking booking){
         return new BookingDTO(booking.getBookingId(),
-                booking.getCustomer(),
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
@@ -103,7 +95,6 @@ public final class BookingDTO {
                 .stream()
                 .map(bookings ->
                         new BookingDTO(bookings.getBookingId(),
-                                bookings.getCustomer(),
                                 bookings.getCheckInDate(),
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
@@ -126,10 +117,6 @@ public final class BookingDTO {
             return this;
         }
 
-        public BookingDTO.Builder withCustomer(String customer){
-            this.instance.customer = customer;
-            return this;
-        }
         public BookingDTO.Builder withCheckInDate(LocalDate fromDate){
             this.instance.checkInDate = fromDate;
             return this;

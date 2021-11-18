@@ -1,5 +1,10 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
 public class Guest extends Customer {
 
     private Long id;
@@ -16,7 +21,7 @@ public class Guest extends Customer {
 
     public static Builder builder() {return new Builder();}
 
-    private Guest() {}
+    public Guest() {}
 
 
     public Long getId() {
