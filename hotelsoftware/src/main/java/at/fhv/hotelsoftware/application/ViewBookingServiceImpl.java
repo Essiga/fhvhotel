@@ -24,7 +24,6 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         return BookingDTO.fromBookingList(todaysCheckIns);
     }
 
-
     @Transactional(readOnly = true)
     @Override
     public List<BookingDTO> findAllBookings() {

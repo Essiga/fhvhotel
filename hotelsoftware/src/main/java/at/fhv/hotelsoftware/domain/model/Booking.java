@@ -32,8 +32,7 @@ public class Booking {
         return new Builder();
     }
 
-    private Booking() {
-    }
+    private Booking() {}
 
 
     private void setId(Long id) {

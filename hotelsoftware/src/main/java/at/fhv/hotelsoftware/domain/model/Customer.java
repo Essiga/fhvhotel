@@ -5,7 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public abstract class Customer {
+public class Customer {
+
+    private Customer(){}
 
     protected Long id;
     protected CustomerId customerId;
