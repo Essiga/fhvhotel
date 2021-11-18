@@ -4,13 +4,13 @@ import java.util.UUID;
 
 public class CustomerId {
 
-    private UUID guestId;
+    private UUID customerId;
 
 
     public CustomerId() {}
 
-    public CustomerId(UUID guestId) {this.guestId = guestId;}
+    public CustomerId(UUID customerId) {this.customerId = customerId;}
 
 
-    public UUID getGuestId() {return guestId;}
+    public UUID getCustomerId() {return customerId;}
 }

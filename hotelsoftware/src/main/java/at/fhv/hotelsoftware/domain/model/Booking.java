@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -8,11 +9,11 @@ import java.util.List;
 import java.util.Objects;
 
 @Component
+@Getter
 public class Booking {
 
     private Long id;
     private BookingId bookingId;
-    private Customer customer;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -22,7 +23,8 @@ public class Booking {
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-     private List<Room> rooms;
+    private CustomerId customer;
+    private List<Room> rooms;
 
     //private LinkedList<String> extraServices;
 
@@ -33,62 +35,9 @@ public class Booking {
     private Booking() {
     }
 
-    private Long getId() {
-        return id;
-    }
 
     private void setId(Long id) {
         this.id = id;
-    }
-
-    public BookingId getBookingId() {
-        return this.bookingId;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public LocalDate getCancellationDeadLine() {
-        return cancellationDeadLine;
-    }
-
-
-    public RoomCategory getRoomCategory() {
-        return roomCategory;
-    }
-
-
-    public VoucherCode getVoucherCode() {
-        return voucherCode;
-    }
-
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public Integer getSingleRoom() {
-        return singleRoom;
-    }
-
-    public Integer getDoubleRoom() {
-        return doubleRoom;
-    }
-
-    public Integer getLuxusRoom() {
-        return luxusRoom;
-    }
-
-   public List<Room> getRooms() {
-        return rooms;
     }
 
     @Override
@@ -130,8 +79,8 @@ public class Booking {
             return this;
         }
 
-        public Builder withCustomer(Customer customer) {
-            this.instance.customer = customer;
+        public Builder withCustomer(CustomerId customerId) {
+            this.instance.customer = customerId;
             return this;
         }
 

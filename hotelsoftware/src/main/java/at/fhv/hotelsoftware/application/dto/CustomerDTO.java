@@ -4,8 +4,9 @@ import at.fhv.hotelsoftware.domain.model.CustomerId;
 import lombok.Builder;
 import lombok.Data;
 
+
+
 @Data
-@Builder
 public class CustomerDTO {
 
     private Long id;

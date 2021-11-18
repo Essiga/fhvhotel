@@ -32,23 +32,24 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Transactional
     public void createBooking(BookingForm bookingForm, CustomerForm customerForm){
 
-        Customer customer = new Guest().builder()
-                .withFirstName(customerForm.getFname())
-                .withLastName(customerForm.getLname())
-                .withVoucherCode(customerForm.getVoucherCode())
-                .withStreetAddress(customerForm.getStreetAdr())
-                .withZip(customerForm.getZip())
-                .withCity(customerForm.getCity())
-                .withCountry(customerForm.getCountry())
-                .withPhoneNumber(customerForm.getPhoneNumber())
-                .withEmail(customerForm.getEmail())
+        Customer customer = Guest.builder()
+                .customerId(new CustomerId(UUID.randomUUID()))
+                .firstName(customerForm.getFname())
+                .lastName(customerForm.getLname())
+                .voucherCode(customerForm.getVoucherCode())
+                .streetAddress(customerForm.getStreetAdr())
+                .zip(customerForm.getZip())
+                .city(customerForm.getCity())
+                .country(customerForm.getCountry())
+                .phoneNumber(customerForm.getPhoneNumber())
+                .email(customerForm.getEmail())
                 .build();
 
 
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).
                 withCancellationDeadLine(null).
-                withCustomer(customer).
+                withCustomer(customer.getCustomerId()).
                 withBookingStatus(BookingStatus.PENDING).
                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
