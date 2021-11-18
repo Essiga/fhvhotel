@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,4 +57,11 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         Booking booking = result.get();
         return BookingDTO.fromBooking(booking);
     }
+
+    @Override
+    @Transactional
+    public void createRoom(Room room) {
+        bookingRepository.createRoom(room);
+    }
+
 }

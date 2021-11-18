@@ -12,8 +12,6 @@
             <property name="roomId" column="roomId" type="java.util.UUID"/>
         </component> -->
 
-
-
         <property name="roomCategory" column="roomCategory">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
@@ -22,5 +20,18 @@
         </property>
 
         <property name="roomNumber" column="roomNumber" type="java.lang.Integer"/>
-    </class>
+
+        <property name="roomStatus" column="roomStatus">
+        <type name="org.hibernate.type.EnumType">
+            <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomStatus</param>
+            <param name="type">12</param>
+        </type>
+        </property>
+
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
+        </component>
+
+
+   </class>
 </hibernate-mapping>

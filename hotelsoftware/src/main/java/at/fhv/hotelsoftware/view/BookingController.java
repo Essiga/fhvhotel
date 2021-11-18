@@ -4,8 +4,7 @@ import at.fhv.hotelsoftware.application.api.CheckInService;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.domain.model.Booking;
-import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +52,13 @@ public class BookingController {
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", listOfCheckouts);
 
+        Room room = Room.builder().
+                withRoomStatus(RoomStatus.FREE).
+                withBookingId(null).
+                withRoomCategory(RoomCategory.DOUBLE).
+                withRoomNumber(3).build();
+
+        viewBookingService.createRoom(room);
         return new ModelAndView("dashboard");
     }
 
@@ -133,6 +139,8 @@ public class BookingController {
     public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
 
         checkInService.checkIn(bookingForm.getBookingId());
+
+
 
         return new ModelAndView("redirect:"+"/");
 

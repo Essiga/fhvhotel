@@ -3,7 +3,6 @@ package at.fhv.hotelsoftware.domain.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,8 +21,6 @@ public class Booking {
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-     private List<Room> rooms;
-
     //private LinkedList<String> extraServices;
 
     public static Builder builder() {
@@ -87,10 +84,6 @@ public class Booking {
         return luxusRoom;
     }
 
-   public List<Room> getRooms() {
-        return rooms;
-    }
-
     @Override
     public String toString() {
         return "Booking{" +
@@ -105,7 +98,6 @@ public class Booking {
 
     public void checkIn(){
         this.bookingStatus = BookingStatus.CHECKEDIN;
-        //TODO: Change RoomStatus
     }
 
     public static class Builder {
@@ -178,18 +170,7 @@ public class Booking {
             return this;
         }
 
-        public Builder withRooms(List<Room> rooms) {
-            this.instance.rooms = rooms;
-            return this;
-        }
-        //TODO: remove
-        public Builder withSingleRoom(Room room) {
-            this.instance.rooms = new LinkedList<Room>();
-            this.instance.rooms.add(room);
-            return this;
-        }
-
-        /* public Builder withExtraServices(LinkedList<String> extraServices){
+       /* public Builder withExtraServices(LinkedList<String> extraServices){
             this.instance.extraServices = extraServices;
             return this;
         } */

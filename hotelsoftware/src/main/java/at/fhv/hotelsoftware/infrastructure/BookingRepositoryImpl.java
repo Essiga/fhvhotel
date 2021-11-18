@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.infrastructure;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.stereotype.Component;
 
 
@@ -69,6 +70,12 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public void addBooking(Booking booking) {
         this.em.persist(booking);
+    }
+
+
+    @Override
+    public void createRoom(Room room){
+        this.em.persist(room);
     }
 }
 

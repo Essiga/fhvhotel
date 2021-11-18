@@ -22,7 +22,6 @@
 
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
-
         <property name="roomCategory" column="roomCategory">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
@@ -34,30 +33,16 @@
         <property name="doubleRoom" column="doubleRoom" type="java.lang.Integer"/>
         <property name="luxusRoom" column="luxusRoom" type="java.lang.Integer"/>
 
+        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
+            <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
+        </component>
+
         <property name="bookingStatus" column="bookingStatus">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">at.fhv.hotelsoftware.domain.model.BookingStatus</param>
                 <param name="type">12</param>
             </type>
         </property>
-
-
-        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
-            <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
-        </component>
-
-
-
-        <list name="rooms" table="tbl_room" inverse="false" cascade="all,delete-orphan" lazy="true" fetch="select">
-            <key>
-                <column name="bookingId" not-null="false" />
-            </key>
-            <list-index column="listIndex"></list-index>
-            <one-to-many class="at.fhv.hotelsoftware.domain.model.Room"/>
-        </list>
-
-
-
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
     </class>
