@@ -1,11 +1,9 @@
 package at.fhv.hotelsoftware.domain.model;
 
-public class Guest {
+public class Guest extends Customer {
 
     private Long id;
-    private GuestId guestId;
-    private GuestType guestType;  // radio button in form
-    private String groupOrCompanyName;
+    private CustomerId customerId;
     private String voucherCode;
     private String fname;
     private String lname;
@@ -29,28 +27,12 @@ public class Guest {
         this.id = id;
     }
 
-    public GuestId getGuestId() {
-        return guestId;
+    public CustomerId getGuestId() {
+        return customerId;
     }
 
-    public void setGuestId(GuestId guestId) {
-        this.guestId = guestId;
-    }
-
-    public GuestType getCustomerType() {
-        return guestType;
-    }
-
-    public void setCustomerType(GuestType guestType) {
-        this.guestType = guestType;
-    }
-
-    public String getGroupOrCompanyName() {
-        return groupOrCompanyName;
-    }
-
-    public void setGroupOrCompanyName(String groupOrCompanyName) {
-        this.groupOrCompanyName = groupOrCompanyName;
+    public void setGuestId(CustomerId customerId) {
+        this.customerId = customerId;
     }
 
     public String getVoucherCode() {
@@ -129,9 +111,7 @@ public class Guest {
     public String toString() {
         return "Guest{" +
                 "id=" + id +
-                ", guestId=" + guestId +
-                ", guestType=" + guestType +
-                ", groupOrCompanyName='" + groupOrCompanyName + '\'' +
+                ", guestId=" + customerId +
                 ", voucherCode='" + voucherCode + '\'' +
                 ", fname='" + fname + '\'' +
                 ", lname='" + lname + '\'' +
@@ -157,18 +137,8 @@ public class Guest {
             return this;
         }
 
-        public Builder withGuestId(GuestId guestId) {
-            this.instance.guestId = guestId;
-            return this;
-        }
-
-        public Builder withGuestType(GuestType guestType) {
-            this.instance.guestType = guestType;
-            return this;
-        }
-
-        public Builder withGroupOrCompanyName(String groupOrCompanyName) {
-            this.instance.groupOrCompanyName = groupOrCompanyName;
+        public Builder withGuestId(CustomerId customerId) {
+            this.instance.customerId = customerId;
             return this;
         }
 

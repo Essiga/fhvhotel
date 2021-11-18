@@ -103,7 +103,10 @@ public class Booking {
                 '}';
     }
 
+    //check in liste von rooms dann ids heraus lesen und in booking hinzufügen
+    //room status auch hier ändern nicht mit setRoomStatus sonder occupyBooking
     public void checkIn(){
+        //roomIds.add(room.getRoomId())
         this.bookingStatus = BookingStatus.CHECKEDIN;
         //TODO: Change RoomStatus
     }
