@@ -2,6 +2,8 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.BookingId;
@@ -20,6 +22,9 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private RoomRepository roomRepository;
 
     @Transactional(readOnly = true)
     @Override
@@ -64,4 +69,10 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         bookingRepository.createRoom(room);
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public List<RoomDTO> roomByBookingId(BookingId bookingId) {
+        List<Room> allRooms = roomRepository.roomByBookingId(bookingId);
+        return RoomDTO.fromRoomList(allRooms);
+    }
 }

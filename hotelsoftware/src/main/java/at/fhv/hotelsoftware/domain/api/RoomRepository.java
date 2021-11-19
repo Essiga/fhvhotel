@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface RoomRepository {
 
     List<Room> allRooms();
+    List<Room> roomByBookingId(BookingId bookingid);
 }

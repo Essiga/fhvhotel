@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.application.api;
 
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.Room;
@@ -14,5 +15,6 @@ public interface ViewBookingService {
     List<BookingDTO> findAllBookings();
     BookingDTO findBookingById(String bookingId) throws BookingNotFoundException;
 
-    void createRoom(Room room);
+    List<RoomDTO> roomByBookingId(BookingId bookingId);
+;    void createRoom(Room room);
 }

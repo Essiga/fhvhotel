@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CheckInService;
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
@@ -59,33 +60,6 @@ public class CheckInServiceImpl implements CheckInService {
                 luxusRoomCount--;
             }
         }
-
-
-
-
-
-
-
-        /*
-       privat int i = 0;
-        for (Room room:allRooms) {
-            if(allRooms.get(i).getRoomStatus() == RoomStatus.FREE) {
-
-            }
-            i++;
-        }
-
-
-
-        for(int i = 0; i <= (booking.get().getSingleRoom()); i++){
-
-            if(allRooms.get(i).getRoomStatus() == RoomStatus.FREE) {
-
-            }
-            } */
-        // nächster Raum auswählen
-
-        // im raum die Buchungsnummer ändern
     }
 }
 
