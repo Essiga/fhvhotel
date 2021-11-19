@@ -3,10 +3,7 @@ package at.fhv.hotelsoftware.application;
 import at.fhv.hotelsoftware.application.api.CheckInService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
-import at.fhv.hotelsoftware.domain.model.Booking;
-import at.fhv.hotelsoftware.domain.model.BookingId;
-import at.fhv.hotelsoftware.domain.model.Room;
-import at.fhv.hotelsoftware.domain.model.RoomStatus;
+import at.fhv.hotelsoftware.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,13 +30,44 @@ public class CheckInServiceImpl implements CheckInService {
     public void checkIn(BookingId bookingId) {
 
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
-        if(!booking.isEmpty()) {
+        if (!booking.isEmpty()) {
             booking.get().checkIn();
         }
 
+        Integer singleRoomCount = booking.get().getSingleRoom();
+        Integer doubleRoomCount = booking.get().getDoubleRoom();
+        Integer luxusRoomCount = booking.get().getLuxusRoom();
         List<Room> allRooms = roomRepository.allRooms();
 
-        int i = 0;
+        //sucht mir einen freien room der eine bestimmteen RoomCategory hat und setzt den roomStatus to Occupied und
+        // setzt die bookingId im Raum
+        for (int i = 0; i < allRooms.size(); i++) {
+            if (singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0){
+                break;
+            }
+            if (singleRoomCount != 0 && allRooms.get(i).getRoomStatus() == RoomStatus.FREE &&
+                    allRooms.get(i).getRoomCategory() == RoomCategory.SINGLE) {
+                allRooms.get(i).setRoomOccupiedAndAssigneBookingId(bookingId);
+                singleRoomCount--;
+            } else if (doubleRoomCount != 0 && allRooms.get(i).getRoomStatus() == RoomStatus.FREE &&
+                    allRooms.get(i).getRoomCategory() == RoomCategory.DOUBLE) {
+                allRooms.get(i).setRoomOccupiedAndAssigneBookingId(bookingId);
+                doubleRoomCount--;
+            } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomStatus() == RoomStatus.FREE &&
+                    allRooms.get(i).getRoomCategory() == RoomCategory.LUXUS) {
+                allRooms.get(i).setRoomOccupiedAndAssigneBookingId(bookingId);
+                luxusRoomCount--;
+            }
+        }
+
+
+
+
+
+
+
+        /*
+       privat int i = 0;
         for (Room room:allRooms) {
             if(allRooms.get(i).getRoomStatus() == RoomStatus.FREE) {
 
@@ -47,15 +75,17 @@ public class CheckInServiceImpl implements CheckInService {
             i++;
         }
 
+
+
         for(int i = 0; i <= (booking.get().getSingleRoom()); i++){
 
             if(allRooms.get(i).getRoomStatus() == RoomStatus.FREE) {
 
             }
-            }
+            } */
         // nächster Raum auswählen
 
-            // im raum die Buchungsnummer ändern
-        }
+        // im raum die Buchungsnummer ändern
     }
 }
+

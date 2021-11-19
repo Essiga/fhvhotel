@@ -20,6 +20,11 @@ public class Room {
     public Room() {
     }
 
+    public void setRoomOccupiedAndAssigneBookingId(BookingId bookingId){
+        this.roomStatus = RoomStatus.OCCUPIED;
+        this.bookingId = bookingId;
+    }
+
     public static class Builder {
 
         private final Room instance;

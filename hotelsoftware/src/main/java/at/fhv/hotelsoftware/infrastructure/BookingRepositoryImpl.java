@@ -17,8 +17,8 @@ import java.util.UUID;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
-   // private LinkedList<Booking> database = new LinkedList<>();
-   // private List<Booking> allBookings = new LinkedList<>();
+    // private LinkedList<Booking> database = new LinkedList<>();
+    // private List<Booking> allBookings = new LinkedList<>();
 
     /*
      public void addToDatabase(Booking booking){
@@ -74,7 +74,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
 
     @Override
-    public void createRoom(Room room){
+    public void createRoom(Room room) {
         this.em.persist(room);
     }
 }
