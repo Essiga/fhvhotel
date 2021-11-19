@@ -10,6 +10,8 @@
         <generator class="native"/>
     </id>
 
+        <discriminator column="type" type="java.lang.String"></discriminator>
+
     <component name="customerId" class="at.fhv.hotelsoftware.domain.model.CustomerId">
         <property name="customerId" column="customerId" type="java.util.UUID"/>
     </component>

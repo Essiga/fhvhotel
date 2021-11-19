@@ -23,7 +23,7 @@ public class Booking {
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private CustomerId customer;
+    private CustomerId customerId;
     private List<Room> rooms;
 
     //private LinkedList<String> extraServices;
@@ -42,7 +42,7 @@ public class Booking {
     @Override
     public String toString() {
         return "Booking{" +
-                "customer='" + customer + '\'' +
+                "customer='" + customerId + '\'' +
                 ", fromDate=" + checkInDate +
                 ", toDate=" + checkOutDate +
                 ", roomCategory=" + roomCategory +
@@ -79,7 +79,7 @@ public class Booking {
         }
 
         public Builder withCustomer(CustomerId customerId) {
-            this.instance.customer = customerId;
+            this.instance.customerId = customerId;
             return this;
         }
 

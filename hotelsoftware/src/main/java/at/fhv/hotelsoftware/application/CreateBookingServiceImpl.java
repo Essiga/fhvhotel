@@ -19,6 +19,9 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    //@Autowired
+   // private CustomerRepository customerRepository;
+
 
     public CreateBookingServiceImpl(BookingRepository bookingRepository){
         this.bookingRepository = bookingRepository;

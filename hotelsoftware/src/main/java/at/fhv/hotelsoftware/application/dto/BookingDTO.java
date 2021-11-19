@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.application.dto;
 import at.fhv.hotelsoftware.domain.model.*;
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -10,6 +11,8 @@ import java.util.stream.Collectors;
 public final class BookingDTO {
 
     private Long id;
+    private String firstName;
+    private String lastName;
     private BookingId bookingId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
@@ -21,15 +24,9 @@ public final class BookingDTO {
 
     public BookingDTO(){}
 
-    public BookingDTO(BookingId bookingId,
-                      LocalDate checkInDate,
-                      LocalDate checkOutDate,
-                      LocalDate cancellationDeadLine,
-                      RoomCategory roomCategory,
-                      VoucherCode voucherCode,
-                      BookingStatus bookingStatus,
-                      List<Room> rooms) {
-
+    public BookingDTO(String firstName, String lastName, BookingId bookingId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, RoomCategory roomCategory, VoucherCode voucherCode, BookingStatus bookingStatus, List<Room> rooms) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.bookingId = bookingId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
@@ -39,8 +36,6 @@ public final class BookingDTO {
         this.bookingStatus = bookingStatus;
         this.rooms = rooms;
     }
-
-
 
     public Long getId() {
         return id;
@@ -79,8 +74,8 @@ public final class BookingDTO {
     }
 
 
-    public static BookingDTO fromBooking(Booking booking){
-        return new BookingDTO(booking.getBookingId(),
+    public static BookingDTO fromBooking(Booking booking, Customer customer){
+        return new BookingDTO(customer.getFirstName(), customer.getLastName(), booking.getBookingId(),
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
@@ -90,19 +85,16 @@ public final class BookingDTO {
                 booking.getRooms());
     }
 
-    public static List<BookingDTO> fromBookingList(List<Booking> booking){
-        return booking
-                .stream()
-                .map(bookings ->
-                        new BookingDTO(bookings.getBookingId(),
-                                bookings.getCheckInDate(),
-                                bookings.getCheckOutDate(),
-                                bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
-                                bookings.getVoucherCode(),
-                                bookings.getBookingStatus(),
-                                bookings.getRooms()))
-                .collect(Collectors.toList());
+    public static List<BookingDTO> fromBookingList(List<Booking> bookings, List<Customer> customers){
+       List<BookingDTO> bookingDTOs = new LinkedList<BookingDTO>();
+
+        for (Booking booking:bookings) {
+            for (Customer customer:customers) {
+                if(booking.getCustomerId() == customer.getCustomerId()){
+                    bookingDTOs.add(BookingDTO.fromBooking(booking, customer));
+                }
+            }
+        }
     }
 
     public static class Builder{
