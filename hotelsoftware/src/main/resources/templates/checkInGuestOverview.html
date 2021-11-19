@@ -43,9 +43,14 @@
 
         <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{checkInGuest(id=(${bookingForm.bookingId.bookingId}))}" th:object="${bookingForm}" method="post">
+        <form th:action="@{checkInGuest(id=(${bookingForm.bookingId.bookingId}))}" th:object="${bookingForm}" method="post" >
+            <div th:object="${availableRoomList}"></div>
 
             <input type="hidden" id="id" name="id" th:field="*{bookingId.bookingId}"/>
+            <input type="hidden" id="availableRoomList" name="availableRoomList" th:field="${availableRoomList}" />
+            <div th:each="availableRoom : ${availableRoomList.roomDTOs}">
+                <input th:field="${availableRoom.roomNumber}" name="roomNumber"/>
+            </div>
 
             <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -210,29 +215,19 @@
                     <table class="w-full table-fixed bg-white">
 
                         <tr class="bg-blue-100 text-xs">
+
+
                             <th class="w-1/5 border-2 py-2 border-blue-200">Room Number</th>
                             <th class="w-2/5 border-2 py-2 border-blue-200">Category</th>
                             <th class="w-1/5 border-2 py-2 border-blue-200">Price</th>
 
                         </tr>
 
-                        <tr class="text-center m-4">
-                            <td>102</td>
-                            <td>Luxury</td>
-                            <td>150,99€</td>
+                        <tr name="availableRoomList" class="text-center m-4" th:each="availableRoom : ${availableRoomList.getRoomDTOs()}">
+                            <td th:text="${availableRoom.roomNumber}"></td>
+                            <td th:text="${availableRoom.getRoomCategory()}"></td>
                         </tr>
 
-                        <tr class="text-center m-4">
-                            <td>112</td>
-                            <td>Double</td>
-                            <td>90,99€</td>
-                        </tr>
-
-                        <tr class="text-center m-4">
-                            <td>69</td>
-                            <td>Single</td>
-                            <td>50,99€</td>
-                        </tr>
 
 
 
@@ -263,6 +258,9 @@
     </div>
 </div>
 </div>
+
+
+
 
 </body>
 </html>

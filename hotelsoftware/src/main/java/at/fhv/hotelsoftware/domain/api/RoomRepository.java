@@ -11,4 +11,5 @@ public interface RoomRepository {
 
     List<Room> allRooms();
     List<Room> roomByBookingId(BookingId bookingid);
+    Optional<Room> findByRoomNumber(Integer roomNumber);
 }

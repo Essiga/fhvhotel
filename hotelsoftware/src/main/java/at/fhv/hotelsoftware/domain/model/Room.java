@@ -1,11 +1,13 @@
 package at.fhv.hotelsoftware.domain.model;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.UUID;
 
 @Data
+@Component
 public class Room {
     public Long id;
     private RoomCategory roomCategory;
@@ -20,7 +22,7 @@ public class Room {
     public Room() {
     }
 
-    public void setRoomOccupiedAndAssigneBookingId(BookingId bookingId){
+    public void occupy(BookingId bookingId){
         this.roomStatus = RoomStatus.OCCUPIED;
         this.bookingId = bookingId;
     }

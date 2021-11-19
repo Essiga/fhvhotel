@@ -16,5 +16,9 @@ public interface ViewBookingService {
     BookingDTO findBookingById(String bookingId) throws BookingNotFoundException;
 
     List<RoomDTO> roomByBookingId(BookingId bookingId);
+
+
+
+
 ;    void createRoom(Room room);
 }

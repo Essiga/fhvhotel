@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RoomRepositoryImpl implements RoomRepository {
@@ -28,10 +29,18 @@ public class RoomRepositoryImpl implements RoomRepository {
 
     @Override
     public List<Room> roomByBookingId(BookingId bookingId) {
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE bookingId = 'bookingId'", Room.class);
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_Id = bookingId", Room.class);
         List<Room> resultList = query.getResultList();
 
         return resultList;
+    }
+
+    @Override
+    public Optional<Room> findByRoomNumber(Integer roomNumber){
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_Number = roomNumber", Room.class);
+        Optional<Room> room = query.getResultStream().findFirst();
+
+        return room;
     }
 
 }

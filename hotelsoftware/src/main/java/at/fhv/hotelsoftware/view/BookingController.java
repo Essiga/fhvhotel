@@ -4,9 +4,12 @@ import at.fhv.hotelsoftware.application.api.CheckInService;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewBookingService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.view.form.AvailableRoomList;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
+import at.fhv.hotelsoftware.view.form.RoomForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,9 +44,22 @@ public class BookingController {
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
     private static final String CHECK_IN_GUEST= "/checkInGuest";
+    private static final String CREATE_DUMMY_DATA = "/createDummyData";
 
 
     private static final String ERROR_VIEW = "errorView";
+
+    @GetMapping(CREATE_DUMMY_DATA)
+    public ModelAndView createDummyData(Model model){
+        Room room = Room.builder().
+                withRoomStatus(RoomStatus.FREE).
+                withBookingId(null).
+                withRoomCategory(RoomCategory.DOUBLE).
+                withRoomNumber(3).build();
+
+        viewBookingService.createRoom(room);
+        return new ModelAndView("redirect:/");
+    }
 
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
@@ -52,13 +68,6 @@ public class BookingController {
         List<BookingDTO> listOfCheckouts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", listOfCheckouts);
 
-        Room room = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.DOUBLE).
-                withRoomNumber(3).build();
-
-        viewBookingService.createRoom(room);
         return new ModelAndView("dashboard");
     }
 
@@ -126,8 +135,12 @@ public class BookingController {
     public ModelAndView checkInGuestOverview(@RequestParam("id") String bookingId, Model model) {
 
         try {
+            List<RoomDTO> rooms = checkInService.findAvailableRooms(bookingId);
             BookingDTO booking = viewBookingService.findBookingById(bookingId);
+            AvailableRoomList availableRoomList = new AvailableRoomList(rooms);
             model.addAttribute("bookingForm", booking);
+            model.addAttribute("rooms", rooms);
+            model.addAttribute("availableRoomList", availableRoomList);
             return new ModelAndView("checkInGuestOverview");
         } catch (BookingNotFoundException e){
             return new ModelAndView("redirect:"+"/");
@@ -136,13 +149,16 @@ public class BookingController {
 
     //TODO: Add Room assignment
     @PostMapping (CHECK_IN_GUEST)
-    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, @ModelAttribute("availableRoomList") AvailableRoomList availableRoomList, @ModelAttribute("availableRoom") AvailableRoomList availableRoomList2, Model model) {
 
-        checkInService.checkIn(bookingForm.getBookingId());
-
-
+        try {
+            checkInService.checkIn(bookingForm.getBookingId(), availableRoomList.getRoomDTOs());
+        } catch (RoomNotFoundException e) {
+            e.printStackTrace();
+        } catch (RoomAlreadyOccupiedException e) {
+            e.printStackTrace();
+        }
 
         return new ModelAndView("redirect:"+"/");
-
     }
 }
