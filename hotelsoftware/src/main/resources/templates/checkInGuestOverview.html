@@ -55,10 +55,6 @@
                         <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].roomStatus}"/>
                         <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].bookingId.bookingId}"/>
                     </td>
-                    <td th:text="${availableRoom.getRoomNumber()}"></td>
-                    <td th:text="${availableRoom.getRoomCategory()}"></td>
-                    <td th:text="${availableRoom.getRoomStatus()}"></td>
-                    <td th:text="${availableRoom.getBookingId().getBookingId()}"></td>
                 </tr>
             </tbody>
 

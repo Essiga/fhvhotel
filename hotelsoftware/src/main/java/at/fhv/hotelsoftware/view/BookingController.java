@@ -138,9 +138,7 @@ public class BookingController {
 
         try {
             List<RoomDTO> rooms = checkInService.findAvailableRooms(bookingId);
-            ArrayList<RoomDTO> arrRooms = new ArrayList<>();
-            arrRooms.addAll(rooms);
-            AvailableRoomList availableRoomList = new AvailableRoomList(arrRooms);
+            AvailableRoomList availableRoomList = new AvailableRoomList(rooms);
             BookingDTO booking = viewBookingService.findBookingById(bookingId);
             model.addAttribute("availableRoomList", availableRoomList);
             model.addAttribute("booking", booking);
