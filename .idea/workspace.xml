@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="added custom validation for date and room categories and Factory Methods in BookingDTO">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createCustomer.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createCustomer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +208,7 @@
       <workItem from="1636294387858" duration="6611000" />
       <workItem from="1636985064073" duration="3949000" />
       <workItem from="1637068569540" duration="7769000" />
-      <workItem from="1637241111177" duration="345000" />
+      <workItem from="1637241111177" duration="6264000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -304,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637082034049</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Created branch for adjusting the UI">
+      <created>1637241553863</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1637241553864</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +450,8 @@
     <MESSAGE value="checkin finished" />
     <MESSAGE value="sql and rooms updated" />
     <MESSAGE value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
-    <option name="LAST_COMMIT_MESSAGE" value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
+    <MESSAGE value="Created branch for adjusting the UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created branch for adjusting the UI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
