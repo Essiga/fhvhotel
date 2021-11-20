@@ -17,23 +17,10 @@ import java.util.UUID;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
-    // private LinkedList<Booking> database = new LinkedList<>();
-    // private List<Booking> allBookings = new LinkedList<>();
-
-    /*
-     public void addToDatabase(Booking booking){
-        this.database.add(booking);
-    }
-
-    @Override
-    public String toString() {
-        return "BookingRepositoryImpl{" +
-                "database=" + database +
-                '}';
-    } */
 
     @PersistenceContext
     private EntityManager em;
+
 
     @Override
     public List<Booking> findAllBookings() {
@@ -51,11 +38,11 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
+    //TODO: make parameters work
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId) {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
         Optional<Booking> booking = query.getResultStream().findFirst();
-
         return booking;
     }
 

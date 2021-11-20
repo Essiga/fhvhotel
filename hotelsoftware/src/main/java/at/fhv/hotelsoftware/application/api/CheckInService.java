@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface CheckInService {
 
-    void occupyRoom(RoomDTO room, BookingId bookingId) throws RoomNotFoundException, RoomAlreadyOccupiedException;
-    void assignRoomToBooking(BookingId bookingId) throws BookingNotFoundException;
+    void checkIn(BookingId bookingId, List<RoomDTO> freeRoomList) throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException;
     List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException;
 }

@@ -64,9 +64,11 @@ public class CheckInServiceImpl implements CheckInService {
 
     @Override
     @Transactional
-    public void occupyRoom(RoomDTO roomDTO, BookingId bookingId) throws RoomNotFoundException, RoomAlreadyOccupiedException {
+    public void checkIn(BookingId bookingId, List<RoomDTO> checkInRooms) throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException {
 
-            Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(roomDTO.getRoomNumber());
+        for (RoomDTO checkInRoom : checkInRooms)
+        {
+            Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoom.getRoomNumber());
 
             if (optRoom.isEmpty()) {
                 throw new RoomNotFoundException("Room not found");
@@ -79,11 +81,7 @@ public class CheckInServiceImpl implements CheckInService {
             } else {
                 throw new RoomAlreadyOccupiedException("Room occupied");
             }
-    }
-
-    @Override
-    @Transactional
-    public void assignRoomToBooking(BookingId bookingId) throws BookingNotFoundException{
+        }
 
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
 

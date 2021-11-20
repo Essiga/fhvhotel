@@ -173,18 +173,11 @@ public class BookingController {
         }
     }
 
-    //TODO: Add Room assignment
     @PostMapping (CHECK_IN_GUEST)
     public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm booking, @ModelAttribute("freeRoomListWrapper") FreeRoomListWrapper freeRoomListWrapper) {
 
-        List<RoomDTO> freeRoomList = freeRoomListWrapper.getFreeRoomList();
-
         try {
-            for (int i = 0; i < freeRoomList.size(); i++)
-            {
-                checkInService.occupyRoom(freeRoomList.get(i), booking.getBookingId());
-            }
-            checkInService.assignRoomToBooking(booking.getBookingId());
+            checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
         } catch (RoomNotFoundException e) {
             e.printStackTrace();
         } catch (RoomAlreadyOccupiedException e) {

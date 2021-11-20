@@ -48,7 +48,7 @@ public class ViewBookingServiceImpl implements ViewBookingService {
     @Override
     public BookingDTO findBookingById(String bookingIdString) throws BookingNotFoundException {
         BookingId bookingId = new BookingId(bookingIdString);
-        Optional<Booking> result = bookingRepository.findBookingById(bookingId);
+        Optional<Booking> result = bookingRepository.findBookingById(new BookingId(bookingIdString));
 
         if(result.isEmpty()){
             throw new BookingNotFoundException("Couldn't find a booking under that ID");
