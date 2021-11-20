@@ -9,16 +9,11 @@ import at.fhv.hotelsoftware.domain.model.Room;
 import java.util.List;
 
 public interface ViewBookingService {
-    List<BookingDTO> findTodaysCheckIns();
-    List<BookingDTO> findTodaysCheckOuts();
 
     List<BookingDTO> findAllBookings();
     BookingDTO findBookingById(String bookingId) throws BookingNotFoundException;
 
-    List<RoomDTO> roomByBookingId(BookingId bookingId);
+    List<BookingDTO> findTodaysCheckIns();
+    List<BookingDTO> findTodaysCheckOuts();
 
-
-
-
-;    void createRoom(Room room);
 }

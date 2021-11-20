@@ -19,22 +19,9 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-
-    public CreateBookingServiceImpl(BookingRepository bookingRepository){
-        this.bookingRepository = bookingRepository;
-    }
-
-    @Transactional
-    public List<Booking> findAllBookings(){
-        return bookingRepository.findAllBookings();
-    }
-
     @Transactional
     public void createBooking(BookingForm bookingForm, CustomerForm customerForm){
 
-
-
-        //TODO: Input validation (later not this sprint)
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).
                 withCancellationDeadLine(null).
@@ -42,7 +29,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withBookingStatus(BookingStatus.PENDING).
                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
-                withRoomCategory(RoomCategory.SINGLE).
                 withSingleRoom(bookingForm.getSingleRoomCount()).
                 withDoubleRoom(bookingForm.getDoubleRoomCount()).
                 withLuxusRoom(bookingForm.getLuxusRoomCount()).
@@ -50,6 +36,4 @@ public class CreateBookingServiceImpl implements CreateBookingService {
 
         bookingRepository.addBooking(booking);
     }
-
-
 }

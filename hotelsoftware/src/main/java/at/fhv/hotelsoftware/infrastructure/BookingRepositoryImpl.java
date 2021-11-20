@@ -71,11 +71,5 @@ public class BookingRepositoryImpl implements BookingRepository {
     public void addBooking(Booking booking) {
         this.em.persist(booking);
     }
-
-
-    @Override
-    public void createRoom(Room room) {
-        this.em.persist(room);
-    }
 }
 

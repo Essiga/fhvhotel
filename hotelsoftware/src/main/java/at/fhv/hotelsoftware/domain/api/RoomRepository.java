@@ -9,7 +9,9 @@ import java.util.Optional;
 
 public interface RoomRepository {
 
-    List<Room> allRooms();
-    List<Room> roomByBookingId(BookingId bookingid);
-    Optional<Room> findByRoomNumber(Integer roomNumber);
+    List<Room> findAllRooms();
+    List<Room> findRoomByBookingId(BookingId bookingid);
+    Optional<Room> findRoomByRoomNumber(Integer roomNumber);
+
+    void addRoom(Room room);
 }

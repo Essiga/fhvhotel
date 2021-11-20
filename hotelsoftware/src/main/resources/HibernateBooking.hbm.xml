@@ -22,15 +22,10 @@
 
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
-        <property name="roomCategory" column="roomCategory">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
-                <param name="type">12</param>
-            </type>
-        </property>
-
         <property name="singleRoom" column="singleRoom" type="java.lang.Integer"/>
+
         <property name="doubleRoom" column="doubleRoom" type="java.lang.Integer"/>
+
         <property name="luxusRoom" column="luxusRoom" type="java.lang.Integer"/>
 
         <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">

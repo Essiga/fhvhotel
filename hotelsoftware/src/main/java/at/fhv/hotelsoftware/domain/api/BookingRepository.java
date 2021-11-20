@@ -9,15 +9,12 @@ import java.util.Optional;
 
 
 public interface BookingRepository {
+
     List<Booking> findTodaysCheckIns();
     List<Booking> findTodaysCheckOuts();
+
     List<Booking> findAllBookings();
-
-
-    void createRoom(Room room);
-    void addBooking(Booking booking);
     Optional<Booking> findBookingById(BookingId bookingId);
 
-
-
+    void addBooking(Booking booking);
 }

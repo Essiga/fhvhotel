@@ -38,7 +38,6 @@ public final class BookingDTO {
                       LocalDate checkInDate,
                       LocalDate checkOutDate,
                       LocalDate cancellationDeadLine,
-                      RoomCategory roomCategory,
                       Integer singleRoom,
                       Integer doubleRoom,
                       Integer luxusRoom,
@@ -50,7 +49,6 @@ public final class BookingDTO {
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
-        this.roomCategory = roomCategory;
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
         this.luxusRoom = luxusRoom;
@@ -236,7 +234,6 @@ public final class BookingDTO {
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
-                booking.getRoomCategory(),
                 booking.getSingleRoom(),
                 booking.getDoubleRoom(),
                 booking.getLuxusRoom(),
@@ -253,7 +250,6 @@ public final class BookingDTO {
                                 bookings.getCheckInDate(),
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
                                 bookings.getSingleRoom(),
                                 bookings.getDoubleRoom(),
                                 bookings.getLuxusRoom(),

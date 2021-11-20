@@ -15,13 +15,11 @@ public class Booking {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
-    private RoomCategory roomCategory;
     private Integer singleRoom;
     private Integer doubleRoom;
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    //private LinkedList<String> extraServices;
 
     public static Builder builder() {
         return new Builder();
@@ -59,11 +57,6 @@ public class Booking {
     }
 
 
-    public RoomCategory getRoomCategory() {
-        return roomCategory;
-    }
-
-
     public VoucherCode getVoucherCode() {
         return voucherCode;
     }
@@ -90,7 +83,6 @@ public class Booking {
                 "customer='" + customer + '\'' +
                 ", fromDate=" + checkInDate +
                 ", toDate=" + checkOutDate +
-                ", roomCategory=" + roomCategory +
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
                 '}';
@@ -139,12 +131,6 @@ public class Booking {
             return this;
         }
 
-        public Builder withRoomCategory(RoomCategory roomCategory) {
-            this.instance.roomCategory = roomCategory;
-            return this;
-        }
-
-
         public Builder withVoucherCode(VoucherCode voucherCode) {
             this.instance.voucherCode = voucherCode;
             return this;
@@ -169,11 +155,6 @@ public class Booking {
             this.instance.luxusRoom = luxusRoom;
             return this;
         }
-
-       /* public Builder withExtraServices(LinkedList<String> extraServices){
-            this.instance.extraServices = extraServices;
-            return this;
-        } */
 
         public Booking build() {
             Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");

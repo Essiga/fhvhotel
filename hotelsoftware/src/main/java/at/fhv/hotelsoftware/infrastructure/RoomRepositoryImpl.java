@@ -18,17 +18,16 @@ public class RoomRepositoryImpl implements RoomRepository {
     private EntityManager em;
 
 
-
     @Override
-    public List<Room> allRooms() {
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE roomStatus = 'FREE'", Room.class);
+    public List<Room> findAllRooms() {
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_Status = 'FREE'", Room.class);
         List<Room> resultList = query.getResultList();
 
         return resultList;
     }
 
     @Override
-    public List<Room> roomByBookingId(BookingId bookingId) {
+    public List<Room> findRoomByBookingId(BookingId bookingId) {
         TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_Id = bookingId", Room.class);
         List<Room> resultList = query.getResultList();
 
@@ -36,11 +35,15 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public Optional<Room> findByRoomNumber(Integer roomNumber){
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_Number = roomNumber", Room.class);
+    public Optional<Room> findRoomByRoomNumber(Integer roomNumber){
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_Number = " + roomNumber, Room.class);
         Optional<Room> room = query.getResultStream().findFirst();
 
         return room;
     }
 
+    @Override
+    public void addRoom(Room room) {
+        this.em.persist(room);
+    }
 }

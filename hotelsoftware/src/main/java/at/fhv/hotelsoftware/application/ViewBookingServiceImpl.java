@@ -23,16 +23,12 @@ public class ViewBookingServiceImpl implements ViewBookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    @Autowired
-    private RoomRepository roomRepository;
-
     @Transactional(readOnly = true)
     @Override
     public List<BookingDTO> findTodaysCheckIns() {
         List<Booking> todaysCheckIns = bookingRepository.findTodaysCheckIns();
         return BookingDTO.fromBookingList(todaysCheckIns);
     }
-
 
     @Transactional(readOnly = true)
     @Override
@@ -54,25 +50,11 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         BookingId bookingId = new BookingId(bookingIdString);
         Optional<Booking> result = bookingRepository.findBookingById(bookingId);
 
-
         if(result.isEmpty()){
             throw new BookingNotFoundException("Couldn't find a booking under that ID");
         }
 
         Booking booking = result.get();
         return BookingDTO.fromBooking(booking);
-    }
-
-    @Override
-    @Transactional
-    public void createRoom(Room room) {
-        bookingRepository.createRoom(room);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
-    public List<RoomDTO> roomByBookingId(BookingId bookingId) {
-        List<Room> allRooms = roomRepository.roomByBookingId(bookingId);
-        return RoomDTO.fromRoomList(allRooms);
     }
 }

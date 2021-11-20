@@ -1,7 +1,6 @@
 package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CheckInService;
-import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
@@ -29,58 +28,70 @@ public class CheckInServiceImpl implements CheckInService {
     }
 
     @Override
-    public List<RoomDTO> findAvailableRooms(String bookingIdString) {
-        BookingId bookingId = new BookingId(bookingIdString);
-        Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
-        List<RoomDTO> rooms = new LinkedList<>();
+    public List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException {
+        Optional<Booking> optBooking = bookingRepository.findBookingById(new BookingId(bookingIdString));
 
-        Integer singleRoomCount = booking.get().getSingleRoom();
-        Integer doubleRoomCount = booking.get().getDoubleRoom();
-        Integer luxusRoomCount = booking.get().getLuxusRoom();
-        List<Room> allRooms = roomRepository.allRooms();
+        if (optBooking.isEmpty()) {
+            throw new BookingNotFoundException("Booking not found");
+        }
+
+        Booking booking = optBooking.get();
+        Integer singleRoomCount = booking.getSingleRoom();
+        Integer doubleRoomCount = booking.getDoubleRoom();
+        Integer luxusRoomCount = booking.getLuxusRoom();
+
+        List<Room> allRooms = roomRepository.findAllRooms();
+        List<RoomDTO> freeRoomsForBooking = new LinkedList<>();
 
         for (int i = 0; i < allRooms.size(); i++) {
             if (singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0) {
                 break;
             }
             if (singleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SINGLE) {
-                rooms.add(RoomDTO.fromRoom(allRooms.get(i)));
+                freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 singleRoomCount--;
             } else if (doubleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.DOUBLE) {
-                rooms.add(RoomDTO.fromRoom(allRooms.get(i)));
+                freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 doubleRoomCount--;
             } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.LUXUS) {
-                rooms.add(RoomDTO.fromRoom(allRooms.get(i)));
+                freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 luxusRoomCount--;
             }
         }
 
-        return rooms;
+        return freeRoomsForBooking;
     }
-
 
     @Override
     @Transactional
-    public void checkIn(BookingId bookingId, List<RoomDTO> roomDTOs) throws RoomNotFoundException, RoomAlreadyOccupiedException {
+    public void occupyRoom(RoomDTO roomDTO, BookingId bookingId) throws RoomNotFoundException, RoomAlreadyOccupiedException {
 
-        for (RoomDTO roomDTO : roomDTOs) {
-            Optional<Room> room = roomRepository.findByRoomNumber(roomDTO.getRoomNumber());
+            Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(roomDTO.getRoomNumber());
 
-            if (room.isEmpty()) {
+            if (optRoom.isEmpty()) {
                 throw new RoomNotFoundException("Room not found");
             }
 
-            if (room.get().getRoomStatus() == RoomStatus.FREE) {
-                room.get().occupy(bookingId);
+            Room room = optRoom.get();
+
+            if (room.getRoomStatus() == RoomStatus.FREE) {
+                room.occupy(bookingId);
             } else {
                 throw new RoomAlreadyOccupiedException("Room occupied");
             }
-        }
+    }
+
+    @Override
+    @Transactional
+    public void assignRoomToBooking(BookingId bookingId) throws BookingNotFoundException{
 
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
-        if (!booking.isEmpty()) {
+
+        if (booking.isPresent()) {
             booking.get().checkIn();
         }
+        else
+            throw new BookingNotFoundException("Booking not found");
     }
 }
 

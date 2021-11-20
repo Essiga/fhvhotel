@@ -43,17 +43,17 @@
 
         <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{checkInGuest}" th:object="${availableRoomList}" method="post" >
+        <form th:action="@{checkInGuest}" th:object="${freeRoomListWrapper}" method="post" >
 
             <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
             <tbody>
-                <tr th:each="availableRoom, stat : *{roomDTOs}">
+                <tr th:each="freeRoom, stat : *{freeRoomList}">
                     <td>
-                        <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].roomNumber}"/>
-                        <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].roomCategory}"/>
-                        <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].roomStatus}"/>
-                        <input type="hidden" th:field="*{roomDTOs[__${stat.index}__].bookingId.bookingId}"/>
+                        <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
+                        <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomCategory}"/>
+                        <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomStatus}"/>
+                        <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].bookingId.bookingId}"/>
                     </td>
                 </tr>
             </tbody>
@@ -229,9 +229,9 @@
 
                         </tr>
 
-                        <tr name="availableRoomList" class="text-center m-4" th:each="availableRoom : ${availableRoomList.getRoomDTOs()}">
-                            <td th:text="${availableRoom.roomNumber}"></td>
-                            <td th:text="${availableRoom.getRoomCategory()}"></td>
+                        <tr class="text-center m-4" th:each="freeRoom : ${freeRoomListWrapper.freeRoomList}">
+                            <td th:text="${freeRoom.roomNumber}"></td>
+                            <td th:text="${freeRoom.getRoomCategory()}"></td>
                         </tr>
 
 
