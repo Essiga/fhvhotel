@@ -22,6 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -136,11 +138,12 @@ public class BookingController {
 
         try {
             List<RoomDTO> rooms = checkInService.findAvailableRooms(bookingId);
+            ArrayList<RoomDTO> arrRooms = new ArrayList<>();
+            arrRooms.addAll(rooms);
+            AvailableRoomList availableRoomList = new AvailableRoomList(arrRooms);
             BookingDTO booking = viewBookingService.findBookingById(bookingId);
-            AvailableRoomList availableRoomList = new AvailableRoomList(rooms);
-            model.addAttribute("bookingForm", booking);
-            model.addAttribute("rooms", rooms);
             model.addAttribute("availableRoomList", availableRoomList);
+            model.addAttribute("booking", booking);
             return new ModelAndView("checkInGuestOverview");
         } catch (BookingNotFoundException e){
             return new ModelAndView("redirect:"+"/");
@@ -149,7 +152,7 @@ public class BookingController {
 
     //TODO: Add Room assignment
     @PostMapping (CHECK_IN_GUEST)
-    public ModelAndView checkInGuest(@ModelAttribute("bookingForm") BookingForm bookingForm, @ModelAttribute("availableRoomList") AvailableRoomList availableRoomList, @ModelAttribute("availableRoom") AvailableRoomList availableRoomList2, Model model) {
+    public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm bookingForm, @ModelAttribute("availableRoomList") AvailableRoomList availableRoomList, Model model) {
 
         try {
             checkInService.checkIn(bookingForm.getBookingId(), availableRoomList.getRoomDTOs());
