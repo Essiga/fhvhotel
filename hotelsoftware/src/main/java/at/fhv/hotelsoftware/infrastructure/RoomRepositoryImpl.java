@@ -29,7 +29,10 @@ public class RoomRepositoryImpl implements RoomRepository {
     //TODO: make parameters work
     @Override
     public List<Room> findRoomByBookingId(BookingId bookingId) {
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_id = bookingId", Room.class);
+
+        String uuid = convertBookingIdToUUIDWithoutHyphen(bookingId);
+
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_id = '" + uuid + "'", Room.class);
         List<Room> resultList = query.getResultList();
 
         return resultList;
@@ -46,5 +49,18 @@ public class RoomRepositoryImpl implements RoomRepository {
     @Override
     public void addRoom(Room room) {
         this.em.persist(room);
+    }
+
+
+    private String convertBookingIdToUUIDWithoutHyphen(BookingId bookingId)
+    {
+        StringBuilder uuid = new StringBuilder(bookingId.getBookingId().toString());
+
+        uuid.deleteCharAt(23);
+        uuid.deleteCharAt(18);
+        uuid.deleteCharAt(13);
+        uuid.deleteCharAt(8);
+
+        return uuid.toString();
     }
 }

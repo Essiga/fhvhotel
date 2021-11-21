@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.domain.model.Room;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Component;
 
 
@@ -38,10 +39,12 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
-    //TODO: make parameters work
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId) {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
+
+        String uuid = convertBookingIdToUUIDWithoutHyphen(bookingId);
+
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = '" + uuid + "'", Booking.class);
         Optional<Booking> booking = query.getResultStream().findFirst();
         return booking;
     }
@@ -57,6 +60,19 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public void addBooking(Booking booking) {
         this.em.persist(booking);
+    }
+
+
+    private String convertBookingIdToUUIDWithoutHyphen(BookingId bookingId)
+    {
+        StringBuilder uuid = new StringBuilder(bookingId.getBookingId().toString());
+
+        uuid.deleteCharAt(23);
+        uuid.deleteCharAt(18);
+        uuid.deleteCharAt(13);
+        uuid.deleteCharAt(8);
+
+        return uuid.toString();
     }
 }
 
