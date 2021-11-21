@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- fixed SQL statements">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- small fixes">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/NotEnoughRoomsException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/CheckInService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/CheckInService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +109,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="at.fhv.hotelsoftware.application" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
@@ -165,7 +169,8 @@
       <workItem from="1637241214836" duration="7916000" />
       <workItem from="1637319899640" duration="1283000" />
       <workItem from="1637416999678" duration="24256000" />
-      <workItem from="1637448281709" duration="6276000" />
+      <workItem from="1637448281709" duration="6579000" />
+      <workItem from="1637503056479" duration="2262000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -300,7 +305,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637453057518</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="- small fixes">
+      <created>1637454903126</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1637454903126</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -439,7 +451,8 @@
     <MESSAGE value="- AvailableRoomList transfer successful&#10;- removed RoomCategory-Attribute from Booking&#10;- created ViewRoomService&#10;- created more Dummy-Rooms&#10;- variable renaming&#10;- fixed sql queries" />
     <MESSAGE value="- AvailableRoomList transfer successful&#10;- removed RoomCategory-Attribute from Booking&#10;- created ViewRoomService&#10;- created more Dummy-Rooms&#10;- variable renaming" />
     <MESSAGE value="- fixed SQL statements" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fixed SQL statements" />
+    <MESSAGE value="- small fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="- small fixes" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -166,11 +166,13 @@ public class BookingController {
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", booking);
 
-            return new ModelAndView("checkInGuestOverview");
-
         } catch (BookingNotFoundException e){
             return new ModelAndView("redirect:"+"/");
+        } catch (NotEnoughRoomsException e) {
+            e.printStackTrace();
         }
+
+        return new ModelAndView("checkInGuestOverview");
     }
 
     @PostMapping (CHECK_IN_GUEST)

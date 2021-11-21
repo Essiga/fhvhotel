@@ -28,7 +28,7 @@ public class CheckInServiceImpl implements CheckInService {
     }
 
     @Override
-    public List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException {
+    public List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException, NotEnoughRoomsException {
         Optional<Booking> optBooking = bookingRepository.findBookingById(new BookingId(bookingIdString));
 
         if (optBooking.isEmpty()) {
@@ -57,6 +57,10 @@ public class CheckInServiceImpl implements CheckInService {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 luxusRoomCount--;
             }
+        }
+
+        if (!(singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0)) {
+            throw new NotEnoughRoomsException("Not enough rooms available");
         }
 
         return freeRoomsForBooking;
