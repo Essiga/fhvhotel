@@ -73,7 +73,7 @@
 
                         <div class="w-1/2">
                             <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6"
-                                   th:value="*{voucherCode}">
+                                   th:value="${booking.voucherCode}">
                             <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
                         </div>
 
@@ -89,13 +89,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{fname}">
+                                   th:value="${booking.fname}">
                             <label for="fname" class="block text-sm text-gray-500">First Name</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{lname}">
+                                   th:value="${booking.lname}">
                             <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
                         </div>
 
@@ -111,13 +111,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{streetAdr}">
+                                   th:value="${booking.streetAdr}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
-                                   th:value="*{zip}">
+                                   th:value="${booking.zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                         </div>
 
@@ -127,13 +127,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{city}">
+                                   th:value="${booking.city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{country}">
+                                   th:value="${booking.country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
                         </div>
 
@@ -159,13 +159,13 @@
 
                         <div class="w-1/2">
                             <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{phoneNumber}">
+                                   th:value="${booking.phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
-                                   th:value="*{email}">
+                                   th:value="${booking.email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
 
@@ -183,21 +183,21 @@
                         <div class="w-1/3">
                             <h2 class="mb-2 font-semibold">Single </h2>
                             <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
-                                   th:value="*{singleRoom}">
+                                   th:value="${booking.singleRoom}">
                             <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
                         </div>
 
                         <div class="w-1/3">
                             <h2 class="mb-2 font-semibold">Double</h2>
                             <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
-                                   th:value="*{doubleRoom}">
+                                   th:value="${booking.doubleRoom}">
                             <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
                         </div>
 
                         <div class="w-1/3">
                             <h2 class="mb-2 font-semibold">Luxus</h2>
                             <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16"
-                                   th:value="*{luxusRoom}">
+                                   th:value="${booking.luxusRoom}">
                             <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
                         </div>
 
@@ -213,13 +213,13 @@
 
                         <div class="w-1/2">
                             <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2"
-                                   th:value="*{checkInDate}">
+                                   th:value="${booking.checkInDate}">
                             <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2"
-                                   th:value="*{checkOutDate}">
+                                   th:value="${booking.checkOutDate}">
                             <label for="toDate" class="block text-sm text-gray-500">To Date</label>
                         </div>
 
@@ -243,7 +243,7 @@
 
                             </tr>
 
-                        <tr class="text-center m-4" th:each="freeRoom : ${freeRoomListWrapper.freeRoomList}">
+                        <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
                             <td th:text="${freeRoom.roomNumber}"></td>
                             <td th:text="${freeRoom.getRoomCategory()}"></td>
                         </tr>
