@@ -98,19 +98,19 @@ public class BookingController {
 
     @GetMapping(CREATE_CUSTOMER_URL)
     public ModelAndView showCustomerForm(Model model) {
-        BookingForm bookingForm = new BookingForm();
+
         CustomerForm customerForm = new CustomerForm();
-        model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
         return new ModelAndView("createCustomer");
     }
 
     @PostMapping(CHOOSE_ROOM_URL)
-    public ModelAndView submitChooseRoom(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result,  @ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+    public ModelAndView submitChooseRoom(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return new ModelAndView("createCustomer");
         }
 
+        BookingForm bookingForm = new BookingForm();
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
         return new ModelAndView("chooseRoom");
@@ -147,7 +147,7 @@ public class BookingController {
     }
 
     @PostMapping(WRITE_BOOKING_IN_DB)
-    public ModelAndView writeBookingInDatabase(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result, @ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+    public ModelAndView writeBookingInDatabase(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result, @ModelAttribute("bookingForm") BookingForm bookingForm) {
         if (result.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {//check date and rooms here
             return new ModelAndView("bookingSummary");
         }
