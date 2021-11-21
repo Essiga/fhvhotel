@@ -1,13 +1,19 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import lombok.Data;
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 import java.util.UUID;
 
+@Data
+@Component
 public class Room {
     public Long id;
-    //private RoomId roomId;
     private RoomCategory roomCategory;
     private Integer roomNumber;
+    private RoomStatus roomStatus;
+    private BookingId bookingId;
 
     public static Builder builder() {
         return new Builder();
@@ -16,36 +22,9 @@ public class Room {
     public Room() {
     }
 
-    private Long getId() {
-        return id;
-    }
-
-   /* private RoomId getRoomId() {
-        return roomId;
-    } */
-
-    private RoomCategory getRoomCategory() {
-        return roomCategory;
-    }
-
-    private Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    private void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
-    }
-
-    private void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-   /* private void setRoomId(RoomId roomId) {
-        this.roomId = roomId;
-    } */
-
-    private void setId(long id) {
-        this.id = id;
+    public void occupy(BookingId bookingId){
+        this.roomStatus = RoomStatus.OCCUPIED;
+        this.bookingId = bookingId;
     }
 
     public static class Builder {
@@ -56,11 +35,6 @@ public class Room {
             this.instance = new Room();
         }
 
-      /*  public Builder withRoomId(RoomId roomId) {
-            this.instance.roomId = roomId;
-            return this;
-        } */
-
         public Builder withRoomCategory(RoomCategory roomCategory) {
             this.instance.roomCategory = roomCategory;
             return this;
@@ -68,6 +42,16 @@ public class Room {
 
         public Builder withRoomNumber(Integer roomNumber) {
             this.instance.roomNumber = roomNumber;
+            return this;
+        }
+
+        public Builder withRoomStatus(RoomStatus roomStatus) {
+            this.instance.roomStatus = roomStatus;
+            return this;
+        }
+
+        public Builder withBookingId(BookingId bookingId){
+            this.instance.bookingId = bookingId;
             return this;
         }
 

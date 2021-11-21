@@ -7,7 +7,4 @@ import at.fhv.hotelsoftware.view.form.CustomerForm;
 public interface CreateBookingService{
 
    void createBooking(BookingForm bookingForm, CustomerForm customerForm);
-
-
-
 }

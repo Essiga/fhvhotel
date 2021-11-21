@@ -3,6 +3,8 @@ package at.fhv.hotelsoftware.infrastructure;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.Room;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.stereotype.Component;
 
 
@@ -16,23 +18,10 @@ import java.util.UUID;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
-   // private LinkedList<Booking> database = new LinkedList<>();
-   // private List<Booking> allBookings = new LinkedList<>();
-
-    /*
-     public void addToDatabase(Booking booking){
-        this.database.add(booking);
-    }
-
-    @Override
-    public String toString() {
-        return "BookingRepositoryImpl{" +
-                "database=" + database +
-                '}';
-    } */
 
     @PersistenceContext
     private EntityManager em;
+
 
     @Override
     public List<Booking> findAllBookings() {
@@ -52,9 +41,11 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId) {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = bookingId", Booking.class);
-        Optional<Booking> booking = query.getResultStream().findFirst();
 
+        String uuid = convertBookingIdToUUIDWithoutHyphen(bookingId);
+
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = '" + uuid + "'", Booking.class);
+        Optional<Booking> booking = query.getResultStream().findFirst();
         return booking;
     }
 
@@ -69,6 +60,19 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public void addBooking(Booking booking) {
         this.em.persist(booking);
+    }
+
+
+    private String convertBookingIdToUUIDWithoutHyphen(BookingId bookingId)
+    {
+        StringBuilder uuid = new StringBuilder(bookingId.getBookingId().toString());
+
+        uuid.deleteCharAt(23);
+        uuid.deleteCharAt(18);
+        uuid.deleteCharAt(13);
+        uuid.deleteCharAt(8);
+
+        return uuid.toString();
     }
 }
 

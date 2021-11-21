@@ -23,7 +23,7 @@ public final class BookingDTO {
     private Integer doubleRoom;
     private Integer luxusRoom;
     private BookingStatus bookingStatus;
-    private List<Room> rooms;
+    private List<Integer> roomNumbers;
     private String phoneNumber;
     private String email;
     private String country;
@@ -38,26 +38,22 @@ public final class BookingDTO {
                       LocalDate checkInDate,
                       LocalDate checkOutDate,
                       LocalDate cancellationDeadLine,
-                      RoomCategory roomCategory,
                       Integer singleRoom,
                       Integer doubleRoom,
                       Integer luxusRoom,
                       VoucherCode voucherCode,
-                      BookingStatus bookingStatus,
-                      List<Room> rooms) {
+                      BookingStatus bookingStatus) {
 
         this.bookingId = bookingId;
         this.customer = customer;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
-        this.roomCategory = roomCategory;
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
         this.luxusRoom = luxusRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
-        this.rooms = rooms;
     }
 
 
@@ -180,8 +176,8 @@ public final class BookingDTO {
         this.bookingStatus = bookingStatus;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public void setRooms(List<Integer> rooms) {
+        this.roomNumbers = roomNumbers;
     }
 
     public void setFname(String fname) {
@@ -228,8 +224,7 @@ public final class BookingDTO {
         return bookingStatus;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public List<Integer> getRoomNumbers() { return roomNumbers;
     }
 
 
@@ -239,13 +234,11 @@ public final class BookingDTO {
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
-                booking.getRoomCategory(),
                 booking.getSingleRoom(),
                 booking.getDoubleRoom(),
                 booking.getLuxusRoom(),
                 booking.getVoucherCode(),
-                booking.getBookingStatus(),
-                booking.getRooms());
+                booking.getBookingStatus());
     }
 
     public static List<BookingDTO> fromBookingList(List<Booking> booking){
@@ -257,13 +250,11 @@ public final class BookingDTO {
                                 bookings.getCheckInDate(),
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
                                 bookings.getSingleRoom(),
                                 bookings.getDoubleRoom(),
                                 bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
-                                bookings.getBookingStatus(),
-                                bookings.getRooms()))
+                                bookings.getBookingStatus()))
                 .collect(Collectors.toList());
     }
 
@@ -305,8 +296,8 @@ public final class BookingDTO {
             return this;
         }
 
-        public BookingDTO.Builder withRoomIds(List<Room> rooms){
-            this.instance.rooms = rooms;
+        public BookingDTO.Builder withRoomNumbers(List<Integer> roomNumbers){
+            this.instance.roomNumbers = roomNumbers;
             return this;
         }
 
