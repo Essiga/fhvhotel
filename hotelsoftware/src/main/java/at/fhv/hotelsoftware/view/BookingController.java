@@ -48,6 +48,7 @@ public class BookingController {
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
     private static final String CHECK_IN_GUEST= "/checkInGuest";
     private static final String CREATE_DUMMY_DATA = "/createDummyData";
+    private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
 
 
     private static final String ERROR_VIEW = "errorView";
@@ -124,12 +125,14 @@ public class BookingController {
     }
 
     private boolean validDuration(BookingForm bookingForm){
-        return LocalDate.parse(bookingForm.getCheckInDate()).isBefore(LocalDate.parse(bookingForm.getCheckOutDate()));
+       // return LocalDate.parse(bookingForm.getCheckInDate()).isBefore(LocalDate.parse(bookingForm.getCheckOutDate()));
+
+        return true;
     }
 
     @PostMapping(EXTRA_SERVICE_URL)
     public ModelAndView submitExtraService(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult result, Model model) {
-        if (result.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {//check date and rooms here
+        if (result.hasErrors() || /* !validDuration(bookingForm) || */ !validCategoryCount(bookingForm)) {//check date and rooms here
             return new ModelAndView("chooseRoom");
         }
 
@@ -148,7 +151,7 @@ public class BookingController {
 
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result, @ModelAttribute("bookingForm") BookingForm bookingForm) {
-        if (result.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {//check date and rooms here
+        if (result.hasErrors() || /*!validDuration(bookingForm) ||*/ !validCategoryCount(bookingForm)) {//check date and rooms here
             return new ModelAndView("bookingSummary");
         }
         createBookingService.createBooking(bookingForm, customerForm);
@@ -190,4 +193,21 @@ public class BookingController {
 
         return new ModelAndView("redirect:"+"/");
     }
+
+
+    //TODO: Add function to get rooms from DB
+    @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
+    public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
+
+        try {
+            List<RoomDTO> findRoomByBookingId = viewRoomService.findRoomByBookingId(bookingId);
+            BookingDTO booking = viewBookingService.findBookingById(bookingId);
+            model.addAttribute("booking", booking);
+        } catch (BookingNotFoundException e){
+            return new ModelAndView("redirect:"+"/");
+        }
+        return new ModelAndView("checkOutGuestOverview");
+    }
+
+
 }

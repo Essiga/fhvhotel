@@ -19,7 +19,8 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoomDTO> findRoomByBookingId(BookingId bookingId) {
+    public List<RoomDTO> findRoomByBookingId(String bookingIdString) {
+        BookingId bookingId = new BookingId(bookingIdString);
         List<Room> allRooms = roomRepository.findRoomByBookingId(bookingId);
         return RoomDTO.fromRoomList(allRooms);
     }

@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface ViewRoomService {
 
-    List<RoomDTO> findRoomByBookingId(BookingId bookingId);
+    List<RoomDTO> findRoomByBookingId(String bookingId);
     void createRoom(Room room);
 }
