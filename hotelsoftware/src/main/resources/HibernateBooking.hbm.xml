@@ -6,29 +6,31 @@
 <hibernate-mapping default-access="field" default-cascade="all">
     <class name="at.fhv.hotelsoftware.domain.model.Booking" table="tbl_booking" lazy="true">
 
-        <id name="id" type="long" column="id">
+        <id name="id" type="java.lang.Long" column="id" unsaved-value="-1">
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.Id">
-            <property name="bookingId" column="bookingId" type="java.lang.String"/>
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
         <property name="customer" column="customer" type="java.lang.String"/>
 
-        <property name="fromDate" column="fromDate" type="java.time.LocalDate"/>
+        <property name="checkInDate" column="checkInDate" type="java.time.LocalDate"/>
 
-        <property name="toDate" column="toDate" type="java.time.LocalDate"/>
+        <property name="checkOutDate" column="checkOutDate" type="java.time.LocalDate"/>
 
         <property name="cancellationDeadLine" column="cancellationDeadline" type="java.time.LocalDate"/>
 
+        <property name="singleRoom" column="singleRoom" type="java.lang.Integer"/>
 
-        <property name="roomCategory" column="roomCategory">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
-                <param name="type">12</param>
-            </type>
-        </property>
+        <property name="doubleRoom" column="doubleRoom" type="java.lang.Integer"/>
+
+        <property name="luxusRoom" column="luxusRoom" type="java.lang.Integer"/>
+
+        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
+            <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
+        </component>
 
         <property name="bookingStatus" column="bookingStatus">
             <type name="org.hibernate.type.EnumType">
@@ -36,17 +38,8 @@
                 <param name="type">12</param>
             </type>
         </property>
-
-
-        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
-            <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
-        </component>
-
-
-        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
-
-
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
     </class>
+
 </hibernate-mapping>
