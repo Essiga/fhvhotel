@@ -9,17 +9,31 @@ import lombok.Data;
 @Data
 public class CustomerDTO {
 
-    private Long id;
-    private CustomerId customerId;
-    private String voucherCode;
-    private String fname;
-    private String lname;
-    private String streetAddress;
-    private String zip;
-    private String city;
-    private String country;
-    private String phoneNumber;
-    private String email;
+    protected Long id;
+    protected CustomerId customerId;
+    protected String voucherCode;
+    protected String firstName;
+    protected String lastName;
+    protected String streetAddress;
+    protected String zip;
+    protected String city;
+    protected String country;
+    protected String phoneNumber;
+    protected String email;
 
     public CustomerDTO(){}
+
+    public CustomerDTO(Long id, CustomerId customerId, String voucherCode, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+        this.id = id;
+        this.customerId = customerId;
+        this.voucherCode = voucherCode;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.streetAddress = streetAddress;
+        this.zip = zip;
+        this.city = city;
+        this.country = country;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 }

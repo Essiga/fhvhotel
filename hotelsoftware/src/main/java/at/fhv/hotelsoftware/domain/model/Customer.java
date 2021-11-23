@@ -7,8 +7,6 @@ import lombok.Data;
 @Builder
 public class Customer {
 
-    private Customer(){}
-
     protected Long id;
     protected CustomerId customerId;
     protected String voucherCode;
@@ -20,6 +18,9 @@ public class Customer {
     protected String country;
     protected String phoneNumber;
     protected String email;
+
+
+    private Customer(){}
 
     public Customer(Long id, CustomerId customerId, String voucherCode, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
         this.id = id;

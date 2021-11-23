@@ -14,20 +14,7 @@ import java.util.Optional;
 
 @Component
 public class BookingRepositoryImpl implements BookingRepository {
-   // private LinkedList<Booking> database = new LinkedList<>();
-   // private List<Booking> allBookings = new LinkedList<>();
 
-    /*
-     public void addToDatabase(Booking booking){
-        this.database.add(booking);
-    }
-
-    @Override
-    public String toString() {
-        return "BookingRepositoryImpl{" +
-                "database=" + database +
-                '}';
-    } */
 
     @PersistenceContext
     private EntityManager em;

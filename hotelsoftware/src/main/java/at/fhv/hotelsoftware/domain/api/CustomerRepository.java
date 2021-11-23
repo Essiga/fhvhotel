@@ -1,3 +1,5 @@
+package at.fhv.hotelsoftware.domain.api;
+
 import at.fhv.hotelsoftware.domain.model.Customer;
 import at.fhv.hotelsoftware.domain.model.CustomerId;
 import org.springframework.stereotype.Component;

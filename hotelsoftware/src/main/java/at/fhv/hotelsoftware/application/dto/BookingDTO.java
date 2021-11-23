@@ -11,30 +11,35 @@ import java.util.stream.Collectors;
 public final class BookingDTO {
 
     private Long id;
-    private String firstName;
-    private String lastName;
     private BookingId bookingId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
     private RoomCategory roomCategory;
+    private Integer singleRoom;
+    private Integer doubleRoom;
+    private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private List<Room> rooms;
+    private CustomerId customerId;
+    private List<RoomId> roomIds;
+
 
     public BookingDTO(){}
 
-    public BookingDTO(String firstName, String lastName, BookingId bookingId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, RoomCategory roomCategory, VoucherCode voucherCode, BookingStatus bookingStatus, List<Room> rooms) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public BookingDTO(BookingId bookingId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, RoomCategory roomCategory, Integer singleRoom, Integer doubleRoom, Integer luxusRoom, VoucherCode voucherCode, BookingStatus bookingStatus, CustomerId customerId, List<RoomId> roomIds) {
         this.bookingId = bookingId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
         this.roomCategory = roomCategory;
+        this.singleRoom = singleRoom;
+        this.doubleRoom = doubleRoom;
+        this.luxusRoom = luxusRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
-        this.rooms = rooms;
+        this.customerId = customerId;
+        this.roomIds = roomIds;
     }
 
     public Long getId() {
@@ -69,32 +74,89 @@ public final class BookingDTO {
         return bookingStatus;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-
-    public static BookingDTO fromBooking(Booking booking, Customer customer){
-        return new BookingDTO(customer.getFirstName(), customer.getLastName(), booking.getBookingId(),
-                booking.getCheckInDate(),
-                booking.getCheckOutDate(),
-                booking.getCancellationDeadLine(),
-                booking.getRoomCategory(),
-                booking.getVoucherCode(),
-                booking.getBookingStatus(),
-                booking.getRooms());
+    public void setBookingId(BookingId bookingId) {
+        this.bookingId = bookingId;
     }
 
-    public static List<BookingDTO> fromBookingList(List<Booking> bookings, List<Customer> customers){
+    public void setCheckInDate(LocalDate checkInDate) {
+        this.checkInDate = checkInDate;
+    }
+
+    public void setCheckOutDate(LocalDate checkOutDate) {
+        this.checkOutDate = checkOutDate;
+    }
+
+    public void setCancellationDeadLine(LocalDate cancellationDeadLine) {
+        this.cancellationDeadLine = cancellationDeadLine;
+    }
+
+    public void setRoomCategory(RoomCategory roomCategory) {
+        this.roomCategory = roomCategory;
+    }
+
+    public Integer getSingleRoom() {
+        return singleRoom;
+    }
+
+    public void setSingleRoom(Integer singleRoom) {
+        this.singleRoom = singleRoom;
+    }
+
+    public Integer getDoubleRoom() {
+        return doubleRoom;
+    }
+
+    public void setDoubleRoom(Integer doubleRoom) {
+        this.doubleRoom = doubleRoom;
+    }
+
+    public Integer getLuxusRoom() {
+        return luxusRoom;
+    }
+
+    public void setLuxusRoom(Integer luxusRoom) {
+        this.luxusRoom = luxusRoom;
+    }
+
+    public void setVoucherCode(VoucherCode voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+
+    public void setBookingStatus(BookingStatus bookingStatus) {
+        this.bookingStatus = bookingStatus;
+    }
+
+    public CustomerId getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(CustomerId customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<RoomId> getRoomIds() {
+        return roomIds;
+    }
+
+    public void setRoomIds(List<RoomId> roomIds) {
+        this.roomIds = roomIds;
+    }
+
+    public static BookingDTO fromBooking(Booking booking){
+
+
+        return new BookingDTO(booking.getBookingId(), booking.getCheckInDate(), booking.getCheckOutDate(), booking.getCancellationDeadLine(), booking.getRoomCategory(), booking.getSingleRoom(), booking.getDoubleRoom(), booking.getLuxusRoom(), booking.getVoucherCode(), booking.getBookingStatus(), booking.getCustomerId(), booking.getRoomIds())
+    }
+
+    public static List<BookingDTO> fromBookingList(List<Booking> bookings){
        List<BookingDTO> bookingDTOs = new LinkedList<BookingDTO>();
 
-        for (Booking booking:bookings) {
-            for (Customer customer:customers) {
-                if(booking.getCustomerId() == customer.getCustomerId()){
-                    bookingDTOs.add(BookingDTO.fromBooking(booking, customer));
-                }
-            }
-        }
+
+
     }
 
     public static class Builder{

@@ -1,4 +1,4 @@
 package at.fhv.hotelsoftware.application.dto;
 
-public class GuestDTO {
+public class GuestDTO extends CustomerDTO {
 }
