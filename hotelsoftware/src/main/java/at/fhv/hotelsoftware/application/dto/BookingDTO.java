@@ -30,6 +30,15 @@ public final class BookingDTO {
     private String city;
     private String streetAdr;
     private String zip;
+    private List<RoomDTO> roomList;
+
+    public void setRoomList(List<RoomDTO> roomList) {
+        this.roomList = roomList;
+    }
+
+    public List<RoomDTO> getRoomList() {
+        return roomList;
+    }
 
     public BookingDTO(){}
 

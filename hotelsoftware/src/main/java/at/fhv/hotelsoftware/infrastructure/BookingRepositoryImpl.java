@@ -42,12 +42,12 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public Optional<Booking> findBookingById(BookingId bookingId) {
 
-        String uuid = convertBookingIdToUUIDWithoutHyphen(bookingId);
-
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = '" + uuid + "'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = :bookingId", Booking.class);
+        query.setParameter("bookingId", bookingId.getBookingId());
         Optional<Booking> booking = query.getResultStream().findFirst();
         return booking;
     }
+
 
     @Override
     public List<Booking> findTodaysCheckOuts() {
@@ -62,17 +62,5 @@ public class BookingRepositoryImpl implements BookingRepository {
         this.em.persist(booking);
     }
 
-
-    private String convertBookingIdToUUIDWithoutHyphen(BookingId bookingId)
-    {
-        StringBuilder uuid = new StringBuilder(bookingId.getBookingId().toString());
-
-        uuid.deleteCharAt(23);
-        uuid.deleteCharAt(18);
-        uuid.deleteCharAt(13);
-        uuid.deleteCharAt(8);
-
-        return uuid.toString();
-    }
 }
 
