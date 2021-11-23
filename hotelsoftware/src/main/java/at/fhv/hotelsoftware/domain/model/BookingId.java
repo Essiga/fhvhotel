@@ -7,7 +7,9 @@ public class BookingId {
 
     public BookingId() {
     }
-
+    public BookingId(String id) {
+        this.bookingId = UUID.fromString(id);
+    }
     public BookingId(UUID bookingId){
         this.bookingId = bookingId;
     }

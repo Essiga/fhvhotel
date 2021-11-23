@@ -1,46 +1,97 @@
 package at.fhv.hotelsoftware.application.dto;
-import at.fhv.hotelsoftware.domain.model.Room;
-import at.fhv.hotelsoftware.domain.model.RoomCategory;
-import at.fhv.hotelsoftware.domain.model.RoomId;
+import at.fhv.hotelsoftware.domain.model.*;
+import lombok.Data;
 
 import java.rmi.server.UID;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 
 public final class RoomDTO {
 
-    private RoomId roomId;
+    public Long id;
     private RoomCategory roomCategory;
     private Integer roomNumber;
-    private Integer roomCount;
+    private RoomStatus roomStatus;
+    private BookingId bookingId;
 
     public RoomDTO(){}
 
-    public RoomDTO(RoomId roomId,
+    public RoomDTO(Long id,
                    RoomCategory roomCategory,
                    Integer roomNumber,
-                   Integer roomCount){
+                   RoomStatus roomstatus,
+                   BookingId bookingId){
 
-        this.roomId = roomId;
+        this.id = id;
         this.roomCategory = roomCategory;
         this.roomNumber = roomNumber;
-        this.roomCount = roomCount;
+        this.roomStatus = roomstatus;
+        this.bookingId = bookingId;
     }
 
-    public RoomId getRoomId() {
-        return roomId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public RoomCategory getRoomCategory() {
         return roomCategory;
     }
 
+    public void setRoomCategory(RoomCategory roomCategory) {
+        this.roomCategory = roomCategory;
+    }
+
     public Integer getRoomNumber() {
         return roomNumber;
     }
 
-    public Integer getRoomCount() {
-        return roomCount;
+    public void setRoomNumber(Integer roomNumber) {
+        this.roomNumber = roomNumber;
+    }
+
+    public RoomStatus getRoomStatus() {
+        return roomStatus;
+    }
+
+    public void setRoomStatus(RoomStatus roomStatus) {
+        this.roomStatus = roomStatus;
+    }
+
+    public BookingId getBookingId() {
+        return bookingId;
+    }
+
+    public void setBookingId(BookingId bookingId) {
+        this.bookingId = bookingId;
+    }
+
+    public static RoomDTO fromRoom(Room room){
+        return new RoomDTO(room.getId(),
+                           room.getRoomCategory(),
+                           room.getRoomNumber(),
+                           room.getRoomStatus(),
+                           room.getBookingId());
+    }
+
+    public static List<RoomDTO> fromRoomList(List<Room> allRoom){
+        return allRoom
+                .stream()
+                .map(allRooms ->
+                        new RoomDTO(
+                                allRooms.getId(),
+                                allRooms.getRoomCategory(),
+                                allRooms.getRoomNumber(),
+                                allRooms.getRoomStatus(),
+                                allRooms.getBookingId()
+                                ))
+                .collect(Collectors.toList());
     }
 
     public static class Builder {
@@ -51,11 +102,10 @@ public final class RoomDTO {
             this.instance = new RoomDTO();
         }
 
-        public RoomDTO.Builder withRoomId(RoomId roomId) {
-            this.instance.roomId = roomId;
+        public RoomDTO.Builder withid(Long id) {
+            this.instance.id = id;
             return this;
         }
-
 
         public RoomDTO.Builder withRoomCategory(RoomCategory roomCategory) {
             this.instance.roomCategory = roomCategory;
@@ -67,13 +117,18 @@ public final class RoomDTO {
             return this;
         }
 
-        public RoomDTO.Builder withRoomCount(Integer roomCount) {
-            this.instance.roomCount = roomCount;
+        public RoomDTO.Builder withRoomStatus(RoomStatus roomStatus) {
+            this.instance.roomStatus = roomStatus;
+            return this;
+        }
+
+        public RoomDTO.Builder withBookingId(BookingId bookingId) {
+            this.instance.bookingId = bookingId;
             return this;
         }
 
         public RoomDTO build() {
-            Objects.requireNonNull(this.instance.roomId, "type must be set in room");
+            Objects.requireNonNull(this.instance.id, "type must be set in room");
             return this.instance;
         }
     }

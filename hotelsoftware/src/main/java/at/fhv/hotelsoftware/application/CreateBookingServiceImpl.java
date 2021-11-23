@@ -19,44 +19,19 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     @Autowired
     private BookingRepository bookingRepository;
 
-    //@Autowired
-   // private CustomerRepository customerRepository;
-
-
-    public CreateBookingServiceImpl(BookingRepository bookingRepository){
-        this.bookingRepository = bookingRepository;
-    }
-
-    @Transactional
-    public List<Booking> findAllBookings(){
-        return bookingRepository.findAllBookings();
-    }
-
     @Transactional
     public void createBooking(BookingForm bookingForm, CustomerForm customerForm){
-
-        Customer customer = Guest.builder()
-                .customerId(new CustomerId(UUID.randomUUID()))
-                .firstName(customerForm.getFname())
-                .lastName(customerForm.getLname())
-                .voucherCode(customerForm.getVoucherCode())
-                .streetAddress(customerForm.getStreetAdr())
-                .zip(customerForm.getZip())
-                .city(customerForm.getCity())
-                .country(customerForm.getCountry())
-                .phoneNumber(customerForm.getPhoneNumber())
-                .email(customerForm.getEmail())
-                .build();
-
 
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).
                 withCancellationDeadLine(null).
-                withCustomer(customer.getCustomerId()).
+                withCustomer(customerForm.getFname() + " " + customerForm.getLname()).
                 withBookingStatus(BookingStatus.PENDING).
                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
-                withRoomCategory(RoomCategory.SINGLE).
+                withSingleRoom(bookingForm.getSingleRoomCount()).
+                withDoubleRoom(bookingForm.getDoubleRoomCount()).
+                withLuxusRoom(bookingForm.getLuxusRoomCount()).
                 build();
 
         bookingRepository.addBooking(booking);

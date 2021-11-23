@@ -1,62 +1,95 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import lombok.Getter;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 @Component
-@Getter
 public class Booking {
 
     private Long id;
     private BookingId bookingId;
+    private String customer;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
-    private RoomCategory roomCategory;
     private Integer singleRoom;
     private Integer doubleRoom;
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private CustomerId customerId;
-    private List<Room> rooms;
-
-    //private LinkedList<String> extraServices;
 
     public static Builder builder() {
         return new Builder();
     }
 
-    private Booking() {}
+    private Booking() {
+    }
 
+    private Long getId() {
+        return id;
+    }
 
     private void setId(Long id) {
         this.id = id;
     }
 
+    public BookingId getBookingId() {
+        return this.bookingId;
+    }
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public LocalDate getCheckInDate() {
+        return checkInDate;
+    }
+
+    public LocalDate getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public LocalDate getCancellationDeadLine() {
+        return cancellationDeadLine;
+    }
+
+
+    public VoucherCode getVoucherCode() {
+        return voucherCode;
+    }
+
+    public BookingStatus getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public Integer getSingleRoom() {
+        return singleRoom;
+    }
+
+    public Integer getDoubleRoom() {
+        return doubleRoom;
+    }
+
+    public Integer getLuxusRoom() {
+        return luxusRoom;
+    }
+
     @Override
     public String toString() {
         return "Booking{" +
-                "customer='" + customerId + '\'' +
+                "customer='" + customer + '\'' +
                 ", fromDate=" + checkInDate +
                 ", toDate=" + checkOutDate +
-                ", roomCategory=" + roomCategory +
                 ", voucherCode=" + voucherCode +
                 ", bookingStatus=" + bookingStatus +
                 '}';
     }
 
-    //check in liste von rooms dann ids heraus lesen und in booking hinzufügen
-    //room status auch hier ändern nicht mit setRoomStatus sonder occupyBooking
     public void checkIn(){
-        //roomIds.add(room.getRoomId())
         this.bookingStatus = BookingStatus.CHECKEDIN;
-        //TODO: Change RoomStatus
     }
 
     public static class Builder {
@@ -78,8 +111,8 @@ public class Booking {
             return this;
         }
 
-        public Builder withCustomer(CustomerId customerId) {
-            this.instance.customerId = customerId;
+        public Builder withCustomer(String customer) {
+            this.instance.customer = customer;
             return this;
         }
 
@@ -97,12 +130,6 @@ public class Booking {
             this.instance.cancellationDeadLine = date;
             return this;
         }
-
-        public Builder withRoomCategory(RoomCategory roomCategory) {
-            this.instance.roomCategory = roomCategory;
-            return this;
-        }
-
 
         public Builder withVoucherCode(VoucherCode voucherCode) {
             this.instance.voucherCode = voucherCode;
@@ -128,22 +155,6 @@ public class Booking {
             this.instance.luxusRoom = luxusRoom;
             return this;
         }
-
-        public Builder withRooms(List<Room> rooms) {
-            this.instance.rooms = rooms;
-            return this;
-        }
-        //TODO: remove
-        public Builder withSingleRoom(Room room) {
-            this.instance.rooms = new LinkedList<Room>();
-            this.instance.rooms.add(room);
-            return this;
-        }
-
-        /* public Builder withExtraServices(LinkedList<String> extraServices){
-            this.instance.extraServices = extraServices;
-            return this;
-        } */
 
         public Booking build() {
             Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");

@@ -1,9 +1,12 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.domain.model.BookingId;
 import at.fhv.hotelsoftware.view.annotations.DateNotNullOrEarlierThanToday;
 import lombok.*;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 public class BookingForm {
@@ -23,5 +26,15 @@ public class BookingForm {
     @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
     private String checkOutDate;
 
+    private BookingId bookingId;
 
+    private List<RoomDTO> roomList;
+
+    public void setRoomList(List<RoomDTO> roomList) {
+        this.roomList = roomList;
+    }
+
+    public List<RoomDTO> getRoomList() {
+        return roomList;
+    }
 }

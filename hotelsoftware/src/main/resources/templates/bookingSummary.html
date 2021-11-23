@@ -7,225 +7,225 @@
 </head>
 <body>
 
-<div class="flex w-4/5"> <!-- Content -->
-    <aside class="h-screen sticky top-0 w-1/5">
+<div class="flex"> <!-- Content -->
+    <aside class="h-screen sticky top-0 w-1/6">
 
-    <nav class="flex-row h-screen w-full bg-green-500">
-        <!-- Navbar -->
+        <nav class="flex-row h-screen w-full bg-green-500">
+            <!-- Navbar -->
 
         <div>
-            <a href="dashboard.html"
+            <a href="/"
                class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
         </div>
 
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                Overview</a>
-        </div>
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+                    Overview</a>
+            </div>
 
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
-                Overview</a>
-        </div>
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
+                    Overview</a>
+            </div>
 
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
-        </div>
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+            </div>
 
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-        </div>
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+            </div>
 
-    </nav>
+        </nav>
     </aside>
 
-    <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+    <div class="flex w-full">
 
-<form th:action="@{/writeBookingInDatabase}" th:object="${customerForm}" method="post">
+        <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+
+            <form th:action="@{/writeBookingInDatabase}" th:object="${customerForm}" method="post">
 
 
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
-        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                    <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
 
-            <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
+                    <div class="flex row"> <!-- Form Line -->
 
-            <div class="flex row"> <!-- Form Line -->
+                        <div class="w-1/2 ">
+                            <input readonly type="text" id="gname" class="border-2 border-gray-400 w-4/6">
+                            <label for="gname" class="block text-sm text-gray-500">Name</label>
+                        </div>
 
-                <div class="w-1/2 ">
-                    <input readonly type="text" id="gname" class="border-2 border-gray-400 w-4/6">
-                    <label for="gname" class="block text-sm text-gray-500">Name</label>
+                        <div class="w-1/2">
+                            <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6"
+                                   th:field="*{voucherCode}">
+                            <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="w-1/2">
-                    <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:field="*{voucherCode}">
-                    <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
+
+                    <div class="flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{fname}">
+                            <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{lname}">
+                            <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
-        </div>
+                    <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
 
-        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                    <div class="flex row"> <!-- Form Line -->
 
-            <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
+                        <div class="w-1/2 ">
+                            <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{streetAdr}">
+                            <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
+                        </div>
 
-            <div class="flex row"> <!-- Form Line -->
+                        <div class="w-1/2">
+                            <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
+                                   th:field="*{zip}">
+                            <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
+                        </div>
 
-                <div class="w-1/2 ">
-                    <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6" th:field="*{fname}">
-                    <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                    </div>
+
+                    <div class="mt-4 flex row"> <!-- Form Line -->
+
+                        <div class="w-1/2 ">
+                            <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{city}">
+                            <label for="city" class="block text-sm text-gray-500">City</label>
+                        </div>
+
+                        <div class="w-1/2">
+                            <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{country}">
+                            <label for="country" class=" block text-sm text-gray-500">Country</label>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="w-1/2">
-                    <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6" th:field="*{lname}">
-                    <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
-                </div>
+                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
 
-            </div>
+                    <div class="flex-row">  <!-- Block Descriptions -->
 
-        </div>
+                        <div class="w-3/6 inline-block">
+                            <h2 class="mb-4 font-semibold">Phone Number</h2>
+                        </div>
 
-        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                        <div class="w-1/3 inline-block">
+                            <h2 class="mb-4 font-semibold">Email</h2>
+                        </div>
 
-            <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
+                    </div>
 
-            <div class="flex row"> <!-- Form Line -->
+                    <div class="flex row"> <!-- Form Line -->
 
-                <div class="w-1/2 ">
-                    <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
-                    <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
-                </div>
+                        <div class="w-1/2">
+                            <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{phoneNumber}">
+                            <label for="phone" class="block text-sm text-gray-500">Number</label>
+                        </div>
 
-                <div class="w-1/2">
-                    <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
-                    <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
-                </div>
+                        <div class="w-1/2">
+                            <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{email}">
+                            <label for="email" class=" block text-sm text-gray-500">Email</label>
+                        </div>
 
-            </div>
-
-            <div class="mt-4 flex row"> <!-- Form Line -->
-
-                <div class="w-1/2 ">
-                    <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
-                    <label for="city" class="block text-sm text-gray-500">City</label>
-                </div>
-
-                <div class="w-1/2">
-                    <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
-                    <label for="country" class=" block text-sm text-gray-500">Country</label>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="p-2 border border-gray-300"> <!-- Logical Block -->
-
-            <div class="flex-row">  <!-- Block Descriptions -->
-
-                <div class="w-3/6 inline-block">
-                    <h2 class="mb-4 font-semibold">Phone Number</h2>
-                </div>
-
-                <div class="w-1/3 inline-block">
-                    <h2 class="mb-4 font-semibold">Email</h2>
-                </div>
-
-            </div>
-
-            <div class="flex row"> <!-- Form Line -->
-
-                <div class="w-1/2">
-                    <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
-                    <label for="phone" class="block text-sm text-gray-500">Number</label>
-                </div>
-
-                <div class="w-1/2">
-                    <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
-                    <label for="email" class=" block text-sm text-gray-500">Email</label>
-                </div>
-
-            </div>
-
-        </div>
+                    </div>
 
 
-    <div class="p-4 border border-gray-300"> <!-- Logical Block -->
+                    <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
-        <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
+                        <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
 
-        <div class="flex"> <!-- Form Line -->
+                        <div class="flex"> <!-- Form Line -->
 
-            <div class="w-1/3">
-                <h2 class="mb-2 font-semibold">Single </h2>
-                <input readonly type="number" id="single" class="border-2 border-gray-400 w-16" th:field="${bookingForm.singleRoomCount}">
-                <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
-            </div>
+                            <div class="w-1/3">
+                                <h2 class="mb-2 font-semibold">Single </h2>
+                                <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
+                                       th:field="${bookingForm.singleRoomCount}">
+                                <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            </div>
 
-            <div class="w-1/3">
-                <h2 class="mb-2 font-semibold">Double</h2>
-                <input readonly type="number" id="double" class="border-2 border-gray-400 w-16" th:field="${bookingForm.doubleRoomCount}">
-                <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
-            </div>
+                            <div class="w-1/3">
+                                <h2 class="mb-2 font-semibold">Double</h2>
+                                <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
+                                       th:field="${bookingForm.doubleRoomCount}">
+                                <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            </div>
 
-            <div class="w-1/3">
-                <h2 class="mb-2 font-semibold">Luxus</h2>
-                <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16" th:field="${bookingForm.luxusRoomCount}">
-                <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
-            </div>
+                            <div class="w-1/3">
+                                <h2 class="mb-2 font-semibold">Luxus</h2>
+                                <input readonly type="number" id="luxus" class="border-2 border-gray-400 w-16"
+                                       th:field="${bookingForm.luxusRoomCount}">
+                                <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            </div>
 
-        </div>
+                        </div>
 
-    </div>
+                    </div>
 
-    <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
+                    <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
 
-        <h2 class="mb-6 text-xl font-semibold">Stay Duration</h2>
+                        <h2 class="mb-6 text-xl font-semibold">Stay Duration</h2>
 
-        <div class="flex row"> <!-- Form Line -->
+                        <div class="flex row"> <!-- Form Line -->
 
-            <div class="w-1/2">
-                <input readonly type="date" id="checkInDate" class="p-2 border-2 border-gray-400 mb-2" th:field="${bookingForm.checkInDate}">
-                <label for="checkInDate" class="block text-sm text-gray-500">Check-In Date</label>
-            </div>
+                            <div class="w-1/2">
+                                <input readonly type="date" id="checkInDate" class="p-2 border-2 border-gray-400 mb-2"
+                                       th:field="${bookingForm.checkInDate}">
+                                <label for="checkInDate" class="block text-sm text-gray-500">Check-In Date</label>
+                            </div>
 
-            <div class="w-1/2">
-                <input readonly type="date" id="checkOutDate" class="p-2 border-2 border-gray-400 mb-2" th:field="${bookingForm.checkOutDate}">
-                <label for="checkOutDate" class="block text-sm text-gray-500">Check-Out</label>
-            </div>
+                            <div class="w-1/2">
+                                <input readonly type="date" id="checkOutDate" class="p-2 border-2 border-gray-400 mb-2"
+                                       th:field="${bookingForm.checkOutDate}">
+                                <label for="checkOutDate" class="block text-sm text-gray-500">Check-Out</label>
+                            </div>
 
-        </div>
+                        </div>
 
-    </div>
+                    </div>
 
-
-
-  <!--  <input readonly id="fname" name="fname" th:field="*{fname}"/>
-    <input readonly id="lname" name="lname" th:field="*{lname}"/>
-    <input readonly id="voucher" name="voucher" th:field="*{voucherCode}"/>
-    <input readonly id="streetAdr" name="streetAdr" th:field="*{streetAdr}"/>
-    <input readonly id="zip" name="zip" th:field="*{zip}"/>
-    <input readonly id="city" name="city" th:field="*{city}"/>
-    <input readonly id="country" name="country" th:field="*{country}"/>
-    <input readonly id="phone" name="phone" th:field="*{phoneNumber}"/>
-    <input readonly id="email" name="email" th:field="*{email}"/>
-    <input readonly id="single" name="single" th:field="*{singleRoomCount}"/>
-    <input readonly id="double" name="double" th:field="*{doubleRoomCount}"/>
-    <input readonly id="luxus" name="luxus" th:field="*{luxusRoomCount}"/>
-    <input readonly id="fromDate" name="fromDate" th:field="*{fromDate}"/>
-    <input readonly id="toDate" name="toDate" th:field="*{toDate}"/> -->
 
     <div class="mt-4 flex row justify-between"> <!-- Button Line -->
 
-        <div class="w-1/6">
-            <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
-        </div>
+                        <div class="w-1/6">
+                            <button type="submit"
+                                    class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
+                                confirm
+                            </button>
+                        </div>
 
+                    </div>
+            </form>
+        </div>
     </div>
-</form>
 </div>
-    </div>
-    </div>
 
 </body>
 </html>
