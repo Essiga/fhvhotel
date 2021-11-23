@@ -1,96 +1,62 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Getter
+@NoArgsConstructor
 public final class BookingDTO {
 
     private Long id;
     private BookingId bookingId;
-    private String customer;
+    private CustomerId customerId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
-    private RoomCategory roomCategory;
     private Integer singleRoom;
     private Integer doubleRoom;
     private Integer luxusRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
-    private CustomerId customerId;
 
-
-    public BookingDTO(){}
-
-    public BookingDTO(BookingId bookingId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, RoomCategory roomCategory, Integer singleRoom, Integer doubleRoom, Integer luxusRoom, VoucherCode voucherCode, BookingStatus bookingStatus, CustomerId customerId, List<RoomId> roomIds) {
+    @Builder
+    public BookingDTO(BookingId bookingId, CustomerId customerId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer luxusRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
         this.bookingId = bookingId;
-        this.customer = customer;
+        this.customerId = customerId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
-        this.roomCategory = roomCategory;
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
         this.luxusRoom = luxusRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
-        this.customerId = customerId;
     }
 
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public BookingId getBookingId() {
-        return bookingId;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public LocalDate getCancellationDeadLine() {
-        return cancellationDeadLine;
-    }
-
-    public RoomCategory getRoomCategory() {
-        return roomCategory;
-    }
-
-    public VoucherCode getVoucherCode() {
-        return voucherCode;
-    }
-
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-
-    public void setBookingId(BookingId bookingId) {
-        this.bookingId = bookingId;
-    }
+//    public void setBookingId(BookingId bookingId) {
+//        this.bookingId = bookingId;
+//    }
 
 
     public static BookingDTO fromBooking(Booking booking){
         return new BookingDTO(booking.getBookingId(),
-                booking.getCustomer(),
+                booking.getCustomerId(),
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
-                booking.getRoomCategory(),
+                booking.getSingleRoom(),
+                booking.getDoubleRoom(),
+                booking.getLuxusRoom(),
                 booking.getVoucherCode(),
-                booking.getBookingStatus(),
-                booking.getRooms());
+                booking.getBookingStatus());
     }
 
     public static List<BookingDTO> fromBookingList(List<Booking> booking){
@@ -98,65 +64,16 @@ public final class BookingDTO {
                 .stream()
                 .map(bookings ->
                         new BookingDTO(bookings.getBookingId(),
-                                bookings.getCustomer(),
+                                bookings.getCustomerId(),
                                 bookings.getCheckInDate(),
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),
-                                bookings.getRoomCategory(),
+                                bookings.getSingleRoom(),
+                                bookings.getDoubleRoom(),
+                                bookings.getLuxusRoom(),
                                 bookings.getVoucherCode(),
-                                bookings.getBookingStatus(),
-                                bookings.getRooms()))
+                                bookings.getBookingStatus()))
                 .collect(Collectors.toList());
     }
 
-    public static class Builder{
-
-        private final BookingDTO instance;
-
-        public Builder() {
-            this.instance = new BookingDTO();
-        }
-        public BookingDTO.Builder withId(Long id){
-            this.instance.id = id;
-            return this;
-        }
-
-        public BookingDTO.Builder withCustomer(String customer){
-            this.instance.customer = customer;
-            return this;
-        }
-        public BookingDTO.Builder withCheckInDate(LocalDate fromDate){
-            this.instance.checkInDate = fromDate;
-            return this;
-        }
-        public BookingDTO.Builder withCheckOutDate(LocalDate toDate){
-            this.instance.checkOutDate = toDate;
-            return this;
-        }
-        public BookingDTO.Builder withRoomCategory(RoomCategory roomCategory){
-            this.instance.roomCategory = roomCategory;
-            return this;
-        }
-
-        public BookingDTO.Builder withCancellationDeadline(LocalDate cancellationDeadLine){
-            this.instance.cancellationDeadLine = cancellationDeadLine;
-            return this;
-        }
-        public BookingDTO.Builder withVoucherCode(VoucherCode voucherCode){
-            this.instance.voucherCode = voucherCode;
-            return this;
-        }
-
-
-        /*public BookingDTO.Builder withBookingStatus(BookingStatus bookingStatus){
-            this.instance.bookingStatus = bookingStatus;
-            return this;
-        }*/
-
-        public BookingDTO build(){
-            Objects.requireNonNull(this.instance.id, "type must be set in booking");
-            return this.instance;
-        }
-
-    }
 }

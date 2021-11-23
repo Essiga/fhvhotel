@@ -26,7 +26,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
     @Override
     public Optional<Customer> findCustomerById(CustomerId customerId) {
         TypedQuery<Customer> query = this.em.createQuery("FROM Customer WHERE customer_Id = :customerId", Customer.class);
-        query.setParameter("customerId", customerId);
+        query.setParameter("customerId", customerId.getCustomerId());
         Optional<Customer> customer = query.getResultStream().findFirst();
 
         return customer;

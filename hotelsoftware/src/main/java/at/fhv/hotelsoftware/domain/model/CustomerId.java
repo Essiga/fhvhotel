@@ -13,4 +13,8 @@ public class CustomerId {
 
 
     public UUID getCustomerId() {return customerId;}
+
+    public void setCustomerId(UUID customerId) {
+        this.customerId = customerId;
+    }
 }

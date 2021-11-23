@@ -14,8 +14,6 @@ public class CustomerForm {
     @NotEmpty(message = "Last name cannot be empty")
     private String lname;
 
-    private String voucherCode;
-
     @NotEmpty(message = "Street address cannot be empty")
     private String streetAdr;
 

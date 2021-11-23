@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.application.dto;
 
+import at.fhv.hotelsoftware.domain.model.Customer;
 import at.fhv.hotelsoftware.domain.model.CustomerId;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +12,6 @@ public class CustomerDTO {
 
     protected Long id;
     protected CustomerId customerId;
-    protected String voucherCode;
     protected String firstName;
     protected String lastName;
     protected String streetAddress;
@@ -23,10 +23,8 @@ public class CustomerDTO {
 
     public CustomerDTO(){}
 
-    public CustomerDTO(Long id, CustomerId customerId, String voucherCode, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
-        this.id = id;
+    public CustomerDTO(CustomerId customerId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
         this.customerId = customerId;
-        this.voucherCode = voucherCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetAddress = streetAddress;
@@ -35,5 +33,17 @@ public class CustomerDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    public static CustomerDTO fromCustomer(Customer customer) {
+        return new CustomerDTO(customer.getCustomerId(),
+                customer.getFirstName(),
+                customer.getLastName(),
+                customer.getStreetAddress(),
+                customer.getZip(),
+                customer.getCity(),
+                customer.getCountry(),
+                customer.getPhoneNumber(),
+                customer.getEmail());
     }
 }

@@ -9,7 +9,6 @@ public class Customer {
 
     protected Long id;
     protected CustomerId customerId;
-    protected String voucherCode;
     protected String firstName;
     protected String lastName;
     protected String streetAddress;
@@ -22,10 +21,9 @@ public class Customer {
 
     private Customer(){}
 
-    public Customer(Long id, CustomerId customerId, String voucherCode, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+    public Customer(Long id, CustomerId customerId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
         this.id = id;
         this.customerId = customerId;
-        this.voucherCode = voucherCode;
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetAddress = streetAddress;

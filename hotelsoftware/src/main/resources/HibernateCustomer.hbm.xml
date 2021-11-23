@@ -16,10 +16,6 @@
         <property name="customerId" column="customerId" type="java.util.UUID"/>
     </component>
 
-    <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
-        <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
-    </component>
-
     <property name="firstName" column="firstName" type="java.lang.String"/>
 
     <property name="lastName" column="lastName" type="java.lang.String"/>

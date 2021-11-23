@@ -1,5 +1,5 @@
 insert into TBL_BOOKING
-values(null,1234, 'Adrian Essig', CURRENT_DATE(), CURRENT_DATE(), '2021-11-03', 'SINGLE',1,0,0, 'CONFIRMED', NULL);
+values(null, 1234, 'Adrian Essig', CURRENT_DATE(), CURRENT_DATE(), '2021-11-03', 'SINGLE',1,0,0, 'CONFIRMED', NULL);
 
 insert into TBL_ROOM
 values(00000002,'SINGLE',101,null,null),
@@ -11,3 +11,4 @@ values(00000002,'SINGLE',101,null,null),
 
 
 
+-- "Expecting 8 byte values to construct a long"
