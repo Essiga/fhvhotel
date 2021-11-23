@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Check-In</title>
+    <title>Check-Out</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
@@ -45,10 +45,8 @@
 
             <h1 class="text-3xl mb-4 font-semibold">Check-Out</h1>
 
-            <form th:action="@{/checkOutGuest}" th:object="${booking}" method="get">
-
-                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
-
+            <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="get" >
+                    <div th:object="${booking}" >
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -233,9 +231,9 @@
 
                             </tr>
 
-                            <tr class="text-center m-4" th:each="roomInfo : ${}">
-                                <td th:text="${roomInfo.roomNumbers}"></td>
-                                <td th:text="${roomInfo.roomCategory}"></td>
+                            <tr class="text-center m-4" th:each="one : ${rooms}">
+                                <td th:text="${one.getRoomNumber()}"></td>
+                                <td th:text="${one.getRoomCategory()}"></td>
                             </tr>
 
 
@@ -269,6 +267,7 @@
                         </button>
                     </div>
 
+                </div>
                 </div>
             </form>
         </div>

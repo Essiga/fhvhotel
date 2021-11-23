@@ -50,11 +50,12 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         BookingId bookingId = new BookingId(bookingIdString);
         Optional<Booking> result = bookingRepository.findBookingById(new BookingId(bookingIdString));
 
-        if(result.isEmpty()){
+        if (result.isEmpty()) {
             throw new BookingNotFoundException("Couldn't find a booking under that ID");
         }
 
         Booking booking = result.get();
         return BookingDTO.fromBooking(booking);
     }
+
 }

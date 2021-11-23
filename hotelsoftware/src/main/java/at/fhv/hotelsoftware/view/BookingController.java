@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -200,14 +199,13 @@ public class BookingController {
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 
         try {
-            List<RoomDTO> findRoomByBookingId = viewRoomService.findRoomByBookingId(bookingId);
+            List<RoomDTO> room = viewRoomService.findRoomByBookingId(bookingId);
             BookingDTO booking = viewBookingService.findBookingById(bookingId);
+            model.addAttribute("rooms", room);
             model.addAttribute("booking", booking);
-        } catch (BookingNotFoundException e){
+        } catch (Exception e){
             return new ModelAndView("redirect:"+"/");
         }
         return new ModelAndView("checkOutGuestOverview");
     }
-
-
 }
