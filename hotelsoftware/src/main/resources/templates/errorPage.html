@@ -1,57 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Check-In</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <title>Booking Summary</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
 
 <div class="flex"> <!-- Content -->
-    <aside class="h-screen sticky top-0 w-1/6">
+  <aside class="h-screen sticky top-0 w-1/6">
 
-        <nav class="flex-row h-screen w-full bg-green-500">
-            <!-- Navbar -->
+    <nav class="flex-row h-screen w-full bg-green-500">
+      <!-- Navbar -->
 
-            <div>
-                <a href="/"
-                   class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
-            </div>
+      <div>
+        <a href="/"
+           class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+      </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                    Overview</a>
-            </div>
+      <div>
+        <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+          Overview</a>
+      </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
-                    Overview</a>
-            </div>
+      <div>
+        <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
+          Overview</a>
+      </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
-            </div>
+      <div>
+        <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+      </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
+      <div>
+        <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+      </div>
 
-        </nav>
-    </aside>
+    </nav>
+  </aside>
 
-    <div class="flex w-full">
-
-        <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
-
-            <h1 class="text-3xl mb-4 font-semibold">ERROR</h1>
-
-            <p th:text="${errorMessage}"></p>
-
-            <img class="w-96" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/High-contrast-face-sad.svg/2048px-High-contrast-face-sad.svg.png"></img>
-
-
-        </div>
+  <div class="flex w-full">
+    <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+      <div class="flex-row w-full">
+        <div class="mb-6 w-full text-2xl text-center">ERROR</div>
+        <div class="mb-6 text-1xl text-center" th:text="${errorMessage}"></div>
+        <img class="mx-auto" th:src="@{images/error_smiley.jpg}"/>
+      </div>
     </div>
+  </div>
 </div>
 
 </body>

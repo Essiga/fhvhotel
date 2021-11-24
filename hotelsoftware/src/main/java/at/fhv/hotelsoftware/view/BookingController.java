@@ -54,8 +54,10 @@ public class BookingController {
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
     private static final String CHECK_IN_GUEST= "/checkInGuest";
     private static final String CREATE_DUMMY_DATA = "/createDummyData";
-    private static final String ERROR_URL = "/displayError";
+    private static final String ERROR_URL = "/showErrorPage";
     private static final String ERROR_PAGE = "errorPage";
+
+    private static final String ERROR_VIEW = "errorView";
 
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
@@ -90,15 +92,11 @@ public class BookingController {
         return new ModelAndView("redirect:/");
     }
 
-
-
-
-
-
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
+        return redirectToErrorPage("Customer Not Found");
 
-        List<BookingDTO> checkIns = viewBookingService.findTodaysCheckIns();
+       /* List<BookingDTO> checkIns = viewBookingService.findTodaysCheckIns();
         model.addAttribute("checkIns", checkIns);
         List<BookingDTO> checkOuts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", checkOuts);
@@ -112,16 +110,11 @@ public class BookingController {
             model.addAttribute("checkInCustomers", checkInCustomers);
             model.addAttribute("checkOutCustomers", checkOutCustomers);
 
-
         } catch (CustomerNotFoundException e) {
-            return redirectError(e.getMessage());
+            e.printStackTrace();
         }
 
-
-
-
-
-        return new ModelAndView("dashboard");
+        return new ModelAndView("dashboard"); */
     }
 
     private List<CustomerDTO> findCustomersForBookings(List<BookingDTO> bookings) throws CustomerNotFoundException {
@@ -214,11 +207,11 @@ public class BookingController {
             model.addAttribute("booking", bookingDTO);
 
         } catch (BookingNotFoundException e){
-            return redirectError(e.getMessage());
+            return redirectToErrorPage(e.getMessage());
         } catch (NotEnoughRoomsException e) {
-            return redirectError(e.getMessage());
+            return redirectToErrorPage(e.getMessage());
         } catch (CustomerNotFoundException e) {
-            return redirectError(e.getMessage());
+            return redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("checkInGuestOverview");
@@ -230,11 +223,11 @@ public class BookingController {
         try {
             checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
         } catch (RoomNotFoundException e) {
-            return redirectError(e.getMessage());
+            return redirectToErrorPage(e.getMessage());
         } catch (RoomAlreadyOccupiedException e) {
             e.printStackTrace();
         } catch (BookingNotFoundException e) {
-            return redirectError(e.getMessage());
+            return redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("redirect:"+"/");
@@ -246,10 +239,7 @@ public class BookingController {
         return ERROR_PAGE;
     }
 
-
-    private static ModelAndView redirectError(String errorMessage) {
+    private static ModelAndView redirectToErrorPage(String errorMessage) {
         return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
     }
-
-
 }
