@@ -67,7 +67,7 @@
 
             <div class="w-1/3">
               <h2 class="mb-2 font-semibold">Single </h2>
-              <input type="number" id="single" class="border-2 border-gray-400 w-16" th:field="*{singleRoomCount}">
+              <input type="number" id="single" min="0" class="border-2 border-gray-400 w-16" th:field="*{singleRoomCount}">
               <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
               <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('singleRoomCount')}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -78,7 +78,7 @@
 
             <div class="w-1/3">
               <h2 class="mb-2 font-semibold">Double</h2>
-              <input type="number" id="double" class="border-2 border-gray-400 w-16" th:field="*{doubleRoomCount}">
+              <input type="number" id="double" min="0" class="border-2 border-gray-400 w-16" th:field="*{doubleRoomCount}">
               <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
               <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('doubleRoomCount')}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -89,7 +89,7 @@
 
             <div class="w-1/3">
               <h2 class="mb-2 font-semibold">Luxus</h2>
-              <input type="number" id="luxus" class="border-2 border-gray-400 w-16" th:field="*{luxusRoomCount}">
+              <input type="number" id="luxus" min="0" class="border-2 border-gray-400 w-16" th:field="*{luxusRoomCount}">
               <label for="luxus" class="mt-2 block text-sm text-gray-500">Room Count</label>
               <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('luxusRoomCount')}">
                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

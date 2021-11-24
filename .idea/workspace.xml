@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Finished Customer Userstory">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="fixed back Button on checkInGuestOverview.html">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,16 +40,16 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Class" />
         <option value="Interface" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Create_Customer" />
+        <entry key="$PROJECT_DIR$" value="Fix_Back_Button" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -327,7 +329,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637689473183</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fixed back Button on checkInGuestOverview.html">
+      <created>1637690296124</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1637690296124</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -464,7 +473,8 @@
     <MESSAGE value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
     <MESSAGE value="Created branch for adjusting the UI" />
     <MESSAGE value="Finished Customer Userstory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Customer Userstory" />
+    <MESSAGE value="fixed back Button on checkInGuestOverview.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed back Button on checkInGuestOverview.html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
