@@ -4,7 +4,7 @@ import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.CustomerDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
-import at.fhv.hotelsoftware.domain.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -55,9 +54,8 @@ public class BookingController {
     private static final String CHECK_IN_GUEST= "/checkInGuest";
     private static final String CREATE_DUMMY_DATA = "/createDummyData";
     private static final String ERROR_URL = "/showErrorPage";
-    private static final String ERROR_PAGE = "errorPage";
 
-    private static final String ERROR_VIEW = "errorView";
+    private static final String ERROR_PAGE = "errorPage";
 
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
@@ -94,9 +92,8 @@ public class BookingController {
 
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
-        return redirectToErrorPage("Customer Not Found");
 
-       /* List<BookingDTO> checkIns = viewBookingService.findTodaysCheckIns();
+        List<BookingDTO> checkIns = viewBookingService.findTodaysCheckIns();
         model.addAttribute("checkIns", checkIns);
         List<BookingDTO> checkOuts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", checkOuts);
@@ -114,7 +111,7 @@ public class BookingController {
             e.printStackTrace();
         }
 
-        return new ModelAndView("dashboard"); */
+        return new ModelAndView("dashboard");
     }
 
     private List<CustomerDTO> findCustomersForBookings(List<BookingDTO> bookings) throws CustomerNotFoundException {
