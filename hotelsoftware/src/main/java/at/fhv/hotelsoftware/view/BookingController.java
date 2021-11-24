@@ -23,6 +23,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class BookingController {
@@ -61,34 +62,33 @@ public class BookingController {
 
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
-        Room singleRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(100).build();
+        Room singleRoom[] = new Room[10];
+        Room doubleRoom[] = new Room[10];
+        Room luxusRoom[] = new Room[10];
 
-        Room singleRoom2 = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(101).build();
+        for (int i = 0; i < singleRoom.length; i++) {
+             singleRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.SINGLE).
+                    withRoomNumber(100 + i).build();
+            viewRoomService.createRoom(singleRoom [i]);
 
-        Room doubleRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.DOUBLE).
-                withRoomNumber(200).build();
+            doubleRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.DOUBLE).
+                    withRoomNumber(200 + 1).build();
+            viewRoomService.createRoom(doubleRoom [i]);
 
-        Room luxusRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.LUXUS).
-                withRoomNumber(300).build();
+            luxusRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.LUXUS).
+                    withRoomNumber(300 + i).build();
+            viewRoomService.createRoom(luxusRoom [i]);
+        }
 
-        viewRoomService.createRoom(singleRoom);
-        viewRoomService.createRoom(singleRoom2);
-        viewRoomService.createRoom(doubleRoom);
-        viewRoomService.createRoom(luxusRoom);
         return new ModelAndView("redirect:/");
     }
 
