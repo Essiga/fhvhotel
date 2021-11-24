@@ -63,7 +63,7 @@ public class CheckInServiceImpl implements CheckInService {
         if (!(singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0)) {
             throw new NotEnoughRoomsException("Not Enough Rooms Available. " +
                                               singleRoomCount + " Single, " + doubleRoomCount + " Double, " + luxusRoomCount + " Luxus " +
-                                              "rooms could not be assigned");
+                                              "Rooms Could Not Be Assigned");
         }
 
         return freeRoomsForBooking;

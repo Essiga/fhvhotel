@@ -222,7 +222,7 @@ public class BookingController {
         } catch (RoomNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
         } catch (RoomAlreadyOccupiedException e) {
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         } catch (BookingNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
         }
