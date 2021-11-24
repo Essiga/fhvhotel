@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Finished Customer Userstory">
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/static/images/error_smiley.jpg" afterDir="false" />
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- Image directory created&#10;- Referencing Images with Thymeleaf in errorPage.html">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +134,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="JavaScript Debug.errorPage.html">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -168,9 +166,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="bookingSummary.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/bookingSummary.html" useBuiltInWebServerPort="true">
-      <method v="2" />
-    </configuration>
     <configuration name="chooseRoom.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/chooseRoom.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
@@ -183,6 +178,9 @@
     <configuration name="dashboard.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/dashboard.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
+    <configuration name="errorPage.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/hotelsoftware/hotelsoftware.main/templates/errorPage.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="HotelsoftwareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="hotelsoftware.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
@@ -192,13 +190,18 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="JavaScript Debug.bookingSummary.html" />
       <item itemvalue="JavaScript Debug.chooseRoom.html" />
       <item itemvalue="JavaScript Debug.createCustomer.html" />
       <item itemvalue="JavaScript Debug.dashboard.html" />
       <item itemvalue="JavaScript Debug.dashboard.html (1)" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="JavaScript Debug.errorPage.html" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.errorPage.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -336,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637690296124</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="- Image directory created&#10;- Referencing Images with Thymeleaf in errorPage.html">
+      <created>1637761884272</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1637761884272</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -474,7 +484,8 @@
     <MESSAGE value="Created branch for adjusting the UI" />
     <MESSAGE value="Finished Customer Userstory" />
     <MESSAGE value="fixed back Button on checkInGuestOverview.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed back Button on checkInGuestOverview.html" />
+    <MESSAGE value="- Image directory created&#10;- Referencing Images with Thymeleaf in errorPage.html" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Image directory created&#10;- Referencing Images with Thymeleaf in errorPage.html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
