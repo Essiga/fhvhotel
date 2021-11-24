@@ -130,8 +130,10 @@ public class BookingController {
 
         CustomerForm customerForm = new CustomerForm();
         BookingForm bookingForm = new BookingForm();
+
         model.addAttribute("customerForm", customerForm);
         model.addAttribute("bookingForm", bookingForm);
+
         return new ModelAndView("createCustomer");
     }
 
@@ -139,13 +141,34 @@ public class BookingController {
     public ModelAndView submitChooseRoom(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result,
                                          @ModelAttribute("bookingForm") BookingForm bookingForm,
                                          Model model) {
+
         if (result.hasErrors()) {
             return new ModelAndView("createCustomer");
         }
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
+
         return new ModelAndView("chooseRoom");
+    }
+
+    @PostMapping(EXTRA_SERVICE_URL)
+    public ModelAndView submitExtraService(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult resultCustomer,
+                                           @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking,
+                                           Model model) {
+
+        if (resultCustomer.hasErrors()) {
+            return new ModelAndView("createCustomer");
+        }
+
+        if (resultBooking.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+            return new ModelAndView("chooseRoom");
+        }
+
+        model.addAttribute("bookingForm", bookingForm);
+        model.addAttribute("customerForm", customerForm);
+
+        return new ModelAndView("extraService");
     }
 
     private boolean validCategoryCount(BookingForm bookingForm){
@@ -160,19 +183,18 @@ public class BookingController {
         //return LocalDate.parse(bookingForm.getCheckInDate()).isBefore(LocalDate.parse(bookingForm.getCheckOutDate()));
     }
 
-    @PostMapping(EXTRA_SERVICE_URL)
-    public ModelAndView submitExtraService(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult result, Model model) {
-        if (result.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {//check date and rooms here
-            return new ModelAndView("chooseRoom");
+    @PostMapping(BOOKING_SUMMARY_URL)
+    public ModelAndView submitBookingSummary(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult resultCustomer,
+                                             @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking,
+                                             Model model) {
+
+        if (resultCustomer.hasErrors()) {
+            return new ModelAndView("createCustomer");
         }
 
-        model.addAttribute("bookingForm", bookingForm);
-        model.addAttribute("customerForm", customerForm);
-        return new ModelAndView("extraService");
-    }
-
-    @PostMapping(BOOKING_SUMMARY_URL)
-    public ModelAndView submitBookingSummary(@ModelAttribute("customerForm") CustomerForm customerForm, @ModelAttribute("bookingForm") BookingForm bookingForm, Model model) {
+        if (resultBooking.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+            return new ModelAndView("chooseRoom");
+        }
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
@@ -180,10 +202,17 @@ public class BookingController {
     }
 
     @PostMapping(WRITE_BOOKING_IN_DB)
-    public ModelAndView writeBookingInDatabase(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult result, @ModelAttribute("bookingForm") BookingForm bookingForm) {
-        if (result.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {//check date and rooms here
-            return new ModelAndView("bookingSummary");
+    public ModelAndView writeBookingInDatabase(@ModelAttribute("customerForm") @Valid CustomerForm customerForm, BindingResult resultCustomer,
+                                               @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking) {
+
+        if (resultCustomer.hasErrors()) {
+            return new ModelAndView("createCustomer");
         }
+
+        if (resultBooking.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+            return new ModelAndView("chooseRoom");
+        }
+
         CustomerId customerId = createCustomerService.createCustomer(customerForm);
         createBookingService.createBooking(bookingForm, customerId);
         return new ModelAndView("redirect:"+"/");
@@ -196,7 +225,6 @@ public class BookingController {
             List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-
             CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
 
             model.addAttribute("customer", customerDTO);
@@ -231,7 +259,7 @@ public class BookingController {
     }
 
     @GetMapping(ERROR_URL)
-    public String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
+    private String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
         model.addAttribute("errorMessage", errorMessage);
         return ERROR_PAGE;
     }
