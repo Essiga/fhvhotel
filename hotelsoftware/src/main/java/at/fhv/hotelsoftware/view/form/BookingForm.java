@@ -23,7 +23,7 @@ public class BookingForm {
     @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
     private String checkInDate;
 
-    @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
+    @DateNotNullOrEarlierThanToday(message = "Date must be in the future")
     private String checkOutDate;
 
     private String voucherCode;
@@ -32,6 +32,9 @@ public class BookingForm {
 
     private List<RoomDTO> roomList;
 
+    private Boolean validDuration = true;
+    private Boolean validCategoryCount = true;
+
     public void setRoomList(List<RoomDTO> roomList) {
         this.roomList = roomList;
     }
@@ -39,4 +42,6 @@ public class BookingForm {
     public List<RoomDTO> getRoomList() {
         return roomList;
     }
+
+
 }

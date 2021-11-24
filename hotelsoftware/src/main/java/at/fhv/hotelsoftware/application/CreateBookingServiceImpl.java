@@ -24,17 +24,17 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     public void createBooking(BookingForm bookingForm, CustomerId customerId){
 
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withCustomerId(customerId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
-                withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
-                withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
-                withSingleRoom(bookingForm.getSingleRoomCount()).
-                withDoubleRoom(bookingForm.getDoubleRoomCount()).
-                withLuxusRoom(bookingForm.getLuxusRoomCount()).
-                build();
+                                withBookingId(new BookingId(UUID.randomUUID())).
+                                withCancellationDeadLine(null).
+                                withCustomerId(customerId).
+                                withBookingStatus(BookingStatus.PENDING).
+                                withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
+                                withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
+                                withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
+                                withSingleRoom(bookingForm.getSingleRoomCount()).
+                                withDoubleRoom(bookingForm.getDoubleRoomCount()).
+                                withLuxusRoom(bookingForm.getLuxusRoomCount()).
+                                build();
 
         bookingRepository.addBooking(booking);
     }

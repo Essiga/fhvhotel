@@ -23,20 +23,19 @@ public class CreateCustomerServiceImpl implements CreateCustomerService {
         CustomerId customerId = new CustomerId(UUID.randomUUID());
 
         Customer customer = Guest.builder().
-                customerId(customerId).
-                firstName(customerForm.getFname()).
-                lastName(customerForm.getLname()).
-                streetAddress(customerForm.getStreetAdr()).
-                zip(customerForm.getZip()).
-                city(customerForm.getCity()).
-                country(customerForm.getCountry()).
-                phoneNumber(customerForm.getPhoneNumber()).
-                email(customerForm.getEmail()).
-                build();
+                                    customerId(customerId).
+                                    firstName(customerForm.getFname()).
+                                    lastName(customerForm.getLname()).
+                                    streetAddress(customerForm.getStreetAdr()).
+                                    zip(customerForm.getZip()).
+                                    city(customerForm.getCity()).
+                                    country(customerForm.getCountry()).
+                                    phoneNumber(customerForm.getPhoneNumber()).
+                                    email(customerForm.getEmail()).
+                                    build();
 
         customerRepository.addCustomer(customer);
 
         return customerId;
-
     }
 }
