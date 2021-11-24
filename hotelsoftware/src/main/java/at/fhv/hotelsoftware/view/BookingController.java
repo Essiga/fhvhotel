@@ -4,6 +4,8 @@ import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.CustomerDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.api.CustomerRepository;
 import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
@@ -11,6 +13,7 @@ import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class BookingController {
@@ -44,6 +49,13 @@ public class BookingController {
     @Autowired
     ViewCustomerService viewCustomerService;
 
+    //TODO: remove, only for testing/debugging
+    @Autowired
+    BookingRepository bookingRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -57,6 +69,7 @@ public class BookingController {
 
     private static final String ERROR_PAGE = "errorPage";
 
+    @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
         Room singleRoom = Room.builder().
@@ -87,6 +100,23 @@ public class BookingController {
         viewRoomService.createRoom(singleRoom2);
         viewRoomService.createRoom(doubleRoom);
         viewRoomService.createRoom(luxusRoom);
+
+        CustomerId customerId = new CustomerId(UUID.randomUUID());
+        CustomerId customerId2 = new CustomerId(UUID.randomUUID());
+        Customer customer = Customer.builder().customerId(customerId).firstName("Adrian").lastName("Essig").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Customer customer2 = Customer.builder().customerId(customerId2).firstName("Fabian").lastName("Egartner").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+
+        customerRepository.addCustomer(customer);
+        customerRepository.addCustomer(customer2);
+
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
+
+
+
+        bookingRepository.addBooking(booking);
+        bookingRepository.addBooking(booking2);
+
         return new ModelAndView("redirect:/");
     }
 
@@ -142,6 +172,7 @@ public class BookingController {
                                          @ModelAttribute("bookingForm") BookingForm bookingForm,
                                          Model model) {
 
+
         if (result.hasErrors()) {
             return new ModelAndView("createCustomer");
         }
@@ -160,8 +191,14 @@ public class BookingController {
         if (resultCustomer.hasErrors()) {
             return new ModelAndView("createCustomer");
         }
+        if (resultBooking.hasErrors()) {
 
-        if (resultBooking.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+            return new ModelAndView("chooseRoom");
+        }
+        if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)){
+            //TODO: Jonathan setter ok?
+            bookingForm.setValidDuration(validDuration(bookingForm));
+            bookingForm.setValidCategoryCount(validCategoryCount(bookingForm));
             return new ModelAndView("chooseRoom");
         }
 
@@ -172,15 +209,11 @@ public class BookingController {
     }
 
     private boolean validCategoryCount(BookingForm bookingForm){
-        if((bookingForm.getSingleRoomCount() + bookingForm.getDoubleRoomCount() + bookingForm.getLuxusRoomCount()) <= 0){
-            return false;
-        }
-        return true;
+        return (bookingForm.getSingleRoomCount() + bookingForm.getDoubleRoomCount() + bookingForm.getLuxusRoomCount()) > 0;
     }
 
     private boolean validDuration(BookingForm bookingForm){
-        return true;
-        //return LocalDate.parse(bookingForm.getCheckInDate()).isBefore(LocalDate.parse(bookingForm.getCheckOutDate()));
+        return LocalDate.parse(bookingForm.getCheckInDate()).isBefore(LocalDate.parse(bookingForm.getCheckOutDate()));
     }
 
     @PostMapping(BOOKING_SUMMARY_URL)
@@ -230,12 +263,9 @@ public class BookingController {
             model.addAttribute("customer", customerDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
+            model.addAttribute("id", bookingId);
 
-        } catch (BookingNotFoundException e){
-            return redirectToErrorPage(e.getMessage());
-        } catch (NotEnoughRoomsException e) {
-            return redirectToErrorPage(e.getMessage());
-        } catch (CustomerNotFoundException e) {
+        } catch (BookingNotFoundException | CustomerNotFoundException | NotEnoughRoomsException e){
             return redirectToErrorPage(e.getMessage());
         }
 
@@ -243,15 +273,11 @@ public class BookingController {
     }
 
     @PostMapping (CHECK_IN_GUEST)
-    public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm booking, @ModelAttribute("freeRoomListWrapper") FreeRoomListWrapper freeRoomListWrapper) {
+    public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm booking, @ModelAttribute("freeRoomListWrapper") FreeRoomListWrapper freeRoomListWrapper, Model model) {
 
         try {
             checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
-        } catch (RoomNotFoundException e) {
-            return redirectToErrorPage(e.getMessage());
-        } catch (RoomAlreadyOccupiedException e) {
-            return redirectToErrorPage(e.getMessage());
-        } catch (BookingNotFoundException e) {
+        } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
         }
 
