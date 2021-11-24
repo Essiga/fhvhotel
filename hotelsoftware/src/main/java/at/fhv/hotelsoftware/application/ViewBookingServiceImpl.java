@@ -27,6 +27,7 @@ public class ViewBookingServiceImpl implements ViewBookingService {
     @Override
     public List<BookingDTO> findTodaysCheckIns() {
         List<Booking> todaysCheckIns = bookingRepository.findTodaysCheckIns();
+
         return BookingDTO.fromBookingList(todaysCheckIns);
     }
 

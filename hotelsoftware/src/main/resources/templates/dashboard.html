@@ -56,8 +56,8 @@
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
-          <tr class="text-center m-4" th:each="checkIn : ${checkIns}">
-            <td class="border py-2 px-4" th:text="*{checkIn.customer}"></td>
+          <tr class="text-center m-4" th:each="checkIn, stat : ${checkIns}">
+            <td class="border py-2 px-4" th:text="${checkInCustomers[__${stat.index}__].firstName} + ' ' + ${checkInCustomers[__${stat.index}__].lastName}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.checkInDate}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.checkOutDate}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.bookingStatus}"></td>
@@ -84,8 +84,8 @@
             <th class="w-1/10 border-2 py-2 border-blue-200"></th>
           </tr>
 
-          <tr class="text-center m-4" th:each="checkOut : ${checkOuts}">
-            <td class="border py-2 px-4" th:text="${checkOut.customer}"></td>
+          <tr class="text-center m-4" th:each="checkOut, stat : ${checkOuts}">
+            <td class="border py-2 px-4" th:text="${checkOutCustomers[__${stat.index}__].firstName} + ' ' + ${checkOutCustomers[__${stat.index}__].lastName}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.checkInDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.checkOutDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.bookingStatus}"></td>

@@ -22,7 +22,6 @@ public class BookingRepositoryImpl implements BookingRepository {
     @PersistenceContext
     private EntityManager em;
 
-
     @Override
     public List<Booking> findAllBookings() {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking", Booking.class);
@@ -45,6 +44,7 @@ public class BookingRepositoryImpl implements BookingRepository {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE booking_id = :bookingId", Booking.class);
         query.setParameter("bookingId", bookingId.getBookingId());
         Optional<Booking> booking = query.getResultStream().findFirst();
+
         return booking;
     }
 
@@ -61,6 +61,5 @@ public class BookingRepositoryImpl implements BookingRepository {
     public void addBooking(Booking booking) {
         this.em.persist(booking);
     }
-
 }
 

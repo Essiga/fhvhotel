@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -11,7 +12,7 @@ public class Booking {
 
     private Long id;
     private BookingId bookingId;
-    private String customer;
+    private CustomerId customerId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -28,6 +29,10 @@ public class Booking {
     private Booking() {
     }
 
+    public void setVoucherCode(VoucherCode voucherCode) {
+        this.voucherCode = voucherCode;
+    }
+
     private Long getId() {
         return id;
     }
@@ -40,8 +45,8 @@ public class Booking {
         return this.bookingId;
     }
 
-    public String getCustomer() {
-        return customer;
+    public CustomerId getCustomerId() {
+        return customerId;
     }
 
     public LocalDate getCheckInDate() {
@@ -77,16 +82,7 @@ public class Booking {
         return luxusRoom;
     }
 
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "customer='" + customer + '\'' +
-                ", fromDate=" + checkInDate +
-                ", toDate=" + checkOutDate +
-                ", voucherCode=" + voucherCode +
-                ", bookingStatus=" + bookingStatus +
-                '}';
-    }
+
 
     public void checkIn(){
         this.bookingStatus = BookingStatus.CHECKEDIN;
@@ -111,8 +107,8 @@ public class Booking {
             return this;
         }
 
-        public Builder withCustomer(String customer) {
-            this.instance.customer = customer;
+        public Builder withCustomerId(CustomerId customerId) {
+            this.instance.customerId = customerId;
             return this;
         }
 

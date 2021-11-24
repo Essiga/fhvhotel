@@ -3,20 +3,20 @@ package at.fhv.hotelsoftware.domain.model;
 import java.util.UUID;
 
 public class RoomId {
-    private UUID roomId;
+    private UUID id;
 
     public RoomId() {
     }
 
-    public RoomId(UUID roomId){
-        this.roomId = roomId;
+    public RoomId(UUID id){
+        this.id = id;
     }
 
-    public UUID getRoomId() {
-        return roomId;
+    public UUID getId() {
+        return id;
     }
 
-    public void setRoomId(UUID roomId) {
-        this.roomId = roomId;
+    public void setId(UUID id) {
+        this.id = id;
     }
 }

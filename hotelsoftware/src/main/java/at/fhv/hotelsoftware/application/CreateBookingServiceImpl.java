@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.api.CustomerRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
@@ -20,13 +21,14 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     private BookingRepository bookingRepository;
 
     @Transactional
-    public void createBooking(BookingForm bookingForm, CustomerForm customerForm){
+    public void createBooking(BookingForm bookingForm, CustomerId customerId){
 
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).
                 withCancellationDeadLine(null).
-                withCustomer(customerForm.getFname() + " " + customerForm.getLname()).
+                withCustomerId(customerId).
                 withBookingStatus(BookingStatus.PENDING).
+                withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).
                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
                 withSingleRoom(bookingForm.getSingleRoomCount()).
@@ -36,4 +38,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
 
         bookingRepository.addBooking(booking);
     }
+
+
 }
