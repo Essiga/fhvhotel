@@ -82,7 +82,7 @@ public class BookingController {
                     withRoomStatus(RoomStatus.FREE).
                     withBookingId(null).
                     withRoomCategory(RoomCategory.DOUBLE).
-                    withRoomNumber(200 + 1).build();
+                    withRoomNumber(200 + i).build();
             viewRoomService.createRoom(doubleRoom [i]);
 
             luxusRoom [i] = Room.builder().
