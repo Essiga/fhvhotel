@@ -59,6 +59,7 @@ public class BookingController {
     private static final String CHECK_IN_GUEST= "/checkInGuest";
     private static final String CREATE_DUMMY_DATA = "/createDummyData";
     private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
+    private static final String CHECK_OUT_GUEST = "/checkOutGuest";
 
 
     private static final String ERROR_VIEW = "errorView";
@@ -146,7 +147,6 @@ public class BookingController {
             return new ModelAndView("createCustomer");
         }
 
-        BookingForm bookingForm = new BookingForm();
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
         return new ModelAndView("chooseRoom");
@@ -253,4 +253,19 @@ public class BookingController {
 
         return new ModelAndView("checkOutGuestOverview");
     }
+
+    @PostMapping(CHECK_OUT_GUEST)
+    public ModelAndView checkOutGuest(@ModelAttribute("booking") BookingForm booking){
+
+        try {
+            checkOutService.checkOut(booking.getBookingId());
+
+        } catch (BookingNotFoundException e) {
+            e.printStackTrace();
+        } catch (RoomNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new ModelAndView("redirect:"+"/");
+    }
+
 }
