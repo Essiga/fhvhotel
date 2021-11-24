@@ -26,6 +26,8 @@ public class BookingForm {
     @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
     private String checkOutDate;
 
+    private String voucherCode;
+
     private BookingId bookingId;
 
     private List<RoomDTO> roomList;
