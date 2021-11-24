@@ -48,7 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Create_Customer" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -328,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637689473183</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="failures">
+      <created>1637765511637</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1637765511637</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +472,8 @@
     <MESSAGE value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
     <MESSAGE value="Created branch for adjusting the UI" />
     <MESSAGE value="Finished Customer Userstory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished Customer Userstory" />
+    <MESSAGE value="failures" />
+    <option name="LAST_COMMIT_MESSAGE" value="failures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

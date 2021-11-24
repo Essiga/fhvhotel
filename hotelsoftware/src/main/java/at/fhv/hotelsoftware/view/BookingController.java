@@ -111,11 +111,6 @@ public class BookingController {
         } catch (CustomerNotFoundException e) {
             e.printStackTrace();
         }
-
-
-
-
-
         return new ModelAndView("dashboard");
     }
 
@@ -251,6 +246,7 @@ public class BookingController {
         } catch (Exception e){
             return new ModelAndView("redirect:"+"/");
         }
+
         return new ModelAndView("checkOutGuestOverview");
     }
 }
