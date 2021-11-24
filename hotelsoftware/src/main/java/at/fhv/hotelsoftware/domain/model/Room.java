@@ -27,6 +27,13 @@ public class Room {
         this.bookingId = bookingId;
     }
 
+    public  void  cleaning(){
+        this.roomStatus = RoomStatus.CLEANING;
+        this.bookingId = null;
+    }
+
+
+
     public static class Builder {
 
         private final Room instance;

@@ -1,9 +1,6 @@
 package at.fhv.hotelsoftware.view;
 
-import at.fhv.hotelsoftware.application.api.CheckInService;
-import at.fhv.hotelsoftware.application.api.CreateBookingService;
-import at.fhv.hotelsoftware.application.api.ViewBookingService;
-import at.fhv.hotelsoftware.application.api.ViewRoomService;
+import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.*;
@@ -40,6 +37,9 @@ public class BookingController {
     @Autowired
     CheckInService checkInService;
 
+    @Autowired
+    CheckOutService checkOutService;
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -55,6 +55,7 @@ public class BookingController {
 
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
+
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
