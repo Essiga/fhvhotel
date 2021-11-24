@@ -46,7 +46,7 @@
             <h1 class="text-3xl mb-4 font-semibold">Check-Out</h1>
 
             <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="get" >
-                    <div th:object="${booking}" >
+                <div th:object="${booking}" th:object="${customer}">
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -77,13 +77,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.fname}">
+                                   th:value="${customer.firstName}">
                             <label for="fname" class="block text-sm text-gray-500">First Name</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.lname}">
+                                   th:value="${customer.lastName}">
                             <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
                         </div>
 
@@ -99,13 +99,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.streetAdr}">
+                                   th:value="${customer.streetAddress}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
-                                   th:value="${booking.zip}">
+                                   th:value="${customer.zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                         </div>
 
@@ -115,13 +115,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.city}">
+                                   th:value="${customer.city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.country}">
+                                   th:value="${customer.country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
                         </div>
 
@@ -147,13 +147,13 @@
 
                         <div class="w-1/2">
                             <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.phoneNumber}">
+                                   th:value="${customer.phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${booking.email}">
+                                   th:value="${customer.email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
 
@@ -231,9 +231,9 @@
 
                             </tr>
 
-                            <tr class="text-center m-4" th:each="one : ${rooms}">
-                                <td th:text="${one.getRoomNumber()}"></td>
-                                <td th:text="${one.getRoomCategory()}"></td>
+                            <tr class="text-center m-4" th:each="oneRoom : ${rooms}">
+                                <td th:text="${oneRoom.roomNumber()}"></td>
+                                <td th:text="${oneRoom.roomStatus()}"></td>
                             </tr>
 
 

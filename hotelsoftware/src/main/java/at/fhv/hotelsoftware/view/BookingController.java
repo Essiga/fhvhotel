@@ -1,11 +1,10 @@
 package at.fhv.hotelsoftware.view;
 
-import at.fhv.hotelsoftware.application.api.CheckInService;
-import at.fhv.hotelsoftware.application.api.CreateBookingService;
-import at.fhv.hotelsoftware.application.api.ViewBookingService;
-import at.fhv.hotelsoftware.application.api.ViewRoomService;
+import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.CustomerDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.domain.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
@@ -22,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -148,7 +148,6 @@ public class BookingController {
             return new ModelAndView("createCustomer");
         }
 
-        BookingForm bookingForm = new BookingForm();
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
         return new ModelAndView("chooseRoom");
@@ -242,10 +241,13 @@ public class BookingController {
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 
         try {
-            List<RoomDTO> room = viewRoomService.findRoomByBookingId(bookingId);
-            BookingDTO booking = viewBookingService.findBookingById(bookingId);
-            model.addAttribute("rooms", room);
-            model.addAttribute("booking", booking);
+            List<RoomDTO> roomDTO = viewRoomService.findRoomByBookingId(bookingId);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+
+            model.addAttribute("customer", customerDTO);
+            model.addAttribute("rooms", roomDTO);
+            model.addAttribute("booking", bookingDTO);
         } catch (Exception e){
             return new ModelAndView("redirect:"+"/");
         }
