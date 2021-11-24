@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 import java.util.UUID;
 
+@Data
 @Component
 public class Room {
     public Long id;
@@ -26,45 +27,12 @@ public class Room {
         this.bookingId = bookingId;
     }
 
-    public Long getId() {
-        return id;
+    public  void  cleaning(){
+        this.roomStatus = RoomStatus.CLEANING;
+        this.bookingId = null;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
-    public RoomCategory getRoomCategory() {
-        return roomCategory;
-    }
-
-    public void setRoomCategory(RoomCategory roomCategory) {
-        this.roomCategory = roomCategory;
-    }
-
-    public Integer getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(Integer roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public RoomStatus getRoomStatus() {
-        return roomStatus;
-    }
-
-    public void setRoomStatus(RoomStatus roomStatus) {
-        this.roomStatus = roomStatus;
-    }
-
-    public BookingId getBookingId() {
-        return bookingId;
-    }
-
-    public void setBookingId(BookingId bookingId) {
-        this.bookingId = bookingId;
-    }
 
     public static class Builder {
 

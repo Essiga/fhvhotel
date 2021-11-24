@@ -46,6 +46,9 @@ public class BookingController {
     @Autowired
     ViewCustomerService viewCustomerService;
 
+    @Autowired
+    CheckOutService checkOutService;
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -143,6 +146,7 @@ public class BookingController {
             return new ModelAndView("createCustomer");
         }
 
+        BookingForm bookingForm = new BookingForm();
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("customerForm", customerForm);
         return new ModelAndView("chooseRoom");
