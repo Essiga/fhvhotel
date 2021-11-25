@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface ViewRoomService {
 
-    RoomDTO findRoomByBookingId(BookingId bookingId) throws RoomNotFoundException;
+    List<RoomDTO> findRoomsByBookingId(String bookingId) throws RoomNotFoundException;
     void createRoom(Room room);
 }

@@ -50,7 +50,7 @@ public class CheckInServiceImpl implements CheckInService {
             } else if (doubleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.DOUBLE) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 --doubleRoomCount;
-            } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.LUXUS) {
+            } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SUPERIOR) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 --luxusRoomCount;
             }

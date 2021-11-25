@@ -100,15 +100,10 @@ public class BookingController {
             luxusRoom [i] = Room.builder().
                     withRoomStatus(RoomStatus.FREE).
                     withBookingId(null).
-                    withRoomCategory(RoomCategory.LUXUS).
+                    withRoomCategory(RoomCategory.SUPERIOR).
                     withRoomNumber(300 + i).build();
             viewRoomService.createRoom(luxusRoom [i]);
         }
-
-        viewRoomService.createRoom(singleRoom);
-        viewRoomService.createRoom(singleRoom2);
-        viewRoomService.createRoom(doubleRoom);
-        viewRoomService.createRoom(luxusRoom);
 
         CustomerId customerId = new CustomerId(UUID.randomUUID());
         CustomerId customerId2 = new CustomerId(UUID.randomUUID());
@@ -299,12 +294,12 @@ public class BookingController {
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 
         try {
-            List<RoomDTO> roomDTO = viewRoomService.findRoomByBookingId(bookingId);
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
 
             model.addAttribute("customer", customerDTO);
-            model.addAttribute("rooms", roomDTO);
+            model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
         } catch (Exception e){
             return new ModelAndView("redirect:"+"/");

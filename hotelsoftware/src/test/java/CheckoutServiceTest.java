@@ -26,7 +26,7 @@ public class CheckoutServiceTest {
     @Test
     public void testRoomStatus(){
         BookingId bookingId = null;
-        List<Room> actual = roomRepository.findRoomByBookingId(bookingId);
+        List<Room> actual = roomRepository.findRoomsByBookingId(bookingId);
 
         for (int i = 0; i < actual.size(); i++) {
             actual.get(i).cleaning();

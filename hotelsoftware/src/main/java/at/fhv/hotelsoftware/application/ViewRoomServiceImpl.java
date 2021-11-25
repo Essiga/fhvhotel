@@ -23,14 +23,14 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public RoomDTO findRoomByBookingId(BookingId bookingId) throws RoomNotFoundException {
-        Optional<Room> roomOpt = roomRepository.findRoomByBookingId(bookingId);
+    public List<RoomDTO> findRoomsByBookingId(String bookingId) throws RoomNotFoundException {
+        List<Room> rooms = roomRepository.findRoomsByBookingId(new BookingId(bookingId));
 
-        if (roomOpt.isEmpty()){
-            throw new RoomNotFoundException("Room assigned to Booking : " + bookingId.getBookingId().toString() + " Not Found");
+        if (rooms.isEmpty()){
+            throw new RoomNotFoundException("Room assigned to Booking : " + bookingId + " Not Found");
         }
 
-        return RoomDTO.fromRoom(roomOpt.get());
+        return RoomDTO.fromRoomList(rooms);
     }
 
     @Override

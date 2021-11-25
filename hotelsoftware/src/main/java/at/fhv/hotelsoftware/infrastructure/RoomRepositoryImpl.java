@@ -27,13 +27,13 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public Optional<Room> findRoomByBookingId(BookingId bookingId) {
+    public List<Room> findRoomsByBookingId(BookingId bookingId) {
 
         TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_id = :bookingId", Room.class);
         query.setParameter("bookingId", bookingId.getBookingId());
-        Optional<Room> room = query.getResultStream().findFirst();
+        List<Room> rooms = query.getResultList();
 
-        return room;
+        return rooms;
     }
 
     @Override

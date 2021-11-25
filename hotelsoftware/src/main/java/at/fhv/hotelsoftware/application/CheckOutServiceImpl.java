@@ -32,7 +32,7 @@ public class CheckOutServiceImpl implements CheckOutService {
         Booking booking = optBooking.get();
         booking.complete();
 
-        List<Room> rooms = roomRepository.findRoomByBookingId(bookingId);
+        List<Room> rooms = roomRepository.findRoomsByBookingId(bookingId);
 
         for (int i = 0; i < rooms.size(); i++) {
             rooms.get(i).cleaning();
