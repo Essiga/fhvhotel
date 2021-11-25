@@ -21,8 +21,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -72,6 +78,7 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
+    private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -289,7 +296,6 @@ public class BookingController {
     }
 
 
-    //TODO: Add function to get rooms from DB
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 
@@ -332,4 +338,38 @@ public class BookingController {
         return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
     }
 
+    @GetMapping ("/pdfInvoice")
+    public void generatePdf(HttpServletResponse response, @ModelAttribute("booking") BookingForm booking, Model model) {
+
+        try {
+            model.addAttribute("booking", booking);
+
+            ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+            templateResolver.setSuffix(".html");
+            templateResolver.setTemplateMode("HTML");
+            TemplateEngine templateEngine = new TemplateEngine();
+            templateEngine.setTemplateResolver(templateResolver);
+
+
+            Context context = new Context();
+            //context.setVariable("checkOutGuestOverview", "bookingId");
+            String html = templateEngine.process("templates/invoice", context);
+
+
+            String fileName = "invoice.pdf";
+            response.addHeader("Content-disposition", "attachment;filename=" + fileName);
+            response.setContentType("application/pdf");
+            OutputStream outputStream = response.getOutputStream();
+
+
+            ITextRenderer renderer = new ITextRenderer();
+            renderer.setDocumentFromString(html);
+            renderer.layout();
+            renderer.createPDF(outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }

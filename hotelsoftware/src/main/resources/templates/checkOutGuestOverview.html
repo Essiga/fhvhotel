@@ -262,11 +262,11 @@
                         </button>
                     </div>
 
-                    <div class="w-2/6">
-                        <button type="Invoice"
+                    <div class="w-2/6" th:object="${booking}">
+                        <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}"
                                 class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             PDF Invoice
-                        </button>
+                        </a>
                     </div>
 
                     <div class="w-2/6">
