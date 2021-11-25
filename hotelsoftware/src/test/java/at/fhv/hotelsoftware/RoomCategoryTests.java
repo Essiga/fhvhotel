@@ -10,9 +10,9 @@ public class RoomCategoryTests {
     @Test
     public void given_roomcategory_when_getprice_then_getcorrectprice(){
         //given
-        Double expectedPrice = 40.0;
+        double expectedPrice = 40.0;
         //when
-        Double price = RoomCategory.SINGLE.getPrice();
+        double price = RoomCategory.SINGLE.getPrice();
 
         //then
         assertEquals(expectedPrice, price);

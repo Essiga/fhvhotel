@@ -25,6 +25,14 @@ public class Invoice {
         this.bookingId = bookingId;
     }
 
+    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, LineItem lineItem) {
+        this.invoiceNumber = invoiceNumber;
+        this.bookingId = bookingId;
+
+        this.lineItems = new ArrayList<>();
+        lineItems.add(lineItem);
+    }
+
     public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, List<LineItem> lineItems) {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
@@ -54,6 +62,27 @@ public class Invoice {
         }
 
         lineItems.add(lineItem);
+    }
+
+    public void removeAllLineItems() {
+        this.lineItems = null;
+    }
+
+    public void removeLineItem(LineItem lineItem) {
+
+        if (lineItem == null || lineItems == null)
+            return;
+
+        for (LineItem l : lineItems){
+
+            if (l.equals(lineItem)){
+                lineItems.remove(l);
+                break;
+            }
+        }
+
+        if (lineItems.isEmpty())
+            lineItems = null;
     }
 
     public double getSum(Booking booking){

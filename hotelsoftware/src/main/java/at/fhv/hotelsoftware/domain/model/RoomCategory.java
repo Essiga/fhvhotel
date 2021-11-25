@@ -4,6 +4,7 @@ public enum RoomCategory {
     SINGLE, DOUBLE, SUPERIOR;
 
     public double getPrice() {
+
         switch(this) {
             case SINGLE:
                 return 40;
@@ -12,6 +13,7 @@ public enum RoomCategory {
             case SUPERIOR:
                 return 100;
         }
+
         return 0;
     }
 }
