@@ -51,7 +51,7 @@ public class ViewBookingServiceImpl implements ViewBookingService {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(new BookingId(bookingIdString));
 
         if(bookingOpt.isEmpty()){
-            throw new BookingNotFoundException("Booking with ID: " + bookingIdString + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingIdString + " not found");
         }
 
         return BookingDTO.fromBooking(bookingOpt.get());

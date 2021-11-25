@@ -23,7 +23,7 @@ public class ViewCustomerServiceImpl implements ViewCustomerService {
         Optional<Customer> customerOpt = customerRepository.findCustomerById(customerId);
 
         if (customerOpt.isEmpty()){
-            throw new CustomerNotFoundException("Customer with ID: " + customerId.getCustomerId().toString() + " Not Found");
+            throw new CustomerNotFoundException("Customer with ID: " + customerId.getCustomerId().toString() + " not found");
         }
 
         return CustomerDTO.fromCustomer(customerOpt.get());
