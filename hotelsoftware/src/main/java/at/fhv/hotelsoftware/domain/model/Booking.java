@@ -1,10 +1,8 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 @Component
@@ -18,7 +16,7 @@ public class Booking {
     private LocalDate cancellationDeadLine;
     private Integer singleRoom;
     private Integer doubleRoom;
-    private Integer luxusRoom;
+    private Integer superiorRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
 
@@ -78,8 +76,8 @@ public class Booking {
         return doubleRoom;
     }
 
-    public Integer getLuxusRoom() {
-        return luxusRoom;
+    public Integer getSuperiorRoom() {
+        return superiorRoom;
     }
 
 
@@ -152,7 +150,7 @@ public class Booking {
         }
 
         public Builder withLuxusRoom(Integer luxusRoom) {
-            this.instance.luxusRoom = luxusRoom;
+            this.instance.superiorRoom = luxusRoom;
             return this;
         }
 
