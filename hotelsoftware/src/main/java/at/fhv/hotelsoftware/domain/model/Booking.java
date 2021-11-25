@@ -86,6 +86,10 @@ public class Booking {
         this.bookingStatus = BookingStatus.CHECKEDIN;
     }
 
+    public void complete(){
+        this.bookingStatus = BookingStatus.COMPLETED;
+    }
+
     public static class Builder {
 
         private final Booking instance;

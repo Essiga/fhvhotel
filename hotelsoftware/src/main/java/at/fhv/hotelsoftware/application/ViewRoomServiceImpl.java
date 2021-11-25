@@ -1,8 +1,12 @@
 package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewRoomService;
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
+import at.fhv.hotelsoftware.domain.model.Booking;
+import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,14 +23,14 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public RoomDTO findRoomByBookingId(BookingId bookingId) throws RoomNotFoundException {
-        Optional<Room> roomOpt = roomRepository.findRoomByBookingId(bookingId);
+    public List<RoomDTO> findRoomsByBookingId(String bookingId) throws RoomNotFoundException {
+        List<Room> rooms = roomRepository.findRoomsByBookingId(new BookingId(bookingId));
 
-        if (roomOpt.isEmpty()){
-            throw new RoomNotFoundException("Room assigned to Booking : " + bookingId.getBookingId().toString() + " Not Found");
+        if (rooms.isEmpty()){
+            throw new RoomNotFoundException("Room assigned to Booking : " + bookingId + " Not Found");
         }
 
-        return RoomDTO.fromRoom(roomOpt.get());
+        return RoomDTO.fromRoomList(rooms);
     }
 
     @Override

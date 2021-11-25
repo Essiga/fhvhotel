@@ -89,7 +89,7 @@
             <td class="border py-2 px-4" th:text="${checkOut.checkInDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.checkOutDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.bookingStatus}"></td>
-            <td class="border py-2 px-20"><a href="#" class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white">Check-Out</a></td>
+            <td class="border py-2 px-20"><a th:href="@{checkOutGuestOverview(id=(*{checkOut.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white">Check-Out</a></td>
           </tr>
 
         </table>

@@ -15,5 +15,4 @@ public interface ViewBookingService {
 
     List<BookingDTO> findTodaysCheckIns();
     List<BookingDTO> findTodaysCheckOuts();
-
 }

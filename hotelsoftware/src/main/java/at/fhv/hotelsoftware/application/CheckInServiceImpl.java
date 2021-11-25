@@ -44,29 +44,21 @@ public class CheckInServiceImpl implements CheckInService {
         List<RoomDTO> freeRoomsForBooking = new LinkedList<>();
 
         for (int i = 0; i < allRooms.size(); i++) {
-
-            if (singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0) {
-                break;
-            }
             if (singleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SINGLE) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
-                singleRoomCount--;
+                --singleRoomCount;
             } else if (doubleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.DOUBLE) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
-                doubleRoomCount--;
+                --doubleRoomCount;
             } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SUPERIOR) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
-                luxusRoomCount--;
+                --luxusRoomCount;
+            }
+            if (singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0) {
+                return freeRoomsForBooking;
             }
         }
-
-        if (!(singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0)) {
-            throw new NotEnoughRoomsException("Not Enough Rooms Available. " +
-                                              singleRoomCount + " Single, " + doubleRoomCount + " Double, " + luxusRoomCount + " Luxus " +
-                                              "Rooms Could Not Be Assigned");
-        }
-
-        return freeRoomsForBooking;
+             throw new NotEnoughRoomsException("Not enough rooms available");
     }
 
     @Override

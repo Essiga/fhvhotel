@@ -26,6 +26,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Controller
@@ -49,6 +50,9 @@ public class BookingController {
     @Autowired
     ViewCustomerService viewCustomerService;
 
+    @Autowired
+    CheckOutService checkOutService;
+
     //TODO: remove, only for testing/debugging
     @Autowired
     BookingRepository bookingRepository;
@@ -65,6 +69,8 @@ public class BookingController {
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
     private static final String CHECK_IN_GUEST= "/checkInGuest";
     private static final String CREATE_DUMMY_DATA = "/createDummyData";
+    private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
+    private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
 
     private static final String ERROR_PAGE = "errorPage";
@@ -72,34 +78,32 @@ public class BookingController {
     @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
     public ModelAndView createDummyData(Model model){
-        Room singleRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(100).build();
+        Room singleRoom[] = new Room[10];
+        Room doubleRoom[] = new Room[10];
+        Room luxusRoom[] = new Room[10];
 
-        Room singleRoom2 = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(101).build();
+        for (int i = 0; i < singleRoom.length; i++) {
+             singleRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.SINGLE).
+                    withRoomNumber(100 + i).build();
+            viewRoomService.createRoom(singleRoom [i]);
 
-        Room doubleRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.DOUBLE).
-                withRoomNumber(200).build();
+            doubleRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.DOUBLE).
+                    withRoomNumber(200 + i).build();
+            viewRoomService.createRoom(doubleRoom [i]);
 
-        Room luxusRoom = Room.builder().
-                withRoomStatus(RoomStatus.FREE).
-                withBookingId(null).
-                withRoomCategory(RoomCategory.SUPERIOR).
-                withRoomNumber(300).build();
-
-        viewRoomService.createRoom(singleRoom);
-        viewRoomService.createRoom(singleRoom2);
-        viewRoomService.createRoom(doubleRoom);
-        viewRoomService.createRoom(luxusRoom);
+            luxusRoom [i] = Room.builder().
+                    withRoomStatus(RoomStatus.FREE).
+                    withBookingId(null).
+                    withRoomCategory(RoomCategory.SUPERIOR).
+                    withRoomNumber(300 + i).build();
+            viewRoomService.createRoom(luxusRoom [i]);
+        }
 
         CustomerId customerId = new CustomerId(UUID.randomUUID());
         CustomerId customerId2 = new CustomerId(UUID.randomUUID());
@@ -284,6 +288,40 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
+
+    //TODO: Add function to get rooms from DB
+    @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
+    public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
+
+        try {
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+
+            model.addAttribute("customer", customerDTO);
+            model.addAttribute("rooms", roomDTOs);
+            model.addAttribute("booking", bookingDTO);
+        } catch (Exception e){
+            return new ModelAndView("redirect:"+"/");
+        }
+
+        return new ModelAndView("checkOutGuestOverview");
+    }
+
+    @PostMapping(CHECK_OUT_GUEST)
+    public ModelAndView checkOutGuest(@ModelAttribute("booking") BookingForm booking){
+
+        try {
+            checkOutService.checkOut(booking.getBookingId());
+
+        } catch (BookingNotFoundException e) {
+            e.printStackTrace();
+        } catch (RoomNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new ModelAndView("redirect:"+"/");
+    }
+
     @GetMapping(ERROR_URL)
     private String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
         model.addAttribute("errorMessage", errorMessage);
@@ -293,4 +331,5 @@ public class BookingController {
     private static ModelAndView redirectToErrorPage(String errorMessage) {
         return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
     }
+
 }
