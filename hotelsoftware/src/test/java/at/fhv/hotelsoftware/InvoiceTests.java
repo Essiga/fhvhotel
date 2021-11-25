@@ -87,19 +87,81 @@ public class InvoiceTests {
     }
 
     @Test
-    public void given_invoice_when_callinggetsumoninvoicewithoutlineitems_then_expectsumsequalminusone(){
+    public void given_invoice_when_callinggetsumoninvoicewithoutlineitems_then_expectsumsequalzero(){
 
         //given
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
         BookingId bookingId = new BookingId(UUID.randomUUID());
         Invoice invoice = new Invoice(invoiceNumber, bookingId);
 
-        Double expectedSum = -1.0;
+        Double expectedSum = 0.0;
 
         //when
         Double sum = invoice.getSum();
 
         //then
         assertEquals(expectedSum, sum);
+    }
+
+    @Test
+    public void given_invoice_when_addlineitemstoinvoice_then_expectequallineitems(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Invoice invoice = new Invoice(invoiceNumber, bookingId);
+
+        List<LineItem> lineItems = new ArrayList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice()));
+
+        //when
+        invoice.addLineItems(lineItems);
+
+        //then
+        assertEquals(lineItems, invoice.getLineItems());
+    }
+
+    @Test
+    public void given_invoice_when_addlineitemtoinvoice_then_expectequalsums(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Invoice invoice = new Invoice(invoiceNumber, bookingId);
+
+        LineItem lineItem = new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice());
+
+        double expectedSum = lineItem.getPrice() * lineItem.getRoomCount();
+
+        //when
+        invoice.addLineItem(lineItem);
+
+        //then
+        assertEquals(expectedSum, invoice.getSum());
+    }
+
+    @Test
+    public void given_invoice_when_addlineitemstoinvoice_then_expectequalsums(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Invoice invoice = new Invoice(invoiceNumber, bookingId);
+
+        List<LineItem> lineItems = new ArrayList<>();
+        LineItem lineItem = new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice());
+        LineItem lineItem2 = new LineItem(RoomCategory.DOUBLE, 2, RoomCategory.DOUBLE.getPrice());
+        lineItems.add(lineItem);
+        lineItems.add(lineItem2);
+
+        double expectedSum = 0.0;
+        expectedSum += lineItem.getPrice() * lineItem.getRoomCount();
+        expectedSum += lineItem2.getPrice() * lineItem2.getRoomCount();
+
+        //when
+        invoice.addLineItems(lineItems);
+
+        //then
+        assertEquals(expectedSum, invoice.getSum());
     }
 }

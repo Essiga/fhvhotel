@@ -43,6 +43,19 @@ public class Invoice {
         return new Invoice(invoiceNumber, bookingId, lineItems);
     }
 
+    public void addLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
+
+    public void addLineItem(LineItem lineItem) {
+
+        if (lineItems == null){
+            lineItems = new ArrayList<>();
+        }
+
+        lineItems.add(lineItem);
+    }
+
     public double getSum(Booking booking){
         double sum = 0.0;
 
@@ -56,14 +69,13 @@ public class Invoice {
     public double getSum(){
 
         if (lineItems == null)
-            return -1.0;
+            return 0.0;
 
         Double sum = 0.0;
 
         for (LineItem lineItem : lineItems){
             Integer count = lineItem.getRoomCount();
             double price = lineItem.getPrice();
-
             sum += price * count;
         }
 
