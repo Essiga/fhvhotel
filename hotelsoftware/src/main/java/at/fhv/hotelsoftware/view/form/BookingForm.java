@@ -18,7 +18,7 @@ public class BookingForm {
     private Integer doubleRoomCount = 0;
 
     @Min(value = 0, message = "Value cannot be less than 0")
-    private Integer luxusRoomCount = 0;
+    private Integer superiorRoomCount = 0;
 
     @DateNotNullOrEarlierThanToday(message = "Date must be today or in the future")
     private String checkInDate;

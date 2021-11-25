@@ -93,7 +93,7 @@ public class BookingController {
         Room luxusRoom = Room.builder().
                 withRoomStatus(RoomStatus.FREE).
                 withBookingId(null).
-                withRoomCategory(RoomCategory.LUXUS).
+                withRoomCategory(RoomCategory.SUPERIOR).
                 withRoomNumber(300).build();
 
         viewRoomService.createRoom(singleRoom);
@@ -209,7 +209,7 @@ public class BookingController {
     }
 
     private boolean validCategoryCount(BookingForm bookingForm){
-        return (bookingForm.getSingleRoomCount() + bookingForm.getDoubleRoomCount() + bookingForm.getLuxusRoomCount()) > 0;
+        return (bookingForm.getSingleRoomCount() + bookingForm.getDoubleRoomCount() + bookingForm.getSuperiorRoomCount()) > 0;
     }
 
     private boolean validDuration(BookingForm bookingForm){

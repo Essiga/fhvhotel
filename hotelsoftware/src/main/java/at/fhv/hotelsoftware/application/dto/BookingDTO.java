@@ -1,14 +1,12 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Getter
@@ -23,12 +21,12 @@ public final class BookingDTO {
     private LocalDate cancellationDeadLine;
     private Integer singleRoom;
     private Integer doubleRoom;
-    private Integer luxusRoom;
+    private Integer superiorRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
 
     @Builder
-    public BookingDTO(BookingId bookingId, CustomerId customerId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer luxusRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
+    public BookingDTO(BookingId bookingId, CustomerId customerId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
         this.bookingId = bookingId;
         this.customerId = customerId;
         this.checkInDate = checkInDate;
@@ -36,7 +34,7 @@ public final class BookingDTO {
         this.cancellationDeadLine = cancellationDeadLine;
         this.singleRoom = singleRoom;
         this.doubleRoom = doubleRoom;
-        this.luxusRoom = luxusRoom;
+        this.superiorRoom = superiorRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
     }
@@ -54,7 +52,7 @@ public final class BookingDTO {
                 booking.getCancellationDeadLine(),
                 booking.getSingleRoom(),
                 booking.getDoubleRoom(),
-                booking.getLuxusRoom(),
+                booking.getSuperiorRoom(),
                 booking.getVoucherCode(),
                 booking.getBookingStatus());
     }
@@ -70,7 +68,7 @@ public final class BookingDTO {
                                 bookings.getCancellationDeadLine(),
                                 bookings.getSingleRoom(),
                                 bookings.getDoubleRoom(),
-                                bookings.getLuxusRoom(),
+                                bookings.getSuperiorRoom(),
                                 bookings.getVoucherCode(),
                                 bookings.getBookingStatus()))
                 .collect(Collectors.toList());
