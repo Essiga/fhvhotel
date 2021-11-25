@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- designing error page finished&#10;- adapted findRoomByID function -&gt; returns now a RoomDTO and not a List of RoomDTOs&#10;- adapted all throws-messages">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="task completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CreateBookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CreateBookingServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateBooking.hbm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateBooking.hbm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/extraService.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/extraService.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +58,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Create_Customer" />
+        <entry key="$PROJECT_DIR$" value="Check-in_UI_Thymeleaf" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,15 +86,15 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/BookingId.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -155,13 +164,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

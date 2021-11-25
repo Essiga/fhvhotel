@@ -28,7 +28,7 @@
 
         <property name="doubleRoom" column="doubleRoom" type="java.lang.Integer"/>
 
-        <property name="luxusRoom" column="luxusRoom" type="java.lang.Integer"/>
+        <property name="superiorRoom" column="superiorRoom" type="java.lang.Integer"/>
 
         <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
             <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
