@@ -149,8 +149,8 @@ public class Booking {
             return this;
         }
 
-        public Builder withLuxusRoom(Integer luxusRoom) {
-            this.instance.superiorRoom = luxusRoom;
+        public Builder withSuperiorRoom(Integer superiorRoom) {
+            this.instance.superiorRoom = superiorRoom;
             return this;
         }
 

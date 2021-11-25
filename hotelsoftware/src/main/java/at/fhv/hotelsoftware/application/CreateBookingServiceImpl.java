@@ -30,7 +30,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                                 withCheckOutDate(LocalDate.parse(bookingForm.getCheckOutDate())).
                                 withSingleRoom(bookingForm.getSingleRoomCount()).
                                 withDoubleRoom(bookingForm.getDoubleRoomCount()).
-                                withLuxusRoom(bookingForm.getSuperiorRoomCount()).
+                withSuperiorRoom(bookingForm.getSuperiorRoomCount()).
                                 build();
 
         bookingRepository.addBooking(booking);
