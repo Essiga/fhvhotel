@@ -9,6 +9,4 @@ import java.util.UUID;
 @AllArgsConstructor
 public class InvoiceNumber {
     private final UUID invoiceNumber;
-
-
 }
