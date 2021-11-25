@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Create Booking Basic UI finished">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="alles funktioniert :)">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/CheckoutServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckOutServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckOutServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/CheckOutService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/CheckOutService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +120,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
@@ -126,7 +128,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Gradle.CheckoutServiceTest">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -145,15 +147,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -163,7 +163,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckoutServiceTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;CheckoutServiceTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -184,7 +184,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckoutServiceTest.testBookingStatus&quot;" />
+        <option name="scriptParameters" value="--tests &quot;CheckoutServiceTest.testBookingStatus&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -200,7 +200,25 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="createCustomer.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fhvhotel/hotelsoftware.main/templates/createCustomer.html" useBuiltInWebServerPort="true">
+    <configuration name="CheckoutServiceTest.testRoomStatus" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;CheckoutServiceTest.testRoomStatus&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
     <configuration name="dashboard.html (1)" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/hotelsoftware/hotelsoftware.main/templates/dashboard.html" useBuiltInWebServerPort="true">
@@ -220,13 +238,16 @@
       <item itemvalue="Application.main" />
       <item itemvalue="Gradle.CheckoutServiceTest.testBookingStatus" />
       <item itemvalue="Gradle.CheckoutServiceTest" />
-      <item itemvalue="JavaScript Debug.createCustomer.html" />
       <item itemvalue="JavaScript Debug.dashboard.html" />
       <item itemvalue="JavaScript Debug.dashboard.html (1)" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="Gradle.CheckoutServiceTest.testRoomStatus" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.CheckoutServiceTest" />
+        <item itemvalue="Gradle.CheckoutServiceTest.testRoomStatus" />
+        <item itemvalue="Gradle.CheckoutServiceTest.testBookingStatus" />
         <item itemvalue="Gradle.CheckoutServiceTest" />
         <item itemvalue="Gradle.CheckoutServiceTest.testBookingStatus" />
       </list>
@@ -248,6 +269,7 @@
       <workItem from="1636985064073" duration="3949000" />
       <workItem from="1637068569540" duration="7769000" />
       <workItem from="1637241111177" duration="6264000" />
+      <workItem from="1637788177753" duration="2461000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -354,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637241553864</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="alles funktioniert :)">
+      <created>1637787952456</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1637787952456</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -490,7 +519,8 @@
     <MESSAGE value="sql and rooms updated" />
     <MESSAGE value="added custom validation for date and room categories and Factory Methods in BookingDTO" />
     <MESSAGE value="Created branch for adjusting the UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created branch for adjusting the UI" />
+    <MESSAGE value="alles funktioniert :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="alles funktioniert :)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

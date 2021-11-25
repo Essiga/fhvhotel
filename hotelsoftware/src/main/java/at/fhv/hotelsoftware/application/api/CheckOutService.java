@@ -11,6 +11,4 @@ import java.util.List;
 
 public interface CheckOutService {
     void checkOut(BookingId bookingId) throws RoomNotFoundException, BookingNotFoundException;
-
-
 }
