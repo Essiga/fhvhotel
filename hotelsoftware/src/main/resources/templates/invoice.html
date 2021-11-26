@@ -1,94 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>Invoice</title>
-    <link rel="stylesheet" href="invoiceStyle.css">
+
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        hr {
+            border-top: 0.01em solid black;
+            margin: 2px;
+            padding: 0px;
+        }
+
+        .adressBlock p {
+            font-size: 11pt;
+            margin-bottom: 0.2%;
+            margin-top: 0;
+        }
+
+        .right {
+            text-align: right;
+            font-size: 11pt;
+        }
+
+        h1 {
+            font-size: 16pt;
+        }
+
+        .header p {
+            margin-left: -3px;
+            font-size: 11pt;
+        }
+
+        .header td {
+            font-size: 11pt;
+            padding-right: 50px;
+        }
+
+        .heading td{
+            padding-right: 80px;
+            font-size: 11pt;
+        }
+
+        .content {
+            margin-left: -3px;
+        }
+
+        .normal {
+            padding-right: 30px;
+            font-size: 11pt;
+        }
+
+        .moreSpace {
+            padding-right: 120px;
+            font-size: 11pt;
+        }
+
+        .rightSide {
+            text-align: right;
+            font-size: 11pt;
+        }
+
+        .content {
+            margin-top: 10px;
+        }
+
+        .content tr td {
+            font-size: 11pt;
+        }
+
+        .first {
+            padding-left: 40px;
+        }
+
+        .second {
+            padding-left: 8px;
+        }
+
+        .third {
+            padding-left: 70px;
+        }
+
+        .totalPrice {
+            font-size: 11pt;
+        }
+
+        .totalPrice th {
+            padding-right: 29px;
+            text-align: left;
+        }
+
+        .totalPrice td {
+            text-align: right;
+        }
+
+        footer p {
+            font-size: 11pt;
+            margin-bottom: 0.2%;
+            margin-top: 0;
+            text-align: center;
+            clear: right;
+        }
+
+        p {
+            font-size: 11pt;
+        }
+
+        .tableRight {
+            float: right;
+            margin-right: 16px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 
+<header>
+</header>
+
 <body>
-<div class="invoice-box">
-    <table cellpadding="0" cellspacing="0">
-        <tr class="top">
-            <td colspan="2">
-                <table>
-                    <tr>
-                        <td class="title">
-                            <img src="https://www.sparksuite.com/images/logo.png" style="width: 100%; max-width: 300px" />
-                        </td>
+<div class="adressBlock">
+    <p>[[${fName}]] [[${lName}]]</p>
+    <p>[[${streetAddress}]]</p>
+    <p>[[${zip}]] [[${city}]]</p>
+    <p>[[${country}]]</p>
+</div>
 
-                        <td>
-                            Invoice #: 123<br />
-                            Created: January 1, 2015<br />
-                            Due: February 1, 2015
-                        </td>
-                    </tr>
-                </table>
-            </td>
+<p class="right">[[${date}]]</p>
+
+<h1>Invoice 001</h1>
+<hr></hr>
+<table class="heading">
+    <tr>
+        <td>Check-In Date: [[${checkInDate}]]</td>
+        <td>Check-Out Date: [[${checkOutDate}]]</td>
+    </tr>
+</table>
+<hr></hr>
+
+<table class="content">
+    <tr>
+        <th class="normal">Room Number</th>
+        <th class="normal">Quantity</th>
+        <th class="moreSpace">Category</th>
+        <th class="rightSide">Single Price</th>
+        <th class="rightSide">Total Price</th>
+    </tr>
+
+    <tr>
+        <td class="first">[[${roomNumber}]]</td>
+        <td class="second">2 Days</td>
+        <td>[[${roomCategory}]]</td>
+        <td class="third">105,00</td>
+        <td class="third">210,00</td>
+    </tr>
+</table>
+<hr></hr>
+
+<div class="tableRight">
+    <table class="totalPrice">
+        <tr>
+            <th>Price without tax</th>
+            <td>520,00</td>
         </tr>
-
-        <tr class="information">
-            <td colspan="2">
-                <table>
-                    <tr>
-                        <td>
-                            Sparksuite, Inc.<br />
-                            12345 Sunny Road<br />
-                            Sunnyville, CA 12345
-                        </td>
-
-                        <td>
-                            Acme Corp.<br />
-                            John Doe<br />
-                            john@example.com
-                        </td>
-                    </tr>
-                </table>
-            </td>
+        <tr>
+            <th>+ 10% tax</th>
+            <td>0,00</td>
         </tr>
-
-        <tr class="heading">
-            <td>Payment Method</td>
-
-            <td>Check #</td>
+        <tr>
+            <th>+ 20% tax</th>
+            <td>104,00</td>
         </tr>
-
-        <tr class="details">
-            <td>Check</td>
-
-            <td>1000</td>
-        </tr>
-
-        <tr class="heading">
-            <td>Item</td>
-
-            <td>Price</td>
-        </tr>
-
-        <tr class="item">
-            <td>Website design</td>
-
-            <td>$300.00</td>
-        </tr>
-
-        <tr class="item">
-            <td>Hosting (3 months)</td>
-
-            <td>$75.00</td>
-        </tr>
-
-        <tr class="item last">
-            <td>Domain name (1 year)</td>
-
-            <td>$10.00</td>
-        </tr>
-
-        <tr class="total">
-            <td></td>
-
-            <td>Total: $385.00</td>
+        <tr>
+            <th>Total Price</th>
+            <td>624,00</td>
         </tr>
     </table>
 </div>
 </body>
+<footer>
+    <p>We thank you for your stay and wish you a pleasant journey home.</p>
+    <p>Alp's Hotel</p>
+    <p>Tel. +43 (0) 1234 /5678 - info@alpsHotel.com</p>
+    <p>www.alpsHotel.com</p>
+</footer>
 </html>
+

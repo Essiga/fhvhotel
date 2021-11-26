@@ -49,6 +49,15 @@
                 <div th:object="${booking}">
                     <div th:object="${customer}">
                         <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
+                        <input type="hidden" id="firstName" name="fname" th:field="${customer.firstName}"/>
+                        <input type="hidden" id="lastName" name="lname" th:field="${customer.lastName}"/>
+                        <input type="hidden" id="voucherCode" name="voucher" th:field="${booking.voucherCode}"/>
+                        <input type="hidden" id="streetAddress" name="streetAdr" th:field="${customer.streetAddress}"/>
+                        <input type="hidden" id="zip" name="zip" th:field="${customer.zip}"/>
+                        <input type="hidden" id="city" name="city" th:field="${customer.city}"/>
+                        <input type="hidden" id="country" name="country" th:field="${customer.country}"/>
+
+
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 

@@ -120,7 +120,7 @@ public class BookingController {
         customerRepository.addCustomer(customer);
         customerRepository.addCustomer(customer2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
         Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
 
 
@@ -339,10 +339,16 @@ public class BookingController {
     }
 
     @GetMapping ("/pdfInvoice")
-    public void generatePdf(HttpServletResponse response, @ModelAttribute("booking") BookingForm booking, Model model) {
+    public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingId, Model model) {
 
         try {
-            model.addAttribute("booking", booking);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+            List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
+
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("customer",customerDTO);
+            model.addAttribute("room", roomDTO);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
             templateResolver.setSuffix(".html");
@@ -350,9 +356,24 @@ public class BookingController {
             TemplateEngine templateEngine = new TemplateEngine();
             templateEngine.setTemplateResolver(templateResolver);
 
-
             Context context = new Context();
-            //context.setVariable("checkOutGuestOverview", "bookingId");
+            context.setVariable("fName", customerDTO.getFirstName());
+            context.setVariable("lName", customerDTO.getLastName());
+            context.setVariable("streetAddress",customerDTO.getStreetAddress());
+            context.setVariable("zip",customerDTO.getZip());
+            context.setVariable("city",customerDTO.getCity());
+            context.setVariable("country",customerDTO.getCountry());
+
+            context.setVariable("date", LocalDate.now());
+            context.setVariable("checkInDate", bookingDTO.getCheckInDate());
+            context.setVariable("checkOutDate", bookingDTO.getCheckOutDate());
+
+            for(int i = 0; i < roomDTO.size(); i++){
+                context.setVariable("roomNumber", roomDTO.get(i).getRoomNumber());
+                context.setVariable("roomCategory", roomDTO.get(i).getRoomCategory());
+            }
+
+
             String html = templateEngine.process("templates/invoice", context);
 
 
