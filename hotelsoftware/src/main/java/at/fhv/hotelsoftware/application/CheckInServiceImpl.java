@@ -70,7 +70,7 @@ public class CheckInServiceImpl implements CheckInService {
             Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoom.getRoomNumber());
 
             if (optRoom.isEmpty()) {
-                throw new RoomNotFoundException("Room with RoomNumber: " + checkInRoom.getRoomNumber() + "Not Found");
+                throw new RoomNotFoundException("Room with room number: " + checkInRoom.getRoomNumber() + "not found");
             }
 
             Room room = optRoom.get();
@@ -78,7 +78,7 @@ public class CheckInServiceImpl implements CheckInService {
             if (room.getRoomStatus() == RoomStatus.FREE) {
                 room.occupy(bookingId);
             } else {
-                throw new RoomAlreadyOccupiedException("Room with RoomNumber: " + room.getRoomNumber() + " Already Occupied");
+                throw new RoomAlreadyOccupiedException("Room with room number: " + room.getRoomNumber() + " already occupied");
             }
         }
 
@@ -88,7 +88,7 @@ public class CheckInServiceImpl implements CheckInService {
             booking.get().checkIn();
         }
         else
-            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
     }
 }
 

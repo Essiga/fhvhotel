@@ -27,7 +27,7 @@ public class ViewRoomServiceImpl implements ViewRoomService {
         List<Room> rooms = roomRepository.findRoomsByBookingId(new BookingId(bookingId));
 
         if (rooms.isEmpty()){
-            throw new RoomNotFoundException("Room assigned to Booking : " + bookingId + " Not Found");
+            throw new RoomNotFoundException("room assigned to booking : " + bookingId + " not found");
         }
 
         return RoomDTO.fromRoomList(rooms);
