@@ -151,12 +151,17 @@
     </tr>
 
     <tr>
-        <td class="first">[[${roomNumber}]]</td>
-        <td class="second">2 Days</td>
-        <td>[[${roomCategory}]]</td>
-        <td class="third">105,00</td>
-        <td class="third">210,00</td>
+        <div th:each="roomDTO : ${roomDTO}" >
+            <td th:text="*{roomDTO.roomNumber}"></td>
+            <td th:text="*{roomDTO.roomCategory}"></td>
+        </div>
+
+
     </tr>
+
+
+
+
 </table>
 <hr></hr>
 

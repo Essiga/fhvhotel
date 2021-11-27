@@ -120,7 +120,7 @@ public class BookingController {
         customerRepository.addCustomer(customer);
         customerRepository.addCustomer(customer2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(1).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
         Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
 
 
@@ -341,6 +341,7 @@ public class BookingController {
     @GetMapping ("/pdfInvoice")
     public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingId, Model model) {
 
+
         try {
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
@@ -368,10 +369,12 @@ public class BookingController {
             context.setVariable("checkInDate", bookingDTO.getCheckInDate());
             context.setVariable("checkOutDate", bookingDTO.getCheckOutDate());
 
-            for(int i = 0; i < roomDTO.size(); i++){
-                context.setVariable("roomNumber", roomDTO.get(i).getRoomNumber());
-                context.setVariable("roomCategory", roomDTO.get(i).getRoomCategory());
-            }
+
+            context.setVariable("roomDTO", roomDTO);
+
+
+
+
 
 
             String html = templateEngine.process("templates/invoice", context);
