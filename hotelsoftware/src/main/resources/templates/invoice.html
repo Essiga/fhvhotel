@@ -9,13 +9,18 @@
             font-family: Arial, Helvetica, sans-serif;
         }
 
+        .center{
+            text-align: center;
+        }
+
         hr {
             border-top: 0.01em solid black;
             margin: 2px;
             padding: 0px;
+            margin-left: -1px;
         }
 
-        .adressBlock p {
+        .addressBlock p {
             font-size: 11pt;
             margin-bottom: 0.2%;
             margin-top: 0;
@@ -28,18 +33,23 @@
 
         h1 {
             font-size: 16pt;
+            margin:0;
         }
 
-        .header p {
+        h2 {
+            font-size: 12pt;
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 12pt;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .heading {
             margin-left: -3px;
-            font-size: 11pt;
         }
-
-        .header td {
-            font-size: 11pt;
-            padding-right: 50px;
-        }
-
         .heading td{
             padding-right: 80px;
             font-size: 11pt;
@@ -47,41 +57,24 @@
 
         .content {
             margin-left: -3px;
-        }
-
-        .normal {
-            padding-right: 30px;
             font-size: 11pt;
-        }
-
-        .moreSpace {
-            padding-right: 120px;
-            font-size: 11pt;
-        }
-
-        .rightSide {
-            text-align: right;
-            font-size: 11pt;
-        }
-
-        .content {
             margin-top: 10px;
         }
 
+        .smallSpace {
+            padding-right: 20px;
+            font-weight: bold;
+        }
+
+        .biggerSpace{
+            padding-right: 60px;
+            font-weight: bold;
+        }
+
+
+
         .content tr td {
             font-size: 11pt;
-        }
-
-        .first {
-            padding-left: 40px;
-        }
-
-        .second {
-            padding-left: 8px;
-        }
-
-        .third {
-            padding-left: 70px;
         }
 
         .totalPrice {
@@ -112,58 +105,60 @@
         .tableRight {
             float: right;
             margin-right: 16px;
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             margin-top: 10px;
         }
     </style>
 </head>
 
-<header>
+<header class="center">
+    <h1>Alp's Hotel</h1>
+    <h2>Tel. +43 (0) 1234 /5678 - info@alpsHotel.com</h2>
+    <h3>www.alpsHotel.com</h3>
 </header>
 
 <body>
-<div class="adressBlock">
-    <p>[[${fName}]] [[${lName}]]</p>
-    <p>[[${streetAddress}]]</p>
-    <p>[[${zip}]] [[${city}]]</p>
-    <p>[[${country}]]</p>
+<div class="addressBlock">
+    <span th:text="${customerDTO.firstName}"/> <span th:text="${customerDTO.lastName}"/>
+    <p th:text="${customerDTO.streetAddress}"/>
+    <span th:text="${customerDTO.zip}"/> <span th:text="${customerDTO.city}"/>
+    <p th:text="${customerDTO.country}"/>
 </div>
 
-<p class="right">[[${date}]]</p>
+
+<p class="right" th:text="${date}"/>
+
 
 <h1>Invoice 001</h1>
 <hr></hr>
 <table class="heading">
     <tr>
-        <td>Check-In Date: [[${checkInDate}]]</td>
-        <td>Check-Out Date: [[${checkOutDate}]]</td>
+        <td>Check-In Date: <span th:text="${bookingDTO.checkInDate}"/> </td>
+        <td>Check-Out Date:  <span th:text="${bookingDTO.checkInDate}"/> </td>
     </tr>
 </table>
 <hr></hr>
+
 
 <table class="content">
     <tr>
-        <th class="normal">Room Number</th>
-        <th class="normal">Quantity</th>
-        <th class="moreSpace">Category</th>
-        <th class="rightSide">Single Price</th>
-        <th class="rightSide">Total Price</th>
+        <span class="smallSpace">Room Number</span>
+        <span class="smallSpace">Quantity</span>
+        <span class="biggerSpace">Category / Description</span>
+        <span>Single Price</span>
+        <span>Total Price</span>
     </tr>
 
     <tr>
-        <div th:each="roomDTO : ${roomDTO}" >
-            <td th:text="*{roomDTO.roomNumber}"></td>
-            <td th:text="*{roomDTO.roomCategory}"></td>
+        <div th:each="roomDTO : ${roomDTO}">
+            <td style="padding-left: 40px; padding-right: 60px" th:text="*{roomDTO.roomNumber}"/>
+            <td style="padding-right: 28px" th:text="*{stay}"/>
+            <td th:text="*{roomDTO.roomCategory}"/>
         </div>
-
-
     </tr>
-
-
-
-
 </table>
 <hr></hr>
+
 
 <div class="tableRight">
     <table class="totalPrice">
@@ -185,12 +180,11 @@
         </tr>
     </table>
 </div>
+
+
 </body>
 <footer>
     <p>We thank you for your stay and wish you a pleasant journey home.</p>
-    <p>Alp's Hotel</p>
-    <p>Tel. +43 (0) 1234 /5678 - info@alpsHotel.com</p>
-    <p>www.alpsHotel.com</p>
 </footer>
 </html>
 

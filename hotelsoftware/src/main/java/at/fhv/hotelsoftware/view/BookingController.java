@@ -35,6 +35,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Controller
 public class BookingController {
 
@@ -358,33 +360,24 @@ public class BookingController {
             templateEngine.setTemplateResolver(templateResolver);
 
             Context context = new Context();
-            context.setVariable("fName", customerDTO.getFirstName());
-            context.setVariable("lName", customerDTO.getLastName());
-            context.setVariable("streetAddress",customerDTO.getStreetAddress());
-            context.setVariable("zip",customerDTO.getZip());
-            context.setVariable("city",customerDTO.getCity());
-            context.setVariable("country",customerDTO.getCountry());
-
             context.setVariable("date", LocalDate.now());
-            context.setVariable("checkInDate", bookingDTO.getCheckInDate());
-            context.setVariable("checkOutDate", bookingDTO.getCheckOutDate());
+
+            long days = DAYS.between(bookingDTO.getCheckInDate(), bookingDTO.getCheckOutDate());
+            String stay = String.format("%d Days", days);
 
 
             context.setVariable("roomDTO", roomDTO);
-
-
-
-
+            context.setVariable("customerDTO", customerDTO);
+            context.setVariable("bookingDTO", bookingDTO);
+            context.setVariable("stay", stay);
 
 
             String html = templateEngine.process("templates/invoice", context);
-
 
             String fileName = "invoice.pdf";
             response.addHeader("Content-disposition", "attachment;filename=" + fileName);
             response.setContentType("application/pdf");
             OutputStream outputStream = response.getOutputStream();
-
 
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(html);
