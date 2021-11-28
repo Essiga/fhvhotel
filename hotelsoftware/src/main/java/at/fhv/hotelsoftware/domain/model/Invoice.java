@@ -44,18 +44,41 @@ public class Invoice {
         BookingId bookingId = booking.getBookingId();
 
         List<LineItem> lineItems = new ArrayList<>();
-        lineItems.add(new LineItem(RoomCategory.SINGLE, booking.getSingleRoom(), RoomCategory.SINGLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.DOUBLE, booking.getSingleRoom(), RoomCategory.DOUBLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.SUPERIOR, booking.getSingleRoom(), RoomCategory.SUPERIOR.getPrice()));
+        Integer singleRooms = booking.getSingleRoom();
+        Integer doubleRooms = booking.getDoubleRoom();
+        Integer superiorRooms = booking.getSuperiorRoom();
+
+        if (singleRooms > 0) {
+            lineItems.add(new LineItem(RoomCategory.SINGLE, singleRooms, RoomCategory.SINGLE.getPrice()));
+        }
+
+        if (doubleRooms > 0) {
+            lineItems.add(new LineItem(RoomCategory.DOUBLE, doubleRooms, RoomCategory.DOUBLE.getPrice()));
+        }
+
+        if (superiorRooms > 0) {
+            lineItems.add(new LineItem(RoomCategory.SUPERIOR, superiorRooms, RoomCategory.SUPERIOR.getPrice()));
+        }
 
         return new Invoice(invoiceNumber, bookingId, lineItems);
     }
 
     public void addLineItems(List<LineItem> lineItems) {
-        this.lineItems = lineItems;
+
+        if (lineItems == null)
+            return;
+
+        if (this.lineItems == null) {
+            this.lineItems = new ArrayList<>();
+        }
+
+        this.lineItems.addAll(lineItems);
     }
 
     public void addLineItem(LineItem lineItem) {
+
+        if (lineItem == null)
+            return;
 
         if (lineItems == null){
             lineItems = new ArrayList<>();
@@ -65,24 +88,42 @@ public class Invoice {
     }
 
     public void removeAllLineItems() {
-        this.lineItems = null;
+        this.lineItems.clear();
     }
 
     public void removeLineItem(LineItem lineItem) {
 
-        if (lineItem == null || lineItems == null)
+        if (lineItem == null || lineItems == null || lineItems.isEmpty())
             return;
 
-        for (LineItem l : lineItems){
+        for (LineItem l : lineItems) {
 
-            if (l.equals(lineItem)){
+            if (l.equals(lineItem)) {
                 lineItems.remove(l);
                 break;
             }
         }
+    }
 
-        if (lineItems.isEmpty())
-            lineItems = null;
+    public LineItem removeLastLineItem() {
+        if (lineItems == null || lineItems.isEmpty())
+            return null;
+
+        int idxOfLastLineItem = lineItems.size()-1;
+        LineItem lastLineItem = lineItems.get(idxOfLastLineItem);
+        lineItems.remove(lastLineItem);
+
+        return lastLineItem;
+    }
+
+    public LineItem removeFirstLineItem() {
+        if (lineItems == null || lineItems.isEmpty())
+            return null;
+
+        LineItem firstLineItem = lineItems.get(0);
+        lineItems.remove(firstLineItem);
+
+        return firstLineItem;
     }
 
     public double getSum(Booking booking){
@@ -97,7 +138,7 @@ public class Invoice {
 
     public double getSum(){
 
-        if (lineItems == null)
+        if (lineItems == null || lineItems.isEmpty())
             return 0.0;
 
         Double sum = 0.0;

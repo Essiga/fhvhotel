@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="created invoice tests">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="merged completed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/BookingId.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/BookingId.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/LineItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/LineItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/InvoiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/InvoiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +141,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull">
+  <component name="RunManager" selected="Gradle.InvoiceTests.given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull">
     <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -194,12 +194,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InvoiceTests.given_invoicewithonelineitem_when_lineitememoved_then_lineitemsequalsnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoice_when_createinvoicefrombookingandsumwithoutparameter_then_expectequalsums" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithonelineitem_when_lineitememoved_then_lineitemsequalsnull&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoice_when_createinvoicefrombookingandsumwithoutparameter_then_expectequalsums&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -215,12 +215,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InvoiceTests.given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalsnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoicewiththreelineitems_when_removefirstlineitem_then_firstlineitemremoved" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalsnull&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewiththreelineitems_when_removefirstlineitem_then_firstlineitemremoved&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -236,12 +236,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InvoiceTests.given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoicewiththreelineitems_when_removelastlineitem_then_lastlineitemremoved" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnull&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewiththreelineitems_when_removelastlineitem_then_lastlineitemremoved&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -257,12 +257,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -287,20 +287,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
       <item itemvalue="Gradle.InvoiceTests" />
-      <item itemvalue="Gradle.InvoiceTests.given_invoicewithonelineitem_when_lineitememoved_then_lineitemsequalsnull" />
-      <item itemvalue="Gradle.InvoiceTests.given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalsnull" />
-      <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnull" />
-      <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
+      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="Gradle.InvoiceTests.given_invoice_when_createinvoicefrombookingandsumwithoutparameter_then_expectequalsums" />
+      <item itemvalue="Gradle.InvoiceTests.given_invoicewiththreelineitems_when_removelastlineitem_then_lastlineitemremoved" />
+      <item itemvalue="Gradle.InvoiceTests.given_invoicewiththreelineitems_when_removefirstlineitem_then_firstlineitemremoved" />
+      <item itemvalue="Gradle.InvoiceTests.given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoicewiththreelineitems_when_removefirstlineitem_then_firstlineitemremoved" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoicewiththreelineitems_when_removelastlineitem_then_lastlineitemremoved" />
         <item itemvalue="Gradle.InvoiceTests" />
-        <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnull" />
-        <item itemvalue="Gradle.InvoiceTests.given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalsnull" />
-        <item itemvalue="Gradle.InvoiceTests.given_invoicewithonelineitem_when_lineitememoved_then_lineitemsequalsnull" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoice_when_createinvoicefrombookingandsumwithoutparameter_then_expectequalsums" />
       </list>
     </recent_temporary>
   </component>

@@ -14,7 +14,7 @@ public class LineItem {
     @Override
     public boolean equals(Object o){
 
-        // check for null
+        // check for null and class
         if (o == null || getClass() != o.getClass()) {return false;}
 
         // same object by reference

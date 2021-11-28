@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,10 +62,28 @@ public class InvoiceTests {
 
         //then
         assertEquals(expectedLineItems, lineItems);
+        assertEquals(expectedLineItems.size(), lineItems.size());
     }
 
     @Test
-    public void given_invoice_when_createinvoicefrombooking_then_expectequalsums(){
+    public void given_invoice_when_createinvoicefrombookingandsum_then_expectequalsums(){
+
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().withSingleRoom(2).withDoubleRoom(1).withSuperiorRoom(1).withBookingId(bookingId).build();
+
+        double expectedSum = (RoomCategory.SINGLE.getPrice() * 2) + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice();
+
+        //when
+        Invoice invoice = Invoice.createInvoiceFromBooking(booking);
+        Double sum = invoice.getSum(booking);
+
+        //then
+        assertEquals(expectedSum, sum);
+    }
+
+    @Test
+    public void given_invoice_when_createinvoicefrombookingandsumwithoutparameter_then_expectequalsums(){
 
         //given
         BookingId bookingId = new BookingId(UUID.randomUUID());
@@ -79,7 +98,7 @@ public class InvoiceTests {
 
         //when
         Invoice invoice = Invoice.createInvoiceFromBooking(booking);
-        Double sum = invoice.getSum(booking);
+        Double sum = invoice.getSum();
 
         //then
         assertEquals(expectedSum, sum);
@@ -103,7 +122,7 @@ public class InvoiceTests {
     }
 
     @Test
-    public void given_invoice_when_addlineitemstoinvoice_then_expectequallineitems(){
+    public void given_invoice_when_addlineitemstoinvoice_then_expectequalsize(){
 
         //given
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
@@ -112,12 +131,19 @@ public class InvoiceTests {
 
         List<LineItem> lineItems = new ArrayList<>();
         lineItems.add(new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR, 3, RoomCategory.SUPERIOR.getPrice()));
+
+        List<LineItem> lineItems2 = new ArrayList<>();
+        lineItems.add(new LineItem(RoomCategory.DOUBLE, 2, RoomCategory.DOUBLE.getPrice()));
+
+        lineItems.addAll(lineItems2);
 
         //when
         invoice.addLineItems(lineItems);
+        invoice.addLineItems(lineItems2);
 
         //then
-        assertEquals(lineItems, invoice.getLineItems());
+        assertEquals(lineItems.size(), invoice.getLineItems().size());
     }
 
     @Test
@@ -179,7 +205,7 @@ public class InvoiceTests {
     }
 
     @Test
-    public void given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalsnull(){
+    public void given_invoicewithonelineitem_when_lineitemremoved_then_lineitemsequalemptylist(){
 
         //given
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
@@ -191,11 +217,11 @@ public class InvoiceTests {
         invoice.removeLineItem(lineItem);
 
         //then
-        assertNull(invoice.getLineItems());
+        assertEquals(Collections.emptyList(), invoice.getLineItems());
     }
 
     @Test
-    public void given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnull(){
+    public void given_invoicewithtwolineitems_when_lineitemremoved_then_lineitemsnotequalsnullorempty(){
 
         //given
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
@@ -214,10 +240,11 @@ public class InvoiceTests {
 
         //then
         assertNotNull(invoice.getLineItems());
+        assertNotEquals(Collections.emptyList(), invoice.getLineItems());
     }
 
     @Test
-    public void given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull(){
+    public void given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalemptylist(){
 
         //given
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
@@ -234,6 +261,86 @@ public class InvoiceTests {
         invoice.removeAllLineItems();
 
         //then
-        assertNull(invoice.getLineItems());
+        assertEquals(Collections.emptyList(), invoice.getLineItems());
+    }
+
+    @Test
+    public void given_invoicewiththreelineitems_when_removelastlineitem_then_lastlineitemremoved(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        List<LineItem> lineItems = new ArrayList<>();
+        LineItem l1 = new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice());
+        LineItem l2 = new LineItem(RoomCategory.DOUBLE, 2, RoomCategory.DOUBLE.getPrice());
+        LineItem l3 = new LineItem(RoomCategory.SUPERIOR, 2, RoomCategory.SUPERIOR.getPrice());
+        lineItems.add(l1);
+        lineItems.add(l2);
+        lineItems.add(l3);
+        Invoice invoice = new Invoice(invoiceNumber, bookingId, lineItems);
+
+        //when
+        LineItem lastLineItem = invoice.removeLastLineItem();
+
+        //then
+        assertEquals(l3, lastLineItem);
+    }
+
+    @Test
+    public void given_invoicewithzerolineitems_when_removelastlineitem_then_returneditemequalsnull(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        List<LineItem> lineItems = new ArrayList<>();
+        Invoice invoice = new Invoice(invoiceNumber, bookingId, lineItems);
+
+        //when
+        LineItem removedLineItem = invoice.removeLastLineItem();
+
+        //then
+        assertNull(removedLineItem);
+    }
+
+    @Test
+    public void given_invoicewiththreelineitems_when_removefirstlineitem_then_firstlineitemremoved(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        List<LineItem> lineItems = new ArrayList<>();
+        LineItem l1 = new LineItem(RoomCategory.SINGLE, 2, RoomCategory.SINGLE.getPrice());
+        LineItem l2 = new LineItem(RoomCategory.DOUBLE, 2, RoomCategory.DOUBLE.getPrice());
+        LineItem l3 = new LineItem(RoomCategory.SUPERIOR, 2, RoomCategory.SUPERIOR.getPrice());
+        lineItems.add(l1);
+        lineItems.add(l2);
+        lineItems.add(l3);
+        Invoice invoice = new Invoice(invoiceNumber, bookingId, lineItems);
+
+        //when
+        LineItem firstLineItem = invoice.removeFirstLineItem();
+
+        //then
+        assertEquals(l1, firstLineItem);
+    }
+
+    @Test
+    public void given_invoicewithzerolineitems_when_removefirstlineitem_then_returneditemequalsnull(){
+
+        //given
+        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        List<LineItem> lineItems = new ArrayList<>();
+        Invoice invoice = new Invoice(invoiceNumber, bookingId, lineItems);
+
+        //when
+        LineItem removedLineItem = invoice.removeFirstLineItem();
+
+        //then
+        assertNull(removedLineItem);
     }
 }
