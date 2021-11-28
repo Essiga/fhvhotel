@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.domain.model;
 
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -12,6 +13,7 @@ public class Invoice {
     private Long id;
     private InvoiceNumber invoiceNumber;
     private BookingId bookingId;
+    private LocalDate invoiceDate;
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
 
@@ -19,18 +21,21 @@ public class Invoice {
         this.invoiceNumber = new InvoiceNumber(UUID.randomUUID());
         this.bookingId = bookingId;
         this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
     }
 
     public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId) {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
         this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
     }
 
     public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, LineItem lineItem) {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
         this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
 
         this.lineItems = new ArrayList<>();
         lineItems.add(lineItem);
@@ -41,6 +46,7 @@ public class Invoice {
         this.bookingId = bookingId;
         this.lineItems = lineItems;
         this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
     }
 
     public void setInvoiceStatus(InvoiceStatus invoiceStatus)
