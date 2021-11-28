@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="added Invoice Date">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateInvoice.hbm.xml" afterDir="false" />
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="HibernateInvoice.hbm.xml created">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/LineItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/LineItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateInvoice.hbm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateInvoice.hbm.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +320,7 @@
       <workItem from="1637068569540" duration="7769000" />
       <workItem from="1637241111177" duration="6264000" />
       <workItem from="1637773922387" duration="3082000" />
-      <workItem from="1638130452501" duration="2619000" />
+      <workItem from="1638130452501" duration="3243000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -501,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638114583081</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="HibernateInvoice.hbm.xml created">
+      <created>1638133308093</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1638133308093</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +648,8 @@
     <MESSAGE value="created invoice tests&#10;added functions to remove and add lineItems to an invoice" />
     <MESSAGE value="created and added InvoiceStatus to Invoice" />
     <MESSAGE value="added Invoice Date" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Invoice Date" />
+    <MESSAGE value="HibernateInvoice.hbm.xml created" />
+    <option name="LAST_COMMIT_MESSAGE" value="HibernateInvoice.hbm.xml created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
