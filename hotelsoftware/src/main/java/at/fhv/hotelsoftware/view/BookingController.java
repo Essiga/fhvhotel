@@ -266,7 +266,6 @@ public class BookingController {
             model.addAttribute("customer", customerDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
-            model.addAttribute("id", bookingId);
 
         } catch (BookingNotFoundException | CustomerNotFoundException | NotEnoughRoomsException e){
             return redirectToErrorPage(e.getMessage());
