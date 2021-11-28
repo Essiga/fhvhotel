@@ -1,6 +1,5 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -13,21 +12,25 @@ public class Invoice {
     private Long id;
     private InvoiceNumber invoiceNumber;
     private BookingId bookingId;
+    private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
 
     public Invoice(BookingId bookingId) {
         this.invoiceNumber = new InvoiceNumber(UUID.randomUUID());
         this.bookingId = bookingId;
+        this.invoiceStatus = InvoiceStatus.OPEN;
     }
 
     public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId) {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
+        this.invoiceStatus = InvoiceStatus.OPEN;
     }
 
     public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, LineItem lineItem) {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
+        this.invoiceStatus = InvoiceStatus.OPEN;
 
         this.lineItems = new ArrayList<>();
         lineItems.add(lineItem);
@@ -37,6 +40,12 @@ public class Invoice {
         this.invoiceNumber = invoiceNumber;
         this.bookingId = bookingId;
         this.lineItems = lineItems;
+        this.invoiceStatus = InvoiceStatus.OPEN;
+    }
+
+    public void setInvoiceStatus(InvoiceStatus invoiceStatus)
+    {
+        this.invoiceStatus = invoiceStatus;
     }
 
     public static Invoice createInvoiceFromBooking(Booking booking){
