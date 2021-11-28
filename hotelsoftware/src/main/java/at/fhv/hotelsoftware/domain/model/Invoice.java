@@ -17,6 +17,7 @@ public class Invoice {
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
 
+
     public Invoice(BookingId bookingId) {
         this.invoiceNumber = new InvoiceNumber(UUID.randomUUID());
         this.bookingId = bookingId;

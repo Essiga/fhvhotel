@@ -7,9 +7,16 @@ import lombok.Getter;
 @Getter
 public class LineItem {
 
+    private Long id;
     private RoomCategory roomCategory;
     private int roomCount;
     private double price;
+
+    public LineItem(RoomCategory roomCategory, Integer roomCount, double price) {
+        this.roomCategory = roomCategory;
+        this.roomCount = roomCount;
+        this.price = price;
+    }
 
     @Override
     public boolean equals(Object o){
