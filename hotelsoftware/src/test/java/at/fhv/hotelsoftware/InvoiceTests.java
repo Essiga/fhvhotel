@@ -37,7 +37,7 @@ public class InvoiceTests {
         Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), bookingId);
 
         //when
-        //TODO: JONATHAN call repository in invoice?
+        //TODO: JONATHAN call repository in invoice? Nooo!!
         Double sum = invoice.getSum(booking);
 
         //then

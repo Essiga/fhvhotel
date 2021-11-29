@@ -141,7 +141,7 @@ public class Invoice {
 
         return firstLineItem;
     }
-
+    //gehört ins Booking
     public double getSum(Booking booking){
         double sum = 0.0;
 
@@ -157,10 +157,10 @@ public class Invoice {
         if (lineItems == null || lineItems.isEmpty())
             return 0.0;
 
-        Double sum = 0.0;
+        double sum = 0.0;
 
         for (LineItem lineItem : lineItems){
-            Integer count = lineItem.getRoomCount();
+            int count = lineItem.getRoomCount();
             double price = lineItem.getPrice();
             sum += price * count;
         }
