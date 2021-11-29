@@ -5,78 +5,52 @@ import lombok.Getter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class Invoice {
 
     private Long id;
     private InvoiceNumber invoiceNumber;
-    private BookingId bookingId;
     private LocalDate invoiceDate;
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
+    private CustomerData customerData;
 
-
-    public Invoice(BookingId bookingId) {
-        this.invoiceNumber = new InvoiceNumber(UUID.randomUUID());
-        this.bookingId = bookingId;
-        this.invoiceStatus = InvoiceStatus.OPEN;
-        this.invoiceDate = LocalDate.now();
+    public Invoice() {
     }
 
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId) {
+    public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, CustomerData customerData) {
         this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
-        this.invoiceStatus = InvoiceStatus.OPEN;
-        this.invoiceDate = LocalDate.now();
-    }
-
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, LineItem lineItem) {
-        this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
-        this.invoiceStatus = InvoiceStatus.OPEN;
-        this.invoiceDate = LocalDate.now();
-
-        this.lineItems = new ArrayList<>();
-        lineItems.add(lineItem);
-    }
-
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, List<LineItem> lineItems) {
-        this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
         this.lineItems = lineItems;
+        this.customerData = customerData;
+
         this.invoiceStatus = InvoiceStatus.OPEN;
         this.invoiceDate = LocalDate.now();
     }
 
-    public void setInvoiceStatus(InvoiceStatus invoiceStatus)
-    {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setInvoiceNumber(InvoiceNumber invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
+
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
         this.invoiceStatus = invoiceStatus;
     }
 
-    public static Invoice createInvoiceFromBooking(Booking booking){
-        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
-        BookingId bookingId = booking.getBookingId();
+    public void setLineItems(List<LineItem> lineItems) {
+        this.lineItems = lineItems;
+    }
 
-        List<LineItem> lineItems = new ArrayList<>();
-        Integer singleRooms = booking.getSingleRoom();
-        Integer doubleRooms = booking.getDoubleRoom();
-        Integer superiorRooms = booking.getSuperiorRoom();
-
-        if (singleRooms > 0) {
-            lineItems.add(new LineItem(RoomCategory.SINGLE, singleRooms, RoomCategory.SINGLE.getPrice()));
-        }
-
-        if (doubleRooms > 0) {
-            lineItems.add(new LineItem(RoomCategory.DOUBLE, doubleRooms, RoomCategory.DOUBLE.getPrice()));
-        }
-
-        if (superiorRooms > 0) {
-            lineItems.add(new LineItem(RoomCategory.SUPERIOR, superiorRooms, RoomCategory.SUPERIOR.getPrice()));
-        }
-
-        return new Invoice(invoiceNumber, bookingId, lineItems);
+    public void setCustomerData(CustomerData customerData) {
+        this.customerData = customerData;
     }
 
     public void addLineItems(List<LineItem> lineItems) {
@@ -141,28 +115,15 @@ public class Invoice {
 
         return firstLineItem;
     }
-    //gehört ins Booking
-    public double getSum(Booking booking){
-        double sum = 0.0;
-
-        sum += RoomCategory.SINGLE.getPrice() * booking.getSingleRoom();
-        sum += RoomCategory.DOUBLE.getPrice() * booking.getDoubleRoom();
-        sum += RoomCategory.SUPERIOR.getPrice() * booking.getSuperiorRoom();
-
-        return sum;
-    }
 
     public double getSum(){
-
-        if (lineItems == null || lineItems.isEmpty())
-            return 0.0;
 
         double sum = 0.0;
 
         for (LineItem lineItem : lineItems){
-            int count = lineItem.getRoomCount();
+            int amount = lineItem.getAmount();
             double price = lineItem.getPrice();
-            sum += price * count;
+            sum += price * amount;
         }
 
         return sum;

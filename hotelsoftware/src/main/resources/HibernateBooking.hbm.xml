@@ -42,6 +42,11 @@
         </property>
         <!-- <one-to-one name="customer" cascade="all" lazy="false" constrained="true"
             class="at.fhv.hotelsoftware.domain.customer"/> -->
+
+        <bag name="invoices" cascade="all">
+            <key column="bookingId"/>
+            <one-to-many class="at.fhv.hotelsoftware.domain.model.Invoice"/>
+        </bag>
     </class>
 
 </hibernate-mapping>

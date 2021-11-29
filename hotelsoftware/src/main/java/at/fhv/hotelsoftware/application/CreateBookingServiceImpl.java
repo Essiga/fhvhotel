@@ -33,6 +33,12 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withSuperiorRoom(bookingForm.getSuperiorRoomCount()).
                                 build();
 
+        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        try {
+            booking.createInvoice(customer);
+        } catch (InvoiceAlreadyCreatedException e) {
+            e.printStackTrace();
+        }
         bookingRepository.addBooking(booking);
     }
 

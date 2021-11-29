@@ -3,7 +3,7 @@ package at.fhv.hotelsoftware.domain.model;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.*;
 
 @Component
 public class Booking {
@@ -19,6 +19,7 @@ public class Booking {
     private Integer superiorRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private List<Invoice> invoices;
 
     public static Builder builder() {
         return new Builder();
@@ -59,6 +60,9 @@ public class Booking {
         return cancellationDeadLine;
     }
 
+    public List<Invoice> getInvoices() {
+        return invoices;
+    }
 
     public VoucherCode getVoucherCode() {
         return voucherCode;
@@ -88,6 +92,32 @@ public class Booking {
 
     public void complete(){
         this.bookingStatus = BookingStatus.COMPLETED;
+    }
+
+    public Invoice createInvoice(Customer customer) throws InvoiceAlreadyCreatedException {
+        if(invoices.isEmpty()) {
+            List<LineItem> lineItems = new ArrayList<>();
+            if (singleRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), singleRoom, RoomCategory.SINGLE.getPrice()));
+            }
+            if (doubleRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), doubleRoom, RoomCategory.DOUBLE.getPrice()));
+            }
+
+            if (superiorRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), superiorRoom, RoomCategory.SUPERIOR.getPrice()));
+            }
+
+            CustomerData customerData = CustomerData.fromCustomer(customer);
+
+            Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, customerData);
+
+            invoices.add(invoice);
+            return invoice;
+        }
+        else{
+            throw new InvoiceAlreadyCreatedException("An invoice for this booking has already been created.");
+        }
     }
 
     public static class Builder {
@@ -156,6 +186,7 @@ public class Booking {
 
         public Booking build() {
             Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");
+            this.instance.invoices = new LinkedList<>();
             return this.instance;
         }
     }

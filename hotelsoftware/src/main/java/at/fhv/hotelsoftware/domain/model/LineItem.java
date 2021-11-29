@@ -3,18 +3,39 @@ package at.fhv.hotelsoftware.domain.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.Objects;
+
 @AllArgsConstructor
 @Getter
 public class LineItem {
 
     private Long id;
-    private RoomCategory roomCategory;
-    private int roomCount;
+    private String name;
+    private int amount;
     private double price;
 
-    public LineItem(RoomCategory roomCategory, Integer roomCount, double price) {
-        this.roomCategory = roomCategory;
-        this.roomCount = roomCount;
+    public LineItem() {
+    }
+
+    public LineItem(String name, Integer amount, double price) {
+        this.name = name;
+        this.amount = amount;
+        this.price = price;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -29,8 +50,8 @@ public class LineItem {
 
         LineItem lineItem = (LineItem)o;
 
-        return (this.roomCategory == lineItem.getRoomCategory() &&
-                this.roomCount == lineItem.getRoomCount() &&
+        return (this.name == lineItem.getName() &&
+                this.amount == lineItem.getAmount() &&
                 this.price == lineItem.getPrice());
     }
 }

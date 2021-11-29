@@ -12,10 +12,6 @@
             <property name="invoiceNumber" column="invoiceNumber" type="java.util.UUID"/>
         </component>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
-            <property name="bookingId" column="bookingId" type="java.util.UUID"/>
-        </component>
-
         <property name="invoiceDate" column="invoiceDate" type="java.time.LocalDate"/>
 
         <property name="invoiceStatus" column="invoiceStatus">
@@ -25,10 +21,25 @@
             </type>
         </property>
 
-        <bag name="lineItems" cascade="all">
+        <component name="customerData" class="at.fhv.hotelsoftware.domain.model.CustomerData">
+            <component name="customerId" class="at.fhv.hotelsoftware.domain.model.CustomerId">
+                <property name="customerId" column="customerId" type="java.util.UUID"/>
+            </component>
+            <property name="firstName" column="firstName" type="java.lang.String"/>
+            <property name="lastName" column="lastName" type="java.lang.String"/>
+            <property name="streetAddress" column="streetAddress" type="java.lang.String"/>
+            <property name="zip" column="zip" type="java.lang.String"/>
+            <property name="city" column="city" type="java.lang.String"/>
+            <property name="country" column="country" type="java.lang.String"/>
+            <property name="phoneNumber" column="phoneNumber" type="java.lang.String"/>
+            <property name="email" column="email" type="java.lang.String"/>
+        </component>
+
+        <list name="lineItems" cascade="all">
             <key column="invoiceNumber"/>
+            <list-index column="idx"/>
             <one-to-many class="at.fhv.hotelsoftware.domain.model.LineItem"/>
-        </bag>
+        </list>
     </class>
 
     <class name="at.fhv.hotelsoftware.domain.model.LineItem" table="tbl_lineItem">
@@ -36,14 +47,9 @@
             <generator class="native"/>
         </id>
 
-        <property name="roomCategory" column="roomCategory">
-            <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
-                <param name="type">12</param>
-            </type>
-        </property>
+        <property name="name" column="name" type="java.lang.String"/>
 
-        <property name="roomCount" column="roomCount" type="java.lang.Integer"/>
+        <property name="amount" column="amount" type="java.lang.Integer"/>
 
         <property name="price" column="price" type="java.lang.Double"/>
     </class>
