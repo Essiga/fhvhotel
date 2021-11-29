@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware;
 
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

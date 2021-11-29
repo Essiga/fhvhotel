@@ -4,6 +4,8 @@ import at.fhv.hotelsoftware.application.api.ViewInvoiceService;
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

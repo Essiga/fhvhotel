@@ -2,7 +2,7 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewCustomerService;
 import at.fhv.hotelsoftware.application.dto.CustomerDTO;
-import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.api.CustomerRepository;
 import at.fhv.hotelsoftware.domain.model.Customer;
 import at.fhv.hotelsoftware.domain.model.CustomerId;

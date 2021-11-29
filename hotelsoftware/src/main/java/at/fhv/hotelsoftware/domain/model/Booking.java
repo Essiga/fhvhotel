@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

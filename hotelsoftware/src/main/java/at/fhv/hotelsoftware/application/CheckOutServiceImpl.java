@@ -4,6 +4,8 @@ import at.fhv.hotelsoftware.application.api.CheckOutService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

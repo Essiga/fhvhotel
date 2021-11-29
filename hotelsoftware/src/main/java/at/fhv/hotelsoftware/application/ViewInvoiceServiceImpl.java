@@ -5,7 +5,7 @@ import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.BookingId;
-import at.fhv.hotelsoftware.domain.model.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
