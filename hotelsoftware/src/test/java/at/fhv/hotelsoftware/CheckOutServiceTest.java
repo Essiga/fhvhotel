@@ -4,6 +4,8 @@ import at.fhv.hotelsoftware.application.api.CheckOutService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +30,7 @@ public class CheckOutServiceTest {
 
 
     @Test
-    void given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout() throws BookingNotFoundException, RoomNotFoundException {
+    void given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout() throws BookingNotFoundException, RoomNotFoundException, RoomNotFoundException {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -40,19 +42,19 @@ public class CheckOutServiceTest {
                 withRoomStatus(RoomStatus.OCCUPIED).
                 withBookingId(bookingId).
                 withRoomCategory(RoomCategory.DOUBLE).
-                withRoomNumber(100).build();
+                withRoomNumber(101).build();
 
         Room singleRoom = Room.builder().
                 withRoomStatus(RoomStatus.OCCUPIED).
                 withBookingId(bookingId).
                 withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(100).build();
+                withRoomNumber(102).build();
 
         Room superiorRoom = Room.builder().
                 withRoomStatus(RoomStatus.OCCUPIED).
                 withBookingId(bookingId).
                 withRoomCategory(RoomCategory.SUPERIOR).
-                withRoomNumber(100).build();
+                withRoomNumber(103).build();
 
         list.add(singleRoom);
         list.add(superiorRoom);
@@ -75,11 +77,5 @@ public class CheckOutServiceTest {
 
         assertDoesNotThrow(() -> checkOutService.checkOut(bookingId));
         assertThrows((BookingNotFoundException.class), (() -> checkOutService.checkOut(null)), "Booking not found");
-
-        //TODO: welche variante??
-        /*
-        Throwable throwable = assertThrows((BookingNotFoundException.class), (() -> checkOutService.checkOut(null)), "Booking not found");
-        assertEquals("Booking not found", throwable.getMessage());
-         */
     }
 }
