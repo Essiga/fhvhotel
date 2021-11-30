@@ -2,10 +2,12 @@ package at.fhv.hotelsoftware.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Objects;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class LineItem {
 
@@ -14,30 +16,17 @@ public class LineItem {
     private int amount;
     private double price;
 
-    public LineItem() {
-    }
-
     public LineItem(String name, Integer amount, double price) {
         this.name = name;
         this.amount = amount;
         this.price = price;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    //TODO: Test
+    public double getTotalPrice(){
+        return amount * price;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     @Override
     public boolean equals(Object o){

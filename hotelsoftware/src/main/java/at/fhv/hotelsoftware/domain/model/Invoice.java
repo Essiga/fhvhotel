@@ -3,13 +3,16 @@ package at.fhv.hotelsoftware.domain.model;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestData;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceStatus;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 public class Invoice {
 
     private Long id;
@@ -19,9 +22,7 @@ public class Invoice {
     private List<LineItem> lineItems;
     private GuestData guestData;
 
-    public Invoice() {
-    }
-
+    @Builder
     public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, GuestData guestData) {
         this.invoiceNumber = invoiceNumber;
         this.lineItems = lineItems;
@@ -29,31 +30,6 @@ public class Invoice {
 
         this.invoiceStatus = InvoiceStatus.OPEN;
         this.invoiceDate = LocalDate.now();
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setInvoiceNumber(InvoiceNumber invoiceNumber) {
-        this.invoiceNumber = invoiceNumber;
-    }
-
-
-    public void setInvoiceDate(LocalDate invoiceDate) {
-        this.invoiceDate = invoiceDate;
-    }
-
-    public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
-        this.invoiceStatus = invoiceStatus;
-    }
-
-    public void setLineItems(List<LineItem> lineItems) {
-        this.lineItems = lineItems;
-    }
-
-    public void setGuestData(GuestData guestData) {
-        this.guestData = guestData;
     }
 
     public void addLineItems(List<LineItem> lineItems) {

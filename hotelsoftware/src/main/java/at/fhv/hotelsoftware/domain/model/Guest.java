@@ -5,8 +5,11 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor
 public class Guest {
 
     private Long id;
@@ -19,9 +22,6 @@ public class Guest {
     private GuestType guestType;
     private String companyName;
     private String agencyName;
-
-
-    private Guest(){}
 
     @Builder
     public Guest(GuestId guestId, String firstName, String lastName, String street, String zip, String city, String country, String phoneNumber, String email) {

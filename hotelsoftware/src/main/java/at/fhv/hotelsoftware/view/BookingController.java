@@ -84,24 +84,24 @@ public class BookingController {
 
         for (int i = 0; i < singleRoom.length; i++) {
              singleRoom [i] = Room.builder().
-                    withRoomStatus(RoomStatus.FREE).
-                    withBookingId(null).
-                    withRoomCategory(RoomCategory.SINGLE).
-                    withRoomNumber(100 + i).build();
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.SINGLE).
+                    roomNumber(100 + i).build();
             viewRoomService.createRoom(singleRoom [i]);
 
             doubleRoom [i] = Room.builder().
-                    withRoomStatus(RoomStatus.FREE).
-                    withBookingId(null).
-                    withRoomCategory(RoomCategory.DOUBLE).
-                    withRoomNumber(200 + i).build();
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.DOUBLE).
+                    roomNumber(200 + i).build();
             viewRoomService.createRoom(doubleRoom [i]);
 
             luxusRoom [i] = Room.builder().
-                    withRoomStatus(RoomStatus.FREE).
-                    withBookingId(null).
-                    withRoomCategory(RoomCategory.SUPERIOR).
-                    withRoomNumber(300 + i).build();
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.SUPERIOR).
+                    roomNumber(300 + i).build();
             viewRoomService.createRoom(luxusRoom [i]);
         }
 
@@ -113,8 +113,26 @@ public class BookingController {
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withGuestId(guestId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
-        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withGuestId(guestId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
+                guestId(guestId).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(0).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
+        Booking booking2 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
+                guestId(guestId2).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(0).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
 
 
 
