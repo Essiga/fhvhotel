@@ -36,14 +36,14 @@ public class CreateInvoiceServiceTests {
         //given
         GuestId guestId = new GuestId(UUID.randomUUID());
         Guest guest = new Guest(guestId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
+        GuestData guestData = GuestData.fromGuest(guest);
 
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, RoomCategory.SUPERIOR.getPrice()));
 
-        Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, customerData);
+        Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
 
         Booking booking = Booking.builder().
                 withBookingId(new BookingId(UUID.randomUUID())).

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class CustomerData {
+public class GuestData {
 
     private GuestId guestId;
     private String firstName;
@@ -23,7 +23,7 @@ public class CustomerData {
     private String companyName;
 
     @Builder
-    public CustomerData(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+    public GuestData(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
         this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -36,7 +36,7 @@ public class CustomerData {
     }
 
 
-    public static CustomerData fromGuest(Guest guest){
-                return new CustomerData(guest.getGuestId(), guest.getFirstName(), guest.getLastName(), guest.getStreetAddress(), guest.getZip(), guest.getCity(), guest.getCountry(), guest.getPhoneNumber(), guest.getEmail());
+    public static GuestData fromGuest(Guest guest){
+                return new GuestData(guest.getGuestId(), guest.getFirstName(), guest.getLastName(), guest.getStreetAddress(), guest.getZip(), guest.getCity(), guest.getCountry(), guest.getPhoneNumber(), guest.getEmail());
     }
 }

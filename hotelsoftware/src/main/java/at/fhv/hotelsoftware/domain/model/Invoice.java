@@ -14,15 +14,15 @@ public class Invoice {
     private LocalDate invoiceDate;
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
-    private CustomerData customerData;
+    private GuestData guestData;
 
     public Invoice() {
     }
 
-    public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, CustomerData customerData) {
+    public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, GuestData guestData) {
         this.invoiceNumber = invoiceNumber;
         this.lineItems = lineItems;
-        this.customerData = customerData;
+        this.guestData = guestData;
 
         this.invoiceStatus = InvoiceStatus.OPEN;
         this.invoiceDate = LocalDate.now();
@@ -49,8 +49,8 @@ public class Invoice {
         this.lineItems = lineItems;
     }
 
-    public void setCustomerData(CustomerData customerData) {
-        this.customerData = customerData;
+    public void setGuestData(GuestData guestData) {
+        this.guestData = guestData;
     }
 
     public void addLineItems(List<LineItem> lineItems) {

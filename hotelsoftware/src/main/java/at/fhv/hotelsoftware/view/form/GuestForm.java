@@ -7,12 +7,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
-public class CustomerForm {
+public class GuestForm {
     @NotEmpty(message = "First name cannot be empty")
-    private String fname;
+    private String firstName;
     //
     @NotEmpty(message = "Last name cannot be empty")
-    private String lname;
+    private String lastName;
 
     @NotEmpty(message = "Street address cannot be empty")
     private String streetAdr;

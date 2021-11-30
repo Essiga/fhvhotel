@@ -21,15 +21,15 @@ public class InvoiceTests {
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 2, RoomCategory.DOUBLE.getPrice()));
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
+        GuestData guestData = GuestData.fromGuest(guest);
 
         //when
-        Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
+        Invoice invoice = new Invoice(invoiceNumber, lineItems, guestData);
 
         //then
         assertEquals(invoiceNumber, invoice.getInvoiceNumber());
         assertEquals(lineItems, invoice.getLineItems());
-        assertEquals(customerData, invoice.getCustomerData());
+        assertEquals(guestData, invoice.getGuestData());
     }
 
     @Test
@@ -77,8 +77,8 @@ public class InvoiceTests {
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 2, RoomCategory.DOUBLE.getPrice()));
 
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
-        Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
+        GuestData guestData = GuestData.fromGuest(guest);
+        Invoice invoice = new Invoice(invoiceNumber, lineItems, guestData);
 
         lineItems.addAll(lineItems2);
 
@@ -114,8 +114,8 @@ public class InvoiceTests {
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
-        Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
+        GuestData guestData = GuestData.fromGuest(guest);
+        Invoice invoice = new Invoice(invoiceNumber, lineItems, guestData);
 
         //when
         invoice.removeLineItem(lineItems.get(0));
@@ -134,8 +134,8 @@ public class InvoiceTests {
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
-        Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
+        GuestData guestData = GuestData.fromGuest(guest);
+        Invoice invoice = new Invoice(invoiceNumber, lineItems, guestData);
 
         //when
         invoice.removeLineItem(lineItems.get(0));
@@ -154,8 +154,8 @@ public class InvoiceTests {
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromGuest(guest);
-        Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
+        GuestData guestData = GuestData.fromGuest(guest);
+        Invoice invoice = new Invoice(invoiceNumber, lineItems, guestData);
 
         //when
         invoice.removeAllLineItems();

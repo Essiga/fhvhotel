@@ -109,9 +109,9 @@ public class Booking {
                 lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), superiorRoom, RoomCategory.SUPERIOR.getPrice()));
             }
 
-            CustomerData customerData = CustomerData.fromGuest(guest);
+            GuestData guestData = GuestData.fromGuest(guest);
 
-            Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, customerData);
+            Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
 
             invoices.add(invoice);
             return invoice;

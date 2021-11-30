@@ -26,7 +26,7 @@
     </div>
 
     <div>
-      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer Overview</a>
+      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
     </div>
 
     <div>
@@ -49,7 +49,7 @@
 
         <table class="w-full table-fixed bg-white">
           <tr class="bg-blue-100 text-xl">
-            <th class="w-1/5 border-2 py-2 border-blue-200">Customer</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Guest</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Check-In Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Check-Out Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Booking Status</th>
@@ -57,7 +57,7 @@
           </tr>
 
           <tr class="text-center m-4" th:each="checkIn, stat : ${checkIns}">
-            <td class="border py-2 px-4" th:text="${checkInCustomers[__${stat.index}__].firstName} + ' ' + ${checkInCustomers[__${stat.index}__].lastName}"></td>
+            <td class="border py-2 px-4" th:text="${checkInGuests[__${stat.index}__].firstName} + ' ' + ${checkInGuests[__${stat.index}__].lastName}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.checkInDate}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.checkOutDate}"></td>
             <td class="border py-2 px-4" th:text="*{checkIn.bookingStatus}"></td>
@@ -77,7 +77,7 @@
         <table class="w-full table-fixed bg-white">
 
           <tr class="bg-blue-100 text-xl">
-            <th class="w-1/5 border-2 py-2 border-blue-200">Customer</th>
+            <th class="w-1/5 border-2 py-2 border-blue-200">Guest</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Check-In Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Check-Out Date</th>
             <th class="w-1/5 border-2 py-2 border-blue-200">Booking Status</th>
@@ -85,7 +85,7 @@
           </tr>
 
           <tr class="text-center m-4" th:each="checkOut, stat : ${checkOuts}">
-            <td class="border py-2 px-4" th:text="${checkOutCustomers[__${stat.index}__].firstName} + ' ' + ${checkOutCustomers[__${stat.index}__].lastName}"></td>
+            <td class="border py-2 px-4" th:text="${checkOutGuests[__${stat.index}__].firstName} + ' ' + ${checkOutGuests[__${stat.index}__].lastName}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.checkInDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.checkOutDate}"></td>
             <td class="border py-2 px-4" th:text="${checkOut.bookingStatus}"></td>
@@ -101,9 +101,9 @@
 
       <div class="flex h-full w-full justify-around">
 
-        <a href="createCustomer" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Booking</a>
+        <a href="createGuest" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Booking</a>
 
-        <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Customer</a>
+        <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">Create Guest</a>
 
         <a href="#" class="w-1/4 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 self-center text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">...</a>
 

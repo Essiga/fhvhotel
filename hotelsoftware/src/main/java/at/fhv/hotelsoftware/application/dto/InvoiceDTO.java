@@ -20,14 +20,14 @@ public class InvoiceDTO {
     private LocalDate invoiceDate;
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
-    private CustomerData customerData;
+    private GuestData guestData;
 
     public static InvoiceDTO fromInvoice(Invoice invoice){
         return new InvoiceDTO(invoice.getInvoiceNumber(),
                 invoice.getInvoiceDate(),
                 invoice.getInvoiceStatus(),
                 invoice.getLineItems(),
-                invoice.getCustomerData());
+                invoice.getGuestData());
     }
 
     public static List<InvoiceDTO> fromInvoiceList(List<Invoice> invoices){
@@ -38,7 +38,7 @@ public class InvoiceDTO {
                                 invoice.getInvoiceDate(),
                                 invoice.getInvoiceStatus(),
                                 invoice.getLineItems(),
-                                invoice.getCustomerData()))
+                                invoice.getGuestData()))
                 .collect(Collectors.toList());
     }
 }
