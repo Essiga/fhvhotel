@@ -95,26 +95,26 @@ public class Invoice {
         }
     }
 
-    public LineItem removeLastLineItem() {
-        if (lineItems == null || lineItems.isEmpty())
-            return null;
-
-        int idxOfLastLineItem = lineItems.size()-1;
-        LineItem lastLineItem = lineItems.get(idxOfLastLineItem);
-        lineItems.remove(lastLineItem);
-
-        return lastLineItem;
-    }
-
-    public LineItem removeFirstLineItem() {
-        if (lineItems == null || lineItems.isEmpty())
-            return null;
-
-        LineItem firstLineItem = lineItems.get(0);
-        lineItems.remove(firstLineItem);
-
-        return firstLineItem;
-    }
+//    public LineItem removeLastLineItem() {
+//        if (lineItems == null || lineItems.isEmpty())
+//            return null;
+//
+//        int idxOfLastLineItem = lineItems.size()-1;
+//        LineItem lastLineItem = lineItems.get(idxOfLastLineItem);
+//        lineItems.remove(lastLineItem);
+//
+//        return lastLineItem;
+//    }
+//
+//    public LineItem removeFirstLineItem() {
+//        if (lineItems == null || lineItems.isEmpty())
+//            return null;
+//
+//        LineItem firstLineItem = lineItems.get(0);
+//        lineItems.remove(firstLineItem);
+//
+//        return firstLineItem;
+//    }
 
     public double getSum(){
 
