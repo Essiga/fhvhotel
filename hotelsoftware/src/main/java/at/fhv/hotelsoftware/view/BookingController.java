@@ -352,11 +352,13 @@ public class BookingController {
             model.addAttribute("invoice", invoiceDTO);
 
         } catch (Exception e){
-            return new ModelAndView("redirect:"+"/");
+            return new ModelAndView("createInvoice");
         }
 
         return new ModelAndView("createInvoice");
     }
+
+
 
     @GetMapping ("/pdfInvoice")
     public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingId, Model model) {
