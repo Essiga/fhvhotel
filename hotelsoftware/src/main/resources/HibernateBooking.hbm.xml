@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-
 <hibernate-mapping default-access="field" default-cascade="all">
     <class name="at.fhv.hotelsoftware.domain.model.Booking" table="tbl_booking" lazy="true">
 

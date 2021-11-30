@@ -8,9 +8,8 @@ import java.util.Optional;
 
 public interface RoomRepository {
 
+    void addRoom(Room room);
     List<Room> findAllRooms();
     List<Room> findRoomsByBookingId(BookingId bookingid);
     Optional<Room> findRoomByRoomNumber(Integer roomNumber);
-
-    void addRoom(Room room);
 }

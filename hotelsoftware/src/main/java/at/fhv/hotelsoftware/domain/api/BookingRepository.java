@@ -6,14 +6,11 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import java.util.List;
 import java.util.Optional;
 
-
 public interface BookingRepository {
 
+    void addBooking(Booking booking);
     List<Booking> findTodaysCheckIns();
     List<Booking> findTodaysCheckOuts();
-
     List<Booking> findAllBookings();
     Optional<Booking> findBookingById(BookingId bookingId);
-
-    void addBooking(Booking booking);
 }

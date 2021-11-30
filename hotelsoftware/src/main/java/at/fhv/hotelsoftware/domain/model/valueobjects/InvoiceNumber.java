@@ -8,7 +8,11 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class InvoiceNumber {
+
     private UUID invoiceNumber;
+
+    public InvoiceNumber(UUID invoiceNumber) {
+        this.invoiceNumber = invoiceNumber;
+    }
 }

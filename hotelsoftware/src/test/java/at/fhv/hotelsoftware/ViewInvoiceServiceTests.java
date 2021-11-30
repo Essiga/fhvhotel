@@ -28,6 +28,7 @@ public class ViewInvoiceServiceTests {
     @MockBean
     private BookingRepository bookingRepository;
 
+
     @Test
     public void given_invoicealreadycreated_when_getinvoice_then_returninvoicedtoswithcorrectlineitems() throws InvoiceAlreadyCreatedException, BookingNotFoundException {
         //given
@@ -40,29 +41,26 @@ public class ViewInvoiceServiceTests {
         lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, RoomCategory.SUPERIOR.getPrice()));
 
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withGuestId(guestId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(guestId).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
         booking.createInvoice(guest);
-
         Mockito.when(bookingRepository.findBookingById(booking.getBookingId())).thenReturn(Optional.of(booking));
 
         //when
         List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(booking.getBookingId());
 
         //then
-
         for (int i = 0; i < lineItems.size(); i++){
             assertEquals(lineItems.get(i), invoiceDTOs.get(0).getLineItems().get(i));
         }
-
     }
 
     @Test
@@ -71,17 +69,15 @@ public class ViewInvoiceServiceTests {
         GuestId guestId = new GuestId(UUID.randomUUID());
         Guest guest = new Guest(guestId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
 
-
-
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withGuestId(guestId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(guestId).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
         booking.createInvoice(guest);
@@ -90,6 +86,5 @@ public class ViewInvoiceServiceTests {
 
         //when...then
         assertThrows(BookingNotFoundException.class, () -> viewInvoiceService.findInvoiceByBookingId(new BookingId(UUID.randomUUID())));
-
     }
 }

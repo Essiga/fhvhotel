@@ -42,12 +42,8 @@ public final class BookingDTO {
         this.bookingStatus = bookingStatus;
     }
 
-//    public void setBookingId(BookingId bookingId) {
-//        this.bookingId = bookingId;
-//    }
+    public static BookingDTO fromBooking(Booking booking) {
 
-
-    public static BookingDTO fromBooking(Booking booking){
         return new BookingDTO(booking.getBookingId(),
                 booking.getGuestId(),
                 booking.getCheckInDate(),
@@ -60,21 +56,21 @@ public final class BookingDTO {
                 booking.getBookingStatus());
     }
 
-    public static List<BookingDTO> fromBookingList(List<Booking> booking){
-        return booking
+    public static List<BookingDTO> fromBookingList(List<Booking> bookings) {
+
+        return bookings
                 .stream()
-                .map(bookings ->
-                        new BookingDTO(bookings.getBookingId(),
-                                bookings.getGuestId(),
-                                bookings.getCheckInDate(),
-                                bookings.getCheckOutDate(),
-                                bookings.getCancellationDeadLine(),
-                                bookings.getSingleRoom(),
-                                bookings.getDoubleRoom(),
-                                bookings.getSuperiorRoom(),
-                                bookings.getVoucherCode(),
-                                bookings.getBookingStatus()))
+                .map(booking ->
+                        new BookingDTO(booking.getBookingId(),
+                                booking.getGuestId(),
+                                booking.getCheckInDate(),
+                                booking.getCheckOutDate(),
+                                booking.getCancellationDeadLine(),
+                                booking.getSingleRoom(),
+                                booking.getDoubleRoom(),
+                                booking.getSuperiorRoom(),
+                                booking.getVoucherCode(),
+                                booking.getBookingStatus()))
                 .collect(Collectors.toList());
     }
-
 }

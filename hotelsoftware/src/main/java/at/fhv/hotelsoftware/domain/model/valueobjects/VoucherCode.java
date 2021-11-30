@@ -1,23 +1,15 @@
 package at.fhv.hotelsoftware.domain.model.valueobjects;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//TODO: Ask Jonathan about using lombok annotations and private setters
-
+@Getter
+@NoArgsConstructor
 public class VoucherCode {
+
     private String voucherCode;
 
-    public VoucherCode(){}
-    public VoucherCode(String string){
+    public VoucherCode(String string) {
         this.voucherCode = string;
-    }
-
-
-    public String getVoucherCode() {
-        return voucherCode;
-    }
-
-    public void setVoucherCode(String voucherCode) {
-        this.voucherCode = voucherCode;
     }
 }

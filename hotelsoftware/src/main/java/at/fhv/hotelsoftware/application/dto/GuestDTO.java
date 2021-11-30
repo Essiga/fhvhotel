@@ -4,30 +4,31 @@ import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.valueobjects.Address;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-//TODO: only one DTO with all fields
-
-@Data
+@Getter
+@NoArgsConstructor
 public class GuestDTO {
 
-    protected Long id;
-    protected GuestId guestId;
-    protected String firstName;
-    protected String lastName;
-    protected String streetAddress;
-    protected String zip;
-    protected String city;
-    protected String country;
-    protected String phoneNumber;
-    protected String email;
+    private Long id;
+    private GuestId guestId;
+    private String firstName;
+    private String lastName;
+    private String streetAddress;
+    private String zip;
+    private String city;
+    private String country;
+    private String phoneNumber;
+    private String email;
     private GuestType guestType;
     private String companyName;
     private String agencyName;
 
-    public GuestDTO(){}
-
-    public GuestDTO(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+    @Builder
+    public GuestDTO(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email, GuestType guestType, String companyName, String agencyName) {
         this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,10 +38,15 @@ public class GuestDTO {
         this.country = country;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.guestType = guestType;
+        this.companyName = companyName;
+        this.agencyName = agencyName;
     }
 
     public static GuestDTO fromGuest(Guest guest) {
+
         Address address = guest.getAddress();
+
         return new GuestDTO(guest.getGuestId(),
                 guest.getFirstName(),
                 guest.getLastName(),
@@ -49,6 +55,9 @@ public class GuestDTO {
                 address.getCity(),
                 address.getCountry(),
                 guest.getPhoneNumber(),
-                guest.getEmail());
+                guest.getEmail(),
+                guest.getGuestType(),
+                guest.getCompanyName(),
+                guest.getAgencyName());
     }
 }

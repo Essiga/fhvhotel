@@ -25,7 +25,6 @@ public class Guest {
 
     @Builder
     public Guest(GuestId guestId, String firstName, String lastName, String street, String zip, String city, String country, String phoneNumber, String email) {
-
         this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;

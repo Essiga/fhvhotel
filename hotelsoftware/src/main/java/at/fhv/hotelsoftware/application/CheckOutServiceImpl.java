@@ -15,11 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Data
 @Component
 public class CheckOutServiceImpl implements CheckOutService {
+
     @Autowired
     BookingRepository bookingRepository;
+
     @Autowired
     RoomRepository roomRepository;
 
@@ -28,7 +29,6 @@ public class CheckOutServiceImpl implements CheckOutService {
     public void checkOut(BookingId bookingId) throws RoomNotFoundException, BookingNotFoundException {
         Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
-        //im test auf emty prüfen
         if (optBooking.isEmpty()){
             throw new BookingNotFoundException("Booking not found");
         }

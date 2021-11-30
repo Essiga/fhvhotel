@@ -1,22 +1,17 @@
 package at.fhv.hotelsoftware.domain.model.valueobjects;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
+@Getter
+@NoArgsConstructor
 public class RoomId {
-    private UUID id;
 
-    public RoomId() {
-    }
+    private UUID roomId;
 
-    public RoomId(UUID id){
-        this.id = id;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
+    public RoomId(UUID id) {
+        this.roomId = id;
     }
 }

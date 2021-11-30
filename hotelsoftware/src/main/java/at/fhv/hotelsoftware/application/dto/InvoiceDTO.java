@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class InvoiceDTO {
 
     private InvoiceNumber invoiceNumber;
@@ -25,15 +23,17 @@ public class InvoiceDTO {
     private List<LineItem> lineItems;
     private GuestData guestData;
 
-    public static InvoiceDTO fromInvoice(Invoice invoice){
-        return new InvoiceDTO(invoice.getInvoiceNumber(),
-                invoice.getInvoiceDate(),
-                invoice.getInvoiceStatus(),
-                invoice.getLineItems(),
-                invoice.getGuestData());
+    @Builder
+    public InvoiceDTO(InvoiceNumber invoiceNumber, LocalDate invoiceDate, InvoiceStatus invoiceStatus, List<LineItem> lineItems, GuestData guestData) {
+        this.invoiceNumber = invoiceNumber;
+        this.invoiceDate = invoiceDate;
+        this.invoiceStatus = invoiceStatus;
+        this.lineItems = lineItems;
+        this.guestData = guestData;
     }
 
     public static List<InvoiceDTO> fromInvoiceList(List<Invoice> invoices){
+
         return invoices
                 .stream()
                 .map(invoice ->

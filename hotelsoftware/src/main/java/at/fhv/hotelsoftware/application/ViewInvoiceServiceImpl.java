@@ -25,12 +25,11 @@ public class ViewInvoiceServiceImpl implements ViewInvoiceService {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
-            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId().toString() + " not found.");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId().toString() + " not found");
         }
 
         Booking booking = bookingOpt.get();
 
         return InvoiceDTO.fromInvoiceList(booking.getInvoices());
-
     }
 }

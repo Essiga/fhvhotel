@@ -17,15 +17,15 @@ public class ViewGuestServiceImpl implements ViewGuestService {
     @Autowired
     private GuestRepository guestRepository;
 
-
     public GuestDTO findGuestById(GuestId guestId) throws GuestNotFoundException {
-
         Optional<Guest> guestOpt = guestRepository.findGuestById(guestId);
 
         if (guestOpt.isEmpty()){
             throw new GuestNotFoundException("Guest with ID: " + guestId.getGuestId().toString() + " not found");
         }
 
-        return GuestDTO.fromGuest(guestOpt.get());
+        Guest guest = guestOpt.get();
+
+        return GuestDTO.fromGuest(guest);
     }
 }

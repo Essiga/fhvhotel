@@ -17,6 +17,10 @@ public class RoomRepositoryImpl implements RoomRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Override
+    public void addRoom(Room room) {
+        this.em.persist(room);
+    }
 
     @Override
     public List<Room> findAllRooms() {
@@ -44,10 +48,4 @@ public class RoomRepositoryImpl implements RoomRepository {
 
         return room;
     }
-
-    @Override
-    public void addRoom(Room room) {
-        this.em.persist(room);
-    }
-
 }

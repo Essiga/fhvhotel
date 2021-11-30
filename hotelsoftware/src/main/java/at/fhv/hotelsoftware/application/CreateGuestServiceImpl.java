@@ -18,7 +18,8 @@ public class CreateGuestServiceImpl implements CreateGuestService {
     private GuestRepository guestRepository;
 
     @Transactional
-    public GuestId createGuest(GuestForm guestForm){
+    public GuestId createGuest(GuestForm guestForm) {
+
         GuestId guestId = new GuestId(UUID.randomUUID());
 
         Guest guest = Guest.builder().

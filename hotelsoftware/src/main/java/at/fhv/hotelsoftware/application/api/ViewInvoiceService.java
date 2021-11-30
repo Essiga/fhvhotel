@@ -7,5 +7,6 @@ import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import java.util.List;
 
 public interface ViewInvoiceService {
+
     List<InvoiceDTO> findInvoiceByBookingId(BookingId bookingId) throws BookingNotFoundException;
 }

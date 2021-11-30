@@ -13,10 +13,10 @@ import java.util.Optional;
 @Component
 public class GuestRepositoryImpl implements GuestRepository {
 
-
     @PersistenceContext
     private EntityManager em;
 
+    @Override
     public void addGuest(Guest guest) {
         this.em.persist(guest);
     }

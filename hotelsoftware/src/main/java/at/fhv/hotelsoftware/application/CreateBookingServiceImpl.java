@@ -22,7 +22,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     private BookingRepository bookingRepository;
 
     @Transactional
-    public void createBooking(BookingForm bookingForm, GuestId guestId){
+    public void createBooking(BookingForm bookingForm, GuestId guestId) {
 
         Booking booking = Booking.builder().
                                 bookingId(new BookingId(UUID.randomUUID())).
@@ -37,9 +37,6 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                                 superiorRoom(bookingForm.getSuperiorRoomCount()).
                                 build();
 
-
         bookingRepository.addBooking(booking);
     }
-
-
 }

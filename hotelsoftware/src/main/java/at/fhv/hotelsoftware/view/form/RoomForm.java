@@ -11,21 +11,10 @@ import java.util.List;
 @Data
 public class RoomForm {
 
-    public Long id;
+    private Long id;
     private RoomCategory roomCategory;
     private Integer roomNumber;
     private RoomStatus roomStatus;
     private BookingId bookingId;
-
     private List<RoomDTO> roomList;
-
-    public void setRoomList(List<RoomDTO> roomList) {
-        this.roomList = roomList;
-    }
-
-    public List<RoomDTO> getRoomList() {
-        return roomList;
-    }
-
-
 }

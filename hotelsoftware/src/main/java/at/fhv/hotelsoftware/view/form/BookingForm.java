@@ -33,15 +33,6 @@ public class BookingForm {
     private List<RoomDTO> roomList;
 
     private Boolean validDuration = true;
+
     private Boolean validCategoryCount = true;
-
-    public void setRoomList(List<RoomDTO> roomList) {
-        this.roomList = roomList;
-    }
-
-    public List<RoomDTO> getRoomList() {
-        return roomList;
-    }
-
-
 }

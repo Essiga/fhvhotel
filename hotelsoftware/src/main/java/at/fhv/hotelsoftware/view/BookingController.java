@@ -217,10 +217,10 @@ public class BookingController {
 
             return new ModelAndView("chooseRoom");
         }
-        if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)){
-            //TODO: Jonathan setter ok?
+        if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
             bookingForm.setValidDuration(validDuration(bookingForm));
             bookingForm.setValidCategoryCount(validCategoryCount(bookingForm));
+
             return new ModelAndView("chooseRoom");
         }
 
@@ -277,7 +277,7 @@ public class BookingController {
     public ModelAndView checkInGuestOverview(@RequestParam("id") String bookingId, Model model) {
 
         try {
-            List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
+            List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(new BookingId(bookingId));
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());

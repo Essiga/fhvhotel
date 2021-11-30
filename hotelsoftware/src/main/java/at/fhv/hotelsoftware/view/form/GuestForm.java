@@ -8,9 +8,10 @@ import javax.validation.constraints.Size;
 
 @Data
 public class GuestForm {
+
     @NotEmpty(message = "First name cannot be empty")
     private String firstName;
-    //
+
     @NotEmpty(message = "Last name cannot be empty")
     private String lastName;
 
@@ -32,6 +33,4 @@ public class GuestForm {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid syntax")
     private String email;
-
-
 }

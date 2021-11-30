@@ -38,9 +38,8 @@ public class CreateInvoiceServiceImpl implements CreateInvoiceService {
         if(guestOpt.isEmpty()){
             throw new GuestNotFoundException("Customer with ID: " + booking.getGuestId().getGuestId().toString() + " not found.");
         }
+
         Guest guest = guestOpt.get();
-
         booking.createInvoice(guest);
-
     }
 }

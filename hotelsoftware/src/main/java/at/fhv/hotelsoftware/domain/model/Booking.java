@@ -5,7 +5,6 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -28,7 +27,7 @@ public class Booking {
     private List<Invoice> invoices;
 
     @Builder
-    public Booking(BookingId bookingId, GuestId guestId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus, List<Invoice> invoices) {
+    public Booking(BookingId bookingId, GuestId guestId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
         this.bookingId = bookingId;
         this.guestId = guestId;
         this.checkInDate = checkInDate;
@@ -39,7 +38,7 @@ public class Booking {
         this.superiorRoom = superiorRoom;
         this.voucherCode = voucherCode;
         this.bookingStatus = bookingStatus;
-        this.invoices = invoices;
+        this.invoices = new ArrayList<>();
     }
 
     public void checkIn(){
@@ -51,11 +50,14 @@ public class Booking {
     }
 
     public Invoice createInvoice(Guest guest) throws InvoiceAlreadyCreatedException {
-        if(invoices.isEmpty()) {
+
+        if (invoices.isEmpty()) {
             List<LineItem> lineItems = new ArrayList<>();
+
             if (singleRoom > 0) {
                 lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), singleRoom, RoomCategory.SINGLE.getPrice()));
             }
+
             if (doubleRoom > 0) {
                 lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), doubleRoom, RoomCategory.DOUBLE.getPrice()));
             }
@@ -65,15 +67,13 @@ public class Booking {
             }
 
             GuestData guestData = GuestData.fromGuest(guest);
-
             Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
-
             invoices.add(invoice);
+
             return invoice;
         }
-        else{
+        else {
             throw new InvoiceAlreadyCreatedException("An invoice for this booking has already been created.");
         }
     }
-
 }

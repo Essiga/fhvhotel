@@ -12,5 +12,5 @@ import java.util.List;
 public interface CheckInService {
 
     void checkIn(BookingId bookingId, List<RoomDTO> freeRoomList) throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException;
-    List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException, NotEnoughRoomsException;
+    List<RoomDTO> findFreeRoomsForBooking(BookingId bookingId) throws BookingNotFoundException, NotEnoughRoomsException;
 }

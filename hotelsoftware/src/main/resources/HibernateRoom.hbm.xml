@@ -8,10 +8,6 @@
             <generator class="native"/>
         </id>
 
-   <!--     <component name="roomId" class="at.fhv.hotelsoftware.domain.model.valueobjects.RoomId">
-            <property name="roomId" column="roomId" type="java.util.UUID"/>
-        </component> -->
-
         <property name="roomCategory" column="roomCategory">
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory</param>

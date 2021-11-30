@@ -52,5 +52,4 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
         return BookingDTO.fromBooking(bookingOpt.get());
     }
-
 }
