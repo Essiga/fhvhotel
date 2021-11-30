@@ -27,7 +27,7 @@ public class Room {
         this.bookingId = bookingId;
     }
 
-    public  void  cleaning(){
+    public  void  checkOut(){
         this.roomStatus = RoomStatus.CLEANING;
         this.bookingId = null;
     }

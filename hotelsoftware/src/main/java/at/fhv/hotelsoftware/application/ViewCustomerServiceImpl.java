@@ -2,7 +2,7 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewCustomerService;
 import at.fhv.hotelsoftware.application.dto.CustomerDTO;
-import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.api.CustomerRepository;
 import at.fhv.hotelsoftware.domain.model.Customer;
 import at.fhv.hotelsoftware.domain.model.CustomerId;
@@ -23,7 +23,7 @@ public class ViewCustomerServiceImpl implements ViewCustomerService {
         Optional<Customer> customerOpt = customerRepository.findCustomerById(customerId);
 
         if (customerOpt.isEmpty()){
-            throw new CustomerNotFoundException("Customer with ID: " + customerId.getCustomerId().toString() + " Not Found");
+            throw new CustomerNotFoundException("Customer with ID: " + customerId.getCustomerId().toString() + " not found");
         }
 
         return CustomerDTO.fromCustomer(customerOpt.get());

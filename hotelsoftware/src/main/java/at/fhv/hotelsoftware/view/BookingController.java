@@ -298,6 +298,7 @@ public class BookingController {
     }
 
 
+    //TODO: Add function to get rooms from DB
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 

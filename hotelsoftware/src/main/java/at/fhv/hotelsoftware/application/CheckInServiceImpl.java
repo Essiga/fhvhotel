@@ -5,6 +5,10 @@ import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.NotEnoughRoomsException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomAlreadyOccupiedException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,7 +74,7 @@ public class CheckInServiceImpl implements CheckInService {
             Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoom.getRoomNumber());
 
             if (optRoom.isEmpty()) {
-                throw new RoomNotFoundException("Room with RoomNumber: " + checkInRoom.getRoomNumber() + "Not Found");
+                throw new RoomNotFoundException("Room with room number: " + checkInRoom.getRoomNumber() + "not found");
             }
 
             Room room = optRoom.get();
@@ -78,7 +82,7 @@ public class CheckInServiceImpl implements CheckInService {
             if (room.getRoomStatus() == RoomStatus.FREE) {
                 room.occupy(bookingId);
             } else {
-                throw new RoomAlreadyOccupiedException("Room with RoomNumber: " + room.getRoomNumber() + " Already Occupied");
+                throw new RoomAlreadyOccupiedException("Room with room number: " + room.getRoomNumber() + " already occupied");
             }
         }
 
@@ -88,7 +92,7 @@ public class CheckInServiceImpl implements CheckInService {
             booking.get().checkIn();
         }
         else
-            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
     }
 }
 

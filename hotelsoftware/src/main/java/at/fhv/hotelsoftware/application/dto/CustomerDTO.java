@@ -5,7 +5,7 @@ import at.fhv.hotelsoftware.domain.model.CustomerId;
 import lombok.Builder;
 import lombok.Data;
 
-
+//TODO: only one DTO with all fields
 
 @Data
 public class CustomerDTO {

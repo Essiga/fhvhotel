@@ -242,9 +242,10 @@
 
                             </tr>
 
-                            <tr class="text-center m-4" th:each="oneRoom : ${rooms}">
-                                <td th:text="${oneRoom.getRoomNumber()}"></td>
-                                <td th:text="${oneRoom.getRoomCategory()}"></td>
+                            <tr class="text-center m-4" th:each="room : ${rooms}">
+                                <td th:text="${room.getRoomNumber()}"></td>
+                                <td th:text="${room.getRoomCategory()}"></td>
+                                <td th:text="${room.getRoomCategory().getPrice()}"></td>
                             </tr>
 
 
