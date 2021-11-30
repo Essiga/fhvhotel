@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.application.api.CheckOutService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
+import com.sun.xml.bind.v2.TODO;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,8 +37,7 @@ public class CheckOutServiceImpl implements CheckOutService {
         List<Room> rooms = roomRepository.findRoomsByBookingId(bookingId);
 
         for (int i = 0; i < rooms.size(); i++) {
-            //cleaning umbenennen z.b checkout
-            rooms.get(i).cleaning();
+            rooms.get(i).checkOut();
         }
     }
 }
