@@ -5,8 +5,7 @@ import java.util.UUID;
 public class BookingId {
     private UUID bookingId;
 
-    public BookingId() {
-    }
+    public BookingId() {}
     public BookingId(String id) {
         this.bookingId = UUID.fromString(id);
     }

@@ -33,6 +33,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                 withSuperiorRoom(bookingForm.getSuperiorRoomCount()).
                                 build();
 
+
         bookingRepository.addBooking(booking);
     }
 

@@ -7,8 +7,8 @@
     <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Create Booking Basic UI finished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckOutServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckOutServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/CheckOutServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/CheckOutServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/test" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,17 +79,17 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/BookingId.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/BookingId.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/RoomCategory.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -160,15 +160,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -291,8 +289,8 @@
       <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
       <item itemvalue="Gradle.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
       <item itemvalue="Gradle.CheckOutServiceTest" />
-      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
       <item itemvalue="Gradle.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
+      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -640,14 +638,6 @@
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/CustomerRepositoryImpl.java</url>
           <line>27</line>
           <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/CheckOutServiceTest.java</url>
-          <line>77</line>
-          <properties>
-            <option name="lambda-ordinal" value="-1" />
-          </properties>
-          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
