@@ -3,11 +3,12 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.CustomerDTO;
+import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.CustomerRepository;
-import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
@@ -59,6 +60,9 @@ public class BookingController {
     ViewCustomerService viewCustomerService;
 
     @Autowired
+    ViewInvoiceService viewInvoiceService;
+
+    @Autowired
     CheckOutService checkOutService;
 
     //TODO: remove, only for testing/debugging
@@ -67,6 +71,8 @@ public class BookingController {
 
     @Autowired
     CustomerRepository customerRepository;
+
+
 
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
@@ -80,7 +86,9 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
+    private static final String CREATE_INVOICE = "/createInvoice";
     private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
+
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -122,8 +130,8 @@ public class BookingController {
         customerRepository.addCustomer(customer);
         customerRepository.addCustomer(customer2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(1).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
-        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withLuxusRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(1).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
 
 
 
@@ -331,14 +339,23 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-    @GetMapping(ERROR_URL)
-    private String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
-        model.addAttribute("errorMessage", errorMessage);
-        return ERROR_PAGE;
-    }
+    @GetMapping(CREATE_INVOICE)
+    public ModelAndView createInvoice(@RequestParam("id") String bookingIdS, BookingId bookingId, Model model){
 
-    private static ModelAndView redirectToErrorPage(String errorMessage) {
-        return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        try {
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingIdS);
+            List<InvoiceDTO> invoiceDTO = viewInvoiceService.findInvoiceByBookingId(bookingId);
+
+            invoiceDTO.get(0).getCustomerData().getFirstName();
+            //model.addAttribute("customer", customerDTO);
+            model.addAttribute("rooms", roomDTOs);
+            model.addAttribute("invoice", invoiceDTO);
+
+        } catch (Exception e){
+            return new ModelAndView("redirect:"+"/");
+        }
+
+        return new ModelAndView("createInvoice");
     }
 
     @GetMapping ("/pdfInvoice")
@@ -389,5 +406,15 @@ public class BookingController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @GetMapping(ERROR_URL)
+    private String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
+        model.addAttribute("errorMessage", errorMessage);
+        return ERROR_PAGE;
+    }
+
+    private static ModelAndView redirectToErrorPage(String errorMessage) {
+        return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
     }
 }
