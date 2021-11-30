@@ -17,6 +17,10 @@ public class Customer {
     protected String phoneNumber;
     protected String email;
 
+    //add agency name and company name
+    //add type
+
+
 
     private Customer(){}
 
