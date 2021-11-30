@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;

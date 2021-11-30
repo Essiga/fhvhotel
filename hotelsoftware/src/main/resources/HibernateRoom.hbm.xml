@@ -8,13 +8,13 @@
             <generator class="native"/>
         </id>
 
-   <!--     <component name="roomId" class="at.fhv.hotelsoftware.domain.model.RoomId">
+   <!--     <component name="roomId" class="at.fhv.hotelsoftware.domain.model.valueobjects.RoomId">
             <property name="roomId" column="roomId" type="java.util.UUID"/>
         </component> -->
 
         <property name="roomCategory" column="roomCategory">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomCategory</param>
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory</param>
                 <param name="type">12</param>
             </type>
         </property>
@@ -23,12 +23,12 @@
 
         <property name="roomStatus" column="roomStatus">
         <type name="org.hibernate.type.EnumType">
-            <param name="enumClass">at.fhv.hotelsoftware.domain.model.RoomStatus</param>
+            <param name="enumClass">at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus</param>
             <param name="type">12</param>
         </type>
         </property>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.valueobjects.BookingId">
             <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 

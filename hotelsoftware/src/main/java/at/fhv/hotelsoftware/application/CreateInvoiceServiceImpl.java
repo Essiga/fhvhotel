@@ -7,6 +7,7 @@ import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;

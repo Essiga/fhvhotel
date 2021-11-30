@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.domain.api;
 
 import at.fhv.hotelsoftware.domain.model.Guest;
-import at.fhv.hotelsoftware.domain.model.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

@@ -1,6 +1,10 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.VoucherCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

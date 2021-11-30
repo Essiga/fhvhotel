@@ -3,7 +3,7 @@ package at.fhv.hotelsoftware.application;
 import at.fhv.hotelsoftware.application.api.ViewGuestService;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.domain.model.Guest;
-import at.fhv.hotelsoftware.domain.model.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;

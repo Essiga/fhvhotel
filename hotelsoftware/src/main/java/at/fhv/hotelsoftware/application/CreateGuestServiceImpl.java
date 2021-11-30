@@ -3,7 +3,7 @@ package at.fhv.hotelsoftware.application;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.Guest;
-import at.fhv.hotelsoftware.domain.model.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +25,7 @@ public class CreateGuestServiceImpl implements CreateGuestService {
                                     guestId(guestId).
                                     firstName(guestForm.getFirstName()).
                                     lastName(guestForm.getLastName()).
-                                    streetAddress(guestForm.getStreetAdr()).
+                                    street(guestForm.getStreetAdr()).
                                     zip(guestForm.getZip()).
                                     city(guestForm.getCity()).
                                     country(guestForm.getCountry()).

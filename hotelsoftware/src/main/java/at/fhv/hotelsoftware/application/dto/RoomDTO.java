@@ -1,11 +1,11 @@
 package at.fhv.hotelsoftware.application.dto;
 import at.fhv.hotelsoftware.domain.model.*;
-import lombok.Data;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 
-import java.rmi.server.UID;
 import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 

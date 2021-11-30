@@ -1,10 +1,10 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import lombok.Data;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
-import java.util.UUID;
 
 @Data
 @Component

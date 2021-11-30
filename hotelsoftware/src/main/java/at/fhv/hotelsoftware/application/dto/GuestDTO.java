@@ -1,8 +1,9 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.Guest;
-import at.fhv.hotelsoftware.domain.model.GuestId;
-import at.fhv.hotelsoftware.domain.model.GuestType;
+import at.fhv.hotelsoftware.domain.model.valueobjects.Address;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
 import lombok.Data;
 
 //TODO: only one DTO with all fields
@@ -39,13 +40,14 @@ public class GuestDTO {
     }
 
     public static GuestDTO fromGuest(Guest guest) {
+        Address address = guest.getAddress();
         return new GuestDTO(guest.getGuestId(),
                 guest.getFirstName(),
                 guest.getLastName(),
-                guest.getStreetAddress(),
-                guest.getZip(),
-                guest.getCity(),
-                guest.getCountry(),
+                address.getStreet(),
+                address.getZip(),
+                address.getCity(),
+                address.getCountry(),
                 guest.getPhoneNumber(),
                 guest.getEmail());
     }

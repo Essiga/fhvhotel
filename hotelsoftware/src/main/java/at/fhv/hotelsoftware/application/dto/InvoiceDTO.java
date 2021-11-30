@@ -1,6 +1,9 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestData;
+import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
+import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

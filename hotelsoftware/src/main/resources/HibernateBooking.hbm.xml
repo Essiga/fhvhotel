@@ -10,11 +10,11 @@
             <generator class="native"/>
         </id>
 
-        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.BookingId">
+        <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.valueobjects.BookingId">
             <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
-        <component name="guestId" class="at.fhv.hotelsoftware.domain.model.GuestId">
+        <component name="guestId" class="at.fhv.hotelsoftware.domain.model.valueobjects.GuestId">
             <property name="guestId" column="customer" type="java.util.UUID"/>
         </component>
 
@@ -30,13 +30,13 @@
 
         <property name="superiorRoom" column="superiorRoom" type="java.lang.Integer"/>
 
-        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.VoucherCode">
+        <component name="voucherCode" class="at.fhv.hotelsoftware.domain.model.valueobjects.VoucherCode">
             <property name="voucherCode" column="voucherCode" type="java.lang.String"/>
         </component>
 
         <property name="bookingStatus" column="bookingStatus">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.BookingStatus</param>
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus</param>
                 <param name="type">12</param>
             </type>
         </property>

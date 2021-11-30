@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
-import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.stereotype.Component;
 

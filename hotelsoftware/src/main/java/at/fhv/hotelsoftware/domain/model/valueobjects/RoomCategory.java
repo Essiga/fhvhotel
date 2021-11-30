@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware.domain.model;
+package at.fhv.hotelsoftware.domain.model.valueobjects;
 
 public enum RoomCategory {
     SINGLE, DOUBLE, SUPERIOR;

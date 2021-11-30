@@ -1,5 +1,8 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import at.fhv.hotelsoftware.domain.model.valueobjects.Address;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,10 +13,7 @@ public class Guest {
     private GuestId guestId;
     private String firstName;
     private String lastName;
-    private String streetAddress;
-    private String zip;
-    private String city;
-    private String country;
+    private Address address;
     private String phoneNumber;
     private String email;
     private GuestType guestType;
@@ -24,16 +24,26 @@ public class Guest {
     private Guest(){}
 
     @Builder
-    public Guest(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+    public Guest(GuestId guestId, String firstName, String lastName, String street, String zip, String city, String country, String phoneNumber, String email) {
 
         this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.streetAddress = streetAddress;
-        this.zip = zip;
-        this.city = city;
-        this.country = country;
+        this.address = new Address(street, zip, city, country);
         this.phoneNumber = phoneNumber;
         this.email = email;
+    }
+
+    @Builder
+    public Guest(GuestId guestId, String firstName, String lastName, Address address, String phoneNumber, String email, GuestType guestType, String companyName, String agencyName) {
+        this.guestId = guestId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.guestType = guestType;
+        this.companyName = companyName;
+        this.agencyName = agencyName;
     }
 }
