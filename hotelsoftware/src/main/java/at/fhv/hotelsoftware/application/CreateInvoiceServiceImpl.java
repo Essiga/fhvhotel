@@ -2,10 +2,10 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CreateInvoiceService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import at.fhv.hotelsoftware.domain.api.CustomerRepository;
+import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,11 +20,11 @@ public class CreateInvoiceServiceImpl implements CreateInvoiceService {
     private BookingRepository bookingRepository;
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private GuestRepository guestRepository;
 
     @Override
     @Transactional
-    public void createInvoice(BookingId bookingId) throws BookingNotFoundException, CustomerNotFoundException, InvoiceAlreadyCreatedException {
+    public void createInvoice(BookingId bookingId) throws BookingNotFoundException, GuestNotFoundException, InvoiceAlreadyCreatedException {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
@@ -32,14 +32,14 @@ public class CreateInvoiceServiceImpl implements CreateInvoiceService {
         }
 
         Booking booking = bookingOpt.get();
-        Optional<Customer> customerOpt = customerRepository.findCustomerById(booking.getCustomerId());
+        Optional<Guest> guestOpt = guestRepository.findGuestById(booking.getGuestId());
 
-        if(customerOpt.isEmpty()){
-            throw new CustomerNotFoundException("Customer with ID: " + booking.getCustomerId().getCustomerId().toString() + " not found.");
+        if(guestOpt.isEmpty()){
+            throw new GuestNotFoundException("Customer with ID: " + booking.getGuestId().getGuestId().toString() + " not found.");
         }
-        Customer customer = customerOpt.get();
+        Guest guest = guestOpt.get();
 
-        booking.createInvoice(customer);
+        booking.createInvoice(guest);
 
     }
 }

@@ -34,7 +34,7 @@ public class CheckOutServiceTest {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
-        Booking booking = Booking.builder().withBookingId(bookingId).withCustomerId(new CustomerId()).
+        Booking booking = Booking.builder().withBookingId(bookingId).withGuestId(new GuestId()).
                 withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).
                 withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
 

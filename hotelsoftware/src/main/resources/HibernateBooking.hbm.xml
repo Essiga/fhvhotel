@@ -14,8 +14,8 @@
             <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
 
-        <component name="customerId" class="at.fhv.hotelsoftware.domain.model.CustomerId">
-            <property name="customerId" column="customer" type="java.util.UUID"/>
+        <component name="guestId" class="at.fhv.hotelsoftware.domain.model.GuestId">
+            <property name="guestId" column="customer" type="java.util.UUID"/>
         </component>
 
         <property name="checkInDate" column="checkInDate" type="java.time.LocalDate"/>

@@ -2,10 +2,10 @@ package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.application.dto.CustomerDTO;
+import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import at.fhv.hotelsoftware.domain.api.CustomerRepository;
+import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
@@ -44,10 +44,10 @@ public class BookingController {
     CheckInService checkInService;
 
     @Autowired
-    CreateCustomerService createCustomerService;
+    CreateGuestService createGuestService;
 
     @Autowired
-    ViewCustomerService viewCustomerService;
+    ViewGuestService viewGuestService;
 
     @Autowired
     CheckOutService checkOutService;
@@ -57,7 +57,7 @@ public class BookingController {
     BookingRepository bookingRepository;
 
     @Autowired
-    CustomerRepository customerRepository;
+    GuestRepository guestRepository;
 
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_CUSTOMER_URL = "/createCustomer";
@@ -104,16 +104,16 @@ public class BookingController {
             viewRoomService.createRoom(luxusRoom [i]);
         }
 
-        CustomerId customerId = new CustomerId(UUID.randomUUID());
-        CustomerId customerId2 = new CustomerId(UUID.randomUUID());
-        Customer customer = Customer.builder().customerId(customerId).firstName("Adrian").lastName("Essig").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
-        Customer customer2 = Customer.builder().customerId(customerId2).firstName("Fabian").lastName("Egartner").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        GuestId guestId = new GuestId(UUID.randomUUID());
+        GuestId guestId2 = new GuestId(UUID.randomUUID());
+        Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").streetAddress("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
 
-        customerRepository.addCustomer(customer);
-        customerRepository.addCustomer(customer2);
+        guestRepository.addGuest(guest);
+        guestRepository.addGuest(guest2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
-        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withGuestId(guestId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withGuestId(guestId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
 
 
 
@@ -134,28 +134,28 @@ public class BookingController {
 
 
         try {
-            List<CustomerDTO> checkInCustomers = findCustomersForBookings(checkIns);
-            List<CustomerDTO> checkOutCustomers = findCustomersForBookings(checkOuts);
+            List<GuestDTO> checkInCustomers = findGuestsForBookings(checkIns);
+            List<GuestDTO> checkOutCustomers = findGuestsForBookings(checkOuts);
 
             model.addAttribute("checkInCustomers", checkInCustomers);
             model.addAttribute("checkOutCustomers", checkOutCustomers);
 
-        } catch (CustomerNotFoundException e) {
+        } catch (GuestNotFoundException e) {
             e.printStackTrace();
         }
 
         return new ModelAndView("dashboard");
     }
 
-    private List<CustomerDTO> findCustomersForBookings(List<BookingDTO> bookings) throws CustomerNotFoundException {
-        List<CustomerDTO> customers = new LinkedList<CustomerDTO>();
+    private List<GuestDTO> findGuestsForBookings(List<BookingDTO> bookings) throws GuestNotFoundException {
+        List<GuestDTO> guests = new LinkedList<GuestDTO>();
         for (BookingDTO booking: bookings) {
 
 
-            customers.add(viewCustomerService.findCustomerById(booking.getCustomerId()));
+            guests.add(viewGuestService.findGuestById(booking.getGuestId()));
 
         }
-        return customers;
+        return guests;
     }
 
     @GetMapping(CREATE_CUSTOMER_URL)
@@ -249,8 +249,8 @@ public class BookingController {
             return new ModelAndView("chooseRoom");
         }
 
-        CustomerId customerId = createCustomerService.createCustomer(customerForm);
-        createBookingService.createBooking(bookingForm, customerId);
+        GuestId guestId = createGuestService.createGuest(customerForm);
+        createBookingService.createBooking(bookingForm, guestId);
         return new ModelAndView("redirect:"+"/");
     }
 
@@ -261,13 +261,13 @@ public class BookingController {
             List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
 
-            model.addAttribute("customer", customerDTO);
+            model.addAttribute("customer", guestDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
 
-        } catch (BookingNotFoundException | CustomerNotFoundException | NotEnoughRoomsException e){
+        } catch (BookingNotFoundException | GuestNotFoundException | NotEnoughRoomsException e){
             return redirectToErrorPage(e.getMessage());
         }
 
@@ -294,9 +294,9 @@ public class BookingController {
         try {
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
 
-            model.addAttribute("customer", customerDTO);
+            model.addAttribute("customer", guestDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
         } catch (Exception e){

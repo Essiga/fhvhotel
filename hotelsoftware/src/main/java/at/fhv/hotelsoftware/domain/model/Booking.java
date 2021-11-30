@@ -11,7 +11,7 @@ public class Booking {
 
     private Long id;
     private BookingId bookingId;
-    private CustomerId customerId;
+    private GuestId guestId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -45,8 +45,8 @@ public class Booking {
         return this.bookingId;
     }
 
-    public CustomerId getCustomerId() {
-        return customerId;
+    public GuestId getGuestId() {
+        return guestId;
     }
 
     public LocalDate getCheckInDate() {
@@ -95,7 +95,7 @@ public class Booking {
         this.bookingStatus = BookingStatus.COMPLETED;
     }
 
-    public Invoice createInvoice(Customer customer) throws InvoiceAlreadyCreatedException {
+    public Invoice createInvoice(Guest guest) throws InvoiceAlreadyCreatedException {
         if(invoices.isEmpty()) {
             List<LineItem> lineItems = new ArrayList<>();
             if (singleRoom > 0) {
@@ -109,7 +109,7 @@ public class Booking {
                 lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), superiorRoom, RoomCategory.SUPERIOR.getPrice()));
             }
 
-            CustomerData customerData = CustomerData.fromCustomer(customer);
+            CustomerData customerData = CustomerData.fromGuest(guest);
 
             Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, customerData);
 
@@ -140,8 +140,8 @@ public class Booking {
             return this;
         }
 
-        public Builder withCustomerId(CustomerId customerId) {
-            this.instance.customerId = customerId;
+        public Builder withGuestId(GuestId guestId) {
+            this.instance.guestId = guestId;
             return this;
         }
 

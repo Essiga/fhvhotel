@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CustomerData {
 
-    private CustomerId customerId;
+    private GuestId guestId;
     private String firstName;
     private String lastName;
     private String streetAddress;
@@ -18,15 +18,13 @@ public class CustomerData {
     private String country;
     private String phoneNumber;
     private String email;
-
-    //TODO: Thaler: should we use inheritance for CustomerData?
-    //What is the best way to do this?
+    private GuestType guestType;
     private String agencyName;
     private String companyName;
 
     @Builder
-    public CustomerData(CustomerId customerId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
-        this.customerId = customerId;
+    public CustomerData(GuestId guestId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+        this.guestId = guestId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.streetAddress = streetAddress;
@@ -38,7 +36,7 @@ public class CustomerData {
     }
 
 
-    public static CustomerData fromCustomer(Customer customer){
-                return new CustomerData(customer.getCustomerId(), customer.getFirstName(), customer.getLastName(), customer.getStreetAddress(), customer.getZip(), customer.getCity(), customer.getCountry(), customer.getPhoneNumber(), customer.getEmail());
+    public static CustomerData fromGuest(Guest guest){
+                return new CustomerData(guest.getGuestId(), guest.getFirstName(), guest.getLastName(), guest.getStreetAddress(), guest.getZip(), guest.getCity(), guest.getCountry(), guest.getPhoneNumber(), guest.getEmail());
     }
 }

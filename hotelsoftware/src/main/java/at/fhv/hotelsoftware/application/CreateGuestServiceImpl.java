@@ -1,10 +1,9 @@
 package at.fhv.hotelsoftware.application;
 
-import at.fhv.hotelsoftware.application.api.CreateCustomerService;
-import at.fhv.hotelsoftware.domain.api.CustomerRepository;
-import at.fhv.hotelsoftware.domain.model.Customer;
-import at.fhv.hotelsoftware.domain.model.CustomerId;
+import at.fhv.hotelsoftware.application.api.CreateGuestService;
+import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.Guest;
+import at.fhv.hotelsoftware.domain.model.GuestId;
 import at.fhv.hotelsoftware.view.form.CustomerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,17 +12,17 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.UUID;
 
 @Component
-public class CreateCustomerServiceImpl implements CreateCustomerService {
+public class CreateGuestServiceImpl implements CreateGuestService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private GuestRepository guestRepository;
 
     @Transactional
-    public CustomerId createCustomer(CustomerForm customerForm){
-        CustomerId customerId = new CustomerId(UUID.randomUUID());
+    public GuestId createGuest(CustomerForm customerForm){
+        GuestId guestId = new GuestId(UUID.randomUUID());
 
-        Customer customer = Guest.builder().
-                                    customerId(customerId).
+        Guest guest = Guest.builder().
+                                    guestId(guestId).
                                     firstName(customerForm.getFname()).
                                     lastName(customerForm.getLname()).
                                     streetAddress(customerForm.getStreetAdr()).
@@ -34,8 +33,8 @@ public class CreateCustomerServiceImpl implements CreateCustomerService {
                                     email(customerForm.getEmail()).
                                     build();
 
-        customerRepository.addCustomer(customer);
+        guestRepository.addGuest(guest);
 
-        return customerId;
+        return guestId;
     }
 }

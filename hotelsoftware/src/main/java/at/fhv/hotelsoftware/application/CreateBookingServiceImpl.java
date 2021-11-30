@@ -18,12 +18,12 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     private BookingRepository bookingRepository;
 
     @Transactional
-    public void createBooking(BookingForm bookingForm, CustomerId customerId){
+    public void createBooking(BookingForm bookingForm, GuestId guestId){
 
         Booking booking = Booking.builder().
                                 withBookingId(new BookingId(UUID.randomUUID())).
                                 withCancellationDeadLine(null).
-                                withCustomerId(customerId).
+                withGuestId(guestId).
                                 withBookingStatus(BookingStatus.PENDING).
                                 withVoucherCode(new VoucherCode(bookingForm.getVoucherCode())).
                                 withCheckInDate(LocalDate.parse(bookingForm.getCheckInDate())).

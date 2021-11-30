@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public final class BookingDTO {
 
     private BookingId bookingId;
-    private CustomerId customerId;
+    private GuestId guestId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -25,9 +25,9 @@ public final class BookingDTO {
     private BookingStatus bookingStatus;
 
     @Builder
-    public BookingDTO(BookingId bookingId, CustomerId customerId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
+    public BookingDTO(BookingId bookingId, GuestId guestId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
         this.bookingId = bookingId;
-        this.customerId = customerId;
+        this.guestId = guestId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
@@ -45,7 +45,7 @@ public final class BookingDTO {
 
     public static BookingDTO fromBooking(Booking booking){
         return new BookingDTO(booking.getBookingId(),
-                booking.getCustomerId(),
+                booking.getGuestId(),
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
@@ -61,7 +61,7 @@ public final class BookingDTO {
                 .stream()
                 .map(bookings ->
                         new BookingDTO(bookings.getBookingId(),
-                                bookings.getCustomerId(),
+                                bookings.getGuestId(),
                                 bookings.getCheckInDate(),
                                 bookings.getCheckOutDate(),
                                 bookings.getCancellationDeadLine(),

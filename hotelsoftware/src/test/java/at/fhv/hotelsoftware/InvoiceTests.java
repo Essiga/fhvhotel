@@ -20,8 +20,8 @@ public class InvoiceTests {
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 2, RoomCategory.DOUBLE.getPrice()));
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        CustomerData customerData = CustomerData.fromGuest(guest);
 
         //when
         Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
@@ -38,9 +38,9 @@ public class InvoiceTests {
         BookingId bookingId = new BookingId(UUID.randomUUID());
         Booking booking = Booking.builder().withSingleRoom(1).withDoubleRoom(1).withSuperiorRoom(1).withBookingId(bookingId).build();
         double expectedPrice = RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice();
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
 
-        Invoice invoice = booking.createInvoice(customer);
+        Invoice invoice = booking.createInvoice(guest);
 
         //when
         double sum = invoice.getSum();
@@ -55,11 +55,11 @@ public class InvoiceTests {
         BookingId bookingId = new BookingId(UUID.randomUUID());
         Booking booking = Booking.builder().withSingleRoom(1).withDoubleRoom(1).withSuperiorRoom(1).withBookingId(bookingId).build();
         double expectedPrice = RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice();
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        Invoice invoice = booking.createInvoice(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
 
         //when...then
-        assertThrows(InvoiceAlreadyCreatedException.class, () -> booking.createInvoice(customer));
+        assertThrows(InvoiceAlreadyCreatedException.class, () -> booking.createInvoice(guest));
     }
 
 
@@ -76,8 +76,8 @@ public class InvoiceTests {
         List<LineItem> lineItems2 = new ArrayList<>();
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 2, RoomCategory.DOUBLE.getPrice()));
 
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        CustomerData customerData = CustomerData.fromGuest(guest);
         Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
 
         lineItems.addAll(lineItems2);
@@ -113,8 +113,8 @@ public class InvoiceTests {
         InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        CustomerData customerData = CustomerData.fromGuest(guest);
         Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
 
         //when
@@ -133,8 +133,8 @@ public class InvoiceTests {
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        CustomerData customerData = CustomerData.fromGuest(guest);
         Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
 
         //when
@@ -153,8 +153,8 @@ public class InvoiceTests {
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
-        Customer customer = new Guest(new CustomerId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        CustomerData customerData = CustomerData.fromGuest(guest);
         Invoice invoice = new Invoice(invoiceNumber, lineItems, customerData);
 
         //when
