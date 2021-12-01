@@ -11,5 +11,5 @@ public interface RoomRepository {
     void addRoom(Room room);
     List<Room> findAllRooms();
     List<Room> findRoomsByBookingId(BookingId bookingid);
-    Optional<Room> findRoomByRoomNumber(Integer roomNumber);
+    Optional<Room> findRoomByRoomNumber(int roomNumber);
 }

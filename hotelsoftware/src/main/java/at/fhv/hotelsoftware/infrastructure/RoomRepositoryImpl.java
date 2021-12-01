@@ -41,7 +41,7 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public Optional<Room> findRoomByRoomNumber(Integer roomNumber){
+    public Optional<Room> findRoomByRoomNumber(int roomNumber){
         TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_number = :roomNumber", Room.class);
         query.setParameter("roomNumber", roomNumber);
         Optional<Room> room = query.getResultStream().findFirst();
