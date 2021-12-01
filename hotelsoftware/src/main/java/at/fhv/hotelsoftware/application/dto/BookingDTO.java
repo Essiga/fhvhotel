@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public final class BookingDTO {
 
-    private Long id;
     private BookingId bookingId;
     private CustomerId customerId;
     private LocalDate checkInDate;

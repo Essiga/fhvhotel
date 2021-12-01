@@ -1,61 +1,74 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 @Getter
 public class Invoice {
 
     private Long id;
     private InvoiceNumber invoiceNumber;
-    private BookingId bookingId;
+    private LocalDate invoiceDate;
+    private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
+    private CustomerData customerData;
 
-    public Invoice(BookingId bookingId) {
-        this.invoiceNumber = new InvoiceNumber(UUID.randomUUID());
-        this.bookingId = bookingId;
+    public Invoice() {
     }
 
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId) {
+    public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, CustomerData customerData) {
         this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
+        this.lineItems = lineItems;
+        this.customerData = customerData;
+
+        this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
     }
 
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, LineItem lineItem) {
-        this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
-
-        this.lineItems = new ArrayList<>();
-        lineItems.add(lineItem);
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Invoice(InvoiceNumber invoiceNumber, BookingId bookingId, List<LineItem> lineItems) {
+    public void setInvoiceNumber(InvoiceNumber invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
-        this.bookingId = bookingId;
+    }
+
+
+    public void setInvoiceDate(LocalDate invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
+
+    public void setInvoiceStatus(InvoiceStatus invoiceStatus) {
+        this.invoiceStatus = invoiceStatus;
+    }
+
+    public void setLineItems(List<LineItem> lineItems) {
         this.lineItems = lineItems;
     }
 
-    public static Invoice createInvoiceFromBooking(Booking booking){
-        InvoiceNumber invoiceNumber = new InvoiceNumber(UUID.randomUUID());
-        BookingId bookingId = booking.getBookingId();
-
-        List<LineItem> lineItems = new ArrayList<>();
-        lineItems.add(new LineItem(RoomCategory.SINGLE, booking.getSingleRoom(), RoomCategory.SINGLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.DOUBLE, booking.getSingleRoom(), RoomCategory.DOUBLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.SUPERIOR, booking.getSingleRoom(), RoomCategory.SUPERIOR.getPrice()));
-
-        return new Invoice(invoiceNumber, bookingId, lineItems);
+    public void setCustomerData(CustomerData customerData) {
+        this.customerData = customerData;
     }
 
     public void addLineItems(List<LineItem> lineItems) {
-        this.lineItems = lineItems;
+
+        if (lineItems == null)
+            return;
+
+        if (this.lineItems == null) {
+            this.lineItems = new ArrayList<>();
+        }
+
+        this.lineItems.addAll(lineItems);
     }
 
     public void addLineItem(LineItem lineItem) {
+
+        if (lineItem == null)
+            return;
 
         if (lineItems == null){
             lineItems = new ArrayList<>();
@@ -65,47 +78,52 @@ public class Invoice {
     }
 
     public void removeAllLineItems() {
-        this.lineItems = null;
+        this.lineItems.clear();
     }
 
     public void removeLineItem(LineItem lineItem) {
 
-        if (lineItem == null || lineItems == null)
+        if (lineItem == null || lineItems == null || lineItems.isEmpty())
             return;
 
-        for (LineItem l : lineItems){
+        for (LineItem l : lineItems) {
 
-            if (l.equals(lineItem)){
+            if (l.equals(lineItem)) {
                 lineItems.remove(l);
                 break;
             }
         }
-
-        if (lineItems.isEmpty())
-            lineItems = null;
     }
 
-    public double getSum(Booking booking){
-        double sum = 0.0;
-
-        sum += RoomCategory.SINGLE.getPrice() * booking.getSingleRoom();
-        sum += RoomCategory.DOUBLE.getPrice() * booking.getDoubleRoom();
-        sum += RoomCategory.SUPERIOR.getPrice() * booking.getSuperiorRoom();
-
-        return sum;
-    }
+//    public LineItem removeLastLineItem() {
+//        if (lineItems == null || lineItems.isEmpty())
+//            return null;
+//
+//        int idxOfLastLineItem = lineItems.size()-1;
+//        LineItem lastLineItem = lineItems.get(idxOfLastLineItem);
+//        lineItems.remove(lastLineItem);
+//
+//        return lastLineItem;
+//    }
+//
+//    public LineItem removeFirstLineItem() {
+//        if (lineItems == null || lineItems.isEmpty())
+//            return null;
+//
+//        LineItem firstLineItem = lineItems.get(0);
+//        lineItems.remove(firstLineItem);
+//
+//        return firstLineItem;
+//    }
 
     public double getSum(){
 
-        if (lineItems == null)
-            return 0.0;
-
-        Double sum = 0.0;
+        double sum = 0.0;
 
         for (LineItem lineItem : lineItems){
-            Integer count = lineItem.getRoomCount();
+            int amount = lineItem.getAmount();
             double price = lineItem.getPrice();
-            sum += price * count;
+            sum += price * amount;
         }
 
         return sum;

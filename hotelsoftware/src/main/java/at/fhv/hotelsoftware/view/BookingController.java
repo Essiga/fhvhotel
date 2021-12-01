@@ -6,7 +6,7 @@ import at.fhv.hotelsoftware.application.dto.CustomerDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.CustomerRepository;
-import at.fhv.hotelsoftware.domain.model.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
@@ -266,7 +266,6 @@ public class BookingController {
             model.addAttribute("customer", customerDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
-            model.addAttribute("id", bookingId);
 
         } catch (BookingNotFoundException | CustomerNotFoundException | NotEnoughRoomsException e){
             return redirectToErrorPage(e.getMessage());

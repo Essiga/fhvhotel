@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-access="field" default-cascade="all">
+    <class name="at.fhv.hotelsoftware.domain.model.Invoice" table="tbl_invoice" lazy="true">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+
+        <component name="invoiceNumber" class="at.fhv.hotelsoftware.domain.model.InvoiceNumber">
+            <property name="invoiceNumber" column="invoiceNumber" type="java.util.UUID"/>
+        </component>
+
+        <property name="invoiceDate" column="invoiceDate" type="java.time.LocalDate"/>
+
+        <property name="invoiceStatus" column="invoiceStatus">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.InvoiceStatus</param>
+                <param name="type">12</param>
+            </type>
+        </property>
+
+        <component name="customerData" class="at.fhv.hotelsoftware.domain.model.CustomerData">
+            <component name="customerId" class="at.fhv.hotelsoftware.domain.model.CustomerId">
+                <property name="customerId" column="customerId" type="java.util.UUID"/>
+            </component>
+            <property name="firstName" column="firstName" type="java.lang.String"/>
+            <property name="lastName" column="lastName" type="java.lang.String"/>
+            <property name="streetAddress" column="streetAddress" type="java.lang.String"/>
+            <property name="zip" column="zip" type="java.lang.String"/>
+            <property name="city" column="city" type="java.lang.String"/>
+            <property name="country" column="country" type="java.lang.String"/>
+            <property name="phoneNumber" column="phoneNumber" type="java.lang.String"/>
+            <property name="email" column="email" type="java.lang.String"/>
+        </component>
+
+        <list name="lineItems" cascade="all">
+            <key column="invoiceNumber"/>
+            <list-index column="idx"/>
+            <one-to-many class="at.fhv.hotelsoftware.domain.model.LineItem"/>
+        </list>
+    </class>
+
+    <class name="at.fhv.hotelsoftware.domain.model.LineItem" table="tbl_lineItem">
+        <id name="id" type="long" column="id">
+            <generator class="native"/>
+        </id>
+
+        <property name="name" column="name" type="java.lang.String"/>
+
+        <property name="amount" column="amount" type="java.lang.Integer"/>
+
+        <property name="price" column="price" type="java.lang.Double"/>
+    </class>
+</hibernate-mapping>

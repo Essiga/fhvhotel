@@ -16,4 +16,5 @@ public enum RoomCategory {
 
         return 0;
     }
+
 }

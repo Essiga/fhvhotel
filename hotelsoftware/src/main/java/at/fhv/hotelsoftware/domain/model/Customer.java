@@ -4,7 +4,6 @@ import lombok.Builder;
 import lombok.Data;
 
 @Data
-@Builder
 public class Customer {
 
     protected Long id;
@@ -18,11 +17,16 @@ public class Customer {
     protected String phoneNumber;
     protected String email;
 
+    //add agency name and company name
+    //add type
+
+
 
     private Customer(){}
 
-    public Customer(Long id, CustomerId customerId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
-        this.id = id;
+    @Builder
+    public Customer(CustomerId customerId, String firstName, String lastName, String streetAddress, String zip, String city, String country, String phoneNumber, String email) {
+
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
