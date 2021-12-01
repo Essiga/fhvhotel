@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- cleaned and structured code&#10;- removed all unnecessary getters and setters">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- removed findAllBookings&#10;- Service methods do always have an id now instead of a string">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewRoomServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewRoomServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewRoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewRoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -324,7 +318,8 @@
       <workItem from="1637773922387" duration="3082000" />
       <workItem from="1638093012675" duration="12159000" />
       <workItem from="1638197058494" duration="10458000" />
-      <workItem from="1638318406389" duration="381000" />
+      <workItem from="1638318406389" duration="506000" />
+      <workItem from="1638318945727" duration="90000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -529,7 +524,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638317202881</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="- removed findAllBookings&#10;- Service methods do always have an id now instead of a string">
+      <created>1638318904157</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1638318904157</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -675,7 +677,8 @@
     <MESSAGE value="changed customerform to guestform and changed the name of the html files from customer* to guest*" />
     <MESSAGE value="Added Address as a valueobject in Guest and CustomerData&#10;and moved all valueobjects into a new folder" />
     <MESSAGE value="- cleaned and structured code&#10;- removed all unnecessary getters and setters" />
-    <option name="LAST_COMMIT_MESSAGE" value="- cleaned and structured code&#10;- removed all unnecessary getters and setters" />
+    <MESSAGE value="- removed findAllBookings&#10;- Service methods do always have an id now instead of a string" />
+    <option name="LAST_COMMIT_MESSAGE" value="- removed findAllBookings&#10;- Service methods do always have an id now instead of a string" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

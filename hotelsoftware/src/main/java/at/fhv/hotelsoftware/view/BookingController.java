@@ -273,10 +273,12 @@ public class BookingController {
     }
 
     @GetMapping  (CHECK_IN_GUEST_OVERVIEW)
-    public ModelAndView checkInGuestOverview(@RequestParam("id") String bookingId, Model model) {
+    public ModelAndView checkInGuestOverview(@RequestParam("id") String id, Model model) {
+
+        BookingId bookingId = new BookingId(id);
 
         try {
-            List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(new BookingId(bookingId));
+            List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
@@ -310,10 +312,12 @@ public class BookingController {
 
     //TODO: Add function to get rooms from DB
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
-    public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
+    public ModelAndView checkOutGuestOverview(@RequestParam("id") String id, Model model){
+
+        BookingId bookingId = new BookingId(id);
 
         try {
-            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(new BookingId(bookingId));
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
 
