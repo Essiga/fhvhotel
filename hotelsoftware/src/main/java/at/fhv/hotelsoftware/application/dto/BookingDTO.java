@@ -1,6 +1,10 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.*;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.VoucherCode;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +18,7 @@ import java.util.stream.Collectors;
 public final class BookingDTO {
 
     private BookingId bookingId;
-    private CustomerId customerId;
+    private GuestId guestId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
@@ -25,9 +29,9 @@ public final class BookingDTO {
     private BookingStatus bookingStatus;
 
     @Builder
-    public BookingDTO(BookingId bookingId, CustomerId customerId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
+    public BookingDTO(BookingId bookingId, GuestId guestId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
         this.bookingId = bookingId;
-        this.customerId = customerId;
+        this.guestId = guestId;
         this.checkInDate = checkInDate;
         this.checkOutDate = checkOutDate;
         this.cancellationDeadLine = cancellationDeadLine;
@@ -38,14 +42,10 @@ public final class BookingDTO {
         this.bookingStatus = bookingStatus;
     }
 
-//    public void setBookingId(BookingId bookingId) {
-//        this.bookingId = bookingId;
-//    }
+    public static BookingDTO fromBooking(Booking booking) {
 
-
-    public static BookingDTO fromBooking(Booking booking){
         return new BookingDTO(booking.getBookingId(),
-                booking.getCustomerId(),
+                booking.getGuestId(),
                 booking.getCheckInDate(),
                 booking.getCheckOutDate(),
                 booking.getCancellationDeadLine(),
@@ -56,21 +56,21 @@ public final class BookingDTO {
                 booking.getBookingStatus());
     }
 
-    public static List<BookingDTO> fromBookingList(List<Booking> booking){
-        return booking
+    public static List<BookingDTO> fromBookingList(List<Booking> bookings) {
+
+        return bookings
                 .stream()
-                .map(bookings ->
-                        new BookingDTO(bookings.getBookingId(),
-                                bookings.getCustomerId(),
-                                bookings.getCheckInDate(),
-                                bookings.getCheckOutDate(),
-                                bookings.getCancellationDeadLine(),
-                                bookings.getSingleRoom(),
-                                bookings.getDoubleRoom(),
-                                bookings.getSuperiorRoom(),
-                                bookings.getVoucherCode(),
-                                bookings.getBookingStatus()))
+                .map(booking ->
+                        new BookingDTO(booking.getBookingId(),
+                                booking.getGuestId(),
+                                booking.getCheckInDate(),
+                                booking.getCheckOutDate(),
+                                booking.getCancellationDeadLine(),
+                                booking.getSingleRoom(),
+                                booking.getDoubleRoom(),
+                                booking.getSuperiorRoom(),
+                                booking.getVoucherCode(),
+                                booking.getBookingStatus()))
                 .collect(Collectors.toList());
     }
-
 }

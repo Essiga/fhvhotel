@@ -12,7 +12,6 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = DateValidator.class)
 public @interface DateNotNullOrEarlierThanToday {
 
-
     String message() default "Illegal Date";
 
     Class<?>[] groups() default {};

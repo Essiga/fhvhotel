@@ -2,11 +2,12 @@ package at.fhv.hotelsoftware;
 
 import at.fhv.hotelsoftware.application.api.CreateInvoiceService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import at.fhv.hotelsoftware.domain.api.CustomerRepository;
+import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.CustomerNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,36 +30,36 @@ public class CreateInvoiceServiceTests {
     private BookingRepository bookingRepository;
 
     @MockBean
-    private CustomerRepository customerRepository;
+    private GuestRepository guestRepository;
 
     @Test
-    public void given_existingbooking_when_createinvoice_then_invoicecreated() throws BookingNotFoundException, InvoiceAlreadyCreatedException, CustomerNotFoundException {
+    public void given_existingbooking_when_createinvoice_then_invoicecreated() throws BookingNotFoundException, InvoiceAlreadyCreatedException, GuestNotFoundException {
         //given
-        CustomerId customerId = new CustomerId(UUID.randomUUID());
-        Customer customer = new Guest(customerId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
-        CustomerData customerData = CustomerData.fromCustomer(customer);
+        GuestId guestId = new GuestId(UUID.randomUUID());
+        Guest guest = new Guest(guestId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        GuestData guestData = GuestData.fromGuest(guest);
 
         List<LineItem> lineItems = new ArrayList<LineItem>();
         lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, RoomCategory.SUPERIOR.getPrice()));
 
-        Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, customerData);
+        Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
 
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withCustomerId(customerId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(guestId).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
 
         Mockito.when(bookingRepository.findBookingById(booking.getBookingId())).thenReturn(Optional.of(booking));
-        Mockito.when(customerRepository.findCustomerById(booking.getCustomerId())).thenReturn(Optional.of(customer));
+        Mockito.when(guestRepository.findGuestById(booking.getGuestId())).thenReturn(Optional.of(guest));
 
         //when
         createInvoiceService.createInvoice(booking.getBookingId());
@@ -75,60 +76,55 @@ public class CreateInvoiceServiceTests {
 
     }
 
-
     @Test
     public void given_novalidcustomerid_when_createinvoice_then_throw_customernotfoundexception() {
         //given
-        CustomerId customerId = new CustomerId(UUID.randomUUID());
-        Customer customer = new Guest(customerId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        GuestId guestId = new GuestId(UUID.randomUUID());
+        Guest guest = new Guest(guestId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
 
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withCustomerId(customerId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(guestId).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
         Booking booking2 = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withCustomerId(new CustomerId(UUID.randomUUID())).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(new GuestId(UUID.randomUUID())).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
         Mockito.when(bookingRepository.findBookingById(booking2.getBookingId())).thenReturn(Optional.of(booking2));
-        Mockito.when(customerRepository.findCustomerById(booking.getCustomerId())).thenReturn(Optional.of(customer));
+        Mockito.when(guestRepository.findGuestById(booking.getGuestId())).thenReturn(Optional.of(guest));
 
         //when...then
-        assertThrows(CustomerNotFoundException.class, () -> createInvoiceService.createInvoice(booking2.getBookingId()));
-
-
-
-
+        assertThrows(GuestNotFoundException.class, () -> createInvoiceService.createInvoice(booking2.getBookingId()));
     }
 
     @Test
     public void given_novalidbookingid_when_createinvoice_then_throw_bookingnotfoundexception() {
         //given
-        CustomerId customerId = new CustomerId(UUID.randomUUID());
+        GuestId guestId = new GuestId(UUID.randomUUID());
 
         Booking booking = Booking.builder().
-                withBookingId(new BookingId(UUID.randomUUID())).
-                withCancellationDeadLine(null).
-                withCustomerId(customerId).
-                withBookingStatus(BookingStatus.PENDING).
-                withVoucherCode(new VoucherCode("test")).
-                withSingleRoom(1).
-                withDoubleRoom(1).
-                withSuperiorRoom(1).
+                bookingId(new BookingId(UUID.randomUUID())).
+                cancellationDeadLine(null).
+                guestId(guestId).
+                bookingStatus(BookingStatus.PENDING).
+                voucherCode(new VoucherCode("test")).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
                 build();
 
         Mockito.when(bookingRepository.findBookingById(booking.getBookingId())).thenReturn(Optional.of(booking));
@@ -136,6 +132,5 @@ public class CreateInvoiceServiceTests {
 
         //when...then
         assertThrows(BookingNotFoundException.class, () -> createInvoiceService.createInvoice(new BookingId(UUID.randomUUID())));
-
     }
 }

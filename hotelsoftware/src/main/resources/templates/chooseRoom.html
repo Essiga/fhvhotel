@@ -49,15 +49,15 @@
 
       <form th:action="@{/extraService}" th:object="${bookingForm}"  method="post">
 
-        <input type="hidden" id="fname" name="fname" th:field="${customerForm.fname}"/>
-        <input type="hidden" id="lname" name="lname" th:field="${customerForm.lname}"/>
+        <input type="hidden" id="firstName" name="firstName" th:field="${guestForm.firstName}"/>
+        <input type="hidden" id="lastName" name="lastName" th:field="${guestForm.lastName}"/>
         <input type="hidden" id="voucher" name="voucher" th:field="${bookingForm.voucherCode}"/>
-        <input type="hidden" id="streetAdr" name="streetAdr" th:field="${customerForm.streetAdr}"/>
-        <input type="hidden" id="zip" name="zip" th:field="${customerForm.zip}"/>
-        <input type="hidden" id="city" name="city" th:field="${customerForm.city}"/>
-        <input type="hidden" id="country" name="country" th:field="${customerForm.country}"/>
-        <input type="hidden" id="phone" name="phone" th:field="${customerForm.phoneNumber}"/>
-        <input type="hidden" id="email" name="email" th:field="${customerForm.email}"/>
+        <input type="hidden" id="streetAdr" name="streetAdr" th:field="${guestForm.streetAdr}"/>
+        <input type="hidden" id="zip" name="zip" th:field="${guestForm.zip}"/>
+        <input type="hidden" id="city" name="city" th:field="${guestForm.city}"/>
+        <input type="hidden" id="country" name="country" th:field="${guestForm.country}"/>
+        <input type="hidden" id="phone" name="phone" th:field="${guestForm.phoneNumber}"/>
+        <input type="hidden" id="email" name="email" th:field="${guestForm.email}"/>
 
         <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
@@ -145,7 +145,7 @@
         <div class="mt-8 flex row justify-between"> <!-- Button Line -->
 
           <div class="w-5/6">
-            <a href="/createCustomer" class="block w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
+            <a href="createGuest" class="w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
           </div>
 
           <div class="w-1/6">

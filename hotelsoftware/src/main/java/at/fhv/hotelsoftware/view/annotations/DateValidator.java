@@ -7,7 +7,6 @@ import java.time.format.DateTimeParseException;
 
 public class DateValidator implements ConstraintValidator<DateNotNullOrEarlierThanToday, String>{
 
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
 
@@ -19,9 +18,6 @@ public class DateValidator implements ConstraintValidator<DateNotNullOrEarlierTh
         } catch (DateTimeParseException | NullPointerException e){
             return false;
         }
-
         return true;
     }
-
-
 }

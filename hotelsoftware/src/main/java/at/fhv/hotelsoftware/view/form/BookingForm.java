@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.view.form;
 
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
-import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.view.annotations.DateNotNullOrEarlierThanToday;
 import lombok.*;
 
@@ -33,15 +33,6 @@ public class BookingForm {
     private List<RoomDTO> roomList;
 
     private Boolean validDuration = true;
+
     private Boolean validCategoryCount = true;
-
-    public void setRoomList(List<RoomDTO> roomList) {
-        this.roomList = roomList;
-    }
-
-    public List<RoomDTO> getRoomList() {
-        return roomList;
-    }
-
-
 }
