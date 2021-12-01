@@ -2,15 +2,12 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-
 <hibernate-mapping default-access="field" default-cascade="all">
-    <class name="at.fhv.hotelsoftware.domain.model.Guest" table="tbl_guest" lazy="true">
 
+    <class name="at.fhv.hotelsoftware.domain.model.Guest" table="tbl_guest" lazy="true">
         <id name="id" type="long" column="id">
             <generator class="native"/>
         </id>
-
-        <discriminator column="type" type="java.lang.String"></discriminator>
 
         <component name="guestId" class="at.fhv.hotelsoftware.domain.model.valueobjects.GuestId">
             <property name="guestId" column="guestId" type="java.util.UUID"/>
@@ -41,7 +38,6 @@
         <property name="companyName" column="companyName" type="java.lang.String"/>
 
         <property name="agencyName" column="agencyName" type="java.lang.String"/>
-
-
     </class>
+
 </hibernate-mapping>

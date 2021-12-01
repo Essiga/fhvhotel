@@ -3,6 +3,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping xmlns="http://www.hibernate.org/xsd/orm/hbm">
+
     <class name="at.fhv.hotelsoftware.domain.model.Room" table="tbl_room" lazy="true">
         <id name="id" type="java.lang.Long" column="id" unsaved-value="null">
             <generator class="native"/>
@@ -27,7 +28,6 @@
         <component name="bookingId" class="at.fhv.hotelsoftware.domain.model.valueobjects.BookingId">
             <property name="bookingId" column="bookingId" type="java.util.UUID"/>
         </component>
-
-
    </class>
+
 </hibernate-mapping>

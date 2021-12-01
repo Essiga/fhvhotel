@@ -123,6 +123,7 @@ public class BookingController {
                 superiorRoom(0).
                 voucherCode(new VoucherCode("")).
                 build();
+
         Booking booking2 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId2).
                 bookingStatus(BookingStatus.CONFIRMED).
@@ -133,8 +134,6 @@ public class BookingController {
                 superiorRoom(0).
                 voucherCode(new VoucherCode("")).
                 build();
-
-
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
@@ -150,8 +149,6 @@ public class BookingController {
         List<BookingDTO> checkOuts = viewBookingService.findTodaysCheckOuts();
         model.addAttribute("checkOuts", checkOuts);
 
-
-
         try {
             List<GuestDTO> checkInGuests = findGuestsForBookings(checkIns);
             List<GuestDTO> checkOutGuests = findGuestsForBookings(checkOuts);
@@ -160,20 +157,20 @@ public class BookingController {
             model.addAttribute("checkOutGuests", checkOutGuests);
 
         } catch (GuestNotFoundException e) {
-            e.printStackTrace();
+            redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("dashboard");
     }
 
     private List<GuestDTO> findGuestsForBookings(List<BookingDTO> bookings) throws GuestNotFoundException {
+
         List<GuestDTO> guests = new LinkedList<GuestDTO>();
+
         for (BookingDTO booking: bookings) {
-
-
             guests.add(viewGuestService.findGuestById(booking.getGuestId()));
-
         }
+
         return guests;
     }
 
@@ -194,7 +191,6 @@ public class BookingController {
                                          @ModelAttribute("bookingForm") BookingForm bookingForm,
                                          Model model) {
 
-
         if (result.hasErrors()) {
             return new ModelAndView("guestForm");
         }
@@ -213,10 +209,11 @@ public class BookingController {
         if (resultGuest.hasErrors()) {
             return new ModelAndView("createGuest");
         }
-        if (resultBooking.hasErrors()) {
 
+        if (resultBooking.hasErrors()) {
             return new ModelAndView("chooseRoom");
         }
+
         if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
             bookingForm.setValidDuration(validDuration(bookingForm));
             bookingForm.setValidCategoryCount(validCategoryCount(bookingForm));
@@ -253,6 +250,7 @@ public class BookingController {
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("guestForm", guestForm);
+
         return new ModelAndView("bookingSummary");
     }
 
@@ -270,6 +268,7 @@ public class BookingController {
 
         GuestId guestId = createGuestService.createGuest(guestForm);
         createBookingService.createBooking(bookingForm, guestId);
+
         return new ModelAndView("redirect:"+"/");
     }
 
@@ -294,10 +293,13 @@ public class BookingController {
     }
 
     @PostMapping (CHECK_IN_GUEST)
-    public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm booking, @ModelAttribute("freeRoomListWrapper") FreeRoomListWrapper freeRoomListWrapper, Model model) {
+    public ModelAndView checkInGuest(@ModelAttribute("booking") BookingForm booking,
+                                     @ModelAttribute("freeRoomListWrapper") FreeRoomListWrapper freeRoomListWrapper,
+                                     Model model) {
 
         try {
             checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
+
         } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
         }
@@ -318,6 +320,7 @@ public class BookingController {
             model.addAttribute("guest", guestDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
+
         } catch (Exception e){
             return new ModelAndView("redirect:"+"/");
         }
@@ -332,10 +335,11 @@ public class BookingController {
             checkOutService.checkOut(booking.getBookingId());
 
         } catch (BookingNotFoundException e) {
-            e.printStackTrace();
+            redirectToErrorPage(e.getMessage());
         } catch (RoomNotFoundException e) {
-            e.printStackTrace();
+            redirectToErrorPage(e.getMessage());
         }
+
         return new ModelAndView("redirect:"+"/");
     }
 
@@ -348,5 +352,4 @@ public class BookingController {
     private static ModelAndView redirectToErrorPage(String errorMessage) {
         return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
     }
-
 }

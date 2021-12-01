@@ -45,7 +45,6 @@
 
             <form th:action="@{/writeBookingInDatabase}" th:object="${guestForm}" method="post">
 
-
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
@@ -127,7 +126,7 @@
 
                 </div>
 
-                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <div class="flex-row">  <!-- Block Descriptions -->
 
@@ -154,11 +153,10 @@
                                    th:field="*{email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
-
                     </div>
+                </div>
 
-
-                    <div class="p-4 border border-gray-300"> <!-- Logical Block -->
+                    <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                         <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
 
@@ -189,7 +187,7 @@
 
                     </div>
 
-                    <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
+                    <div class="p-4 mb-2 border border-gray-300">   <!-- Logical Block -->
 
                         <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
 
@@ -211,16 +209,13 @@
 
                     </div>
 
-
-    <div class="mt-4 flex row justify-between"> <!-- Button Line -->
-
-                        <div class="w-1/6">
-                            <button type="submit"
-                                    class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
-                                confirm
-                            </button>
-                        </div>
-
+                    <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+                            <div class="w-1/6">
+                                <button type="submit"
+                                        class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
+                                    confirm
+                                </button>
+                            </div>
                     </div>
             </form>
         </div>
