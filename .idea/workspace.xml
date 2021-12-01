@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="- removed findAllBookings&#10;- Service methods do always have an id now instead of a string">
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/RoomRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/RoomRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/RoomRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/RoomRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/RoomForm.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +137,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="JavaScript Debug.bookingSummary.html">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -174,27 +173,6 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
         <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CreateInvoiceServiceTests&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="CreateInvoiceServiceTests.given_existingbooking_when_createinvoice_then_invoicecreated" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CreateInvoiceServiceTests.given_existingbooking_when_createinvoice_then_invoicecreated&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -273,6 +251,9 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="bookingSummary.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/hotelsoftware/hotelsoftware.main/templates/bookingSummary.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
     <configuration name="HotelsoftwareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="hotelsoftware.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
@@ -283,19 +264,19 @@
     <list>
       <item itemvalue="Application.main" />
       <item itemvalue="Gradle.InvoiceTests" />
-      <item itemvalue="Gradle.CreateInvoiceServiceTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
       <item itemvalue="Gradle.RoomCategoryTests" />
       <item itemvalue="Gradle.ViewInvoiceServiceTests" />
       <item itemvalue="Gradle.CreateInvoiceServiceTests" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="JavaScript Debug.bookingSummary.html" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.bookingSummary.html" />
         <item itemvalue="Gradle.ViewInvoiceServiceTests" />
         <item itemvalue="Gradle.CreateInvoiceServiceTests" />
         <item itemvalue="Gradle.InvoiceTests" />
         <item itemvalue="Gradle.RoomCategoryTests" />
-        <item itemvalue="Gradle.CreateInvoiceServiceTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
       </list>
     </recent_temporary>
   </component>
