@@ -20,8 +20,8 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<RoomDTO> findRoomsByBookingId(String bookingId) throws RoomNotFoundException {
-        List<Room> rooms = roomRepository.findRoomsByBookingId(new BookingId(bookingId));
+    public List<RoomDTO> findRoomsByBookingId(BookingId bookingId) throws RoomNotFoundException {
+        List<Room> rooms = roomRepository.findRoomsByBookingId(bookingId);
 
         if (rooms.isEmpty()){
             throw new RoomNotFoundException("room assigned to booking : " + bookingId + " not found");

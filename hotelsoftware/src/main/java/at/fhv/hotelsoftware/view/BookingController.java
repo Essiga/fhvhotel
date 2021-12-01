@@ -313,7 +313,7 @@ public class BookingController {
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String bookingId, Model model){
 
         try {
-            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(new BookingId(bookingId));
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
 

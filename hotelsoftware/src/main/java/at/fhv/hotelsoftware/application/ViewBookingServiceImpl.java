@@ -29,13 +29,6 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<BookingDTO> findAllBookings() {
-        List<Booking> allBookings = bookingRepository.findAllBookings();
-        return BookingDTO.fromBookingList(allBookings);
-    }
-
-    @Transactional(readOnly = true)
-    @Override
     public List<BookingDTO> findTodaysCheckOuts() {
         List<Booking> allBookings = bookingRepository.findTodaysCheckOuts();
         return BookingDTO.fromBookingList(allBookings);
@@ -43,11 +36,11 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
     @Transactional(readOnly = true)
     @Override
-    public BookingDTO findBookingById(String bookingIdString) throws BookingNotFoundException {
-        Optional<Booking> bookingOpt = bookingRepository.findBookingById(new BookingId(bookingIdString));
+    public BookingDTO findBookingById(BookingId bookingId) throws BookingNotFoundException {
+        Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
-            throw new BookingNotFoundException("Booking with ID: " + bookingIdString + " not found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId + " not found");
         }
 
         return BookingDTO.fromBooking(bookingOpt.get());
