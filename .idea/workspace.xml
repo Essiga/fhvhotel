@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="removed RoomForm">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Create Booking Basic UI finished">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/BookingTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Invoice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Room.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/valueobjects/Address.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/valueobjects/Address.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/valueobjects/GuestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/valueobjects/GuestData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/CheckOutServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/CheckOutServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/CreateInvoiceServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/CreateInvoiceServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/InvoiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/InvoiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/RoomCategoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/RoomCategoryTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/ViewInvoiceServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewInvoiceServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,15 +86,15 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -136,7 +146,25 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated">
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
+      <module name="hotelsoftware.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
+      <module name="hotelsoftware.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -148,30 +176,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
-      <module name="hotelsoftware.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
-      <module name="hotelsoftware.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CheckOutServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckOutServiceTest&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -187,12 +197,54 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="CheckOutServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckOutServiceTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -229,48 +281,6 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="InvoiceTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="HotelsoftwareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="hotelsoftware.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
@@ -280,20 +290,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="Gradle.InvoiceTests" />
-      <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
-      <item itemvalue="Gradle.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
       <item itemvalue="Gradle.CheckOutServiceTest" />
       <item itemvalue="Gradle.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" />
+      <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted" />
+      <item itemvalue="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
+        <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted" />
+        <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" />
         <item itemvalue="Gradle.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
         <item itemvalue="Gradle.CheckOutServiceTest" />
-        <item itemvalue="Gradle.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
-        <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
-        <item itemvalue="Gradle.InvoiceTests" />
       </list>
     </recent_temporary>
   </component>
@@ -624,6 +634,15 @@
     <option name="LAST_COMMIT_MESSAGE" value="Create Booking Basic UI finished" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/BookingTests.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.springframework.cglib.core.Signature" memberName="desc" />

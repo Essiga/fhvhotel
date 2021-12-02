@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware;
+package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CheckOutService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;

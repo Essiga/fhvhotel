@@ -5,6 +5,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import lombok.*;
 
+//TODO: try again without setter
 @Data //setters required by Hibernate
 @NoArgsConstructor
 public class Room {
