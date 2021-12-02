@@ -1,6 +1,6 @@
 package at.fhv.hotelsoftware;
 
-import at.fhv.hotelsoftware.domain.model.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

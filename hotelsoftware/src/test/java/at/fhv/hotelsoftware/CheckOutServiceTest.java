@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,27 +35,35 @@ public class CheckOutServiceTest {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
-        Booking booking = Booking.builder().withBookingId(bookingId).withCustomerId(new CustomerId()).
-                withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).
-                withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(0).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
 
         Room doubleRoom = Room.builder().
-                withRoomStatus(RoomStatus.OCCUPIED).
-                withBookingId(bookingId).
-                withRoomCategory(RoomCategory.DOUBLE).
-                withRoomNumber(101).build();
+                roomStatus(RoomStatus.OCCUPIED).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.DOUBLE).
+                roomNumber(101).build();
 
         Room singleRoom = Room.builder().
-                withRoomStatus(RoomStatus.OCCUPIED).
-                withBookingId(bookingId).
-                withRoomCategory(RoomCategory.SINGLE).
-                withRoomNumber(102).build();
+                roomStatus(RoomStatus.OCCUPIED).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(102).build();
 
         Room superiorRoom = Room.builder().
-                withRoomStatus(RoomStatus.OCCUPIED).
-                withBookingId(bookingId).
-                withRoomCategory(RoomCategory.SUPERIOR).
-                withRoomNumber(103).build();
+                roomStatus(RoomStatus.OCCUPIED).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SUPERIOR).
+                roomNumber(103).build();
 
         list.add(singleRoom);
         list.add(superiorRoom);

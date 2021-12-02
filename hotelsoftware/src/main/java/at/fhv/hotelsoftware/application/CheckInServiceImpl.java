@@ -9,6 +9,9 @@ import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.NotEnoughRoomsException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomAlreadyOccupiedException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,11 +35,11 @@ public class CheckInServiceImpl implements CheckInService {
     }
 
     @Override
-    public List<RoomDTO> findFreeRoomsForBooking(String bookingIdString) throws BookingNotFoundException, NotEnoughRoomsException {
-        Optional<Booking> optBooking = bookingRepository.findBookingById(new BookingId(bookingIdString));
+    public List<RoomDTO> findFreeRoomsForBooking(BookingId bookingId) throws BookingNotFoundException, NotEnoughRoomsException {
+        Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
         if (optBooking.isEmpty()) {
-            throw new BookingNotFoundException("Booking with ID: " + bookingIdString + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId + " Not Found");
         }
 
         Booking booking = optBooking.get();
@@ -48,16 +51,20 @@ public class CheckInServiceImpl implements CheckInService {
         List<RoomDTO> freeRoomsForBooking = new LinkedList<>();
 
         for (int i = 0; i < allRooms.size(); i++) {
+
             if (singleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SINGLE) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 --singleRoomCount;
+
             } else if (doubleRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.DOUBLE) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 --doubleRoomCount;
+
             } else if (luxusRoomCount != 0 && allRooms.get(i).getRoomCategory() == RoomCategory.SUPERIOR) {
                 freeRoomsForBooking.add(RoomDTO.fromRoom(allRooms.get(i)));
                 --luxusRoomCount;
             }
+
             if (singleRoomCount == 0 && doubleRoomCount == 0 && luxusRoomCount == 0) {
                 return freeRoomsForBooking;
             }

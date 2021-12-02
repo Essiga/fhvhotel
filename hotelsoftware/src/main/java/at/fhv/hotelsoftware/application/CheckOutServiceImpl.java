@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,11 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Data
 @Component
 public class CheckOutServiceImpl implements CheckOutService {
+
     @Autowired
     BookingRepository bookingRepository;
+
     @Autowired
     RoomRepository roomRepository;
 
@@ -27,7 +29,6 @@ public class CheckOutServiceImpl implements CheckOutService {
     public void checkOut(BookingId bookingId) throws RoomNotFoundException, BookingNotFoundException {
         Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
-        //im test auf emty prüfen
         if (optBooking.isEmpty()){
             throw new BookingNotFoundException("Booking not found");
         }

@@ -3,12 +3,13 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field" default-cascade="all">
+
     <class name="at.fhv.hotelsoftware.domain.model.Invoice" table="tbl_invoice" lazy="true">
         <id name="id" type="long" column="id">
             <generator class="native"/>
         </id>
 
-        <component name="invoiceNumber" class="at.fhv.hotelsoftware.domain.model.InvoiceNumber">
+        <component name="invoiceNumber" class="at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber">
             <property name="invoiceNumber" column="invoiceNumber" type="java.util.UUID"/>
         </component>
 
@@ -16,22 +17,30 @@
 
         <property name="invoiceStatus" column="invoiceStatus">
             <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">at.fhv.hotelsoftware.domain.model.InvoiceStatus</param>
+                <param name="enumClass">at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceStatus</param>
                 <param name="type">12</param>
             </type>
         </property>
 
-        <component name="customerData" class="at.fhv.hotelsoftware.domain.model.CustomerData">
-            <component name="customerId" class="at.fhv.hotelsoftware.domain.model.CustomerId">
-                <property name="customerId" column="customerId" type="java.util.UUID"/>
+        <component name="guestData" class="at.fhv.hotelsoftware.domain.model.valueobjects.GuestData">
+
+            <component name="guestId" class="at.fhv.hotelsoftware.domain.model.valueobjects.GuestId">
+                <property name="guestId" column="guestId" type="java.util.UUID"/>
             </component>
+
             <property name="firstName" column="firstName" type="java.lang.String"/>
+
             <property name="lastName" column="lastName" type="java.lang.String"/>
-            <property name="streetAddress" column="streetAddress" type="java.lang.String"/>
-            <property name="zip" column="zip" type="java.lang.String"/>
-            <property name="city" column="city" type="java.lang.String"/>
-            <property name="country" column="country" type="java.lang.String"/>
+
+            <component name="address" class="at.fhv.hotelsoftware.domain.model.valueobjects.Address">
+                <property name="street" column="streetAddress" type="java.lang.String"/>
+                <property name="zip" column="zip" type="java.lang.String"/>
+                <property name="city" column="city" type="java.lang.String"/>
+                <property name="country" column="country" type="java.lang.String"/>
+            </component>
+
             <property name="phoneNumber" column="phoneNumber" type="java.lang.String"/>
+
             <property name="email" column="email" type="java.lang.String"/>
         </component>
 
@@ -53,4 +62,5 @@
 
         <property name="price" column="price" type="java.lang.Double"/>
     </class>
+
 </hibernate-mapping>

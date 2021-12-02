@@ -24,7 +24,7 @@
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest
                     Overview</a>
             </div>
 
@@ -43,8 +43,7 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <form th:action="@{/writeBookingInDatabase}" th:object="${customerForm}" method="post">
-
+            <form th:action="@{/writeBookingInDatabase}" th:object="${guestForm}" method="post">
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -74,15 +73,15 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
-                                   th:field="*{fname}">
-                            <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                            <input readonly type="text" id="firstName" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{firstName}">
+                            <label for="firstName" class="block text-sm text-gray-500">First Name</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
-                                   th:field="*{lname}">
-                            <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
+                            <input readonly type="text" id="lastName" class="border-2 border-gray-400 w-4/6"
+                                   th:field="*{lastName}">
+                            <label for="lastName" class=" block text-sm text-gray-500">Last Name</label>
                         </div>
 
                     </div>
@@ -127,7 +126,7 @@
 
                 </div>
 
-                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <div class="flex-row">  <!-- Block Descriptions -->
 
@@ -154,11 +153,10 @@
                                    th:field="*{email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
-
                     </div>
+                </div>
 
-
-                    <div class="p-4 border border-gray-300"> <!-- Logical Block -->
+                    <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                         <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
 
@@ -189,7 +187,7 @@
 
                     </div>
 
-                    <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
+                    <div class="p-4 mb-2 border border-gray-300">   <!-- Logical Block -->
 
                         <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
 
@@ -211,16 +209,13 @@
 
                     </div>
 
-
-    <div class="mt-4 flex row justify-between"> <!-- Button Line -->
-
-                        <div class="w-1/6">
-                            <button type="submit"
-                                    class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
-                                confirm
-                            </button>
-                        </div>
-
+                    <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+                            <div class="w-1/6">
+                                <button type="submit"
+                                        class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
+                                    confirm
+                                </button>
+                            </div>
                     </div>
             </form>
         </div>

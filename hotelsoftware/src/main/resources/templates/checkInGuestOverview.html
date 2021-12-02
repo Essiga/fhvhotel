@@ -88,15 +88,15 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.firstName}">
-                            <label for="fname" class="block text-sm text-gray-500">First Name</label>
+                            <input readonly type="text" id="firstName" class="border-2 border-gray-400 w-4/6"
+                                   th:value="${guest.firstName}">
+                            <label for="firstName" class="block text-sm text-gray-500">First Name</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.lastName}">
-                            <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
+                            <input readonly type="text" id="lastName" class="border-2 border-gray-400 w-4/6"
+                                   th:value="${guest.lastName}">
+                            <label for="lastName" class=" block text-sm text-gray-500">Last Name</label>
                         </div>
 
                     </div>
@@ -111,13 +111,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.streetAddress}">
+                                   th:value="${guest.streetAddress}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
-                                   th:value="${customer.zip}">
+                                   th:value="${guest.zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                         </div>
 
@@ -127,13 +127,13 @@
 
                         <div class="w-1/2 ">
                             <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.city}">
+                                   th:value="${guest.city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.country}">
+                                   th:value="${guest.country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
                         </div>
 
@@ -159,13 +159,13 @@
 
                         <div class="w-1/2">
                             <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.phoneNumber}">
+                                   th:value="${guest.phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
                         </div>
 
                         <div class="w-1/2">
                             <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
-                                   th:value="${customer.email}">
+                                   th:value="${guest.email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
 
@@ -243,21 +243,13 @@
 
                             </tr>
 
-                        <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
-                            <td th:text="${freeRoom.roomNumber}"></td>
-                            <td th:text="${freeRoom.getRoomCategory()}"></td>
-                            <td th:text="${freeRoom.getRoomCategory().getPrice()}"></td>
-                        </tr>
+                            <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
+                                <td th:text="${freeRoom.roomNumber}"></td>
+                                <td th:text="${freeRoom.getRoomCategory()}"></td>
+                                <td th:text="${freeRoom.getRoomCategory().getPrice()}"></td>
+                            </tr>
 
-
-
-
-                    </table>
-
-
-                        <!-- <div class="w-2/6">
-                            <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Assign</button>
-                        </div> -->
+                        </table>
 
                     </div>
 
@@ -266,18 +258,12 @@
 
                 <div class="mt-4 flex row justify-between"> <!-- Button Line -->
 
-                    <div class="w-2/6">
-                        <div class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                        <a href="/" >back</a>
-                        </div>
+                    <div class="w-5/6">
+                        <a href="/" class="block w-1/5 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">back</a>
                     </div>
 
-
-                    <div class="w-2/6 text-right">
-                        <button type="submit"
-                                class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Check-In
-                        </button>
+                    <div class="w-1/6">
+                        <button type="submit" class="w-full p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">next</button>
                     </div>
 
                 </div>
