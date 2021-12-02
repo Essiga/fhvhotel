@@ -65,12 +65,17 @@ public class BookingController {
     @Autowired
     CheckOutService checkOutService;
 
+    @Autowired
+    CreateInvoiceService createInvoiceService;
+
     //TODO: remove, only for testing/debugging
     @Autowired
     BookingRepository bookingRepository;
 
     @Autowired
     CustomerRepository customerRepository;
+
+
 
 
 
@@ -87,6 +92,7 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
     private static final String CREATE_INVOICE = "/createInvoice";
+    private static final String SUBMIT_INVOICE = "/submitInvoice";
     private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
 
 
@@ -130,7 +136,7 @@ public class BookingController {
         customerRepository.addCustomer(customer);
         customerRepository.addCustomer(customer2);
 
-        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(1).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
+        Booking booking = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(2).withDoubleRoom(1).withSuperiorRoom(0).withVoucherCode(new VoucherCode("12346789")).build();
         Booking booking2 = Booking.builder().withBookingId(new BookingId(UUID.randomUUID())).withCustomerId(customerId2).withBookingStatus(BookingStatus.CONFIRMED).withCheckInDate(LocalDate.now()).withCheckOutDate(LocalDate.now()).withSingleRoom(1).withDoubleRoom(0).withSuperiorRoom(0).withVoucherCode(new VoucherCode("")).build();
 
 
@@ -340,16 +346,23 @@ public class BookingController {
     }
 
     @GetMapping(CREATE_INVOICE)
-    public ModelAndView createInvoice(@RequestParam("id") String bookingIdS, BookingId bookingId, Model model){
+    public ModelAndView createInvoice(@RequestParam("id") String bookingIdS, Model model){
 
         try {
+            BookingId bookingId = new BookingId(bookingIdS);
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingIdS);
-            List<InvoiceDTO> invoiceDTO = viewInvoiceService.findInvoiceByBookingId(bookingId);
+            createInvoiceService.createInvoice(bookingId);
 
-            invoiceDTO.get(0).getCustomerData().getFirstName();
-            //model.addAttribute("customer", customerDTO);
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingIdS);
+
+            InvoiceDTO invoice = invoiceDTOs.get(0);
+            CustomerData guest = invoiceDTOs.get(0).getCustomerData();
+
+            model.addAttribute("booking", bookingDTO);
             model.addAttribute("rooms", roomDTOs);
-            model.addAttribute("invoice", invoiceDTO);
+            model.addAttribute("invoice", invoice);
+            model.addAttribute("guest", guest);
 
         } catch (Exception e){
             return new ModelAndView("createInvoice");
@@ -357,8 +370,6 @@ public class BookingController {
 
         return new ModelAndView("createInvoice");
     }
-
-
 
     @GetMapping ("/pdfInvoice")
     public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingId, Model model) {

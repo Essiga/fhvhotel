@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Create Invoice</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="flex"> <!-- Content -->
+<div class="flex">
+
     <aside class="h-screen sticky top-0 w-1/6">
 
+        <!-- Navbar -->
         <nav class="flex-row h-screen w-full bg-green-500">
-            <!-- Navbar -->
 
             <div>
-                <a href="/"
-                   class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
             </div>
 
             <div>
@@ -29,7 +31,8 @@
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room
+                    Overview</a>
             </div>
 
             <div>
@@ -37,257 +40,147 @@
             </div>
 
         </nav>
+
     </aside>
 
     <div class="flex w-full">
 
+        <!--Content-->
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="text-3xl mb-4 font-semibold">Create Invoice</h1>
+            <h1 class="text-3xl mb-8 font-semibold">Invoice</h1>
 
-            <form th:action="@{checkOutGuest}" th:object="${invoice}"  method="post" >
+            <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
 
+                <div class="p-2 mb-6 border border-gray-300 flex">
 
+                    <div class="pr-2">Company Name:</div>
+                    <div class="font-semibold inline mr-4" id="gName" th:text="${booking.voucherCode.voucherCode}"></div>
 
+                    <div class="pr-2">Voucher Code:</div>
+                    <div class="font-semibold inline" id="voucherCode" th:text="${booking.voucherCode.voucherCode}"></div>
 
+                </div>
 
-                        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-2 mb-8 border border-gray-300">
 
-                            <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
+                    <div>
+                        <div class="inline" id="fName" th:text="${guest.firstName}"></div>
+                        <div class="inline" id="lName" th:text="${guest.lastName}"></div>
+                        <div id="streetAdr" th:text="${guest.streetAddress}"></div>
+                        <div class="inline" id="zip" th:text="${guest.zip}"></div>
+                        <div class="inline" id="city" th:text="${guest.city}"></div>
+                        <div id="country" th:text="${guest.country}"></div>
+                    </div>
 
-                            <div class="flex row"> <!-- Form Line -->
+                </div>
 
-                                <div class="w-1/2 ">
-                                    <input readonly type="text" id="gname" class="border-2 border-gray-400 w-4/6">
-                                    <label for="gname" class="block text-sm text-gray-500">Name</label>
-                                </div>
 
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6"
-                                           th:value="${booking.voucherCode.voucherCode}">
-                                    <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
-                                </div>
+                <div class="flex p-1 mb-8 justify-around border-t-2 border-b-2 border-blue-200">
 
-                            </div>
-
-                            invoice.get(customerDTO.firstName)
-
-
-                        </div>
-
-                        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
-
-                            <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
-
-                            <div class="flex row"> <!-- Form Line -->
-
-                                <div class="w-1/2 ">
-                                    <input readonly type="text" id="fname" class="border-2 border-gray-400 w-4/6"
-                                          th:value="${invoice.get(0).getCustomerData().getFirstName()}">
-                                    <label for="fname" class="block text-sm text-gray-500">First Name</label>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="lname" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.lastName}">
-                                    <label for="lname" class=" block text-sm text-gray-500">Last Name</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
-
-                            <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
-
-                            <div class="flex row"> <!-- Form Line -->
-
-                                <div class="w-1/2 ">
-                                    <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.streetAddress}">
-                                    <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
-                                           th:value="${customer.zip}">
-                                    <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
-                                </div>
-
-                            </div>
-
-                            <div class="mt-4 flex row"> <!-- Form Line -->
-
-                                <div class="w-1/2 ">
-                                    <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.city}">
-                                    <label for="city" class="block text-sm text-gray-500">City</label>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.country}">
-                                    <label for="country" class=" block text-sm text-gray-500">Country</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="p-2 border border-gray-300"> <!-- Logical Block -->
-
-                            <div class="flex-row">  <!-- Block Descriptions -->
-
-                                <div class="w-3/6 inline-block">
-                                    <h2 class="mb-4 font-semibold">Phone Number</h2>
-                                </div>
-
-                                <div class="w-1/3 inline-block">
-                                    <h2 class="mb-4 font-semibold">Email</h2>
-                                </div>
-
-                            </div>
-
-                            <div class="flex row"> <!-- Form Line -->
-
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.phoneNumber}">
-                                    <label for="phone" class="block text-sm text-gray-500">Number</label>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
-                                           th:value="${customer.email}">
-                                    <label for="email" class=" block text-sm text-gray-500">Email</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="p-4 mt-2 border border-gray-300"> <!-- Logical Block -->
-
-                            <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
-
-                            <div class="flex"> <!-- Form Line -->
-
-                                <div class="w-1/3">
-                                    <h2 class="mb-2 font-semibold">Single</h2>
-                                    <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
-                                           th:value="${booking.singleRoom}">
-                                    <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                                </div>
-
-                                <div class="w-1/3">
-                                    <h2 class="mb-2 font-semibold">Double</h2>
-                                    <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
-                                           th:value="${booking.doubleRoom}">
-                                    <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                                </div>
-
-                                <div class="w-1/3">
-                                    <h2 class="mb-2 font-semibold">Superior</h2>
-                                    <input readonly type="number" id="superior" class="border-2 border-gray-400 w-16"
-                                           th:value="${booking.superiorRoom}">
-                                    <label for="superior" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="p-4 mt-2 border border-gray-300">   <!-- Logical Block -->
-
-                            <h2 class="mb-6 text-xl font-semibold">Stay Duration</h2>
-
-                            <div class="flex row"> <!-- Form Line -->
-
-                                <div class="w-1/2">
-                                    <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2"
-                                           th:value="${booking.checkInDate}">
-                                    <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
-                                </div>
-
-                                <div class="w-1/2">
-                                    <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2"
-                                           th:value="${booking.checkOutDate}">
-                                    <label for="toDate" class="block text-sm text-gray-500">To Date</label>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="overflow-auto p-4 mt-2 border border-gray-300"> <!-- Logical Block -->
-
-                            <h2 class="mb-6 text-xl font-semibold">Room</h2>  <!-- Block Description -->
-
-                            <div class="flex"> <!-- Form Line -->
-
-                                <table class="w-full table-fixed bg-white">
-
-                                    <tr class="bg-blue-100 text-xs">
-                                        <th class="w-1/5 border-2 py-2 border-blue-200">Room Number</th>
-                                        <th class="w-2/5 border-2 py-2 border-blue-200">Category</th>
-                                        <th class="w-1/5 border-2 py-2 border-blue-200">Price</th>
-
-                                    </tr>
-
-                                    <tr class="text-center m-4" th:each="room : ${rooms}">
-                                        <td th:text="${room.getRoomNumber()}"></td>
-                                        <td th:text="${room.getRoomCategory()}"></td>
-                                        <td th:text="${room.getRoomCategory().getPrice()}"></td>
-                                    </tr>
-
-
-
-
-                                </table>
-
-
-                                <!-- <div class="w-2/6">
-                                    <button type="submit" class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Assign</button>
-                                </div> -->
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="mt-4 flex row justify-between"> <!-- Button Line -->
-
-                            <div class="w-2/6">
-                                <button type="submit"
-                                        class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                                    Back
-                                </button>
-                            </div>
-
-                            <div class="w-2/6" th:object="${booking}">
-                                <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}"
-                                   class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                                    PDF Invoice
-                                </a>
-                            </div>
-
-                            <div class="w-2/6">
-                                <button type="submit"
-                                        class="w-full p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                                    Check-Out
-                                </button>
-                            </div>
-
+                    <div>
+                        <div class="inline">Check-In Date:
+                            <div class="font-semibold" id="fromDate" th:text="${booking.checkInDate}"></div>
                         </div>
                     </div>
+
+                    <div>
+                        <div class="inline">Check-Out Date:
+                            <div class="font-semibold" id="toDate" th:text="${booking.checkOutDate}"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="inline">Invoice Date:
+                            <div class="font-semibold" id="today" th:text="${invoice.getInvoiceDate()}"></div>
+                        </div>
+                    </div>
+
                 </div>
+
+                <div>
+
+                    <div class="flex mb-8">
+                        <div class="font-bold pr-1">Invoice Number:</div>
+                        <div class="pl-2 font-semibold" id="invoiceNumber"
+                             th:text="${invoice.invoiceNumber.invoiceNumber}"></div>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <table class="w-full table-fixed bg-white border-2 border-blue-200">
+
+                        <tr class="bg-blue-100 text-base">
+                            <th class="w-2/5 border-2 py-2 border-blue-200">Description</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Amount</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Single Price</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Total Price</th>
+                        </tr>
+
+                        <tr class="text-center border-2 border-blue-100" th:each="item : ${invoice.lineItems}">
+                            <td class="p-1" th:text="${item.getName()}"></td>
+                            <td class="p-1" th:text="${item.getAmount()}"></td>
+                            <td class="p-1" th:text="${item.getPrice()}"></td>
+                            <td class="p-1"></td>
+                        </tr>
+                    </table>
+
+                    <table class="w-full table-fixed bg-white ">
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-base text-right font-semibold p-2">Net Price</th>
+                            <td class="w-1/5 text-base">
+                                <div class="text-center border-gray-200 border-b-2 p-1"></div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-right font-semibold p-2">+ 20 % tax</th>
+                            <td class="w-1/5">
+                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
+                            <td class="w-1/5">
+                                <div class="p-2 text-center font-bold border-black border-double border-b-4"></div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="mt-16 flex justify-between items-baseline">
+
+                    <div class="w-3/5">
+                        <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}"
+                           class="p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Generate PDF
+                        </a>
+                    </div>
+
+
+                    <div class="w-2/5 text-right">
+                        <button type="submit"
+                                class="w-1/2 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Complete
+                        </button>
+                    </div>
+
+                </div>
+
             </form>
         </div>
     </div>
 </div>
-
 </body>
+
 </html>
