@@ -2,16 +2,13 @@ package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.application.dto.CustomerDTO;
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import at.fhv.hotelsoftware.domain.api.CustomerRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
-import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
@@ -37,7 +34,6 @@ import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -376,18 +372,18 @@ public class BookingController {
     }
 
     @GetMapping(CREATE_INVOICE)
-    public ModelAndView createInvoice(@RequestParam("id") String bookingIdS, Model model){
+    public ModelAndView createInvoice(@RequestParam("id") String bookingIdString, Model model){
 
         try {
-            BookingId bookingId = new BookingId(bookingIdS);
-            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingIdS);
+            BookingId bookingId = new BookingId(bookingIdString);
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             createInvoiceService.createInvoice(bookingId);
 
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
-            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingIdS);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
 
             InvoiceDTO invoice = invoiceDTOs.get(0);
-            CustomerData guest = invoiceDTOs.get(0).getCustomerData();
+            GuestData guest = invoiceDTOs.get(0).getGuestData();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("rooms", roomDTOs);
@@ -402,16 +398,17 @@ public class BookingController {
     }
 
     @GetMapping ("/pdfInvoice")
-    public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingId, Model model) {
+    public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, Model model) {
 
 
         try {
+            BookingId bookingId = new BookingId(bookingIdString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            CustomerDTO customerDTO = viewCustomerService.findCustomerById(bookingDTO.getCustomerId());
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
 
             model.addAttribute("booking", bookingDTO);
-            model.addAttribute("customer",customerDTO);
+            model.addAttribute("guest",guestDTO);
             model.addAttribute("room", roomDTO);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
@@ -428,7 +425,7 @@ public class BookingController {
 
 
             context.setVariable("roomDTO", roomDTO);
-            context.setVariable("customerDTO", customerDTO);
+            context.setVariable("guestDTO", guestDTO);
             context.setVariable("bookingDTO", bookingDTO);
             context.setVariable("stay", stay);
 

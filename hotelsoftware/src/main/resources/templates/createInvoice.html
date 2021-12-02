@@ -67,10 +67,10 @@
                     <div>
                         <div class="inline" id="fName" th:text="${guest.firstName}"></div>
                         <div class="inline" id="lName" th:text="${guest.lastName}"></div>
-                        <div id="streetAdr" th:text="${guest.streetAddress}"></div>
-                        <div class="inline" id="zip" th:text="${guest.zip}"></div>
-                        <div class="inline" id="city" th:text="${guest.city}"></div>
-                        <div id="country" th:text="${guest.country}"></div>
+                        <div id="streetAdr" th:text="${guest.address.street}"></div>
+                        <div class="inline" id="zip" th:text="${guest.address.zip}"></div>
+                        <div class="inline" id="city" th:text="${guest.address.city}"></div>
+                        <div id="country" th:text="${guest.address.country}"></div>
                     </div>
 
                 </div>
