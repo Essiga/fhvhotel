@@ -32,4 +32,6 @@ public class ViewInvoiceServiceImpl implements ViewInvoiceService {
 
         return InvoiceDTO.fromInvoiceList(booking.getInvoices());
     }
+
+
 }

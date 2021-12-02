@@ -22,16 +22,22 @@ public class InvoiceDTO {
     private InvoiceStatus invoiceStatus;
     private List<LineItem> lineItems;
     private GuestData guestData;
+    private double sum;
+    private double tax;
+    private double totalPrice;
 
-    @Builder
-    public InvoiceDTO(InvoiceNumber invoiceNumber, LocalDate invoiceDate, InvoiceStatus invoiceStatus, List<LineItem> lineItems, GuestData guestData) {
+    public InvoiceDTO(InvoiceNumber invoiceNumber, LocalDate invoiceDate, InvoiceStatus invoiceStatus, List<LineItem> lineItems, GuestData guestData, double sum, double tax, double totalPrice) {
         this.invoiceNumber = invoiceNumber;
         this.invoiceDate = invoiceDate;
         this.invoiceStatus = invoiceStatus;
         this.lineItems = lineItems;
         this.guestData = guestData;
+        this.sum = sum;
+        this.tax = tax;
+        this.totalPrice = totalPrice;
     }
 
+    @Builder
     public static List<InvoiceDTO> fromInvoiceList(List<Invoice> invoices){
 
         return invoices
@@ -41,7 +47,10 @@ public class InvoiceDTO {
                                 invoice.getInvoiceDate(),
                                 invoice.getInvoiceStatus(),
                                 invoice.getLineItems(),
-                                invoice.getGuestData()))
+                                invoice.getGuestData(),
+                                invoice.getSum(),
+                                invoice.getTax(invoice.getSum()),
+                                invoice.getTotalPrice(invoice.getSum(), invoice.getTax(invoice.getSum()))))
                 .collect(Collectors.toList());
     }
 }

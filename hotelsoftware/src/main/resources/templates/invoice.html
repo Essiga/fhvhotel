@@ -67,12 +67,27 @@
         }
 
         .biggerSpace{
-            padding-right: 60px;
+            padding-right: 335px;
             font-weight: bold;
         }
 
+        .itemSmall {
+            width: 120px;
+        }
 
+        .itemBig {
+            width: 350px;
+        }
 
+        .itemLast {
+            width: 80px;
+            text-align: right;
+        }
+
+        .price {
+            width: 107px;
+            text-align: right;
+        }
         .content tr td {
             font-size: 11pt;
         }
@@ -119,22 +134,21 @@
 
 <body>
 <div class="addressBlock">
-    <span th:text="${customerDTO.firstName}"/> <span th:text="${customerDTO.lastName}"/>
-    <p th:text="${customerDTO.streetAddress}"/>
-    <span th:text="${customerDTO.zip}"/> <span th:text="${customerDTO.city}"/>
-    <p th:text="${customerDTO.country}"/>
+    <span th:text="${guest.firstName}"/> <span th:text="${guest.lastName}"/>
+    <p th:text="${guest.address.street}"/>
+    <span th:text="${guest.address.zip}"/> <span th:text="${guest.address.city}"/>
+    <p th:text="${guest.address.country}"/>
 </div>
 
 
 <p class="right" th:text="${date}"/>
 
-
-<h1>Invoice 001</h1>
+<h1>Invoice <span th:text="${invoice.invoiceNumber.invoiceNumber}"></span></h1>
 <hr></hr>
 <table class="heading">
     <tr>
-        <td>Check-In Date: <span th:text="${bookingDTO.checkInDate}"/> </td>
-        <td>Check-Out Date:  <span th:text="${bookingDTO.checkInDate}"/> </td>
+        <td>Check-In Date: <span th:text="${booking.checkInDate}"/> </td>
+        <td>Check-Out Date:  <span th:text="${booking.checkInDate}"/> </td>
     </tr>
 </table>
 <hr></hr>
@@ -142,44 +156,41 @@
 
 <table class="content">
     <tr>
-        <span class="smallSpace">Room Number</span>
-        <span class="smallSpace">Quantity</span>
-        <span class="biggerSpace">Category / Description</span>
-        <span>Single Price</span>
-        <span>Total Price</span>
+        <span class="smallSpace">Description</span>
+        <span class="biggerSpace">Amount</span>
+        <span class="smallSpace">Single Price</span>
+        <span style="font-weight: bold">Total Price</span>
     </tr>
 
     <tr>
-        <div th:each="roomDTO : ${roomDTO}">
-            <td style="padding-left: 40px; padding-right: 60px" th:text="*{roomDTO.roomNumber}"/>
-            <td style="padding-right: 28px" th:text="*{stay}"/>
-            <td th:text="*{roomDTO.roomCategory}"/>
+        <div th:each="item : ${invoice.lineItems}">
+            <td class="itemSmall" th:text="*{item.name}"/>
+            <td class="itemBig" th:text="*{item.amount}"/>
+            <td class="itemLast" th:text="*{item.price}"/>
+            <td class="price" th:text="*{item.totalPrice}"/>
         </div>
     </tr>
 </table>
 <hr></hr>
 
-
 <div class="tableRight">
     <table class="totalPrice">
         <tr>
-            <th>Price without tax</th>
-            <td>520,00</td>
-        </tr>
-        <tr>
-            <th>+ 10% tax</th>
-            <td>0,00</td>
+            <th>Net Price</th>
+            <td th:text="${invoice.sum}"></td>
         </tr>
         <tr>
             <th>+ 20% tax</th>
-            <td>104,00</td>
+            <td th:text="${invoice.tax}"></td>
         </tr>
         <tr>
             <th>Total Price</th>
-            <td>624,00</td>
+            <td th:text="${invoice.totalPrice}"></td>
         </tr>
     </table>
 </div>
+
+
 
 
 </body>

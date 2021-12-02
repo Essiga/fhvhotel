@@ -43,4 +43,14 @@ public class Invoice {
 
         return sum;
     }
+
+    public double getTax(double sum){
+        double tax = 0.2 * sum;
+        return tax;
+    }
+
+    public double getTotalPrice(double sum, double tax){
+        double totalPrice = sum + tax;
+        return totalPrice;
+    }
 }

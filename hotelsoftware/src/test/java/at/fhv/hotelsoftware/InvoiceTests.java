@@ -76,4 +76,42 @@ public class InvoiceTests {
     //then
     assertTrue(identicalLineItems);
     }
+
+    @Test
+    public void given_invoice_when_tax_then_reflectax() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().singleRoom(1).doubleRoom(1).superiorRoom(1).bookingId(bookingId).build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        double sum = invoice.getSum();
+        double expectedTax = 0.2 * (RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice());
+
+        //when
+        double tax = invoice.getTax(sum);
+
+        // then
+        assertEquals(expectedTax, tax);
+    }
+
+    @Test
+    public void given_invoice_when_taxandsum_then_reflecttotalsum() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().singleRoom(1).doubleRoom(1).superiorRoom(1).bookingId(bookingId).build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        double sum = invoice.getSum();
+        double tax = invoice.getTax(sum);
+
+        double expectedTotalPrice = 1.2 * (RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice());
+
+        //when
+        double totalPrice = invoice.getTotalPrice(sum, tax);
+
+        // then
+        assertEquals(totalPrice, totalPrice);
+    }
 }

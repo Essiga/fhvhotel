@@ -141,9 +141,9 @@ public class BookingController {
                 bookingStatus(BookingStatus.CONFIRMED).
                 checkInDate(LocalDate.now()).
                 checkOutDate(LocalDate.now()).
-                singleRoom(1).
-                doubleRoom(0).
-                superiorRoom(0).
+                singleRoom(2).
+                doubleRoom(1).
+                superiorRoom(1).
                 voucherCode(new VoucherCode("")).
                 build();
 
@@ -404,12 +404,16 @@ public class BookingController {
         try {
             BookingId bookingId = new BookingId(bookingIdString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+
+            InvoiceDTO invoice = invoiceDTOs.get(0);
+            GuestData guest = invoiceDTOs.get(0).getGuestData();
 
             model.addAttribute("booking", bookingDTO);
-            model.addAttribute("guest",guestDTO);
+            model.addAttribute("guest",guest);
             model.addAttribute("room", roomDTO);
+            model.addAttribute("invoice", invoice);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
             templateResolver.setSuffix(".html");
@@ -424,10 +428,11 @@ public class BookingController {
             String stay = String.format("%d Days", days);
 
 
-            context.setVariable("roomDTO", roomDTO);
-            context.setVariable("guestDTO", guestDTO);
-            context.setVariable("bookingDTO", bookingDTO);
+            context.setVariable("room", roomDTO);
+            context.setVariable("guest", guest);
+            context.setVariable("booking", bookingDTO);
             context.setVariable("stay", stay);
+            context.setVariable("invoice", invoice);
 
 
             String html = templateEngine.process("templates/invoice", context);

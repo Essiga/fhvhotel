@@ -51,14 +51,17 @@
             <h1 class="text-3xl mb-8 font-semibold">Invoice</h1>
 
             <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
+                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
                 <div class="p-2 mb-6 border border-gray-300 flex">
 
                     <div class="pr-2">Company Name:</div>
-                    <div class="font-semibold inline mr-4" id="gName" th:text="${booking.voucherCode.voucherCode}"></div>
+                    <div class="font-semibold inline mr-4" id="gName"
+                         th:text="${booking.voucherCode.voucherCode}"></div>
 
                     <div class="pr-2">Voucher Code:</div>
-                    <div class="font-semibold inline" id="voucherCode" th:text="${booking.voucherCode.voucherCode}"></div>
+                    <div class="font-semibold inline" id="voucherCode"
+                         th:text="${booking.voucherCode.voucherCode}"></div>
 
                 </div>
 
@@ -123,7 +126,7 @@
                             <td class="p-1" th:text="${item.getName()}"></td>
                             <td class="p-1" th:text="${item.getAmount()}"></td>
                             <td class="p-1" th:text="${item.getPrice()}"></td>
-                            <td class="p-1"></td>
+                            <td class="p-1" th:text="${item.getTotalPrice()}"></td>
                         </tr>
                     </table>
 
@@ -133,7 +136,7 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-base text-right font-semibold p-2">Net Price</th>
                             <td class="w-1/5 text-base">
-                                <div class="text-center border-gray-200 border-b-2 p-1"></div>
+                                <div class="text-center border-gray-200 border-b-2 p-1" th:text="${invoice.sum}"></div>
                             </td>
 
                         </tr>
@@ -142,7 +145,8 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2">+ 20 % tax</th>
                             <td class="w-1/5">
-                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"></div>
+                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"
+                                     th:text="${invoice.tax}"></div>
                             </td>
                         </tr>
 
@@ -150,7 +154,8 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
                             <td class="w-1/5">
-                                <div class="p-2 text-center font-bold border-black border-double border-b-4"></div>
+                                <div class="p-2 text-center font-bold border-black border-double border-b-4"
+                                     th:text="${invoice.totalPrice}"></div>
                             </td>
                         </tr>
 
@@ -160,17 +165,18 @@
 
                 <div class="mt-16 flex justify-between items-baseline">
 
-                    <div class="w-3/5">
-                        <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}"
-                           class="p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Generate PDF
-                        </a>
+                    <div class="w-2/6">
+                        <div class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}">
+                                 Generate PDF
+                            </a>
+                        </div>
                     </div>
 
 
-                    <div class="w-2/5 text-right">
+                    <div class="w-2/6 text-right">
                         <button type="submit"
-                                class="w-1/2 p-2 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                                class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             Complete
                         </button>
                     </div>
