@@ -424,16 +424,10 @@ public class BookingController {
             templateEngine.setTemplateResolver(templateResolver);
 
             Context context = new Context();
-            context.setVariable("date", LocalDate.now());
-
-            long days = DAYS.between(bookingDTO.getCheckInDate(), bookingDTO.getCheckOutDate());
-            String stay = String.format("%d Days", days);
-
 
             context.setVariable("room", roomDTO);
             context.setVariable("guest", guest);
             context.setVariable("booking", bookingDTO);
-            context.setVariable("stay", stay);
             context.setVariable("invoice", invoice);
 
 
