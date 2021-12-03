@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
@@ -22,12 +23,20 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Controller
 public class BookingController {
@@ -51,7 +60,13 @@ public class BookingController {
     ViewGuestService viewGuestService;
 
     @Autowired
+    ViewInvoiceService viewInvoiceService;
+
+    @Autowired
     CheckOutService checkOutService;
+
+    @Autowired
+    CreateInvoiceService createInvoiceService;
 
     //TODO: remove, only for testing/debugging
     @Autowired
@@ -59,6 +74,10 @@ public class BookingController {
 
     @Autowired
     GuestRepository guestRepository;
+
+
+
+
 
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
@@ -72,6 +91,10 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
+    private static final String CREATE_INVOICE = "/createInvoice";
+    private static final String SUBMIT_INVOICE = "/submitInvoice";
+    private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
+
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -118,9 +141,9 @@ public class BookingController {
                 bookingStatus(BookingStatus.CONFIRMED).
                 checkInDate(LocalDate.now()).
                 checkOutDate(LocalDate.now()).
-                singleRoom(1).
-                doubleRoom(0).
-                superiorRoom(0).
+                singleRoom(2).
+                doubleRoom(1).
+                superiorRoom(1).
                 voucherCode(new VoucherCode("")).
                 build();
 
@@ -286,6 +309,7 @@ public class BookingController {
             model.addAttribute("guest", guestDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
+            model.addAttribute("id", bookingId);
 
         } catch (BookingNotFoundException | GuestNotFoundException | NotEnoughRoomsException e){
             return redirectToErrorPage(e.getMessage());
@@ -347,6 +371,82 @@ public class BookingController {
         }
 
         return new ModelAndView("redirect:"+"/");
+    }
+
+    @GetMapping(CREATE_INVOICE)
+    public ModelAndView createInvoice(@RequestParam("id") String bookingIdString, Model model){
+
+        try {
+            BookingId bookingId = new BookingId(bookingIdString);
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
+            createInvoiceService.createInvoice(bookingId);
+
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+
+            InvoiceDTO invoice = invoiceDTOs.get(0);
+            GuestData guest = invoiceDTOs.get(0).getGuestData();
+
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("rooms", roomDTOs);
+            model.addAttribute("invoice", invoice);
+            model.addAttribute("guest", guest);
+
+        } catch (Exception e){
+            return new ModelAndView("createInvoice");
+        }
+
+        return new ModelAndView("createInvoice");
+    }
+
+    @GetMapping ("/pdfInvoice")
+    public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, Model model) {
+
+
+        try {
+            BookingId bookingId = new BookingId(bookingIdString);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+
+            InvoiceDTO invoice = invoiceDTOs.get(0);
+            GuestData guest = invoiceDTOs.get(0).getGuestData();
+
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("guest",guest);
+            model.addAttribute("room", roomDTO);
+            model.addAttribute("invoice", invoice);
+
+            ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+            templateResolver.setSuffix(".html");
+            templateResolver.setTemplateMode("HTML");
+            TemplateEngine templateEngine = new TemplateEngine();
+            templateEngine.setTemplateResolver(templateResolver);
+
+            Context context = new Context();
+
+            context.setVariable("room", roomDTO);
+            context.setVariable("guest", guest);
+            context.setVariable("booking", bookingDTO);
+            context.setVariable("invoice", invoice);
+
+
+            String html = templateEngine.process("templates/invoice", context);
+
+            String fileName = "invoice.pdf";
+            response.addHeader("Content-disposition", "attachment;filename=" + fileName);
+            response.setContentType("application/pdf");
+            OutputStream outputStream = response.getOutputStream();
+
+            ITextRenderer renderer = new ITextRenderer();
+            renderer.setDocumentFromString(html);
+            renderer.layout();
+            renderer.createPDF(outputStream);
+            outputStream.flush();
+            outputStream.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     @GetMapping(ERROR_URL)
