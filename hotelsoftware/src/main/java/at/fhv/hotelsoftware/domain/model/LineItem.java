@@ -22,7 +22,6 @@ public class LineItem {
         this.price = price;
     }
 
-    //TODO: Test
     public double getTotalPrice(){
         return amount * price;
     }

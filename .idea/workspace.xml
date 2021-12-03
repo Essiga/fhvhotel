@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+ LineItems_Tests
     <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Create Booking Basic UI finished">
       <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/BookingTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -16,6 +17,7 @@
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/InvoiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/InvoiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/RoomCategoryTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/RoomCategoryTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/ViewInvoiceServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewInvoiceServiceTests.java" afterDir="false" />
+dev
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +61,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="Booking_Test" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -146,7 +148,9 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated">
+LineItems_Tests
+  <component name="RunManager" selected="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice">
+
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -239,12 +243,14 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckOutServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckOutServiceTest&quot;" />
+ LineItems_Tests
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull&quot;" />
+
         <option name="taskDescriptions">
           <list />
         </option>
@@ -260,12 +266,16 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+LineItems_Tests
+    <configuration name="LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+dev
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout&quot;" />
+LineItems_Tests
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice&quot;" />
+
         <option name="taskDescriptions">
           <list />
         </option>
@@ -290,20 +300,22 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
+LineItems_Tests
+      <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
+      <item itemvalue="Gradle.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
       <item itemvalue="Gradle.CheckOutServiceTest" />
       <item itemvalue="Gradle.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
-      <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" />
-      <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted" />
-      <item itemvalue="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
+      <item itemvalue="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.BookingTests.given_existingbooking_when_createinvoice_then_invoicecreated" />
-        <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatuscheckedin_when_completed_then_bookingstatuscompleted" />
-        <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" />
+        <item itemvalue="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" />
         <item itemvalue="Gradle.CheckOutServiceTest.given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
         <item itemvalue="Gradle.CheckOutServiceTest" />
+        <item itemvalue="Gradle.CheckOutServiceTest.given_3rooms_when_3rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
+ dev
       </list>
     </recent_temporary>
   </component>
@@ -631,7 +643,8 @@
     <MESSAGE value="- designing error page finished&#10;- adapted findRoomByID function -&gt; returns now a RoomDTO and not a List of RoomDTOs&#10;- adapted all throws-messages" />
     <MESSAGE value="created invoice tests" />
     <MESSAGE value="Create Booking Basic UI finished" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create Booking Basic UI finished" />
+    <MESSAGE value="Tests for Booking done&#10;Added equals methods for address and guestdata" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for Booking done&#10;Added equals methods for address and guestdata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
