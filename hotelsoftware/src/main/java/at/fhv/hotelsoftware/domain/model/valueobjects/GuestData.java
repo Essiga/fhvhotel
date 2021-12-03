@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @Getter
 @NoArgsConstructor
 public class GuestData {
@@ -62,5 +64,18 @@ public class GuestData {
                 guest.getGuestType(),
                 guest.getAgencyName(),
                 guest.getCompanyName());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GuestData guestData = (GuestData) o;
+        return Objects.equals(guestId.getGuestId(), guestData.guestId.getGuestId()) && Objects.equals(firstName, guestData.firstName) && Objects.equals(lastName, guestData.lastName) && Objects.equals(address, guestData.address) && Objects.equals(phoneNumber, guestData.phoneNumber) && Objects.equals(email, guestData.email) && guestType == guestData.guestType && Objects.equals(agencyName, guestData.agencyName) && Objects.equals(companyName, guestData.companyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(guestId, firstName, lastName, address, phoneNumber, email, guestType, agencyName, companyName);
     }
 }
