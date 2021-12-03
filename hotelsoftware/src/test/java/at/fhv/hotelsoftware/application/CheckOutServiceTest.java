@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware;
+package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CheckOutService;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotOccupiedException;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -31,7 +32,7 @@ public class CheckOutServiceTest {
 
 
     @Test
-    void given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout() throws BookingNotFoundException, RoomNotFoundException, RoomNotFoundException {
+    void given_rooms_when_rommsinbooking_and_booking_checkout_then_expectroomsbookingidisnull_and_expectroomCategoryis_cleaning_and_bookingstatusis_checkedout() throws BookingNotFoundException, RoomNotFoundException, RoomNotFoundException, RoomNotOccupiedException {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 

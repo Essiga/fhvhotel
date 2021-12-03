@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware;
+package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewInvoiceService;
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;

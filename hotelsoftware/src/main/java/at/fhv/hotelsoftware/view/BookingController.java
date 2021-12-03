@@ -366,6 +366,8 @@ public class BookingController {
             redirectToErrorPage(e.getMessage());
         } catch (RoomNotFoundException e) {
             redirectToErrorPage(e.getMessage());
+        } catch (RoomNotOccupiedException e){
+            redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("redirect:"+"/");
