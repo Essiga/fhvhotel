@@ -4,7 +4,6 @@ import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.valueobjects.Address;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
-import lombok.Builder;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
