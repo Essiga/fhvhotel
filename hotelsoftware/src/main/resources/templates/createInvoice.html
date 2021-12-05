@@ -17,7 +17,7 @@
         <nav class="flex-row h-screen w-full bg-green-500">
 
             <div>
-                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+                <a href="#" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
             </div>
 
             <div>
@@ -26,7 +26,7 @@
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest
                     Overview</a>
             </div>
 
@@ -53,15 +53,19 @@
             <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
                 <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
-                <div class="p-2 mb-6 border border-gray-300 flex">
+                <div class="flex p-2 mb-6 border border-gray-300">
 
-                    <div class="pr-2">Company Name:</div>
-                    <div class="font-semibold inline mr-4" id="gName"
-                         th:text="${booking.voucherCode.voucherCode}"></div>
+                    <div class="flex w-1/2">
+                        <div class="mr-2">Company Name:</div>
+                        <div class="font-semibold" id="gName"
+                             th:text="${booking.voucherCode.voucherCode}"></div>
+                    </div>
 
-                    <div class="pr-2">Voucher Code:</div>
-                    <div class="font-semibold inline" id="voucherCode"
-                         th:text="${booking.voucherCode.voucherCode}"></div>
+                    <div class="flex w-1/2">
+                        <div class="mr-2">Voucher Code:</div>
+                        <div id="voucherCode"
+                             th:text="${booking.voucherCode.voucherCode}"></div>
+                    </div>
 
                 </div>
 
@@ -177,7 +181,7 @@
                     <div class="w-2/6 text-right">
                         <button type="submit"
                                 class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Complete
+                            Check-Out
                         </button>
                     </div>
 
