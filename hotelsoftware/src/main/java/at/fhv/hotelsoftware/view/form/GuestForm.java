@@ -7,14 +7,13 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 @Data
-public class CustomerForm {
-    @NotEmpty(message = "First name cannot be empty")
-    private String fname;
-    //
-    @NotEmpty(message = "Last name cannot be empty")
-    private String lname;
+public class GuestForm {
 
-    private String voucherCode;
+    @NotEmpty(message = "First name cannot be empty")
+    private String firstName;
+
+    @NotEmpty(message = "Last name cannot be empty")
+    private String lastName;
 
     @NotEmpty(message = "Street address cannot be empty")
     private String streetAdr;
@@ -34,6 +33,4 @@ public class CustomerForm {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid syntax")
     private String email;
-
-
 }

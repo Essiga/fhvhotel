@@ -1,164 +1,79 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import org.springframework.stereotype.Component;
+import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
-@Component
+@Getter
+@NoArgsConstructor
 public class Booking {
 
     private Long id;
     private BookingId bookingId;
-    private String customer;
+    private GuestId guestId;
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private LocalDate cancellationDeadLine;
     private Integer singleRoom;
     private Integer doubleRoom;
-    private Integer luxusRoom;
+    private Integer superiorRoom;
     private VoucherCode voucherCode;
     private BookingStatus bookingStatus;
+    private List<Invoice> invoices;
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    private Booking() {
-    }
-
-    private Long getId() {
-        return id;
-    }
-
-    private void setId(Long id) {
-        this.id = id;
-    }
-
-    public BookingId getBookingId() {
-        return this.bookingId;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public LocalDate getCheckInDate() {
-        return checkInDate;
-    }
-
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
-    }
-
-    public LocalDate getCancellationDeadLine() {
-        return cancellationDeadLine;
-    }
-
-
-    public VoucherCode getVoucherCode() {
-        return voucherCode;
-    }
-
-    public BookingStatus getBookingStatus() {
-        return bookingStatus;
-    }
-
-    public Integer getSingleRoom() {
-        return singleRoom;
-    }
-
-    public Integer getDoubleRoom() {
-        return doubleRoom;
-    }
-
-    public Integer getLuxusRoom() {
-        return luxusRoom;
-    }
-
-    @Override
-    public String toString() {
-        return "Booking{" +
-                "customer='" + customer + '\'' +
-                ", fromDate=" + checkInDate +
-                ", toDate=" + checkOutDate +
-                ", voucherCode=" + voucherCode +
-                ", bookingStatus=" + bookingStatus +
-                '}';
+    @Builder
+    public Booking(BookingId bookingId, GuestId guestId, LocalDate checkInDate, LocalDate checkOutDate, LocalDate cancellationDeadLine, Integer singleRoom, Integer doubleRoom, Integer superiorRoom, VoucherCode voucherCode, BookingStatus bookingStatus) {
+        this.bookingId = bookingId;
+        this.guestId = guestId;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.cancellationDeadLine = cancellationDeadLine;
+        this.singleRoom = singleRoom;
+        this.doubleRoom = doubleRoom;
+        this.superiorRoom = superiorRoom;
+        this.voucherCode = voucherCode;
+        this.bookingStatus = bookingStatus;
+        this.invoices = new ArrayList<>();
     }
 
     public void checkIn(){
         this.bookingStatus = BookingStatus.CHECKEDIN;
     }
 
-    public static class Builder {
+    public void complete(){
+        this.bookingStatus = BookingStatus.COMPLETED;
+    }
 
-        private final Booking instance;
+    public Invoice createInvoice(Guest guest) throws InvoiceAlreadyCreatedException {
 
+        if (invoices.isEmpty()) {
+            List<LineItem> lineItems = new ArrayList<>();
 
-        public Builder() {
-            this.instance = new Booking();
+            if (singleRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), singleRoom, RoomCategory.SINGLE.getPrice()));
+            }
+
+            if (doubleRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), doubleRoom, RoomCategory.DOUBLE.getPrice()));
+            }
+
+            if (superiorRoom > 0) {
+                lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), superiorRoom, RoomCategory.SUPERIOR.getPrice()));
+            }
+
+            GuestData guestData = GuestData.fromGuest(guest);
+            Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
+            invoices.add(invoice);
+
+            return invoice;
         }
-
-        public Builder withBookingId(BookingId bookingId) {
-            this.instance.bookingId = bookingId;
-            return this;
-        }
-
-        public Builder withLongId(Long id) {
-            this.instance.id = id;
-            return this;
-        }
-
-        public Builder withCustomer(String customer) {
-            this.instance.customer = customer;
-            return this;
-        }
-
-        public Builder withCheckInDate(LocalDate checkInDate) {
-            this.instance.checkInDate = checkInDate;
-            return this;
-        }
-
-        public Builder withCheckOutDate(LocalDate checkOutDate) {
-            this.instance.checkOutDate = checkOutDate;
-            return this;
-        }
-
-        public Builder withCancellationDeadLine(LocalDate date) {
-            this.instance.cancellationDeadLine = date;
-            return this;
-        }
-
-        public Builder withVoucherCode(VoucherCode voucherCode) {
-            this.instance.voucherCode = voucherCode;
-            return this;
-        }
-
-        public Builder withBookingStatus(BookingStatus bookingStatus) {
-            this.instance.bookingStatus = bookingStatus;
-            return this;
-        }
-
-        public Builder withSingleRoom(Integer singleRoom) {
-            this.instance.singleRoom = singleRoom;
-            return this;
-        }
-
-        public Builder withDoubleRoom(Integer doubleRoom) {
-            this.instance.doubleRoom = doubleRoom;
-            return this;
-        }
-
-        public Builder withLuxusRoom(Integer luxusRoom) {
-            this.instance.luxusRoom = luxusRoom;
-            return this;
-        }
-
-        public Booking build() {
-            Objects.requireNonNull(this.instance.bookingId, "type must be set in booking");
-            return this.instance;
+        else {
+            throw new InvoiceAlreadyCreatedException("An invoice for this booking has already been created.");
         }
     }
 }

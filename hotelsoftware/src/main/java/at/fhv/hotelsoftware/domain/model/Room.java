@@ -1,64 +1,48 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import lombok.Data;
-import org.springframework.stereotype.Component;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomAlreadyOccupiedException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotOccupiedException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
+import lombok.*;
 
-import java.util.Objects;
-import java.util.UUID;
-
-@Data
-@Component
+//TODO: try again without setter
+@Data //setters required by Hibernate
+@NoArgsConstructor
 public class Room {
-    public Long id;
+
+    private Long id;
     private RoomCategory roomCategory;
     private Integer roomNumber;
     private RoomStatus roomStatus;
     private BookingId bookingId;
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public Room() {
-    }
-
-    public void occupy(BookingId bookingId){
-        this.roomStatus = RoomStatus.OCCUPIED;
+    @Builder
+    public Room(RoomCategory roomCategory, Integer roomNumber, RoomStatus roomStatus, BookingId bookingId) {
+        this.roomCategory = roomCategory;
+        this.roomNumber = roomNumber;
+        this.roomStatus = roomStatus;
         this.bookingId = bookingId;
     }
 
-    public static class Builder {
+    public void occupy(BookingId bookingId) throws RoomAlreadyOccupiedException {
+        if(this.roomStatus == RoomStatus.OCCUPIED){
+            throw new RoomAlreadyOccupiedException("Room with room number: " + roomNumber + " already occupied.");
+        } else {
+            this.roomStatus = RoomStatus.OCCUPIED;
+            this.bookingId = bookingId;
+        }
+    }
 
-        private final Room instance;
-
-        public Builder() {
-            this.instance = new Room();
+    public void checkOut() throws RoomNotOccupiedException {
+        if(roomStatus != RoomStatus.OCCUPIED){
+            throw new RoomNotOccupiedException("Room with room number: " + roomNumber + " is not occupied.");
+        }
+        else {
+            this.roomStatus = RoomStatus.CLEANING;
+            this.bookingId = null;
         }
 
-        public Builder withRoomCategory(RoomCategory roomCategory) {
-            this.instance.roomCategory = roomCategory;
-            return this;
-        }
-
-        public Builder withRoomNumber(Integer roomNumber) {
-            this.instance.roomNumber = roomNumber;
-            return this;
-        }
-
-        public Builder withRoomStatus(RoomStatus roomStatus) {
-            this.instance.roomStatus = roomStatus;
-            return this;
-        }
-
-        public Builder withBookingId(BookingId bookingId){
-            this.instance.bookingId = bookingId;
-            return this;
-        }
-
-
-        public Room build() {
-  //          Objects.requireNonNull(this.instance.roomId, "type must be set in room");
-            return this.instance;
-        }
     }
 }

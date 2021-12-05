@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Create Invoice</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="flex">
+
+    <aside class="h-screen sticky top-0 w-1/6">
+
+        <!-- Navbar -->
+        <nav class="flex-row h-screen w-full bg-green-500">
+
+            <div>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+                    Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Customer
+                    Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room
+                    Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+            </div>
+
+        </nav>
+
+    </aside>
+
+    <div class="flex w-full">
+
+        <!--Content-->
+        <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+
+            <h1 class="text-3xl mb-8 font-semibold">Invoice</h1>
+
+            <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
+                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
+
+                <div class="p-2 mb-6 border border-gray-300 flex">
+
+                    <div class="pr-2">Company Name:</div>
+                    <div class="font-semibold inline mr-4" id="gName"
+                         th:text="${booking.voucherCode.voucherCode}"></div>
+
+                    <div class="pr-2">Voucher Code:</div>
+                    <div class="font-semibold inline" id="voucherCode"
+                         th:text="${booking.voucherCode.voucherCode}"></div>
+
+                </div>
+
+                <div class="p-2 mb-8 border border-gray-300">
+
+                    <div>
+                        <div class="inline" id="fName" th:text="${guest.firstName}"></div>
+                        <div class="inline" id="lName" th:text="${guest.lastName}"></div>
+                        <div id="streetAdr" th:text="${guest.address.street}"></div>
+                        <div class="inline" id="zip" th:text="${guest.address.zip}"></div>
+                        <div class="inline" id="city" th:text="${guest.address.city}"></div>
+                        <div id="country" th:text="${guest.address.country}"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="flex p-1 mb-8 justify-around border-t-2 border-b-2 border-blue-200">
+
+                    <div>
+                        <div class="inline">Check-In Date:
+                            <div class="font-semibold" id="fromDate" th:text="${booking.checkInDate}"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="inline">Check-Out Date:
+                            <div class="font-semibold" id="toDate" th:text="${booking.checkOutDate}"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="inline">Invoice Date:
+                            <div class="font-semibold" id="today" th:text="${invoice.getInvoiceDate()}"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <div class="flex mb-8">
+                        <div class="font-bold pr-1">Invoice Number:</div>
+                        <div class="pl-2 font-semibold" id="invoiceNumber"
+                             th:text="${invoice.invoiceNumber.invoiceNumber}"></div>
+                    </div>
+
+                </div>
+
+                <div>
+
+                    <table class="w-full table-fixed bg-white border-2 border-blue-200">
+
+                        <tr class="bg-blue-100 text-base">
+                            <th class="w-2/5 border-2 py-2 border-blue-200">Description</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Amount</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Single Price</th>
+                            <th class="w-1/5 border-2 py-2 border-blue-200">Total Price</th>
+                        </tr>
+
+                        <tr class="text-center border-2 border-blue-100" th:each="item : ${invoice.lineItems}">
+                            <td class="p-1" th:text="${item.getName()}"></td>
+                            <td class="p-1" th:text="${item.getAmount()}"></td>
+                            <td class="p-1" th:text="${item.getPrice()}"></td>
+                            <td class="p-1" th:text="${item.getTotalPrice()}"></td>
+                        </tr>
+                    </table>
+
+                    <table class="w-full table-fixed bg-white ">
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-base text-right font-semibold p-2">Net Price</th>
+                            <td class="w-1/5 text-base">
+                                <div class="text-center border-gray-200 border-b-2 p-1" th:text="${invoice.sum}"></div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-right font-semibold p-2">+ 20 % tax</th>
+                            <td class="w-1/5">
+                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"
+                                     th:text="${invoice.tax}"></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="w-3/5"></td>
+                            <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
+                            <td class="w-1/5">
+                                <div class="p-2 text-center font-bold border-black border-double border-b-4"
+                                     th:text="${invoice.totalPrice}"></div>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="mt-16 flex justify-between items-baseline">
+
+                    <div class="w-2/6">
+                        <div class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}">
+                                 Generate PDF
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="w-2/6 text-right">
+                        <button type="submit"
+                                class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Complete
+                        </button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

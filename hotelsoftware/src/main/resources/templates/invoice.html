@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Invoice</title>
+
+    <style>
+        * {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .center{
+            text-align: center;
+        }
+
+        hr {
+            border-top: 0.01em solid black;
+            margin: 2px;
+            padding: 0px;
+            margin-left: -1px;
+        }
+
+        .addressBlock p {
+            font-size: 11pt;
+            margin-bottom: 0.2%;
+            margin-top: 0;
+        }
+
+        .right {
+            text-align: right;
+            font-size: 11pt;
+        }
+
+        h1 {
+            font-size: 16pt;
+            margin:0;
+        }
+
+        h2 {
+            font-size: 12pt;
+            margin: 0;
+        }
+
+        h3 {
+            font-size: 12pt;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .heading {
+            margin-left: -3px;
+        }
+        .heading td{
+            padding-right: 80px;
+            font-size: 11pt;
+        }
+
+        .content {
+            margin-left: -3px;
+            font-size: 11pt;
+            margin-top: 10px;
+        }
+
+        .smallSpace {
+            padding-right: 20px;
+            font-weight: bold;
+        }
+
+        .biggerSpace{
+            padding-right: 335px;
+            font-weight: bold;
+        }
+
+        .itemSmall {
+            width: 120px;
+        }
+
+        .itemBig {
+            width: 350px;
+        }
+
+        .itemLast {
+            width: 80px;
+            text-align: right;
+        }
+
+        .price {
+            width: 107px;
+            text-align: right;
+        }
+        .content tr td {
+            font-size: 11pt;
+        }
+
+        .totalPrice {
+            font-size: 11pt;
+        }
+
+        .totalPrice th {
+            padding-right: 29px;
+            text-align: left;
+        }
+
+        .totalPrice td {
+            text-align: right;
+        }
+
+        footer p {
+            font-size: 11pt;
+            margin-bottom: 0.2%;
+            margin-top: 0;
+            text-align: center;
+            clear: right;
+        }
+
+        p {
+            font-size: 11pt;
+        }
+
+        .tableRight {
+            float: right;
+            margin-right: 16px;
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<header class="center">
+    <h1>Alp's Hotel</h1>
+    <h2>Tel. +43 (0) 1234 /5678 - info@alpsHotel.com</h2>
+    <h3>www.alpsHotel.com</h3>
+</header>
+
+<body>
+<div class="addressBlock">
+    <span th:text="${guest.firstName}"/> <span th:text="${guest.lastName}"/>
+    <p th:text="${guest.address.street}"/>
+    <span th:text="${guest.address.zip}"/> <span th:text="${guest.address.city}"/>
+    <p th:text="${guest.address.country}"/>
+</div>
+
+
+<p class="right" th:text="${invoice.invoiceDate}"/>
+
+<h1>Invoice <span th:text="${invoice.invoiceNumber.invoiceNumber}"></span></h1>
+<hr></hr>
+<table class="heading">
+    <tr>
+        <td>Check-In Date: <span th:text="${booking.checkInDate}"/> </td>
+        <td>Check-Out Date:  <span th:text="${booking.checkInDate}"/> </td>
+    </tr>
+</table>
+<hr></hr>
+
+
+<table class="content">
+    <tr>
+        <span class="smallSpace">Description</span>
+        <span class="biggerSpace">Amount</span>
+        <span class="smallSpace">Single Price</span>
+        <span style="font-weight: bold">Total Price</span>
+    </tr>
+
+    <tr>
+        <div th:each="item : ${invoice.lineItems}">
+            <td class="itemSmall" th:text="*{item.name}"/>
+            <td class="itemBig" th:text="*{item.amount}"/>
+            <td class="itemLast" th:text="*{item.price}"/>
+            <td class="price" th:text="*{item.totalPrice}"/>
+        </div>
+    </tr>
+</table>
+<hr></hr>
+
+<div class="tableRight">
+    <table class="totalPrice">
+        <tr>
+            <th>Net Price</th>
+            <td th:text="${invoice.sum}"></td>
+        </tr>
+        <tr>
+            <th>+ 20% tax</th>
+            <td th:text="${invoice.tax}"></td>
+        </tr>
+        <tr>
+            <th>Total Price</th>
+            <td th:text="${invoice.totalPrice}"></td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+</body>
+<footer>
+    <p>We thank you for your stay and wish you a pleasant journey home.</p>
+</footer>
+</html>
+

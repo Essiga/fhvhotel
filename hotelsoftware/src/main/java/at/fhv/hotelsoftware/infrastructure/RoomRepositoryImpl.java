@@ -1,7 +1,7 @@
 package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
-import at.fhv.hotelsoftware.domain.model.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +17,10 @@ public class RoomRepositoryImpl implements RoomRepository {
     @PersistenceContext
     private EntityManager em;
 
+    @Override
+    public void addRoom(Room room) {
+        this.em.persist(room);
+    }
 
     @Override
     public List<Room> findAllRooms() {
@@ -26,41 +30,22 @@ public class RoomRepositoryImpl implements RoomRepository {
         return resultList;
     }
 
-    //TODO: make parameters work
     @Override
-    public List<Room> findRoomByBookingId(BookingId bookingId) {
+    public List<Room> findRoomsByBookingId(BookingId bookingId) {
 
-        String uuid = convertBookingIdToUUIDWithoutHyphen(bookingId);
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_id = :bookingId", Room.class);
+        query.setParameter("bookingId", bookingId.getBookingId());
+        List<Room> rooms = query.getResultList();
 
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE booking_id = '" + uuid + "'", Room.class);
-        List<Room> resultList = query.getResultList();
-
-        return resultList;
+        return rooms;
     }
 
     @Override
-    public Optional<Room> findRoomByRoomNumber(Integer roomNumber){
-        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_number = " + roomNumber, Room.class);
+    public Optional<Room> findRoomByRoomNumber(int roomNumber){
+        TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_number = :roomNumber", Room.class);
+        query.setParameter("roomNumber", roomNumber);
         Optional<Room> room = query.getResultStream().findFirst();
 
         return room;
-    }
-
-    @Override
-    public void addRoom(Room room) {
-        this.em.persist(room);
-    }
-
-
-    private String convertBookingIdToUUIDWithoutHyphen(BookingId bookingId)
-    {
-        StringBuilder uuid = new StringBuilder(bookingId.getBookingId().toString());
-
-        uuid.deleteCharAt(23);
-        uuid.deleteCharAt(18);
-        uuid.deleteCharAt(13);
-        uuid.deleteCharAt(8);
-
-        return uuid.toString();
     }
 }
