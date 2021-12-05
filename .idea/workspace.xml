@@ -134,7 +134,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.GuestTest">
+  <component name="RunManager" selected="Application.main">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -149,19 +149,6 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
       <module name="hotelsoftware.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -284,8 +271,8 @@
       <item itemvalue="Gradle.BookingTests.given_existingbookingwithstatusconfirmed_when_checkin_then_bookingstatuscheckedin" />
       <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
       <item itemvalue="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" />
-      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
       <item itemvalue="Gradle.GuestTest" />
+      <item itemvalue="Spring Boot.HotelsoftwareApplication" />
     </list>
     <recent_temporary>
       <list>
