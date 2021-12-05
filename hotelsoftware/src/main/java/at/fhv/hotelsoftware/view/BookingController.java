@@ -215,7 +215,7 @@ public class BookingController {
                                          Model model) {
 
         if (result.hasErrors()) {
-            return new ModelAndView("guestForm");
+            return new ModelAndView("createGuest");
         }
 
         model.addAttribute("bookingForm", bookingForm);
