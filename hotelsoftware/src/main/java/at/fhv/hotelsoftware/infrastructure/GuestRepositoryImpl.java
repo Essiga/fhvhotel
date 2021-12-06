@@ -25,8 +25,8 @@ public class GuestRepositoryImpl implements GuestRepository {
     public Optional<Guest> findGuestById(GuestId guestId) {
         TypedQuery<Guest> query = this.em.createQuery("FROM Guest WHERE guest_Id = :guestId", Guest.class);
         query.setParameter("guestId", guestId.getGuestId());
-        Optional<Guest> customer = query.getResultStream().findFirst();
+        Optional<Guest> guest = query.getResultStream().findFirst();
 
-        return customer;
+        return guest;
     }
 }

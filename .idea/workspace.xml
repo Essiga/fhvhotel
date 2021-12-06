@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="beginning of test">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Branch created">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewBookingServiceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/CheckInServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/CheckInServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/CheckInServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/LineItemTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/LineItemTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/RoomTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/RoomTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,14 +79,14 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
@@ -138,7 +139,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception">
+  <component name="RunManager" selected="Gradle.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -168,12 +169,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LineItemTests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.LineItemTests&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -189,12 +190,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ViewBookingServiceTests.given_booking_when_findbookingbyid_then_returncorrectbooking" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewBookingServiceTests.given_booking_when_findbookingbyid_then_returncorrectbooking&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -210,12 +211,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomalreadyoccupiedexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomalreadyoccupiedexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -231,12 +232,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -252,25 +253,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
+    <configuration name="checkOutGuestOverview.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/hotelsoftware/hotelsoftware.main/templates/checkOutGuestOverview.html" useBuiltInWebServerPort="true">
       <method v="2" />
     </configuration>
     <configuration name="HotelsoftwareApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -282,20 +265,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn" />
+      <item itemvalue="JavaScript Debug.checkOutGuestOverview.html" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
-      <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception" />
-      <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomalreadyoccupiedexception" />
-      <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception" />
-      <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception" />
+      <item itemvalue="Gradle.LineItemTests" />
+      <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findbookingbyid_then_returncorrectbooking" />
+      <item itemvalue="Gradle.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" />
+      <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception" />
-        <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception" />
-        <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomalreadyoccupiedexception" />
-        <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception" />
-        <item itemvalue="Gradle.CheckInServiceTest.given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn" />
+        <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" />
+        <item itemvalue="Gradle.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" />
+        <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findbookingbyid_then_returncorrectbooking" />
+        <item itemvalue="Gradle.LineItemTests" />
+        <item itemvalue="JavaScript Debug.checkOutGuestOverview.html" />
       </list>
     </recent_temporary>
   </component>
@@ -320,9 +303,7 @@
       <workItem from="1638197058494" duration="10458000" />
       <workItem from="1638390102492" duration="1220000" />
       <workItem from="1638428587988" duration="1660000" />
-      <workItem from="1638723928179" duration="251000" />
-      <workItem from="1638782849152" duration="3014000" />
-      <workItem from="1638805901621" duration="1875000" />
+      <workItem from="1638656487739" duration="3939000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -485,14 +466,7 @@
       <option name="project" value="LOCAL" />
       <updated>1638201217699</updated>
     </task>
-    <task id="LOCAL-00024" summary="beginning of test">
-      <created>1638646776290</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1638646776290</updated>
-    </task>
-    <option name="localTasksCounter" value="25" />
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,8 +608,7 @@
     <MESSAGE value="created invoice tests" />
     <MESSAGE value="Create Booking Basic UI finished" />
     <MESSAGE value="Tests for Booking done&#10;Added equals methods for address and guestdata" />
-    <MESSAGE value="beginning of test" />
-    <option name="LAST_COMMIT_MESSAGE" value="beginning of test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Tests for Booking done&#10;Added equals methods for address and guestdata" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

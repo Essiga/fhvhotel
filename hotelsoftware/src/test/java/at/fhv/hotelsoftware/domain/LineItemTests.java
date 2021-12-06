@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware;
+package at.fhv.hotelsoftware.domain;
 
 import at.fhv.hotelsoftware.domain.model.LineItem;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
