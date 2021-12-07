@@ -36,14 +36,13 @@ public class Invoice {
         double sum = 0.0;
 
         for (LineItem lineItem : lineItems) {
-            int amount = lineItem.getAmount();
-            double price = lineItem.getPrice();
-            sum += price * amount;
+            sum += lineItem.getTotalPrice();
         }
 
         return sum;
     }
 
+    //TODO call get total price to get the sum
     public double getTax(double sum){
         double tax = 0.2 * sum;
         return tax;
