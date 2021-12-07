@@ -87,12 +87,6 @@ public class CheckInServiceImpl implements CheckInService {
             Room room = optRoom.get();
 
             room.occupy(bookingId);
-
-//            if (room.getRoomStatus() == RoomStatus.FREE) {
-//                room.occupy(bookingId);
-//            } else {
-//                throw new RoomAlreadyOccupiedException("Room with room number: " + room.getRoomNumber() + " already occupied");
-//            }
         }
 
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
