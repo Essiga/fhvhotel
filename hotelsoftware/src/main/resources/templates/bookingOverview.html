@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>Booking Overview</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{search.js}"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex">
+    <aside class="h-screen sticky top-0 w-1/6">
+
+        <nav class="flex-row h-screen w-full bg-green-500"> <!-- Navbar -->
+
+            <div>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <div class="flex-row w-full"> <!-- Content -->
+
+        <div class="pl-2 h-4/6 border border-blue-700">  <!-- Check-Ins -->
+
+            <!-- Check-Ins -->
+            <h1 class="font-extrabold text-4xl text-blue-500 ">Booking Overview</h1>
+
+            <div class="flex pt-4">
+                <div class="px-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"
+                         stroke="currentColor" class="h-5 w-5 m-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <input class="border-2 border-blue-200 rounded" type="text" id="checkInSearch" onkeyup="search(this.id, 'checkIns')"
+                           placeholder=" Search for guest...">
+                </div>
+            </div>
+
+            <div class="m-4 h-4/5 overflow-scroll">
+
+                <table class="w-full table-fixed bg-white" id="checkIns">
+                    <tr class="bg-blue-100 text-xl">
+                        <th class="w-1/5 border-2 py-2 border-blue-200">Guest</th>
+                        <th class="w-1/5 border-2 py-2 border-blue-200">Check-In Date</th>
+                        <th class="w-1/5 border-2 py-2 border-blue-200">Check-Out Date</th>
+                        <th class="w-1/10 border-2 py-2 border-blue-200"></th>
+                    </tr>
+
+                    <tr class="text-center m-4" th:each="booking, stat : ${allBookings}">
+                        <td class="border py-2 px-4" th:text="${allGuests[__${stat.index}__].firstName} + ' ' + ${allGuests[__${stat.index}__].lastName}"></td>
+                        <td class="border py-2 px-4" th:text="*{allGuests.checkInDate}"></td>
+                        <td class="border py-2 px-4" th:text="*{allGuests.checkOutDate}"></td>
+                        <td class="border py-2 px-20">
+                        <a th:href="@{checkInGuestOverview(id=(*{allBookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white mr-5">Check-In</a>
+                        <a th:href="@{checkInGuestOverview(id=(*{allBookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white mr-5">Check-Out</a>
+                        <a th:href="@{checkInGuestOverview(id=(*{allBookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-blue-400 hover:bg-blue-500 focus:bg-blue-600 text-2xl font-bold text-white">Test</a></td>
+                    </tr>
+
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

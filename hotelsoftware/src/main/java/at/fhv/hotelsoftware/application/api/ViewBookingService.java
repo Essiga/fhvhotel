@@ -11,4 +11,6 @@ public interface ViewBookingService {
     BookingDTO findBookingById(BookingId bookingId) throws BookingNotFoundException;
     List<BookingDTO> findTodaysCheckIns();
     List<BookingDTO> findTodaysCheckOuts();
+
+    List<BookingDTO> findAllBookings();
 }

@@ -36,7 +36,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import static java.time.temporal.ChronoUnit.DAYS;
 
 @Controller
 public class BookingController {
@@ -93,7 +92,8 @@ public class BookingController {
     private static final String ERROR_URL = "/showErrorPage";
     private static final String CREATE_INVOICE = "/createInvoice";
     private static final String SUBMIT_INVOICE = "/submitInvoice";
-    private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
+    private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
+    private static final String BOOKING_OVERVIEW = "/bookingOverview";
 
 
     private static final String ERROR_PAGE = "errorPage";
@@ -457,5 +457,23 @@ public class BookingController {
 
     private static ModelAndView redirectToErrorPage(String errorMessage) {
         return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+    }
+
+    @GetMapping(BOOKING_OVERVIEW)
+    public ModelAndView showBookings(Model model) {
+
+        try {
+            List<BookingDTO> allBookings = viewBookingService.findAllBookings();
+            model.addAttribute("allBookings", allBookings);
+
+
+            List<GuestDTO> allGuests = findGuestsForBookings(allBookings);
+            model.addAttribute("allGuests", allGuests);
+
+        } catch (GuestNotFoundException e) {
+            redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("showBookings");
     }
 }
