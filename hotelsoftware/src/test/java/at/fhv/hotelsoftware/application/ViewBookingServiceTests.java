@@ -155,4 +155,54 @@ public class ViewBookingServiceTests {
             assertEquals(checkOutToday, bookings.get(i).getCheckOutDate());
         }
     }
+
+    @Test
+    public void given_bookings_when_findallbookings_then_expectallbookings() throws BookingNotFoundException {
+        //given
+        LocalDate checkOutToday = LocalDate.now();
+        LocalDate checkOutTomorrow = checkOutToday.plusDays(1);
+
+        List<Booking> bookings = new ArrayList<>();
+
+        Booking booking1 = Booking.builder().
+                bookingId(new BookingId(UUID.randomUUID())).
+                checkOutDate(checkOutToday).
+                build();
+
+        Booking booking2 = Booking.builder().
+                bookingId(new BookingId(UUID.randomUUID())).
+                checkOutDate(checkOutToday).
+                build();
+
+        Booking booking3 = Booking.builder().
+                bookingId(new BookingId(UUID.randomUUID())).
+                checkOutDate(checkOutTomorrow).
+                build();
+
+        bookings.add(booking1);
+        bookings.add(booking2);
+        bookings.add(booking3);
+
+        Mockito.when(bookingRepository.findAllBookings()).thenReturn(bookings);
+
+        //when
+        List<BookingDTO> findAllBookings = viewBookingService.findAllBookings();
+
+        //then
+        for (int i = 0; i < bookings.size(); i++) {
+            assertEquals(findAllBookings.get(i).getBookingId().getBookingId(), bookings.get(i).getBookingId().getBookingId());
+        }
+    }
+
+    @Test
+    public void given_bookings_when_findallbookings_then_expectbookingnotfoundexception() throws BookingNotFoundException {
+        //given
+        List<Booking> bookings = new ArrayList<>();
+
+        Mockito.when(bookingRepository.findAllBookings()).thenReturn(bookings);
+
+        // when ...then
+        assertThrows(BookingNotFoundException.class, () -> viewBookingService.findAllBookings());
+
+    }
 }
