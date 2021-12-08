@@ -198,7 +198,7 @@
 
                     <div class="w-2/6">
                         <a class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
-                                id="chooseguestbutton">
+                                id="chooseGuest">
                             choose guest
                         </a>
                     </div>
@@ -215,12 +215,13 @@
 </div>
 </body>
 
-<!-- popup -->
+<!-- background of popup-->
 <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="popup">
 
+    <!-- popup -->
     <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-3/5 border shadow-lg rounded-md bg-white">
 
-        <div class="">
+        <div>
             <input class="border-2 border-blue-200 rounded" type="text" id="guestSearch" onkeyup="search(this.id, 'guests')"
                    placeholder=" Search for guest...">
         </div>
@@ -265,13 +266,12 @@
 
 <script>
     let popup = document.getElementById("popup");
-    let chooseGuestButton = document.getElementById("chooseguestbutton");
+    let chooseGuestButton = document.getElementById("chooseGuest");
+    let insertGuest = document.getElementById("insertGuest");
 
     chooseGuestButton.onclick = function() {
         popup.style.display = "block";
     }
-
-    let insertGuest = document.getElementById("insertGuest");
 
     insertGuest.onclick = function() {
         popup.style.display = "none";
@@ -291,7 +291,6 @@
                     rowIndex = tr[i].rowIndex;
                     break;
                 }
-
             }
         }
 
