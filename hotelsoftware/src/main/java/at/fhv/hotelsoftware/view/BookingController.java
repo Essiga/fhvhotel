@@ -7,6 +7,7 @@ import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
@@ -74,6 +75,9 @@ public class BookingController {
 
     @Autowired
     GuestRepository guestRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
 
 
@@ -160,6 +164,8 @@ public class BookingController {
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+
+        List<Room> list = roomRepository.findAllRooms();
 
         return new ModelAndView("redirect:/");
     }

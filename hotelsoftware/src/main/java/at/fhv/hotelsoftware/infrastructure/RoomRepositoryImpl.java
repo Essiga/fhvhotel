@@ -30,6 +30,15 @@ public class RoomRepositoryImpl implements RoomRepository {
         return resultList;
     }
 
+    @Override
+    public List<Room> findAllRooms() {
+        TypedQuery<Room> query = this.em.createQuery("FROM Room", Room.class);
+        List<Room> resultList = query.getResultList();
+
+        return resultList;
+    }
+
+
 
 
     @Override
