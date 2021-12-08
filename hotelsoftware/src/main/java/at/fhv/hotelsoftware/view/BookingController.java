@@ -14,14 +14,12 @@ import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -130,11 +128,14 @@ public class BookingController {
 
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
+        GuestId guestId3 = new GuestId(UUID.randomUUID());
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Alp").lastName("Arslan").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
+        guestRepository.addGuest(guest3);
 
         Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId).
@@ -158,8 +159,23 @@ public class BookingController {
                 voucherCode(new VoucherCode("")).
                 build();
 
+
+        Booking booking3 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
+                guestId(guestId3).
+                bookingStatus(BookingStatus.PENDING).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(2).
+                doubleRoom(3).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
+
+
+
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+        bookingRepository.addBooking(booking3);
 
         return new ModelAndView("redirect:/");
     }
@@ -455,14 +471,16 @@ public class BookingController {
         return ERROR_PAGE;
     }
 
-    private static ModelAndView redirectToErrorPage(String errorMessage) {
-        return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
-    }
+        private static ModelAndView redirectToErrorPage (String errorMessage){
+            return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        }
 
-    @GetMapping(BOOKING_OVERVIEW)
+
+    @GetMapping ("bookingOverview.html")
     public ModelAndView showBookings(Model model) {
 
         try {
+
             List<BookingDTO> allBookings = viewBookingService.findAllBookings();
             model.addAttribute("allBookings", allBookings);
 
@@ -470,10 +488,13 @@ public class BookingController {
             List<GuestDTO> allGuests = findGuestsForBookings(allBookings);
             model.addAttribute("allGuests", allGuests);
 
-        } catch (GuestNotFoundException e) {
-            redirectToErrorPage(e.getMessage());
+        } catch (GuestNotFoundException | BookingNotFoundException e) {
+
+            return new ModelAndView("redirect:"+"/");
         }
 
-        return new ModelAndView("showBookings");
+        return new ModelAndView("bookingOverview");
     }
+
+
 }
