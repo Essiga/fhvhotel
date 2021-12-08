@@ -92,6 +92,7 @@ public class BookingController {
     private static final String SUBMIT_INVOICE = "/submitInvoice";
     private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
     private static final String BOOKING_OVERVIEW = "/bookingOverview";
+    private static final String BOOKING_SUMMARY  = "/bookingSum";
 
 
     private static final String ERROR_PAGE = "errorPage";
@@ -292,6 +293,7 @@ public class BookingController {
 
         return new ModelAndView("bookingSummary");
     }
+
 
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
@@ -496,5 +498,23 @@ public class BookingController {
         return new ModelAndView("bookingOverview");
     }
 
+    @GetMapping(BOOKING_SUMMARY)
+    public ModelAndView bookingSummary(@RequestParam("id") String id, Model model){
 
+        BookingId bookingId = new BookingId(id);
+
+        try {
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
+
+            model.addAttribute("guest", guestDTO);
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("id", bookingId);
+
+        } catch (BookingNotFoundException | GuestNotFoundException e){
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("bookingSum");
+    }
 }
