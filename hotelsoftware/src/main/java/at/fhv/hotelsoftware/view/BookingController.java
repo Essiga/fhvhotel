@@ -76,8 +76,7 @@ public class BookingController {
     @Autowired
     GuestRepository guestRepository;
 
-    @Autowired
-    RoomRepository roomRepository;
+
 
 
 
@@ -104,7 +103,7 @@ public class BookingController {
 
     @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
-    public ModelAndView createDummyData(Model model){
+    public ModelAndView createDummyData(Model model) throws RoomNotFoundException{
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
@@ -165,7 +164,7 @@ public class BookingController {
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
 
-        List<Room> list = roomRepository.findAllRooms();
+
 
         return new ModelAndView("redirect:/");
     }
