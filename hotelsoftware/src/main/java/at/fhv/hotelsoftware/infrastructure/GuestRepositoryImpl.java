@@ -38,4 +38,6 @@ public class GuestRepositoryImpl implements GuestRepository {
         List<Guest> resultList = query.getResultList();
         return resultList;
     }
+
+
 }
