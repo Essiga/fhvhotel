@@ -7,9 +7,11 @@
 
     <title>Room</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{search.js}"></script>
 </head>
 
 <body class="bg-gray-100">
+
 <div class="flex">
     <aside class="h-screen sticky top-0 w-1/6">
 
@@ -194,6 +196,13 @@
                         <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
                     </div>
 
+                    <div class="w-2/6">
+                        <a class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                                id="chooseguestbutton">
+                            choose guest
+                        </a>
+                    </div>
+
                     <div class="w-2/6 text-right">
                         <button type="submit" class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">next</button>
                     </div>
@@ -205,5 +214,63 @@
     </div>
 </div>
 </body>
+
+<!-- modal -->
+<div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full"
+     id="my-modal">
+    <div class="z-50 relative top-20 mx-auto w-3/5 h-2/5 border shadow-lg rounded-md bg-white">
+        <div class="items-center px-4 py-3">
+
+            <div>
+                <input class="border-2 border-blue-200 rounded" type="text" id="guestSearch" onkeyup="search(this.id, 'guests')"
+                       placeholder=" Search for guest...">
+            </div>
+
+            <table id="guests" class="w-full table-fixed bg-white">
+
+                <tr class="bg-blue-100 text-xs">
+                    <th class="w-1/5 border-2 py-2 border-blue-200">Guest</th>
+                    <th class="w-2/5 border-2 py-2 border-blue-200">Street</th>
+                    <th class="w-1/5 border-2 py-2 border-blue-200">ZIP</th>
+                    <th class="w-1/5 border-2 py-2 border-blue-200">City</th>
+                    <th class="w-1/5 border-2 py-2 border-blue-200">Country</th>
+                </tr>
+
+                <tr class="text-center m-4" th:each="guest : ${allGuests}">
+                    <td th:text="${guest.firstName} + ' ' + ${guest.lastName}"></td>
+                    <td th:text="${guest.streetAddress}"></td>
+                    <td th:text="${guest.zip}"></td>
+                    <td th:text="${guest.city}"></td>
+                    <td th:text="${guest.country}"></td>
+                </tr>
+
+            </table>
+
+            <h1 class="text-center font-bold">search existing customer</h1>
+
+            <a id="insertGuest"
+               class="block w-1/5 mx-auto p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                insert
+            </a>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    let modal = document.getElementById("my-modal");
+
+    let chooseGuestButton = document.getElementById("chooseguestbutton");
+
+    chooseGuestButton.onclick = function() {
+    modal.style.display = "block";
+    }
+
+    let insertGuest = document.getElementById("insertGuest");
+
+    insertGuest.onclick = function() {
+    modal.style.display = "none";
+    }
+</script>
 
 </html>

@@ -203,6 +203,13 @@ public class BookingController {
         GuestForm guestForm = new GuestForm();
         BookingForm bookingForm = new BookingForm();
 
+        try {
+            List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+            model.addAttribute("allGuests", allGuests);
+        } catch (GuestNotFoundException e) {
+            e.printStackTrace();
+        }
+
         model.addAttribute("guestForm", guestForm);
         model.addAttribute("bookingForm", bookingForm);
 
