@@ -133,11 +133,18 @@ public class BookingController {
 
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
+        GuestId guestId3 = new GuestId(UUID.randomUUID());
+        GuestId guestId4 = new GuestId(UUID.randomUUID());
+
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
+        Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
+        guestRepository.addGuest(guest3);
+        guestRepository.addGuest(guest4);
 
         Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId).
@@ -207,6 +214,13 @@ public class BookingController {
 
         GuestForm guestForm = new GuestForm();
         BookingForm bookingForm = new BookingForm();
+
+        try {
+            List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+            model.addAttribute("allGuests", allGuests);
+        } catch (GuestNotFoundException e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("guestForm", guestForm);
         model.addAttribute("bookingForm", bookingForm);

@@ -12,7 +12,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class RoomRepositoryImpl implements RoomRepository {
+public class
+RoomRepositoryImpl implements RoomRepository {
 
     @PersistenceContext
     private EntityManager em;
