@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.Guest;
+import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.valueobjects.Address;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
@@ -8,6 +9,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
@@ -59,5 +63,28 @@ public class GuestDTO {
                 guest.getGuestType(),
                 guest.getCompanyName(),
                 guest.getAgencyName());
+    }
+
+    public static List<GuestDTO> fromGuestList(List<Guest> guests){
+
+
+        return guests
+                .stream()
+                .map(guest ->
+                        new GuestDTO(
+                                guest.getGuestId(),
+                                guest.getFirstName(),
+                                guest.getLastName(),
+                                guest.getAddress().getStreet(),
+                                guest.getAddress().getZip(),
+                                guest.getAddress().getCity(),
+                                guest.getAddress().getCountry(),
+                                guest.getPhoneNumber(),
+                                guest.getEmail(),
+                                guest.getGuestType(),
+                                guest.getCompanyName(),
+                                guest.getAgencyName()
+                        ))
+                .collect(Collectors.toList());
     }
 }

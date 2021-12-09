@@ -9,6 +9,7 @@ import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -27,5 +28,15 @@ public class ViewGuestServiceImpl implements ViewGuestService {
         Guest guest = guestOpt.get();
 
         return GuestDTO.fromGuest(guest);
+    }
+
+    public List<GuestDTO> findAllGuest() throws GuestNotFoundException {
+        List<Guest> allGuests = guestRepository.findAllGuest();
+
+        if(allGuests.isEmpty()){
+            throw new GuestNotFoundException("No guests have been found");
+        }
+
+        return GuestDTO.fromGuestList(allGuests);
     }
 }
