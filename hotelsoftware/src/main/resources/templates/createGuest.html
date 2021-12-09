@@ -7,9 +7,11 @@
 
     <title>Room</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{search.js}"></script>
 </head>
 
 <body class="bg-gray-100">
+
 <div class="flex">
     <aside class="h-screen sticky top-0 w-1/6">
 
@@ -42,7 +44,7 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">  <!-- Form Block -->
 
-            <form th:action="@{/chooseRoom}" th:object="${guestForm}" method="post">
+            <form id="guestForm" th:action="@{/chooseRoom}" th:object="${guestForm}" method="post">
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -51,12 +53,12 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input type="text" id="gname" class="border-2 border-gray-400 w-4/6">
+                            <input type="text" id="gname" name="gname" class="border-2 border-gray-400 w-4/6">
                             <label for="gname" class="block text-sm text-gray-500">Name</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input type="text" id="voucher" class="border-2 border-gray-400 w-2/6" th:field="${bookingForm.voucherCode}">
+                            <input type="text" id="voucher" name="voucher" class="border-2 border-gray-400 w-2/6" th:field="${bookingForm.voucherCode}">
                             <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
                         </div>
 
@@ -71,7 +73,7 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input type="text" id="firstName" class="border-2 border-gray-400 w-4/6" th:field="*{firstName}">
+                            <input type="text" id="firstName" name="firstName" class="border-2 border-gray-400 w-4/6" th:field="*{firstName}">
                             <label for="firstName" class="block text-sm text-gray-500">First Name</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('firstName')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -81,7 +83,7 @@
                         </div>
 
                         <div class="w-1/2">
-                            <input type="text" id="lastName" class="border-2 border-gray-400 w-4/6" th:field="*{lastName}">
+                            <input type="text" id="lastName" name="lastName" class="border-2 border-gray-400 w-4/6" th:field="*{lastName}">
                             <label for="lastName" class=" block text-sm text-gray-500">Last Name</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('lastName')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,7 +103,7 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
+                            <input type="text" id="streetAdr" name="streetAdr" class="border-2 border-gray-400 w-4/6" th:field="*{streetAdr}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('streetAdr')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -111,7 +113,7 @@
                         </div>
 
                         <div class="w-1/2">
-                            <input type="text" id="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
+                            <input type="text" id="zip" name="zip" class="border-2 border-gray-400 w-2/6" th:field="*{zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('zip')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -125,7 +127,7 @@
                     <div class="mt-4 flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input type="text" id="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
+                            <input type="text" id="city" name="city" class="border-2 border-gray-400 w-4/6" th:field="*{city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('city')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +137,7 @@
                         </div>
 
                         <div class="w-1/2">
-                            <input type="text" id="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
+                            <input type="text" id="country" name="country" class="border-2 border-gray-400 w-4/6" th:field="*{country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('country')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -165,7 +167,7 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2">
-                            <input type="text" id="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
+                            <input type="text" id="phone" name="phone" class="border-2 border-gray-400 w-4/6" th:field="*{phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('phoneNumber')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -175,7 +177,7 @@
                         </div>
 
                         <div class="w-1/2">
-                            <input type="text" id="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
+                            <input type="text" id="email" name="email" class="border-2 border-gray-400 w-4/6" th:field="*{email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                             <div class="flex rounded content-start mt-1 w-4/6 p-1 text-xs text-gray-600 bg-red-200 border-red-200 border" th:if="${#fields.hasErrors('email')}">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="pr-1" width="18" height="18" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -188,10 +190,17 @@
 
                 </div>
 
-                <div class="mt-8 flex row justify-between"> <!-- Button Line -->
+                <div class="mt-8 flex"> <!-- Button Line -->
 
                     <div class="w-2/6">
                         <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
+                    </div>
+
+                    <div class="ml-32 w-2/6">
+                        <a href="#" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                                id="chooseGuest">
+                            load guest
+                        </a>
                     </div>
 
                     <div class="w-2/6 text-right">
@@ -205,5 +214,110 @@
     </div>
 </div>
 </body>
+
+<!-- background of popup-->
+<div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="popup">
+
+    <!-- popup -->
+    <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-3/5 border shadow-lg rounded-md bg-white">
+
+        <div>
+            <input class="border-2 border-blue-200 rounded" type="text" id="guestSearch" onkeyup="search(this.id, 'guests')"
+                   placeholder=" Search for guest...">
+        </div>
+
+        <div class="mt-4 pr-4 h-5/6 overflow-scroll">
+
+            <table id="guests" class="w-full table-fixed bg-white">
+
+                <tr class="bg-blue-100 text-xl">
+                    <th class="w-2/12 border-2 py-2 border-blue-200">Guest</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">Street</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">ZIP</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">City</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">Country</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">Phone</th>
+                    <th class="w-3/12 border-2 py-2 border-blue-200">Email</th>
+                    <th class="w-2/12 border-2 py-2 border-blue-200">Insert</th>
+                </tr>
+
+                <tr class="text-center m-4" th:each="guest : ${allGuests}">
+                    <td class="border py-2 px-4" th:text="${guest.firstName} + ' ' + ${guest.lastName}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.streetAddress}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.zip}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.city}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.country}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.phoneNumber}"></td>
+                    <td class="border py-2 px-4" th:text="${guest.email}"></td>
+                    <td class="border py-2 px-4"><input name="chosenGuest" type="radio"></td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <a id="insertGuest" href="#"
+           class="mt-4 block w-1/5 mx-auto p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+            insert
+        </a>
+
+    </div>
+</div>
+
+<script>
+    let popup = document.getElementById("popup");
+    let chooseGuestButton = document.getElementById("chooseGuest");
+    let insertGuest = document.getElementById("insertGuest");
+
+    chooseGuestButton.onclick = function() {
+        popup.style.display = "block";
+    }
+
+    insertGuest.onclick = function() {
+        popup.style.display = "none";
+
+        let table = document.getElementById("guests");
+        let tr = table.getElementsByTagName("tr");
+
+        let rowIndex;
+
+        for (let i = 0; i < tr.length; i++) {
+            let radio_td = tr[i].getElementsByTagName("td")[7];
+
+            if (radio_td) {
+                let radio = radio_td.getElementsByTagName("input")[0];
+
+                if (radio.checked){
+                    rowIndex = tr[i].rowIndex;
+                    break;
+                }
+            }
+        }
+
+        let fullName = tr[rowIndex].getElementsByTagName("td")[0].innerHTML;
+        let nameArray = fullName.split(" ");
+        let firstName = nameArray[0];
+        let lastName = nameArray[1];
+
+        let streetAddress = tr[rowIndex].getElementsByTagName("td")[1].innerHTML;
+        let zip = tr[rowIndex].getElementsByTagName("td")[2].innerHTML;
+        let city = tr[rowIndex].getElementsByTagName("td")[3].innerHTML;
+        let country = tr[rowIndex].getElementsByTagName("td")[4].innerHTML;
+        let phoneNumber = tr[rowIndex].getElementsByTagName("td")[5].innerHTML;
+        let email = tr[rowIndex].getElementsByTagName("td")[6].innerHTML;
+
+
+        let guestForm = document.getElementById("guestForm");
+
+        guestForm.firstName.value = firstName;
+        guestForm.lastName.value = lastName;
+        guestForm.streetAdr.value = streetAddress;
+        guestForm.zip.value = zip;
+        guestForm.city.value = city;
+        guestForm.country.value = country;
+        guestForm.phone.value = phoneNumber;
+        guestForm.email.value = email;
+    }
+</script>
 
 </html>

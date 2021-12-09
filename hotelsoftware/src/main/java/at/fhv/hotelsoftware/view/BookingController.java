@@ -7,6 +7,7 @@ import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
@@ -78,6 +79,8 @@ public class BookingController {
 
 
 
+
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -102,7 +105,7 @@ public class BookingController {
 
     @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
-    public ModelAndView createDummyData(Model model){
+    public ModelAndView createDummyData(Model model) throws RoomNotFoundException{
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
@@ -222,6 +225,13 @@ public class BookingController {
 
         GuestForm guestForm = new GuestForm();
         BookingForm bookingForm = new BookingForm();
+
+        try {
+            List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+            model.addAttribute("allGuests", allGuests);
+        } catch (GuestNotFoundException e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("guestForm", guestForm);
         model.addAttribute("bookingForm", bookingForm);

@@ -47,7 +47,7 @@ public class CheckInServiceImpl implements CheckInService {
         Integer doubleRoomCount = booking.getDoubleRoom();
         Integer luxusRoomCount = booking.getSuperiorRoom();
 
-        List<Room> allRooms = roomRepository.findAllRooms();
+        List<Room> allRooms = roomRepository.findAllFreeRooms();
         List<RoomDTO> freeRoomsForBooking = new LinkedList<>();
 
         for (int i = 0; i < allRooms.size(); i++) {

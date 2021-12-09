@@ -76,7 +76,7 @@ public class CheckInServiceTest {
         list.add(superiorRoom);
 
         Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
-        Mockito.when(roomRepository.findAllRooms()).thenReturn(list);
+        Mockito.when(roomRepository.findAllFreeRooms()).thenReturn(list);
 
 
         //when
@@ -130,7 +130,7 @@ public class CheckInServiceTest {
         list.add(superiorRoom);
 
         Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
-        Mockito.when(roomRepository.findAllRooms()).thenReturn(list);
+        Mockito.when(roomRepository.findAllFreeRooms()).thenReturn(list);
 
 
         // when ... then
@@ -178,7 +178,7 @@ public class CheckInServiceTest {
         list.add(superiorRoom);
 
         Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
-        Mockito.when(roomRepository.findAllRooms()).thenReturn(list);
+        Mockito.when(roomRepository.findAllFreeRooms()).thenReturn(list);
 
 
         // when ... then
