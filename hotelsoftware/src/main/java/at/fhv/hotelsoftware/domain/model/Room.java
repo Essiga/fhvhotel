@@ -7,6 +7,8 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import lombok.*;
 
+import java.util.Objects;
+
 //TODO: try again without setter
 @Data //setters required by Hibernate
 @NoArgsConstructor
@@ -44,5 +46,18 @@ public class Room {
             this.bookingId = null;
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return roomCategory == room.roomCategory && roomNumber.equals(room.roomNumber) && roomStatus == room.roomStatus && Objects.equals(bookingId, room.bookingId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(roomCategory, roomNumber, roomStatus, bookingId);
     }
 }
