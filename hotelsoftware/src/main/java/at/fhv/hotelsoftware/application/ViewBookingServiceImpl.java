@@ -45,4 +45,16 @@ public class ViewBookingServiceImpl implements ViewBookingService {
 
         return BookingDTO.fromBooking(bookingOpt.get());
     }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<BookingDTO> findAllBookings() throws BookingNotFoundException {
+        List<Booking> allBookings = bookingRepository.findAllBookings();
+
+        if(allBookings.isEmpty()){
+            throw new BookingNotFoundException("No bookings found");
+        }
+
+        return BookingDTO.fromBookingList(allBookings);
+    }
 }
