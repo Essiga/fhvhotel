@@ -37,7 +37,7 @@ public class RoomRepositoryTests {
 //
 
     @Test
-    public void given_rooms_when_persistedflushedfetched_then_expectallrooms() {
+    public void given_rooms_when_findallrooms_then_expectallrooms() {
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
@@ -72,7 +72,7 @@ public class RoomRepositoryTests {
         assertEquals(expectedNumberOfRooms, allRooms.size());
 
     }
-}
+
     //
     @Test
     void given_newroom_when_persistedflushedfetched_then_expectequalroom() {
@@ -97,7 +97,7 @@ public class RoomRepositoryTests {
     }
 
     @Test
-    void given_roomspersisted_when_findallrooms_then_returnallrooms() {
+    void given_roomspersisted_when_findallfreerooms_then_returnallrooms() {
         //given
         Room roomExpected1 = new Room().builder().
                 roomNumber(101).
@@ -130,7 +130,7 @@ public class RoomRepositoryTests {
         em.flush();
 
         //when
-        List<Room> rooms = roomRepository.findAllRooms();
+        List<Room> rooms = roomRepository.findAllFreeRooms();
 
         //then
         assertEquals(expectedRooms.size(), rooms.size());
