@@ -32,8 +32,6 @@ public class RoomRepositoryTests {
     @Autowired
     private RoomRepository roomRepository;
 
-    @Autowired
-    private ViewRoomService viewRoomService;
 //
 
     @Test
@@ -50,23 +48,23 @@ public class RoomRepositoryTests {
                     bookingId(null).
                     roomCategory(RoomCategory.SINGLE).
                     roomNumber(100 + i).build();
-            viewRoomService.createRoom(singleRoom[i]);
+            roomRepository.addRoom(singleRoom[i]);
 
             doubleRoom[i] = Room.builder().
                     roomStatus(RoomStatus.FREE).
                     bookingId(null).
                     roomCategory(RoomCategory.DOUBLE).
                     roomNumber(200 + i).build();
-            viewRoomService.createRoom(doubleRoom[i]);
+            roomRepository.addRoom(doubleRoom[i]);
 
             luxusRoom[i] = Room.builder().
                     roomStatus(RoomStatus.FREE).
                     bookingId(null).
                     roomCategory(RoomCategory.SUPERIOR).
                     roomNumber(300 + i).build();
-            viewRoomService.createRoom(luxusRoom[i]);
+            roomRepository.addRoom(luxusRoom[i]);
         }
-
+        em.flush();
         List <Room> allRooms = roomRepository.findAllRooms();
 
         assertEquals(expectedNumberOfRooms, allRooms.size());
