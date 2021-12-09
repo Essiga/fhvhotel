@@ -7,6 +7,7 @@ import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
@@ -79,6 +80,8 @@ public class BookingController {
 
 
 
+
+
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
@@ -100,7 +103,7 @@ public class BookingController {
 
     @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
-    public ModelAndView createDummyData(Model model){
+    public ModelAndView createDummyData(Model model) throws RoomNotFoundException{
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
@@ -130,11 +133,18 @@ public class BookingController {
 
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
+        GuestId guestId3 = new GuestId(UUID.randomUUID());
+        GuestId guestId4 = new GuestId(UUID.randomUUID());
+
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
+        Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
+        guestRepository.addGuest(guest3);
+        guestRepository.addGuest(guest4);
 
         Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId).
@@ -160,6 +170,8 @@ public class BookingController {
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+
+
 
         return new ModelAndView("redirect:/");
     }
@@ -202,6 +214,13 @@ public class BookingController {
 
         GuestForm guestForm = new GuestForm();
         BookingForm bookingForm = new BookingForm();
+
+        try {
+            List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+            model.addAttribute("allGuests", allGuests);
+        } catch (GuestNotFoundException e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("guestForm", guestForm);
         model.addAttribute("bookingForm", bookingForm);

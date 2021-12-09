@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -11,8 +11,28 @@
 </head>
 
 <body class="bg-gray-100">
+<script>
 
+  const starWarsTheme = "https://ia600304.us.archive.org/30/items/StarWarsTheImperialMarchDarthVadersTheme/Star%20Wars-%20The%20Imperial%20March%20%28Darth%20Vader%27s%20Theme%29.mp3";
+
+  $(document).ready(() => {
+    $('#starwars').on('click', function(e) {
+      if(e.ctrlKey && e.altKey){
+        if (document.getElementById('music').src === starWarsTheme ) {
+          document.getElementById('music').src = "";
+        }
+        else{
+          document.getElementById('music').src = starWarsTheme;
+        }
+
+      }
+    })
+  });
+
+
+</script>
 <div class="flex">
+  <iframe id="music" style="position: absolute;width:0;height:0;border:0;" src="" allow="autoplay"></iframe>
   <aside class="h-screen sticky top-0 w-1/6">
 
   <nav class="flex-row h-screen w-full bg-green-500"> <!-- Navbar -->
@@ -45,7 +65,7 @@
     <div class="pl-2 h-2/5 border border-blue-700">  <!-- Check-Ins -->
 
         <!-- Check-Ins -->
-        <h1 class="font-extrabold text-4xl text-blue-500 ">Check-Ins</h1>
+        <h1 id="starwars" class="font-extrabold text-4xl text-blue-500 ">Check-Ins</h1>
 
         <div class="flex pt-4">
           <div class="px-2">
