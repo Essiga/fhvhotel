@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Added action buttons which are dependent from Booking status&#10;New Summary Page with confirm button and controller">
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSum.html" afterDir="false" />
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="GuestTest">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ConfirmBookingServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ConfirmBookingService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ConfirmBookingServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/static/filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/static/filter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSum.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/confirmSummary.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,15 +49,15 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Booking_Overview_Search_Function" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -79,22 +84,15 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/HibernateBooking.hbm.xml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/dto/BookingDTO.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/infrastructure/BookingRepositoryImpl.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/invoice.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createInvoice.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/ViewBookingServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/ViewBookingService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/form/BookingForm.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/api/BookingRepository.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -104,7 +102,7 @@
     </option>
     <option name="myId2Visible">
       <map>
-        <entry key="JPA Structure" value="false" />
+        <entry key="JPA Structure" value="true" />
       </map>
     </option>
   </component>
@@ -147,13 +145,11 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.main">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
+    <configuration name="main" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
+      <module name="at.fhv.hotelsoftware.main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -167,21 +163,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="main" type="Application" factoryName="Application">
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="at.fhv.hotelsoftware.HotelsoftwareApplication" />
-      <module name="hotelsoftware.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GuestRepositoryTests.given_guests_when_persistedflushedfetched_then_expectallguests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectbookingnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.infrastructure.GuestRepositoryTests.given_guests_when_persistedflushedfetched_then_expectallguests&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectbookingnotfoundexception&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -197,12 +184,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectconfirmedbooking" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectconfirmedbooking&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -218,12 +205,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="GuestTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.GuestTest&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -239,12 +226,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectallguests" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectallguests&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -260,12 +247,12 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectguestnotfoundexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectguestnotfoundexception&quot;" />
+        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice&quot;" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -290,20 +277,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="Gradle.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" />
-      <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" />
-      <item itemvalue="Gradle.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectallguests" />
-      <item itemvalue="Gradle.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectguestnotfoundexception" />
-      <item itemvalue="Gradle.GuestRepositoryTests.given_guests_when_persistedflushedfetched_then_expectallguests" />
+      <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
+      <item itemvalue="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" />
+      <item itemvalue="Gradle.GuestTest" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
+      <item itemvalue="Gradle.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectconfirmedbooking" />
+      <item itemvalue="Gradle.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectbookingnotfoundexception" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.GuestRepositoryTests.given_guests_when_persistedflushedfetched_then_expectallguests" />
-        <item itemvalue="Gradle.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectguestnotfoundexception" />
-        <item itemvalue="Gradle.ViewGuestServiceTests.given_guestsexists_when_findallguest_then_expectallguests" />
-        <item itemvalue="Gradle.ViewBookingServiceTests.given_booking_when_findtodayscheckins_then_returntodayscheckins" />
-        <item itemvalue="Gradle.ViewBookingServiceTests.given_novalidbookingid_when_findbookingbyid_then_throwbookingnotfoundexception" />
+        <item itemvalue="Gradle.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectbookingnotfoundexception" />
+        <item itemvalue="Gradle.ConfirmBookingServiceTest.given_bookingId_when_confirmBooking__thenexpectconfirmedbooking" />
+        <item itemvalue="Gradle.GuestTest" />
+        <item itemvalue="Gradle.LineItemTests.given_existinglineitem_when_gettotalprice_then_reflecttotalprice" />
+        <item itemvalue="Gradle.InvoiceTests.given_invoicewithtwolineitems_when_removealllineitems_then_lineitemsequalnull" />
       </list>
     </recent_temporary>
   </component>
@@ -328,7 +315,7 @@
       <workItem from="1638197058494" duration="10458000" />
       <workItem from="1638390102492" duration="1220000" />
       <workItem from="1638428587988" duration="1660000" />
-      <workItem from="1638656487739" duration="3939000" />
+      <workItem from="1639060159599" duration="4478000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -491,7 +478,14 @@
       <option name="project" value="LOCAL" />
       <updated>1638201217699</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="GuestTest">
+      <created>1638631593214</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1638631593214</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,7 +597,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/dev" />
+                        <option value="GuestTest" />
                       </list>
                     </value>
                   </entry>
@@ -633,8 +627,8 @@
     <MESSAGE value="created invoice tests" />
     <MESSAGE value="Create Booking Basic UI finished" />
     <MESSAGE value="Tests for Booking done&#10;Added equals methods for address and guestdata" />
-    <MESSAGE value="Added action buttons which are dependent from Booking status&#10;New Summary Page with confirm button and controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added action buttons which are dependent from Booking status&#10;New Summary Page with confirm button and controller" />
+    <MESSAGE value="GuestTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="GuestTest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -651,11 +645,17 @@
         <PinnedItemInfo parentTag="org.springframework.cglib.core.Signature" memberName="desc" />
         <PinnedItemInfo parentTag="at.fhv.hotelsoftware.infrastructure.BookingRepositoryImpl" memberName="em" />
         <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="value" />
+        <PinnedItemInfo parentTag="at.fhv.hotelsoftware.application.ConfirmBookingServiceImpl" memberName="bookingRepository" />
         <PinnedItemInfo parentTag="org.apache.catalina.connector.ResponseFacade" memberName="response" />
         <PinnedItemInfo parentTag="com.sun.proxy.$Proxy93" memberName="h" />
         <PinnedItemInfo parentTag="java.lang.IllegalArgumentException" memberName="cause" />
         <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="key" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="GradleRunConfiguration">
+        <watch expression="model" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

@@ -45,9 +45,8 @@
 
             <h1 class="text-3xl mb-4 font-semibold">Booking Summary</h1>
 
-            <form th:action="@{confirmBooking}" th:object="${rooms}"  method="get" >
-                <div th:object="${booking}">
-                    <div th:object="${guest}">
+            <form th:action="@{confirmBooking}" th:object="${booking}"  method="post" >
+                      <div th:object="${guest}">
                         <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
                         <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
@@ -225,17 +224,13 @@
                                 <a href="bookingOverview.html" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
                             </div>
 
-                            <div class="w-2/6 text-right mr-1" th:object="${booking}">
-                                <div class="w-3/5 p-1 ml-36 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                                    <a th:href="@{confirmBooking(id=(${booking.bookingId.bookingId}))}">
-                                       Confirm
-                                    </a>
-                                </div>
+                            <div class="w-2/6 text-right">
+                                <button type="submit" class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Confirm</button>
                             </div>
 
                         </div>
                     </div>
-                </div>
+
             </form>
         </div>
     </div>

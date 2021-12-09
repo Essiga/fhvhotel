@@ -14,7 +14,6 @@ import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -65,6 +64,9 @@ public class BookingController {
     @Autowired
     CreateInvoiceService createInvoiceService;
 
+    @Autowired
+    ConfirmBookingService confirmBookingService;
+
     //TODO: remove, only for testing/debugging
     @Autowired
     BookingRepository bookingRepository;
@@ -92,7 +94,8 @@ public class BookingController {
     private static final String SUBMIT_INVOICE = "/submitInvoice";
     private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
     private static final String BOOKING_OVERVIEW = "/bookingOverview";
-    private static final String BOOKING_SUMMARY  = "/bookingSum";
+    private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
+    private static final String CONFIRM_BOOKING = "/confirmBooking";
 
 
     private static final String ERROR_PAGE = "errorPage";
@@ -498,7 +501,7 @@ public class BookingController {
         return new ModelAndView("bookingOverview");
     }
 
-    @GetMapping(BOOKING_SUMMARY)
+    @GetMapping(CONFIRM_BOOKING_SUMMARY)
     public ModelAndView bookingSummary(@RequestParam("id") String id, Model model){
 
         BookingId bookingId = new BookingId(id);
@@ -515,6 +518,19 @@ public class BookingController {
             return redirectToErrorPage(e.getMessage());
         }
 
-        return new ModelAndView("bookingSum");
+        return new ModelAndView("confirmSummary");
+    }
+
+    @PostMapping (CONFIRM_BOOKING)
+    public ModelAndView confirmBooking(@ModelAttribute("booking") BookingForm booking) {
+
+        try {
+            confirmBookingService.confirmBooking(booking.getBookingId());
+
+        } catch (BookingNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("redirect:"+"/");
     }
 }
