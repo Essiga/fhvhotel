@@ -24,12 +24,23 @@ RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<Room> findAllRooms() {
+    public List<Room> findAllFreeRooms() {
         TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_status = 'FREE'", Room.class);
         List<Room> resultList = query.getResultList();
 
         return resultList;
     }
+
+    @Override
+    public List<Room> findAllRooms() {
+        TypedQuery<Room> query = this.em.createQuery("FROM Room", Room.class);
+        List<Room> resultList = query.getResultList();
+
+        return resultList;
+    }
+
+
+
 
     @Override
     public List<Room> findRoomsByBookingId(BookingId bookingId) {

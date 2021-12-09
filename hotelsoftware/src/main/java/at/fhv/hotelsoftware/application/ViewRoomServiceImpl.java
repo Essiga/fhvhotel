@@ -31,6 +31,18 @@ public class ViewRoomServiceImpl implements ViewRoomService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<RoomDTO> findAllRooms () throws RoomNotFoundException{
+        List<Room> rooms = roomRepository.findAllRooms();
+
+        if (rooms.isEmpty()){
+            throw new RoomNotFoundException("No Rooms exist (CreateDummyData)");
+        }
+
+        return RoomDTO.fromRoomList(rooms);
+    }
+
+    @Override
     @Transactional
     public void createRoom(Room room) {
         roomRepository.addRoom(room);

@@ -1,9 +1,13 @@
 package at.fhv.hotelsoftware.infrastructure;
 
+import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.Room;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +33,46 @@ public class RoomRepositoryTests {
 
     @Autowired
     private RoomRepository roomRepository;
+
+//
+
+    @Test
+    public void given_rooms_when_findallrooms_then_expectallrooms() {
+        Room singleRoom[] = new Room[10];
+        Room doubleRoom[] = new Room[10];
+        Room luxusRoom[] = new Room[10];
+
+        int expectedNumberOfRooms = 30;
+
+        for (int i = 0; i < singleRoom.length; i++) {
+            singleRoom[i] = Room.builder().
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.SINGLE).
+                    roomNumber(100 + i).build();
+            roomRepository.addRoom(singleRoom[i]);
+
+            doubleRoom[i] = Room.builder().
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.DOUBLE).
+                    roomNumber(200 + i).build();
+            roomRepository.addRoom(doubleRoom[i]);
+
+            luxusRoom[i] = Room.builder().
+                    roomStatus(RoomStatus.FREE).
+                    bookingId(null).
+                    roomCategory(RoomCategory.SUPERIOR).
+                    roomNumber(300 + i).build();
+            roomRepository.addRoom(luxusRoom[i]);
+        }
+        em.flush();
+        List <Room> allRooms = roomRepository.findAllRooms();
+
+        assertEquals(expectedNumberOfRooms, allRooms.size());
+
+    }
+
     //
     @Test
     void given_newroom_when_persistedflushedfetched_then_expectequalroom() {
@@ -52,7 +97,7 @@ public class RoomRepositoryTests {
     }
 
     @Test
-    void given_roomspersisted_when_findallrooms_then_returnallrooms() {
+    void given_roomspersisted_when_findallfreerooms_then_returnallrooms() {
         //given
         Room roomExpected1 = new Room().builder().
                 roomNumber(101).
@@ -85,7 +130,7 @@ public class RoomRepositoryTests {
         em.flush();
 
         //when
-        List<Room> rooms = roomRepository.findAllRooms();
+        List<Room> rooms = roomRepository.findAllFreeRooms();
 
         //then
         assertEquals(expectedRooms.size(), rooms.size());
