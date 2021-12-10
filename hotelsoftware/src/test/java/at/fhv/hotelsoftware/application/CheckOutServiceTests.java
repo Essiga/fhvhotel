@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @SpringBootTest
-public class CheckOutServiceTest {
+public class CheckOutServiceTests {
     @Autowired
     private CheckOutService checkOutService;
 

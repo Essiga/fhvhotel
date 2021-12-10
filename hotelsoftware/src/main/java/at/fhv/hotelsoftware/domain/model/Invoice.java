@@ -21,6 +21,7 @@ public class Invoice {
     private InvoiceStatus invoiceStatus;
     private GuestData guestData;
     private List<LineItem> lineItems;
+    private final double TAX = 0.2;
 
     @Builder
     public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, GuestData guestData) {
@@ -42,14 +43,13 @@ public class Invoice {
         return sum;
     }
 
-    //TODO call get total price to get the sum
-    public double getTax(double sum){
-        double tax = 0.2 * sum;
-        return tax;
+
+    public double getTax(){
+        return getSum() * TAX;
+
     }
 
-    public double getTotalPrice(double sum, double tax){
-        double totalPrice = sum + tax;
-        return totalPrice;
+    public double getSumWithTax(){
+        return getSum() + getTax();
     }
 }

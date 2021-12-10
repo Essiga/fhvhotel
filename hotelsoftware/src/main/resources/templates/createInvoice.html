@@ -126,7 +126,7 @@
                             <th class="w-1/5 border-2 py-2 border-blue-200">Total Price</th>
                         </tr>
 
-                        <tr class="text-center border-2 border-blue-100" th:each="item : ${invoice.lineItems}">
+                        <tr class="text-center border-2 border-blue-100" th:each="item : ${invoice.lineItemDTOs}">
                             <td class="p-1" th:text="${item.getName()}"></td>
                             <td class="p-1" th:text="${item.getAmount()}"></td>
                             <td class="p-1" th:text="${item.getPrice()}"></td>
@@ -159,7 +159,7 @@
                             <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
                             <td class="w-1/5">
                                 <div class="p-2 text-center font-bold border-black border-double border-b-4"
-                                     th:text="${invoice.totalPrice}"></div>
+                                     th:text="${invoice.getSumWithTax}"></div>
                             </td>
                         </tr>
 

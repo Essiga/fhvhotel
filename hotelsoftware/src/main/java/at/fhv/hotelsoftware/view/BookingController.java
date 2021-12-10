@@ -114,6 +114,7 @@ public class BookingController {
                     bookingId(null).
                     roomCategory(RoomCategory.SINGLE).
                     roomNumber(100 + i).build();
+             //TODO: create createRoomService
             viewRoomService.createRoom(singleRoom [i]);
 
             doubleRoom [i] = Room.builder().
@@ -135,16 +136,19 @@ public class BookingController {
         GuestId guestId2 = new GuestId(UUID.randomUUID());
         GuestId guestId3 = new GuestId(UUID.randomUUID());
         GuestId guestId4 = new GuestId(UUID.randomUUID());
+        GuestId guestId5 = new GuestId(UUID.randomUUID());
 
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
         Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
+        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("alpi@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
         guestRepository.addGuest(guest3);
         guestRepository.addGuest(guest4);
+        guestRepository.addGuest(guest5);
 
         Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId).
@@ -168,8 +172,29 @@ public class BookingController {
                 voucherCode(new VoucherCode("")).
                 build();
 
+        Booking booking3 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
+                guestId(guestId5).
+                bookingStatus(BookingStatus.CHECKEDIN).
+                checkInDate(LocalDate.now().minusDays(2)).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(0).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        Room room = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(booking3.getBookingId()).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(999).build();
+
+        viewRoomService.createRoom(room);
+
+
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+        bookingRepository.addBooking(booking3);
 
 
 
@@ -353,6 +378,7 @@ public class BookingController {
     }
 
 
+
     //TODO: Add function to get rooms from DB
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String id, Model model){
@@ -368,8 +394,15 @@ public class BookingController {
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
 
-        } catch (Exception e){
-            return new ModelAndView("redirect:"+"/");
+        } catch (BookingNotFoundException e){
+            e.printStackTrace();
+           //return new ModelAndView("redirect:"+"/");
+        }
+        catch (RoomNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (GuestNotFoundException e){
+            e.printStackTrace();
         }
 
         return new ModelAndView("checkOutGuestOverview");
@@ -427,7 +460,7 @@ public class BookingController {
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
-
+            //TODO check if invoiceList empty
             InvoiceDTO invoice = invoiceDTOs.get(0);
             GuestData guest = invoiceDTOs.get(0).getGuestData();
 
@@ -463,6 +496,8 @@ public class BookingController {
             renderer.createPDF(outputStream);
             outputStream.flush();
             outputStream.close();
+
+            //TODO dont catch all exceptions always just catch the exceptions that you know will be thrown one by one
         } catch (Exception ex) {
             ex.printStackTrace();
         }

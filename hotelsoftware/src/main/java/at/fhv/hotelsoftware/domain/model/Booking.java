@@ -146,7 +146,7 @@ public class Booking {
     }
 
     private boolean containsAllLineItems(List<LineItem> lineItems, List<LineItem> invoiceLineItems){
-        boolean result = true;
+
         int count = 0;
         for (LineItem lineItem : lineItems) {
             for(LineItem invoiceLineItem : invoiceLineItems){
@@ -155,15 +155,15 @@ public class Booking {
                     if(lineItem.getAmount() > invoiceLineItem.getAmount() ||
                             lineItem.getDuration() != invoiceLineItem.getDuration() ||
                             lineItem.getPrice() != invoiceLineItem.getPrice()){
-                        result = false;
+                        return false;
                     }
                 }
             }
         }
         if(count < lineItems.size()){
-            result = false;
+            return false;
         }
 
-        return result;
+        return true;
     }
 }

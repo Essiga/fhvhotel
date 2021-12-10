@@ -163,7 +163,7 @@
     </tr>
 
     <tr>
-        <div th:each="item : ${invoice.lineItems}">
+        <div th:each="item : ${invoice.lineItemDTOs}">
             <td class="itemSmall" th:text="*{item.name}"/>
             <td class="itemBig" th:text="*{item.amount}"/>
             <td class="itemLast" th:text="*{item.price}"/>
@@ -185,7 +185,7 @@
         </tr>
         <tr>
             <th>Total Price</th>
-            <td th:text="${invoice.totalPrice}"></td>
+            <td th:text="${invoice.sumWithTax}"></td>
         </tr>
     </table>
 </div>

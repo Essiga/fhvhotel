@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewInvoiceService;
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
+import at.fhv.hotelsoftware.application.dto.LineItemDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
@@ -41,6 +42,8 @@ public class ViewInvoiceServiceTests {
         lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 1, RoomCategory.DOUBLE.getPrice()));
         lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 1, RoomCategory.SUPERIOR.getPrice()));
 
+        List<LineItemDTO> lineItemDTOs = LineItemDTO.fromLineItemList(lineItems);
+
         Booking booking = Booking.builder().
                 bookingId(new BookingId(UUID.randomUUID())).
                 cancellationDeadLine(null).
@@ -61,8 +64,8 @@ public class ViewInvoiceServiceTests {
         List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(booking.getBookingId());
 
         //then
-        for (int i = 0; i < lineItems.size(); i++){
-            assertEquals(lineItems.get(i), invoiceDTOs.get(0).getLineItems().get(i));
+        for (int i = 0; i < lineItemDTOs.size(); i++){
+            assertEquals(lineItemDTOs.get(i), invoiceDTOs.get(0).getLineItemDTOs().get(i));
         }
     }
 

@@ -108,7 +108,7 @@ public class InvoiceTests {
         double expectedTax = 0.2 * (RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice());
 
         //when
-        double tax = invoice.getTax(sum);
+        double tax = invoice.getTax();
 
         // then
         assertEquals(expectedTax, tax);
@@ -130,12 +130,12 @@ public class InvoiceTests {
         Invoice invoice = booking.createInvoice(guest);
 
         double sum = invoice.getSum();
-        double tax = invoice.getTax(sum);
+        double tax = invoice.getTax();
 
         double expectedTotalPrice = 1.2 * (RoomCategory.SINGLE.getPrice() + RoomCategory.DOUBLE.getPrice() + RoomCategory.SUPERIOR.getPrice());
 
         //when
-        double totalPrice = invoice.getTotalPrice(sum, tax);
+        double totalPrice = invoice.getSumWithTax();
 
         // then
         assertEquals(totalPrice, totalPrice);
