@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 @SpringBootTest
-public class CreateGuestTest {
-    @InjectMocks
+public class CreateGuestServiceTests {
+
     @Autowired
     private CreateGuestServiceImpl createGuestService;
 
@@ -46,11 +46,13 @@ public class CreateGuestTest {
         guestForm.setStreetAdr(street);
         guestForm.setZip(zip);
 
+        //when
         GuestId guestIdExpected = createGuestService.createGuest(guestForm);
 
         Mockito.verify(guestRepository).addGuest(guestCaptor.capture());
         Guest guest = guestCaptor.getValue();
 
+        //then
         assertEquals(guestIdExpected, guest.getGuestId());
     }
 }
