@@ -47,6 +47,10 @@ public class Booking {
         this.invoices = new ArrayList<>();
     }
 
+    public void confirmBooking(){
+        this.bookingStatus = BookingStatus.CONFIRMED;
+    }
+
     public void checkIn(){
         this.bookingStatus = BookingStatus.CHECKEDIN;
     }

@@ -19,10 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -69,6 +66,9 @@ public class BookingController {
     @Autowired
     CreateInvoiceService createInvoiceService;
 
+    @Autowired
+    ConfirmBookingService confirmBookingService;
+
     //TODO: remove, only for testing/debugging
     @Autowired
     BookingRepository bookingRepository;
@@ -96,7 +96,10 @@ public class BookingController {
     private static final String ERROR_URL = "/showErrorPage";
     private static final String CREATE_INVOICE = "/createInvoice";
     private static final String SUBMIT_INVOICE = "/submitInvoice";
-    private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
+    private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
+    private static final String BOOKING_OVERVIEW = "/bookingOverview";
+    private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
+    private static final String CONFIRM_BOOKING = "/confirmBooking";
 
 
     private static final String ERROR_PAGE = "errorPage";
@@ -194,7 +197,6 @@ public class BookingController {
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
-        bookingRepository.addBooking(booking3);
 
 
 
@@ -321,6 +323,7 @@ public class BookingController {
         return new ModelAndView("bookingSummary");
     }
 
+
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
                                                @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking) {
@@ -376,7 +379,6 @@ public class BookingController {
 
         return new ModelAndView("redirect:"+"/");
     }
-
 
 
     //TODO: Add function to get rooms from DB
@@ -509,7 +511,61 @@ public class BookingController {
         return ERROR_PAGE;
     }
 
-    private static ModelAndView redirectToErrorPage(String errorMessage) {
-        return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        private static ModelAndView redirectToErrorPage (String errorMessage){
+            return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        }
+
+
+    @GetMapping ("bookingOverview.html")
+    public ModelAndView showBookings(Model model) {
+
+        try {
+
+            List<BookingDTO> allBookings = viewBookingService.findAllBookings();
+            model.addAttribute("allBookings", allBookings);
+
+
+            List<GuestDTO> allGuests = findGuestsForBookings(allBookings);
+            model.addAttribute("allGuests", allGuests);
+
+        } catch (GuestNotFoundException | BookingNotFoundException e) {
+
+            return new ModelAndView("redirect:"+"/");
+        }
+
+        return new ModelAndView("bookingOverview");
+    }
+
+    @GetMapping(CONFIRM_BOOKING_SUMMARY)
+    public ModelAndView bookingSummary(@RequestParam("id") String id, Model model){
+
+        BookingId bookingId = new BookingId(id);
+
+        try {
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
+
+            model.addAttribute("guest", guestDTO);
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("id", bookingId);
+
+        } catch (BookingNotFoundException | GuestNotFoundException e){
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("confirmSummary");
+    }
+
+    @PostMapping (CONFIRM_BOOKING)
+    public ModelAndView confirmBooking(@ModelAttribute("booking") BookingForm booking) {
+
+        try {
+            confirmBookingService.confirmBooking(booking.getBookingId());
+
+        } catch (BookingNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("redirect:"+"/");
     }
 }

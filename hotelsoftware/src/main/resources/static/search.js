@@ -18,4 +18,3 @@ function search(searchField, searchIn){
     }
 }
 
-
