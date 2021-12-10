@@ -47,7 +47,6 @@ public class BookingRepositoryImpl implements BookingRepository {
 
         return resultList;
     }
-
     @Override
     public List<Booking> findAllBookings() {
         TypedQuery<Booking> query = this.em.createQuery("FROM Booking", Booking.class);
@@ -55,5 +54,6 @@ public class BookingRepositoryImpl implements BookingRepository {
 
         return resultList;
     }
+
 }
 
