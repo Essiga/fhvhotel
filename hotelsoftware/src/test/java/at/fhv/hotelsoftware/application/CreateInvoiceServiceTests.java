@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -40,15 +41,17 @@ public class CreateInvoiceServiceTests {
         GuestData guestData = GuestData.fromGuest(guest);
 
         List<LineItem> lineItems = new ArrayList<LineItem>();
-        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, RoomCategory.SUPERIOR.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, 1, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 1, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 1, RoomCategory.SUPERIOR.getPrice()));
 
         Invoice invoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItems, guestData);
 
         Booking booking = Booking.builder().
                 bookingId(new BookingId(UUID.randomUUID())).
                 cancellationDeadLine(null).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(1)).
                 guestId(guestId).
                 bookingStatus(BookingStatus.PENDING).
                 voucherCode(new VoucherCode("test")).

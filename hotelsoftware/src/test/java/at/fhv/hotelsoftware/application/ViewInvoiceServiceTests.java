@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.ViewInvoiceService;
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
+import at.fhv.hotelsoftware.application.dto.LineItemDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
@@ -14,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,14 +38,18 @@ public class ViewInvoiceServiceTests {
         Guest guest = new Guest(guestId, "Fabian", "Egartner", "Jahngasse 1", "6800", "Dornbirn", "Austria", "066023874", "abc@test.de");
 
         List<LineItem> lineItems = new ArrayList<>();
-        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, RoomCategory.SINGLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, RoomCategory.DOUBLE.getPrice()));
-        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, RoomCategory.SUPERIOR.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, 1, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 1, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 1, RoomCategory.SUPERIOR.getPrice()));
+
+        List<LineItemDTO> lineItemDTOs = LineItemDTO.fromLineItemList(lineItems);
 
         Booking booking = Booking.builder().
                 bookingId(new BookingId(UUID.randomUUID())).
                 cancellationDeadLine(null).
                 guestId(guestId).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(1)).
                 bookingStatus(BookingStatus.PENDING).
                 voucherCode(new VoucherCode("test")).
                 singleRoom(1).
@@ -58,8 +64,8 @@ public class ViewInvoiceServiceTests {
         List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(booking.getBookingId());
 
         //then
-        for (int i = 0; i < lineItems.size(); i++){
-            assertEquals(lineItems.get(i), invoiceDTOs.get(0).getLineItems().get(i));
+        for (int i = 0; i < lineItemDTOs.size(); i++){
+            assertEquals(lineItemDTOs.get(i), invoiceDTOs.get(0).getLineItemDTOs().get(i));
         }
     }
 
@@ -73,6 +79,8 @@ public class ViewInvoiceServiceTests {
                 bookingId(new BookingId(UUID.randomUUID())).
                 cancellationDeadLine(null).
                 guestId(guestId).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(1)).
                 bookingStatus(BookingStatus.PENDING).
                 voucherCode(new VoucherCode("test")).
                 singleRoom(1).
