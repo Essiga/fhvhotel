@@ -1,10 +1,7 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
-import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
-import at.fhv.hotelsoftware.application.dto.GuestDTO;
-import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.application.dto.*;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
@@ -14,6 +11,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
+import at.fhv.hotelsoftware.view.form.LineItemWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -432,18 +431,25 @@ public class BookingController {
         try {
             BookingId bookingId = new BookingId(bookingIdString);
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
-            createInvoiceService.createInvoice(bookingId);
 
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
-            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
 
+            if (invoiceDTOs.isEmpty())
+            {
+                invoiceDTOs.add(createInvoiceService.createInvoice(bookingId));
+            }
+
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             InvoiceDTO invoice = invoiceDTOs.get(0);
-            GuestData guest = invoiceDTOs.get(0).getGuestData();
+
+            LineItemWrapper lineItemWrapper = new LineItemWrapper(invoice.getLineItemDTOs());
+            GuestData guest = invoice.getGuestData();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("invoice", invoice);
             model.addAttribute("guest", guest);
+            model.addAttribute("lineItemWrapper", lineItemWrapper);
 
         } catch (Exception e){
             return new ModelAndView("createInvoice");
@@ -568,7 +574,16 @@ public class BookingController {
     }
 
     @PostMapping (SPLIT_INVOICE)
-    public ModelAndView splitInvoice() {
+    public ModelAndView splitInvoice(@ModelAttribute("lineItemWrapper") LineItemWrapper lineItemWrapper, Model model) {
+
+        List<LineItemDTO> lineItems = lineItemWrapper.getLineItemList();
+
+        for (LineItemDTO lineItem : lineItems)
+        {
+            System.out.println("BIER" + lineItems.size());
+            System.out.println("BIER2:" + lineItem.getName());
+        }
+
         return new ModelAndView("redirect:/");
     }
 }

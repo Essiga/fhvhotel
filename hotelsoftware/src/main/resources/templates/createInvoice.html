@@ -17,7 +17,7 @@
         <nav class="flex-row h-screen w-full bg-green-500">
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
             </div>
 
             <div>
@@ -203,39 +203,49 @@
     <!-- popup -->
     <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-3/5 border shadow-lg rounded-md bg-white">
 
-        <form th:action="@{splitInvoice}" method="post">
+        <form th:action="@{splitInvoice}" th:object="${lineItemWrapper}" method="post">
 
-        <div class="mt-4 pr-4 h-5/6 overflow-scroll">
-
-            <table id="guests" class="w-full table-fixed bg-white">
-
-                <tr class="bg-blue-100 text-xl">
-                    <th class="w-2/12 border-2 py-2 border-blue-200">Description</th>
-                    <th class="w-1/12 border-2 py-2 border-blue-200">Amount</th>
-                    <th class="w-1/12 border-2 py-2 border-blue-200">Duration</th>
-                    <th class="w-1/12 border-2 py-2 border-blue-200">Single price</th>
-                    <th class="w-2/12 border-2 py-2 border-blue-200">Split Amount</th>
+            <tbody>
+                <tr th:each="lineItem, stat : *{lineItemList}">
+                    <td>
+                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].name}"/>
+                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].amount}"/>
+                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].duration}"/>
+                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].price}"/>
+                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].totalPrice}"/>
+                    </td>
                 </tr>
+            </tbody>
 
-                <tr class="text-center m-4" th:each="item : ${invoice.lineItemDTOs}">
-                    <td class="border py-2 px-4" th:text="${item.name}"></td>
-                    <td name="maxAmount" class="border py-2 px-4" th:text="${item.amount}"></td>
-                    <td class="border py-2 px-4" th:text="${item.duration}"></td>
-                    <td class="border py-2 px-4" th:text="${item.price}"></td>
-                    <td class="border py-2 px-4"><input name="splitAmount" type="number" min="0" value="0"></td>
-                </tr>
+            <div class="mt-4 pr-4 h-5/6 overflow-scroll">
 
-            </table>
+                <table id="guests" class="w-full table-fixed bg-white">
 
-        </div>
+                    <tr class="bg-blue-100 text-xl">
+                        <th class="w-2/12 border-2 py-2 border-blue-200">Description</th>
+                        <th class="w-1/12 border-2 py-2 border-blue-200">Amount</th>
+                        <th class="w-1/12 border-2 py-2 border-blue-200">Duration</th>
+                        <th class="w-1/12 border-2 py-2 border-blue-200">Single price</th>
+                        <th class="w-2/12 border-2 py-2 border-blue-200">Split Amount</th>
+                    </tr>
 
-        <button id="confirmSplit" type="submit"
-           class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-            split
-        </button>
+                    <tr class="text-center m-4" th:each="item, stat: ${invoice.lineItemDTOs}">
+                        <td class="border py-2 px-4" th:text="${item.name}"></td>
+                        <td name="maxAmount" class="border py-2 px-4" th:text="${item.amount}"></td>
+                        <td class="border py-2 px-4" th:text="${item.duration}"></td>
+                        <td class="border py-2 px-4" th:text="${item.price}"></td>
+                        <td class="border py-2 px-4"><input name="splitAmount" type="number" min="0" value="0"></td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <button id="confirmSplit" type="submit"
+               class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                split
+            </button>
 
         </form>
-
     </div>
 </div>
 
