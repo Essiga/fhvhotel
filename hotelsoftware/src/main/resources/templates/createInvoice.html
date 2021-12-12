@@ -170,11 +170,15 @@
                 <div class="mt-16 flex justify-between items-baseline">
 
                     <div class="w-2/6">
-                        <div class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}">
-                                 Generate PDF
-                            </a>
-                        </div>
+                        <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                             Generate PDF
+                        </a>
+                    </div>
+
+                    <div class="ml-32 w-2/6">
+                        <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Split Invoice
+                        </a>
                     </div>
 
 
