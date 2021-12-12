@@ -100,7 +100,7 @@ public class BookingController {
     private static final String BOOKING_OVERVIEW = "/bookingOverview";
     private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
     private static final String CONFIRM_BOOKING = "/confirmBooking";
-
+    private static final String SPLIT_INVOICE = "/splitInvoice";
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -565,5 +565,10 @@ public class BookingController {
         }
 
         return new ModelAndView("redirect:"+"/");
+    }
+
+    @PostMapping (SPLIT_INVOICE)
+    public ModelAndView splitInvoice() {
+        return new ModelAndView("redirect:/");
     }
 }

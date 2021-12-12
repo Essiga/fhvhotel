@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.application.api;
 
 import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
+import at.fhv.hotelsoftware.application.dto.LineItemDTO;
 import at.fhv.hotelsoftware.domain.model.Invoice;
 import at.fhv.hotelsoftware.domain.model.LineItem;
 import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
