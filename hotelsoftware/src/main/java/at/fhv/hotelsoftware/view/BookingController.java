@@ -197,8 +197,7 @@ public class BookingController {
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
-
-
+        bookingRepository.addBooking(booking3);
 
         return new ModelAndView("redirect:/");
     }
