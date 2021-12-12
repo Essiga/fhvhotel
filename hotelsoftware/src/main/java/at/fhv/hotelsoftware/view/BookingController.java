@@ -455,7 +455,6 @@ public class BookingController {
     @GetMapping ("/pdfInvoice")
     public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, Model model) {
 
-
         try {
             BookingId bookingId = new BookingId(bookingIdString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
