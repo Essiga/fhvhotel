@@ -39,7 +39,9 @@
         }
 
         /* The search field when it gets focus/clicked on */
-        #myInput:focus {outline: 3px solid #ddd;}
+        #myInput:focus {
+            outline: 3px solid #ddd;
+        }
 
         /* The container <div> - needed to position the dropdown content */
         .dropdown {
@@ -66,10 +68,14 @@
         }
 
         /* Change color of dropdown links on hover */
-        .dropdown-content button:hover {background-color: #f1f1f1}
+        .dropdown-content button:hover {
+            background-color: #f1f1f1
+        }
 
         /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-        .show {display:block;}
+        .show {
+            display: block;
+        }
     </style>
 
 </head>
@@ -128,12 +134,12 @@
 
 
                 <div class="dropdown px-2">
-                        <button onclick="myFunction()" class="dropbtn">Filter Status</button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <button id="pending" onclick="filterBookings('PENDING')">Pending</button>
-                            <button id="confirmed" onclick="filterBookings('CONFIRMED')">Confirmed</button>
-                            <button id="checkedIn" onclick="filterBookings('CHECKEDIN')">Checked-In</button>
-                            <button id="all" onclick="filterBookings('ALL')">All</button>
+                    <button onclick="myFunction()" class="dropbtn">Filter Status</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <button id="pending" onclick="filterBookings('PENDING')">Pending</button>
+                        <button id="confirmed" onclick="filterBookings('CONFIRMED')">Confirmed</button>
+                        <button id="checkedIn" onclick="filterBookings('CHECKEDIN')">Checked-In</button>
+                        <button id="all" onclick="filterBookings('ALL')">All</button>
                     </div>
                 </div>
             </div>
@@ -149,14 +155,21 @@
                     </tr>
                     <tbody id="body">
                     <tr class="text-center m-4" th:each="bookings, stat : ${allBookings}">
-                        <td class="border py-2 px-4" th:text="${allGuests[__${stat.index}__].firstName} + ' ' + ${allGuests[__${stat.index}__].lastName}"></td>
+                        <td class="border py-2 px-4"
+                            th:text="${allGuests[__${stat.index}__].firstName} + ' ' + ${allGuests[__${stat.index}__].lastName}"></td>
                         <td class="border py-2 px-4" th:text="*{bookings.checkInDate}"></td>
                         <td class="border py-2 px-4" th:text="*{bookings.checkOutDate}"></td>
                         <td class="border py-2 px-20" th:text="*{bookings.bookingStatus}"></td>
                         <td class="border py-2 px-20" th:switch="*{bookings.bookingStatus}">
-                            <a th:href="@{confirmSummary(id=(*{bookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-blue-400 hover:bg-blue-500 focus:bg-blue-600 text-2xl font-bold text-white px-5" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).PENDING}">CONFIRM</a>
-                            <a th:href="@{checkInGuestOverview(id=(*{bookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white px-5" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CONFIRMED}">CHECK-IN</a>
-                            <a th:href="@{checkOutGuestOverview(id=(*{bookings.bookingId.bookingId}))}"  class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white px-2" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CHECKEDIN}">CHECK-OUT</a>
+                            <a th:href="@{confirmSummary(id=(*{bookings.bookingId.bookingId}))}"
+                               class="p-1 rounded-lg text-center bg-blue-400 hover:bg-blue-500 focus:bg-blue-600 text-2xl font-bold text-white px-5"
+                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).PENDING}">CONFIRM</a>
+                            <a th:href="@{checkInGuestOverview(id=(*{bookings.bookingId.bookingId}))}"
+                               class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white px-5"
+                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CONFIRMED}">CHECK-IN</a>
+                            <a th:href="@{checkOutGuestOverview(id=(*{bookings.bookingId.bookingId}))}"
+                               class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white px-2"
+                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CHECKEDIN}">CHECK-OUT</a>
                         </td>
                     </tr>
                     </tbody>

@@ -21,7 +21,8 @@
             </div>
 
             <div>
-                <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+                <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+                    Overview</a>
             </div>
 
             <div>
@@ -45,7 +46,9 @@
         <!--Content-->
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="text-3xl mb-8 font-semibold">Invoice</h1>
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Invoice</h1>
+            <h2 class="mb-4 font-semibold text-xl">Step 2: create invoice</h2>
+
 
             <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
                 <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
@@ -165,7 +168,7 @@
                     <div class="w-2/6">
                         <div class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             <a th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}">
-                                 Generate PDF
+                                Generate PDF
                             </a>
                         </div>
                     </div>

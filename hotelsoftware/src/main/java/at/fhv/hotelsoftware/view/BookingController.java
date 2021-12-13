@@ -30,9 +30,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.OutputStream;
 import java.time.LocalDate;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -197,6 +195,7 @@ public class BookingController {
 
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+        bookingRepository.addBooking(booking3);
 
 
 
@@ -350,8 +349,13 @@ public class BookingController {
         try {
             List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
+            Collections.sort(freeRoomListWrapper);
+
+
+
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
+
 
             model.addAttribute("guest", guestDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);

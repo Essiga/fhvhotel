@@ -97,7 +97,7 @@
         }
 
         .totalPrice th {
-            padding-right: 29px;
+            padding-right: 55px;
             text-align: left;
         }
 
@@ -166,8 +166,8 @@
         <div th:each="item : ${invoice.lineItemDTOs}">
             <td class="itemSmall" th:text="*{item.name}"/>
             <td class="itemBig" th:text="*{item.amount}"/>
-            <td class="itemLast" th:text="*{item.price}"/>
-            <td class="price" th:text="*{item.totalPrice}"/>
+            <td class="itemLast"><span th:text="*{item.price}"/> &#8364;</td>
+            <td class="price"><span th:text="*{item.totalPrice}"/> &#8364;</td>
         </div>
     </tr>
 </table>
@@ -177,15 +177,15 @@
     <table class="totalPrice">
         <tr>
             <th>Net Price</th>
-            <td th:text="${invoice.sum}"></td>
+            <td><span th:text="*{invoice.sum}"/> &#8364;</td>
         </tr>
         <tr>
             <th>+ 20% tax</th>
-            <td th:text="${invoice.tax}"></td>
+            <td><span th:text="${invoice.tax}"/> &#8364;</td>
         </tr>
         <tr>
             <th>Total Price</th>
-            <td th:text="${invoice.sumWithTax}"></td>
+            <td><span th:text="${invoice.sumWithTax}"/> &#8364;</td>
         </tr>
     </table>
 </div>
