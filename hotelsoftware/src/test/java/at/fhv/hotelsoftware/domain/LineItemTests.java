@@ -1,4 +1,4 @@
-package at.fhv.hotelsoftware;
+package at.fhv.hotelsoftware.domain;
 
 import at.fhv.hotelsoftware.domain.model.LineItem;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
@@ -12,10 +12,11 @@ public class LineItemTests {
     public void given_existinglineitem_when_gettotalprice_then_reflecttotalprice(){
         //given
         int amount = 2;
+        int duration = 3;
         double price = RoomCategory.DOUBLE.getPrice();
-        double expectedTotal = price * amount;
+        double expectedTotal = price * amount * duration;
 
-        LineItem lineItem = new LineItem(RoomCategory.DOUBLE.toString(), amount, RoomCategory.DOUBLE.getPrice());
+        LineItem lineItem = new LineItem(RoomCategory.DOUBLE.toString(), amount, duration, RoomCategory.DOUBLE.getPrice());
 
         //when
         double totalPrice = lineItem.getTotalPrice();

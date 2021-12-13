@@ -21,6 +21,7 @@ public class Invoice {
     private InvoiceStatus invoiceStatus;
     private GuestData guestData;
     private List<LineItem> lineItems;
+    private final double TAX = 0.2;
 
     @Builder
     public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems, GuestData guestData) {
@@ -36,21 +37,19 @@ public class Invoice {
         double sum = 0.0;
 
         for (LineItem lineItem : lineItems) {
-            int amount = lineItem.getAmount();
-            double price = lineItem.getPrice();
-            sum += price * amount;
+            sum += lineItem.getTotalPrice();
         }
 
         return sum;
     }
 
-    public double getTax(double sum){
-        double tax = 0.2 * sum;
-        return tax;
+
+    public double getTax(){
+        return getSum() * TAX;
+
     }
 
-    public double getTotalPrice(double sum, double tax){
-        double totalPrice = sum + tax;
-        return totalPrice;
+    public double getSumWithTax(){
+        return getSum() + getTax();
     }
 }

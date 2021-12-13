@@ -47,7 +47,7 @@ public class CheckInServiceImpl implements CheckInService {
         Integer doubleRoomCount = booking.getDoubleRoom();
         Integer luxusRoomCount = booking.getSuperiorRoom();
 
-        List<Room> allRooms = roomRepository.findAllRooms();
+        List<Room> allRooms = roomRepository.findAllFreeRooms();
         List<RoomDTO> freeRoomsForBooking = new LinkedList<>();
 
         for (int i = 0; i < allRooms.size(); i++) {
@@ -87,12 +87,6 @@ public class CheckInServiceImpl implements CheckInService {
             Room room = optRoom.get();
 
             room.occupy(bookingId);
-
-//            if (room.getRoomStatus() == RoomStatus.FREE) {
-//                room.occupy(bookingId);
-//            } else {
-//                throw new RoomAlreadyOccupiedException("Room with room number: " + room.getRoomNumber() + " already occupied");
-//            }
         }
 
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);

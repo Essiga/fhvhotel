@@ -7,6 +7,7 @@ import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
@@ -18,10 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -68,12 +66,17 @@ public class BookingController {
     @Autowired
     CreateInvoiceService createInvoiceService;
 
+    @Autowired
+    ConfirmBookingService confirmBookingService;
+
     //TODO: remove, only for testing/debugging
     @Autowired
     BookingRepository bookingRepository;
 
     @Autowired
     GuestRepository guestRepository;
+
+
 
 
 
@@ -93,14 +96,17 @@ public class BookingController {
     private static final String ERROR_URL = "/showErrorPage";
     private static final String CREATE_INVOICE = "/createInvoice";
     private static final String SUBMIT_INVOICE = "/submitInvoice";
-    private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
+    private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
+    private static final String BOOKING_OVERVIEW = "/bookingOverview";
+    private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
+    private static final String CONFIRM_BOOKING = "/confirmBooking";
 
 
     private static final String ERROR_PAGE = "errorPage";
 
     @Transactional
     @GetMapping(CREATE_DUMMY_DATA)
-    public ModelAndView createDummyData(Model model){
+    public ModelAndView createDummyData(Model model) throws RoomNotFoundException{
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
@@ -111,6 +117,7 @@ public class BookingController {
                     bookingId(null).
                     roomCategory(RoomCategory.SINGLE).
                     roomNumber(100 + i).build();
+             //TODO: create createRoomService
             viewRoomService.createRoom(singleRoom [i]);
 
             doubleRoom [i] = Room.builder().
@@ -130,11 +137,21 @@ public class BookingController {
 
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
+        GuestId guestId3 = new GuestId(UUID.randomUUID());
+        GuestId guestId4 = new GuestId(UUID.randomUUID());
+        GuestId guestId5 = new GuestId(UUID.randomUUID());
+
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
+        Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
+        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("alpi@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
+        guestRepository.addGuest(guest3);
+        guestRepository.addGuest(guest4);
+        guestRepository.addGuest(guest5);
 
         Booking booking = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
                 guestId(guestId).
@@ -158,8 +175,30 @@ public class BookingController {
                 voucherCode(new VoucherCode("")).
                 build();
 
+        Booking booking3 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
+                guestId(guestId5).
+                bookingStatus(BookingStatus.CHECKEDIN).
+                checkInDate(LocalDate.now().minusDays(2)).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(0).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        Room room = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(booking3.getBookingId()).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(999).build();
+
+        viewRoomService.createRoom(room);
+
+
         bookingRepository.addBooking(booking);
         bookingRepository.addBooking(booking2);
+
+
 
         return new ModelAndView("redirect:/");
     }
@@ -202,6 +241,13 @@ public class BookingController {
 
         GuestForm guestForm = new GuestForm();
         BookingForm bookingForm = new BookingForm();
+
+        try {
+            List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+            model.addAttribute("allGuests", allGuests);
+        } catch (GuestNotFoundException e) {
+            e.printStackTrace();
+        }
 
         model.addAttribute("guestForm", guestForm);
         model.addAttribute("bookingForm", bookingForm);
@@ -277,6 +323,7 @@ public class BookingController {
         return new ModelAndView("bookingSummary");
     }
 
+
     @PostMapping(WRITE_BOOKING_IN_DB)
     public ModelAndView writeBookingInDatabase(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
                                                @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking) {
@@ -349,8 +396,15 @@ public class BookingController {
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
 
-        } catch (Exception e){
-            return new ModelAndView("redirect:"+"/");
+        } catch (BookingNotFoundException e){
+            e.printStackTrace();
+           //return new ModelAndView("redirect:"+"/");
+        }
+        catch (RoomNotFoundException e){
+            e.printStackTrace();
+        }
+        catch (GuestNotFoundException e){
+            e.printStackTrace();
         }
 
         return new ModelAndView("checkOutGuestOverview");
@@ -408,7 +462,7 @@ public class BookingController {
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
-
+            //TODO check if invoiceList empty
             InvoiceDTO invoice = invoiceDTOs.get(0);
             GuestData guest = invoiceDTOs.get(0).getGuestData();
 
@@ -444,6 +498,8 @@ public class BookingController {
             renderer.createPDF(outputStream);
             outputStream.flush();
             outputStream.close();
+
+            //TODO dont catch all exceptions always just catch the exceptions that you know will be thrown one by one
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -455,7 +511,61 @@ public class BookingController {
         return ERROR_PAGE;
     }
 
-    private static ModelAndView redirectToErrorPage(String errorMessage) {
-        return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        private static ModelAndView redirectToErrorPage (String errorMessage){
+            return new ModelAndView("redirect:" + ERROR_URL + "?errorMessage=" + errorMessage);
+        }
+
+
+    @GetMapping ("bookingOverview.html")
+    public ModelAndView showBookings(Model model) {
+
+        try {
+
+            List<BookingDTO> allBookings = viewBookingService.findAllBookings();
+            model.addAttribute("allBookings", allBookings);
+
+
+            List<GuestDTO> allGuests = findGuestsForBookings(allBookings);
+            model.addAttribute("allGuests", allGuests);
+
+        } catch (GuestNotFoundException | BookingNotFoundException e) {
+
+            return new ModelAndView("redirect:"+"/");
+        }
+
+        return new ModelAndView("bookingOverview");
+    }
+
+    @GetMapping(CONFIRM_BOOKING_SUMMARY)
+    public ModelAndView bookingSummary(@RequestParam("id") String id, Model model){
+
+        BookingId bookingId = new BookingId(id);
+
+        try {
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+            GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
+
+            model.addAttribute("guest", guestDTO);
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("id", bookingId);
+
+        } catch (BookingNotFoundException | GuestNotFoundException e){
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("confirmSummary");
+    }
+
+    @PostMapping (CONFIRM_BOOKING)
+    public ModelAndView confirmBooking(@ModelAttribute("booking") BookingForm booking) {
+
+        try {
+            confirmBookingService.confirmBooking(booking.getBookingId());
+
+        } catch (BookingNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("redirect:"+"/");
     }
 }

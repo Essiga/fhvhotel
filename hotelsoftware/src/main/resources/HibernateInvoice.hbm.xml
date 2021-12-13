@@ -60,6 +60,8 @@
 
         <property name="amount" column="amount" type="java.lang.Integer"/>
 
+        <property name="duration" column="duration" type="java.lang.Integer"/>
+
         <property name="price" column="price" type="java.lang.Double"/>
     </class>
 

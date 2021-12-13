@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.Guest;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -25,8 +27,17 @@ public class GuestRepositoryImpl implements GuestRepository {
     public Optional<Guest> findGuestById(GuestId guestId) {
         TypedQuery<Guest> query = this.em.createQuery("FROM Guest WHERE guest_Id = :guestId", Guest.class);
         query.setParameter("guestId", guestId.getGuestId());
-        Optional<Guest> customer = query.getResultStream().findFirst();
+        Optional<Guest> guest = query.getResultStream().findFirst();
 
-        return customer;
+        return guest;
     }
+
+    @Override
+    public List<Guest> findAllGuest(){
+        TypedQuery<Guest> query = this.em.createQuery("FROM Guest", Guest.class);
+        List<Guest> resultList = query.getResultList();
+        return resultList;
+    }
+
+
 }
