@@ -95,6 +95,7 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
     private static final String CREATE_INVOICE = "/createInvoice";
+    private static final String ROOM_OVERVIEW = "/roomOverview";
     private static final String SUBMIT_INVOICE = "/submitInvoice";
     private static final String CREATE_INVOICE_PDF ="/pdfInvoice";
 
@@ -466,6 +467,19 @@ public class BookingController {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    @GetMapping(ROOM_OVERVIEW)
+    public ModelAndView roomOverview(Model model) {
+        try {
+            List<RoomDTO> allRoomsDTO = viewRoomService.findAllRooms();
+
+            model.addAttribute("rooms", allRoomsDTO);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return new ModelAndView("bookingOverview");
     }
 
     @GetMapping(ERROR_URL)
