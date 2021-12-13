@@ -97,7 +97,7 @@ public class Booking {
 
         Invoice originalInvoice = null;
         for (Invoice i : invoices) {
-            if(i.getInvoiceNumber().getInvoiceNumber() == invoiceNumber.getInvoiceNumber()){
+            if(i.getInvoiceNumber().getInvoiceNumber().equals(invoiceNumber.getInvoiceNumber())){
                 originalInvoice = i;
                 break;
             }

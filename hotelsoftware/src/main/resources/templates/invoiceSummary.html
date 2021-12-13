@@ -49,7 +49,7 @@
             <h1 class="text-3xl mb-8 font-semibold">Invoice</h1>
 
             <form th:action="@{checkOutGuest}" th:object="${invoice}" method="post">
-                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
+<!--                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>-->
 
                 <div class="p-2 mb-6 border border-gray-300 flex">
 
@@ -169,7 +169,7 @@
 
                     <div class="w-2/6">
                         <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                             Generate PDF
+                            Generate PDF
                         </a>
                     </div>
 
@@ -204,20 +204,19 @@
         <form th:action="@{splitInvoice}" th:object="${lineItemWrapper}" method="post">
 
             <tbody>
-                <tr th:each="lineItem, stat : *{lineItemList}">
-                    <td>
-                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].name}"/>
-                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].amount}"/>
-                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].duration}"/>
-                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].price}"/>
-                        <input type="hidden" th:field="*{lineItemList[__${stat.index}__].totalPrice}"/>
-                    </td>
-                </tr>
+            <tr th:each="lineItem, stat : *{lineItemList}">
+                <td>
+                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].name}"/>
+                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].amount}"/>
+                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].duration}"/>
+                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].price}"/>
+                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].totalPrice}"/>
+                </td>
+            </tr>
             </tbody>
             <input type="hidden" id="bookingIdSplitInvoice" name="bookingId" th:field="${booking.bookingId.bookingId}"/>
             <input type="hidden" id="invoiceNumberSplitInvoice" name="invoiceNumber" th:field="${invoice.invoiceNumber.invoiceNumber}"/>
-<!--            <input type="hidden" id="bookingId" name="bookingId" th:field="${booking.bookingId.bookingId}"/>-->
-<!--            <input type="hidden" id="invoiceNumber" name="invoiceNumber" th:field="${booking.bookingId.bookingId}"/>-->
+
 
 
             <div class="mt-4 pr-4 h-5/6 overflow-scroll">
@@ -244,8 +243,8 @@
             </div>
 
             <button id="confirmSplit" type="submit"
-               class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-               split
+                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                split
             </button>
 
         </form>

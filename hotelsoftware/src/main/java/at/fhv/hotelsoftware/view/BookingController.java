@@ -4,7 +4,6 @@ import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.*;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
-import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
@@ -28,12 +27,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.OutputStream;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
-
-import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.stream.Collectors;
 
 @Controller
 public class BookingController {
@@ -67,6 +65,9 @@ public class BookingController {
 
     @Autowired
     ConfirmBookingService confirmBookingService;
+
+    @Autowired
+    SplitInvoiceService splitInvoiceService;
 
     //TODO: remove, only for testing/debugging
     @Autowired
@@ -389,10 +390,12 @@ public class BookingController {
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
 
             model.addAttribute("guest", guestDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
+            model.addAttribute("invoices", invoiceDTOs);
 
         } catch (BookingNotFoundException e){
             e.printStackTrace();
@@ -425,6 +428,47 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
+    @GetMapping("/invoiceSummary")
+    public ModelAndView invoiceSummary(@RequestParam("bookingId") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model){
+
+        BookingId bookingId = new BookingId(bookingIdString);
+        InvoiceNumber invoiceNumber = new InvoiceNumber(invoiceNumberString);
+        try {
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
+            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
+            InvoiceDTO invoiceDTO = findInvoiceByNumber(invoiceNumber, invoiceDTOs);
+            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
+
+            GuestData guest = invoiceDTO.getGuestData();
+
+            LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
+
+            model.addAttribute("invoice", invoiceDTO);
+            model.addAttribute("booking", bookingDTO);
+            model.addAttribute("guest", guest);
+            model.addAttribute("rooms", roomDTOs);
+            model.addAttribute("lineItemWrapper", lineItemWrapper);
+
+        } catch (BookingNotFoundException e) {
+            e.printStackTrace();
+        } catch (InvoiceNotFoundException e) {
+        e.printStackTrace();
+        } catch (RoomNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return new ModelAndView("invoiceSummary");
+    }
+
+    private InvoiceDTO findInvoiceByNumber(InvoiceNumber invoiceNumber, List<InvoiceDTO> invoiceDTOs) throws InvoiceNotFoundException {
+        for (InvoiceDTO invoiceDTO : invoiceDTOs) {
+            if(invoiceDTO.getInvoiceNumber().getInvoiceNumber().equals(invoiceNumber.getInvoiceNumber())){
+                return invoiceDTO;
+            }
+        }
+        throw new InvoiceNotFoundException("Invoice with Number " + invoiceNumber.getInvoiceNumber().toString() + " not found.");
+    }
+
     @GetMapping(CREATE_INVOICE)
     public ModelAndView createInvoice(@RequestParam("id") String bookingIdString, Model model){
 
@@ -432,7 +476,7 @@ public class BookingController {
             BookingId bookingId = new BookingId(bookingIdString);
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
 
-            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
 
             if (invoiceDTOs.isEmpty())
             {
@@ -440,16 +484,17 @@ public class BookingController {
             }
 
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            InvoiceDTO invoice = invoiceDTOs.get(0);
+            InvoiceDTO invoiceDTO = invoiceDTOs.get(0);
 
-            LineItemWrapper lineItemWrapper = new LineItemWrapper(invoice.getLineItemDTOs());
-            GuestData guest = invoice.getGuestData();
+            LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
+            GuestData guest = invoiceDTO.getGuestData();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("rooms", roomDTOs);
-            model.addAttribute("invoice", invoice);
+            model.addAttribute("invoice", invoiceDTO);
             model.addAttribute("guest", guest);
             model.addAttribute("lineItemWrapper", lineItemWrapper);
+
 
         } catch (Exception e){
             return new ModelAndView("createInvoice");
@@ -465,7 +510,7 @@ public class BookingController {
             BookingId bookingId = new BookingId(bookingIdString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
-            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
             //TODO check if invoiceList empty
             InvoiceDTO invoice = invoiceDTOs.get(0);
             GuestData guest = invoiceDTOs.get(0).getGuestData();
@@ -574,9 +619,29 @@ public class BookingController {
     }
 
     @PostMapping (SPLIT_INVOICE)
-    public ModelAndView splitInvoice(@ModelAttribute("lineItemWrapper") LineItemWrapper lineItemWrapper, Model model) {
+    public ModelAndView splitInvoice(@ModelAttribute("lineItemWrapper") LineItemWrapper lineItemWrapper,
+                                     @ModelAttribute("booking") BookingDTO bookingDTO,
+                                     @ModelAttribute("invoice") InvoiceDTO invoiceDTO) {
 
-        List<LineItemDTO> lineItems = lineItemWrapper.getLineItemList();
+        List<LineItemDTO> lineItemDTOs = lineItemWrapper.getLineItemList();
+
+        List<LineItem> lineItemsToSplit = lineItemDTOs
+                .stream()
+                .filter(line -> line.getSplitAmount() > 0)
+                .map(lineItemDTO ->
+                        new LineItem(lineItemDTO.getName(),
+                                lineItemDTO.getSplitAmount(),
+                                lineItemDTO.getDuration(),
+                                lineItemDTO.getPrice()))
+                .collect(Collectors.toList());
+
+
+        try {
+            splitInvoiceService.splitInvoice(bookingDTO.getBookingId(), invoiceDTO.getInvoiceNumber(), lineItemsToSplit);
+        } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException e) {
+            return redirectToErrorPage(e.getMessage());
+        }
+
 
         return new ModelAndView("redirect:/");
     }

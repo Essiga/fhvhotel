@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface ViewInvoiceService {
 
-    List<InvoiceDTO> findInvoiceByBookingId(BookingId bookingId) throws BookingNotFoundException;
+    List<InvoiceDTO> findInvoicesByBookingId(BookingId bookingId) throws BookingNotFoundException;
 }

@@ -21,7 +21,7 @@ public class ViewInvoiceServiceImpl implements ViewInvoiceService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<InvoiceDTO> findInvoiceByBookingId(BookingId bookingId) throws BookingNotFoundException {
+    public List<InvoiceDTO> findInvoicesByBookingId(BookingId bookingId) throws BookingNotFoundException {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
