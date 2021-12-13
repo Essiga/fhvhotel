@@ -578,12 +578,6 @@ public class BookingController {
 
         List<LineItemDTO> lineItems = lineItemWrapper.getLineItemList();
 
-        for (LineItemDTO lineItem : lineItems)
-        {
-            System.out.println("BIER" + lineItems.size());
-            System.out.println("BIER2:" + lineItem.getName());
-        }
-
         return new ModelAndView("redirect:/");
     }
 }

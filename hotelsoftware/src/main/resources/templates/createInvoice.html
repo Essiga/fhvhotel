@@ -231,10 +231,10 @@
 
                     <tr class="text-center m-4" th:each="item, stat: ${invoice.lineItemDTOs}">
                         <td class="border py-2 px-4" th:text="${item.name}"></td>
-                        <td name="maxAmount" class="border py-2 px-4" th:text="${item.amount}"></td>
+                        <td class="border py-2 px-4" th:text="${item.amount}"></td>
                         <td class="border py-2 px-4" th:text="${item.duration}"></td>
                         <td class="border py-2 px-4" th:text="${item.price}"></td>
-                        <td class="border py-2 px-4"><input name="splitAmount" type="number" min="0" value="0"></td>
+                        <td class="border py-2 px-4"><input type="number" min="0" th:max="${item.amount}" value="0" th:field="*{lineItemList[__${stat.index}__].splitAmount}"/></td>
                     </tr>
 
                 </table>
@@ -242,7 +242,7 @@
 
             <button id="confirmSplit" type="submit"
                class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                split
+               split
             </button>
 
         </form>
@@ -252,14 +252,7 @@
 <script>
     let popup = document.getElementById("popup");
     let requestSplit = document.getElementById("requestSplit");
-    let splitAmounts = document.getElementsByName("splitAmount");
-    let maxAmounts = document.getElementsByName("maxAmount");
     let confirmSplit = document.getElementById("confirmSplit");
-
-    for (let i = 0; i < splitAmounts.length; i++)
-    {
-        splitAmounts[i].setAttribute("max", maxAmounts[i].innerHTML);
-    }
 
     requestSplit.onclick = function() {
         popup.style.display = "block";
