@@ -34,8 +34,6 @@ public class RoomRepositoryTests {
     @Autowired
     private RoomRepository roomRepository;
 
-//
-
     @Test
     public void given_rooms_when_findallrooms_then_expectallrooms() {
         Room singleRoom[] = new Room[10];
