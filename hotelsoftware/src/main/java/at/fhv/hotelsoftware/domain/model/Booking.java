@@ -1,9 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.LineItemsMismatchException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NoLineItemsException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -89,7 +86,7 @@ public class Booking {
         }
     }
 
-    public Invoice splitInvoice(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException {
+    public Invoice splitInvoice(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
 
         if(lineItemsToSplit.isEmpty()){
             throw new NoLineItemsException("Line items must not be empty.");
@@ -122,15 +119,18 @@ public class Booking {
 
     }
 
-    private void updateOriginalInvoice(List<LineItem> lineItemsToSplit, Invoice originalInvoice) {
+    private void updateOriginalInvoice(List<LineItem> lineItemsToSplit, Invoice originalInvoice) throws AllLineItemsRemovedException {
         List<LineItem> remainingLineItems = getRemainingInvoiceLineItems(lineItemsToSplit, originalInvoice);
+        if(remainingLineItems.isEmpty()){
+            throw new AllLineItemsRemovedException("Cannot remove all line items from an invoice.");
+        }
         Invoice updatedOriginalInvoice = new Invoice(originalInvoice.getInvoiceNumber(), remainingLineItems, originalInvoice.getGuestData());
         invoices.set(invoices.indexOf(originalInvoice), updatedOriginalInvoice);
     }
 
     private List<LineItem> getRemainingInvoiceLineItems(List<LineItem> lineItemsToRemove, Invoice invoice) {
         List<LineItem> remainingLineItems = new LinkedList<LineItem>();
-
+        //if lineItemsToRemove.equals(invoice.getLineItems()) then throw AllLineItemsRemoved...
         for (LineItem lineItem : lineItemsToRemove) {
             for(LineItem invoiceLineItem : invoice.getLineItems()){
                 if(lineItem.getName().equals(invoiceLineItem.getName())){
@@ -138,9 +138,7 @@ public class Booking {
                             lineItem.getDuration() == invoiceLineItem.getDuration() &&
                             lineItem.getPrice() == invoiceLineItem.getPrice()){
 
-                        if(lineItem.getAmount() != invoiceLineItem.getAmount()){
-                            remainingLineItems.add(new LineItem(lineItem.getName(), invoiceLineItem.getAmount() - lineItem.getAmount(),  lineItem.getDuration(), lineItem.getPrice()));
-                        }
+                        remainingLineItems.add(new LineItem(lineItem.getName(), invoiceLineItem.getAmount() - lineItem.getAmount(),  lineItem.getDuration(), lineItem.getPrice()));
 
                     }
                 }

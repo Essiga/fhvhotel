@@ -41,7 +41,7 @@
 
             <h1 class="text-3xl mb-4 font-semibold">Check-Out</h1>
 
-            <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="get" >
+            <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="post" >
                 <div th:object="${booking}">
                     <div th:object="${guest}">
                         <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
@@ -260,7 +260,7 @@
                                 <td th:text="${invoice.invoiceNumber.invoiceNumber}"></td>
                                 <td th:text="${invoice.invoiceDate}"></td>
                                 <td th:text="${invoice.invoiceStatus}"></td>
-                                <td><a th:href="@{invoiceSummary(bookingId=(${booking.bookingId.bookingId}), invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white">View</a></td>
+                                <td class="block m-2"><a th:href="@{invoiceSummary(bookingId=(${booking.bookingId.bookingId}), invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="p-1 pr-4 pl-4 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-sm font-bold text-white tracking-wide	">View</a></td>
                             </tr>
 
                         </table>
@@ -272,16 +272,14 @@
                 <div class="mt-4 flex row justify-between"> <!-- Button Line -->
 
                     <div class="w-2/6">
-                        <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
+                        <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Back</a>
                     </div>
 
-                    <div class="w-2/6 text-right mr-1" th:object="${booking}">
-                        <div class="w-3/5 p-1 ml-36 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                        <a th:href="@{createInvoice(id=(${booking.bookingId.bookingId}))}">
-                            Create Invoice
-                        </a>
-                        </div>
+
+                    <div class="w-2/6 text-right">
+                        <button type="submit" class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Confirm Check-Out</button>
                     </div>
+
 
                 </div>
                 </div>

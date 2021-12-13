@@ -4,10 +4,7 @@ import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.Invoice;
 import at.fhv.hotelsoftware.domain.model.LineItem;
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.LineItemsMismatchException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NoLineItemsException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 
@@ -96,7 +93,7 @@ public class BookingTests {
     }
 
     @Test
-    public void given_bookingwithoneinvoice_when_splitinvoice_then_twoinvoices() throws InvoiceAlreadyCreatedException, InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException {
+    public void given_bookingwithoneinvoice_when_splitinvoice_then_twoinvoices() throws InvoiceAlreadyCreatedException, InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
         //given
         BookingId bookingId = new BookingId(UUID.randomUUID());
         Booking booking = Booking.builder().
@@ -128,6 +125,34 @@ public class BookingTests {
             assertEquals(lineItems.get(i), splitInvoice.getLineItems().get(i));
         }
 
+
+    }
+
+    @Test
+    public void given_bookingwithoneinvoice_when_splitinvoicewithalllineitems_then_throwalllineitemsremovedexception() throws InvoiceAlreadyCreatedException, InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(4).
+                doubleRoom(2).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 4, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 2, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+        double splitSum = lineItems.get(0).getTotalPrice() + lineItems.get(1).getTotalPrice() + lineItems.get(2).getTotalPrice();
+
+
+        //when...then
+        assertThrows(AllLineItemsRemovedException.class, () -> booking.splitInvoice(invoice.getInvoiceNumber(), lineItems));
 
     }
 

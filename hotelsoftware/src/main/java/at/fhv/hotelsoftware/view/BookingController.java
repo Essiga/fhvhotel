@@ -392,6 +392,11 @@ public class BookingController {
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
 
+            if (invoiceDTOs.isEmpty())
+            {
+                invoiceDTOs.add(createInvoiceService.createInvoice(bookingId));
+            }
+
             model.addAttribute("guest", guestDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("booking", bookingDTO);
@@ -405,6 +410,8 @@ public class BookingController {
             e.printStackTrace();
         }
         catch (GuestNotFoundException e){
+            e.printStackTrace();
+        } catch (InvoiceAlreadyCreatedException e) {
             e.printStackTrace();
         }
 
@@ -638,11 +645,11 @@ public class BookingController {
 
         try {
             splitInvoiceService.splitInvoice(bookingDTO.getBookingId(), invoiceDTO.getInvoiceNumber(), lineItemsToSplit);
-        } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException e) {
+        } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException | AllLineItemsRemovedException e) {
             return redirectToErrorPage(e.getMessage());
         }
 
 
-        return new ModelAndView("redirect:/");
+        return new ModelAndView("redirect:checkOutGuestOverview?id="+bookingDTO.getBookingId().getBookingId().toString());
     }
 }

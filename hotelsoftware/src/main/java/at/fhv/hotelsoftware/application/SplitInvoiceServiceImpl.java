@@ -6,10 +6,7 @@ import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Invoice;
 import at.fhv.hotelsoftware.domain.model.LineItem;
-import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.LineItemsMismatchException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NoLineItemsException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,7 @@ public class SplitInvoiceServiceImpl implements SplitInvoiceService {
 
     @Transactional
     @Override
-    public InvoiceDTO splitInvoice(BookingId bookingId, InvoiceNumber invoiceNumber, List<LineItem> lineItems) throws BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException {
+    public InvoiceDTO splitInvoice(BookingId bookingId, InvoiceNumber invoiceNumber, List<LineItem> lineItems) throws BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
