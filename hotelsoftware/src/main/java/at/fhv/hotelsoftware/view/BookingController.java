@@ -360,6 +360,8 @@ public class BookingController {
 
         BookingId bookingId = new BookingId(id);
 
+
+
         try {
             List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
@@ -469,17 +471,19 @@ public class BookingController {
         }
     }
 
-    @GetMapping(ROOM_OVERVIEW)
-    public ModelAndView roomOverview(Model model) {
-        try {
-            List<RoomDTO> allRoomsDTO = viewRoomService.findAllRooms();
+    @GetMapping("roomOverview.html")
+    public ModelAndView roomOverview(Model model) throws RoomNotFoundException {
 
-            model.addAttribute("rooms", allRoomsDTO);
+        try {
+            List<RoomDTO> allRooms = viewRoomService.findAllRooms();
+            model.addAttribute("allRooms", allRooms);
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return new ModelAndView("bookingOverview");
+        return new ModelAndView("roomOverview");
+
+
     }
 
     @GetMapping(ERROR_URL)
