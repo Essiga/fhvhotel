@@ -247,7 +247,7 @@
                             <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
                                 <td th:text="${freeRoom.roomNumber}"></td>
                                 <td th:text="${freeRoom.getRoomCategory()}"></td>
-                                <td th:text="${freeRoom.getRoomCategory().getPrice()}"></td>
+                                <td><span th:text="${freeRoom.getRoomCategory().getPrice()}"></span> &#8364;</td>
                             </tr>
 
                         </table>

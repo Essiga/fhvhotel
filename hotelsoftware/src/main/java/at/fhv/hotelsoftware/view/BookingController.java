@@ -1,10 +1,7 @@
 package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
-import at.fhv.hotelsoftware.application.dto.BookingDTO;
-import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
-import at.fhv.hotelsoftware.application.dto.GuestDTO;
-import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.application.dto.*;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
@@ -349,8 +346,6 @@ public class BookingController {
         try {
             List<RoomDTO> freeRoomListForBooking = checkInService.findFreeRoomsForBooking(bookingId);
             FreeRoomListWrapper freeRoomListWrapper = new FreeRoomListWrapper(freeRoomListForBooking);
-            Collections.sort(freeRoomListWrapper);
-
 
 
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
@@ -444,11 +439,13 @@ public class BookingController {
 
             InvoiceDTO invoice = invoiceDTOs.get(0);
             GuestData guest = invoiceDTOs.get(0).getGuestData();
+            Integer duration = invoice.getLineItemDTOs().get(0).getDuration();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("invoice", invoice);
             model.addAttribute("guest", guest);
+            model.addAttribute("duration", duration);
 
         } catch (Exception e){
             return new ModelAndView("createInvoice");
@@ -460,20 +457,23 @@ public class BookingController {
     @GetMapping ("/pdfInvoice")
     public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, Model model) {
 
-
         try {
             BookingId bookingId = new BookingId(bookingIdString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(bookingId);
+
+
             //TODO check if invoiceList empty
             InvoiceDTO invoice = invoiceDTOs.get(0);
             GuestData guest = invoiceDTOs.get(0).getGuestData();
+            Integer duration = invoice.getLineItemDTOs().get(0).getDuration();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest",guest);
             model.addAttribute("room", roomDTO);
             model.addAttribute("invoice", invoice);
+            model.addAttribute("duration", duration);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
             templateResolver.setSuffix(".html");
@@ -487,6 +487,7 @@ public class BookingController {
             context.setVariable("guest", guest);
             context.setVariable("booking", bookingDTO);
             context.setVariable("invoice", invoice);
+            context.setVariable("duration", duration);
 
 
             String html = templateEngine.process("templates/invoice", context);

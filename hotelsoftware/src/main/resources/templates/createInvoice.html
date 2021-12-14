@@ -99,6 +99,13 @@
                         </div>
                     </div>
 
+
+                    <div>
+                        <div class="inline">Duration:
+                            <div class="font-semibold" id="duration" th:text="${duration}"></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div>
@@ -125,8 +132,11 @@
                         <tr class="text-center border-2 border-blue-100" th:each="item : ${invoice.lineItemDTOs}">
                             <td class="p-1" th:text="${item.getName()}"></td>
                             <td class="p-1" th:text="${item.getAmount()}"></td>
-                            <td class="p-1" th:text="${item.getPrice()}"></td>
-                            <td class="p-1" th:text="${item.getTotalPrice()}"></td>
+
+                            <td class="p-1"><span th:text="${item.getPrice()}"/> &#8364;</td>
+                            <td class="p1"><span th:text="${item.getTotalPrice()}"/> &#8364;</td>
+
+
                         </tr>
                     </table>
 
@@ -136,7 +146,7 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-base text-right font-semibold p-2">Net Price</th>
                             <td class="w-1/5 text-base">
-                                <div class="text-center border-gray-200 border-b-2 p-1" th:text="${invoice.sum}"></div>
+                                <div class="text-center border-gray-200 border-b-2 p-1"><span th:text="${invoice.sum}"></span> &#8364;</div>
                             </td>
 
                         </tr>
@@ -145,8 +155,8 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2">+ 20 % tax</th>
                             <td class="w-1/5">
-                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"
-                                     th:text="${invoice.tax}"></div>
+                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"><span
+                                     th:text="${invoice.tax}"></span> &#8364;</div>
                             </td>
                         </tr>
 
@@ -154,8 +164,8 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
                             <td class="w-1/5">
-                                <div class="p-2 text-center font-bold border-black border-double border-b-4"
-                                     th:text="${invoice.getSumWithTax}"></div>
+                                <div class="p-2 text-center font-bold border-black border-double border-b-4"><span
+                                     th:text="${invoice.getSumWithTax}"></span> &#8364;</div>
                             </td>
                         </tr>
 
