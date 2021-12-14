@@ -4,18 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Created invoiceSummary.html &#10;Implemented splitting in UI, function now gets called&#10;restructuring checkout/invoice WIP">
-      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/exceptions/AllLineItemsRemovedException.java" afterDir="false" />
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/SplitInvoiceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/api/SplitInvoiceService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/confirmSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/confirmSummary.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createGuest.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createGuest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createInvoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createInvoice.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/invoiceSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/invoiceSummary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/BookingTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/domain/BookingTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewGuestServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewGuestServiceTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,9 +123,6 @@
         <option name="mavenHome" value="$USER_HOME$/apache-maven-3.8.1" />
       </MavenGeneralSettings>
     </option>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1zzvyByPvQzAx3Ajdm7fddue7KO" />
   <component name="ProjectLevelVcsManager">
@@ -337,7 +339,7 @@
       <workItem from="1638390102492" duration="1220000" />
       <workItem from="1638428587988" duration="1660000" />
       <workItem from="1638656487739" duration="3939000" />
-      <workItem from="1639385743303" duration="22486000" />
+      <workItem from="1639385743303" duration="34982000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -521,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1639421665836</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout">
+      <created>1639430169672</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1639430169672</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -667,7 +676,8 @@
     <MESSAGE value="Function tested and implemented" />
     <MESSAGE value="fixed functions in invoice now sum and totalprice don't have to be passed as parameters&#10;Finished SplitInvoiceService and tests&#10;Updated InvoiceDTO&#10;Created LineItemDTO" />
     <MESSAGE value="Created invoiceSummary.html &#10;Implemented splitting in UI, function now gets called&#10;restructuring checkout/invoice WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created invoiceSummary.html &#10;Implemented splitting in UI, function now gets called&#10;restructuring checkout/invoice WIP" />
+    <MESSAGE value="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -684,58 +694,53 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>403</line>
-          <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>407</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>410</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>514</line>
+          <line>495</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>646</line>
+          <line>635</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceImpl.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="57" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>199</line>
+          <line>201</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>481</line>
+          <line>462</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>440</line>
+          <line>421</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>632</line>
+          <line>622</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java</url>
+          <line>142</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java</url>
           <line>131</line>
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java</url>
+          <line>162</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

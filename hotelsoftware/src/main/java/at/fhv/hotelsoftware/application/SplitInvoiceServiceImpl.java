@@ -32,6 +32,7 @@ public class SplitInvoiceServiceImpl implements SplitInvoiceService {
 
         Booking booking = bookingOpt.get();
 
+
         Invoice splitInvoice = booking.splitInvoice(invoiceNumber, lineItems);
 
         return InvoiceDTO.fromInvoice(splitInvoice);

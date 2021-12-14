@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -88,7 +89,9 @@ public class Booking {
 
     public Invoice splitInvoice(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
 
-        if(lineItemsToSplit.isEmpty()){
+        List<LineItem> nonEmptyLineItems = removeEmptyLineItems(lineItemsToSplit);
+
+        if(nonEmptyLineItems.isEmpty()){
             throw new NoLineItemsException("Line items must not be empty.");
         }
 
@@ -108,7 +111,9 @@ public class Booking {
 
             updateOriginalInvoice(lineItemsToSplit, originalInvoice);
 
-            Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItemsToSplit, originalInvoice.getGuestData());
+
+
+            Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), nonEmptyLineItems, originalInvoice.getGuestData());
 
             invoices.add(splitInvoice);
             return splitInvoice;
@@ -119,18 +124,24 @@ public class Booking {
 
     }
 
+    private List<LineItem> removeEmptyLineItems(List<LineItem> lineItems) {
+        return lineItems.stream().filter(l -> l.getAmount()>0).collect(Collectors.toList());
+    }
+
     private void updateOriginalInvoice(List<LineItem> lineItemsToSplit, Invoice originalInvoice) throws AllLineItemsRemovedException {
         List<LineItem> remainingLineItems = getRemainingInvoiceLineItems(lineItemsToSplit, originalInvoice);
-        if(remainingLineItems.isEmpty()){
+        List<LineItem> nonEmptyRemainingLineItems = removeEmptyLineItems(remainingLineItems);
+
+        if(nonEmptyRemainingLineItems.isEmpty()){
             throw new AllLineItemsRemovedException("Cannot remove all line items from an invoice.");
         }
-        Invoice updatedOriginalInvoice = new Invoice(originalInvoice.getInvoiceNumber(), remainingLineItems, originalInvoice.getGuestData());
+        Invoice updatedOriginalInvoice = new Invoice(originalInvoice.getInvoiceNumber(), nonEmptyRemainingLineItems, originalInvoice.getGuestData());
         invoices.set(invoices.indexOf(originalInvoice), updatedOriginalInvoice);
     }
 
     private List<LineItem> getRemainingInvoiceLineItems(List<LineItem> lineItemsToRemove, Invoice invoice) {
         List<LineItem> remainingLineItems = new LinkedList<LineItem>();
-        //if lineItemsToRemove.equals(invoice.getLineItems()) then throw AllLineItemsRemoved...
+
         for (LineItem lineItem : lineItemsToRemove) {
             for(LineItem invoiceLineItem : invoice.getLineItems()){
                 if(lineItem.getName().equals(invoiceLineItem.getName())){

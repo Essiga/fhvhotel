@@ -11,6 +11,7 @@ import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import at.fhv.hotelsoftware.view.form.LineItemWrapper;
+import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -244,8 +246,8 @@ public class BookingController {
         try {
             List<GuestDTO> allGuests = viewGuestService.findAllGuest();
             model.addAttribute("allGuests", allGuests);
-        } catch (GuestNotFoundException e) {
-            e.printStackTrace();
+        } catch (GuestNotFoundException ignored) {
+
         }
 
         model.addAttribute("guestForm", guestForm);
@@ -269,32 +271,6 @@ public class BookingController {
         return new ModelAndView("chooseRoom");
     }
 
-    @PostMapping(EXTRA_SERVICE_URL)
-    public ModelAndView submitExtraService(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
-                                           @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking,
-                                           Model model) {
-
-        if (resultGuest.hasErrors()) {
-            return new ModelAndView("createGuest");
-        }
-
-        if (resultBooking.hasErrors()) {
-            return new ModelAndView("chooseRoom");
-        }
-
-        if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
-            bookingForm.setValidDuration(validDuration(bookingForm));
-            bookingForm.setValidCategoryCount(validCategoryCount(bookingForm));
-
-            return new ModelAndView("chooseRoom");
-        }
-
-        model.addAttribute("bookingForm", bookingForm);
-        model.addAttribute("guestForm", guestForm);
-
-        return new ModelAndView("extraService");
-    }
-
     private boolean validCategoryCount(BookingForm bookingForm){
         return (bookingForm.getSingleRoomCount() + bookingForm.getDoubleRoomCount() + bookingForm.getSuperiorRoomCount()) > 0;
     }
@@ -312,9 +288,17 @@ public class BookingController {
             return new ModelAndView("createGuest");
         }
 
-        if (resultBooking.hasErrors() || !validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+        if (resultBooking.hasErrors()) {
             return new ModelAndView("chooseRoom");
         }
+
+        if(!validDuration(bookingForm) || !validCategoryCount(bookingForm)) {
+            bookingForm.setValidDuration(validDuration(bookingForm));
+            bookingForm.setValidCategoryCount(validCategoryCount(bookingForm));
+
+            return new ModelAndView("chooseRoom");
+        }
+
 
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("guestForm", guestForm);
@@ -379,8 +363,6 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-
-    //TODO: Add function to get rooms from DB
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
     public ModelAndView checkOutGuestOverview(@RequestParam("id") String id, Model model){
 
@@ -403,16 +385,15 @@ public class BookingController {
             model.addAttribute("invoices", invoiceDTOs);
 
         } catch (BookingNotFoundException e){
-            e.printStackTrace();
-           //return new ModelAndView("redirect:"+"/");
+            return redirectToErrorPage(e.getMessage());
         }
         catch (RoomNotFoundException e){
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         }
         catch (GuestNotFoundException e){
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         } catch (InvoiceAlreadyCreatedException e) {
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("checkOutGuestOverview");
@@ -457,11 +438,11 @@ public class BookingController {
             model.addAttribute("lineItemWrapper", lineItemWrapper);
 
         } catch (BookingNotFoundException e) {
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         } catch (InvoiceNotFoundException e) {
-        e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         } catch (RoomNotFoundException e) {
-            e.printStackTrace();
+            return redirectToErrorPage(e.getMessage());
         }
 
         return new ModelAndView("invoiceSummary");
@@ -511,21 +492,22 @@ public class BookingController {
     }
 
     @GetMapping ("/pdfInvoice")
-    public void generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, Model model) {
+    public ModelAndView generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model) {
 
         try {
             BookingId bookingId = new BookingId(bookingIdString);
+            InvoiceNumber invoiceNumber = new InvoiceNumber(invoiceNumberString);
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             List<RoomDTO> roomDTO = viewRoomService.findRoomsByBookingId(bookingId);
             List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
-            //TODO check if invoiceList empty
-            InvoiceDTO invoice = invoiceDTOs.get(0);
-            GuestData guest = invoiceDTOs.get(0).getGuestData();
+
+            InvoiceDTO invoiceDTO = findInvoiceByNumber(invoiceNumber, invoiceDTOs);
+            GuestData guest = invoiceDTO.getGuestData();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest",guest);
             model.addAttribute("room", roomDTO);
-            model.addAttribute("invoice", invoice);
+            model.addAttribute("invoice", invoiceDTO);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
             templateResolver.setSuffix(".html");
@@ -538,7 +520,7 @@ public class BookingController {
             context.setVariable("room", roomDTO);
             context.setVariable("guest", guest);
             context.setVariable("booking", bookingDTO);
-            context.setVariable("invoice", invoice);
+            context.setVariable("invoice", invoiceDTO);
 
 
             String html = templateEngine.process("templates/invoice", context);
@@ -551,14 +533,22 @@ public class BookingController {
             ITextRenderer renderer = new ITextRenderer();
             renderer.setDocumentFromString(html);
             renderer.layout();
+
             renderer.createPDF(outputStream);
             outputStream.flush();
             outputStream.close();
-
-            //TODO dont catch all exceptions always just catch the exceptions that you know will be thrown one by one
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        } catch (DocumentException e) {
+            return redirectToErrorPage(e.getMessage());
+        } catch (IOException e) {
+            return redirectToErrorPage(e.getMessage());
+        } catch (BookingNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
+        } catch (RoomNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
+        } catch (InvoiceNotFoundException e) {
+            return redirectToErrorPage(e.getMessage());
         }
+        return null;
     }
 
     @GetMapping(ERROR_URL)
@@ -634,7 +624,6 @@ public class BookingController {
 
         List<LineItem> lineItemsToSplit = lineItemDTOs
                 .stream()
-                .filter(line -> line.getSplitAmount() > 0)
                 .map(lineItemDTO ->
                         new LineItem(lineItemDTO.getName(),
                                 lineItemDTO.getSplitAmount(),

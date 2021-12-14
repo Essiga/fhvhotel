@@ -33,10 +33,6 @@
                 <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
-
         </nav>
 
     </aside>
@@ -181,7 +177,7 @@
 
 
 
-                        <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}),invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             Generate PDF
                         </a>
 
@@ -193,41 +189,6 @@
     </div>
 </div>
 </body>
-
-<!-- background of popup-->
-<!--<div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="popup">-->
-
-<!--    &lt;!&ndash; popup &ndash;&gt;-->
-<!--    <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-3/5 border shadow-lg rounded-md bg-white">-->
-
-<!--        <form th:action="@{splitInvoice}" th:object="${lineItemWrapper}" method="post">-->
-
-<!--            <tbody>-->
-<!--            <tr th:each="lineItem, stat : *{lineItemList}">-->
-<!--                <td>-->
-<!--                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].name}"/>-->
-<!--                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].amount}"/>-->
-<!--                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].duration}"/>-->
-<!--                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].price}"/>-->
-<!--                    <input type="hidden" th:field="*{lineItemList[__${stat.index}__].totalPrice}"/>-->
-<!--                </td>-->
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--            <input type="hidden" id="bookingIdSplitInvoice" name="bookingId" th:field="${booking.bookingId.bookingId}"/>-->
-<!--            <input type="hidden" id="invoiceNumberSplitInvoice" name="invoiceNumber" th:field="${invoice.invoiceNumber.invoiceNumber}"/>-->
-
-
-
-
-
-<!--            <button id="confirmSplit" type="submit"-->
-<!--                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">-->
-<!--                split-->
-<!--            </button>-->
-
-<!--        </form>-->
-<!--    </div>-->
-<!--</div>-->
 
 <!-- background of popup-->
 <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="popup">
@@ -259,7 +220,7 @@
                     <th class="w-2/12 border-2 py-2 border-blue-200">Description</th>
                     <th class="w-1/12 border-2 py-2 border-blue-200">Amount</th>
                     <th class="w-1/12 border-2 py-2 border-blue-200">Duration</th>
-                    <th class="w-1/12 border-2 py-2 border-blue-200">Single price</th>
+                    <th class="w-1/12 border-2 py-2 border-blue-200">Single Price</th>
                     <th class="w-2/12 border-2 py-2 border-blue-200">Split Amount</th>
                 </tr>
 
