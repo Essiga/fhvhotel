@@ -1,9 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceAlreadyCreatedException;
-import at.fhv.hotelsoftware.domain.model.exceptions.InvoiceNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.LineItemsMismatchException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NoLineItemsException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,6 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
@@ -89,15 +87,17 @@ public class Booking {
         }
     }
 
-    public Invoice splitInvoice(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException {
+    public Invoice splitInvoice(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
 
-        if(lineItemsToSplit.isEmpty()){
+        List<LineItem> nonEmptyLineItems = removeEmptyLineItems(lineItemsToSplit);
+
+        if(nonEmptyLineItems.isEmpty()){
             throw new NoLineItemsException("Line items must not be empty.");
         }
 
         Invoice originalInvoice = null;
         for (Invoice i : invoices) {
-            if(i.getInvoiceNumber().getInvoiceNumber() == invoiceNumber.getInvoiceNumber()){
+            if(i.getInvoiceNumber().getInvoiceNumber().equals(invoiceNumber.getInvoiceNumber())){
                 originalInvoice = i;
                 break;
             }
@@ -111,7 +111,9 @@ public class Booking {
 
             updateOriginalInvoice(lineItemsToSplit, originalInvoice);
 
-            Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), lineItemsToSplit, originalInvoice.getGuestData());
+
+
+            Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), nonEmptyLineItems, originalInvoice.getGuestData());
 
             invoices.add(splitInvoice);
             return splitInvoice;
@@ -122,9 +124,18 @@ public class Booking {
 
     }
 
-    private void updateOriginalInvoice(List<LineItem> lineItemsToSplit, Invoice originalInvoice) {
+    private List<LineItem> removeEmptyLineItems(List<LineItem> lineItems) {
+        return lineItems.stream().filter(l -> l.getAmount()>0).collect(Collectors.toList());
+    }
+
+    private void updateOriginalInvoice(List<LineItem> lineItemsToSplit, Invoice originalInvoice) throws AllLineItemsRemovedException {
         List<LineItem> remainingLineItems = getRemainingInvoiceLineItems(lineItemsToSplit, originalInvoice);
-        Invoice updatedOriginalInvoice = new Invoice(originalInvoice.getInvoiceNumber(), remainingLineItems, originalInvoice.getGuestData());
+        List<LineItem> nonEmptyRemainingLineItems = removeEmptyLineItems(remainingLineItems);
+
+        if(nonEmptyRemainingLineItems.isEmpty()){
+            throw new AllLineItemsRemovedException("Cannot remove all line items from an invoice.");
+        }
+        Invoice updatedOriginalInvoice = new Invoice(originalInvoice.getInvoiceNumber(), nonEmptyRemainingLineItems, originalInvoice.getGuestData());
         invoices.set(invoices.indexOf(originalInvoice), updatedOriginalInvoice);
     }
 
@@ -138,9 +149,7 @@ public class Booking {
                             lineItem.getDuration() == invoiceLineItem.getDuration() &&
                             lineItem.getPrice() == invoiceLineItem.getPrice()){
 
-                        if(lineItem.getAmount() != invoiceLineItem.getAmount()){
-                            remainingLineItems.add(new LineItem(lineItem.getName(), invoiceLineItem.getAmount() - lineItem.getAmount(),  lineItem.getDuration(), lineItem.getPrice()));
-                        }
+                        remainingLineItems.add(new LineItem(lineItem.getName(), invoiceLineItem.getAmount() - lineItem.getAmount(),  lineItem.getDuration(), lineItem.getPrice()));
 
                     }
                 }
