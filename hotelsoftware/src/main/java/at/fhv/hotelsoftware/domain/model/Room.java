@@ -37,6 +37,12 @@ public class Room {
         }
     }
 
+    public void free(){
+        if (this.roomStatus == RoomStatus.CLEANING){
+            this.roomStatus = RoomStatus.FREE;
+        }
+    }
+
     public void checkOut() throws RoomNotOccupiedException {
         if(roomStatus != RoomStatus.OCCUPIED){
             throw new RoomNotOccupiedException("Room with room number: " + roomNumber + " is not occupied.");
