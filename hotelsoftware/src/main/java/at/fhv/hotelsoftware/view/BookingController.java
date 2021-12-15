@@ -256,7 +256,16 @@ public class BookingController {
                                          Model model) {
 
         if (result.hasErrors()) {
-            return new ModelAndView("createGuest");
+
+            try {
+                List<GuestDTO> allGuests = viewGuestService.findAllGuest();
+                model.addAttribute("allGuests", allGuests);
+                return new ModelAndView(CREATE_GUEST_URL);
+
+            } catch (GuestNotFoundException ignored) {
+            }
+
+
         }
 
         model.addAttribute("bookingForm", bookingForm);
