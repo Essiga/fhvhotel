@@ -80,14 +80,9 @@ public class BookingController {
 
 
 
-
-
-
-
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
-    private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
@@ -96,8 +91,7 @@ public class BookingController {
     private static final String CHECK_OUT_GUEST_OVERVIEW = "/checkOutGuestOverview";
     private static final String CHECK_OUT_GUEST = "/checkOutGuest";
     private static final String ERROR_URL = "/showErrorPage";
-    private static final String CREATE_INVOICE = "/createInvoice";
-    private static final String SUBMIT_INVOICE = "/submitInvoice";
+    private static final String INVOICE_SUMMARY = "/invoiceSummary";
     private static final String CREATE_INVOICE_PDF = "/pdfInvoice";
     private static final String BOOKING_OVERVIEW = "/bookingOverview";
     private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
@@ -257,7 +251,7 @@ public class BookingController {
     }
 
     @PostMapping(CHOOSE_ROOM_URL)
-    public ModelAndView submitChooseRoom(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult result,
+    public ModelAndView submitGuestForm(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult result,
                                          @ModelAttribute("bookingForm") BookingForm bookingForm,
                                          Model model) {
 
@@ -280,7 +274,7 @@ public class BookingController {
     }
 
     @PostMapping(BOOKING_SUMMARY_URL)
-    public ModelAndView submitBookingSummary(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
+    public ModelAndView submitChooseRoom(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult resultGuest,
                                              @ModelAttribute("bookingForm") @Valid BookingForm bookingForm, BindingResult resultBooking,
                                              Model model) {
 
@@ -326,7 +320,7 @@ public class BookingController {
     }
 
     @GetMapping  (CHECK_IN_GUEST_OVERVIEW)
-    public ModelAndView checkInGuestOverview(@RequestParam("id") String id, Model model) {
+    public ModelAndView showCheckInGuestOverview(@RequestParam("id") String id, Model model) {
 
         BookingId bookingId = new BookingId(id);
 
@@ -364,7 +358,7 @@ public class BookingController {
     }
 
     @GetMapping(CHECK_OUT_GUEST_OVERVIEW)
-    public ModelAndView checkOutGuestOverview(@RequestParam("id") String id, Model model){
+    public ModelAndView showCheckOutGuestOverview(@RequestParam("id") String id, Model model){
 
         BookingId bookingId = new BookingId(id);
 
@@ -416,8 +410,8 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
-    @GetMapping("/invoiceSummary")
-    public ModelAndView invoiceSummary(@RequestParam("bookingId") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model){
+    @GetMapping(INVOICE_SUMMARY)
+    public ModelAndView showInvoiceSummary(@RequestParam("bookingId") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model){
 
         BookingId bookingId = new BookingId(bookingIdString);
         InvoiceNumber invoiceNumber = new InvoiceNumber(invoiceNumberString);
@@ -457,42 +451,8 @@ public class BookingController {
         throw new InvoiceNotFoundException("Invoice with Number " + invoiceNumber.getInvoiceNumber().toString() + " not found.");
     }
 
-    @GetMapping(CREATE_INVOICE)
-    public ModelAndView createInvoice(@RequestParam("id") String bookingIdString, Model model){
-
-        try {
-            BookingId bookingId = new BookingId(bookingIdString);
-            List<RoomDTO> roomDTOs = viewRoomService.findRoomsByBookingId(bookingId);
-
-            List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(bookingId);
-
-            if (invoiceDTOs.isEmpty())
-            {
-                invoiceDTOs.add(createInvoiceService.createInvoice(bookingId));
-            }
-
-            BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
-            InvoiceDTO invoiceDTO = invoiceDTOs.get(0);
-
-            LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
-            GuestData guest = invoiceDTO.getGuestData();
-
-            model.addAttribute("booking", bookingDTO);
-            model.addAttribute("rooms", roomDTOs);
-            model.addAttribute("invoice", invoiceDTO);
-            model.addAttribute("guest", guest);
-            model.addAttribute("lineItemWrapper", lineItemWrapper);
-
-
-        } catch (Exception e){
-            return new ModelAndView("createInvoice");
-        }
-
-        return new ModelAndView("createInvoice");
-    }
-
-    @GetMapping ("/pdfInvoice")
-    public ModelAndView generatePdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model) {
+    @GetMapping (CREATE_INVOICE_PDF)
+    public ModelAndView ShowPdf(HttpServletResponse response, @RequestParam("id") String bookingIdString, @RequestParam("invoiceNumber") String invoiceNumberString, Model model) {
 
         try {
             BookingId bookingId = new BookingId(bookingIdString);
@@ -562,7 +522,7 @@ public class BookingController {
         }
 
 
-    @GetMapping ("bookingOverview.html")
+    @GetMapping (BOOKING_OVERVIEW)
     public ModelAndView showBookings(Model model) {
 
         try {
@@ -583,7 +543,7 @@ public class BookingController {
     }
 
     @GetMapping(CONFIRM_BOOKING_SUMMARY)
-    public ModelAndView bookingSummary(@RequestParam("id") String id, Model model){
+    public ModelAndView showConfirmBookingSummary(@RequestParam("id") String id, Model model){
 
         BookingId bookingId = new BookingId(id);
 
