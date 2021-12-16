@@ -68,7 +68,7 @@ public class ViewRoomServiceTests {
     }
 
     @Test
-    public void given_room_whrn_clean_then_expectroomstatusfree(){
+    public void given_room_when_clean_then_expectroomstatusfree(){
         //given
         Room singleRoom = Room.builder().
                 roomStatus(RoomStatus.CLEANING).
@@ -83,8 +83,6 @@ public class ViewRoomServiceTests {
 
         //then
         assertEquals(RoomStatus.FREE, singleRoom.getRoomStatus());
-
-
     }
 
     @Test
