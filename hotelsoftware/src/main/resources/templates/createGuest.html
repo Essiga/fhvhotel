@@ -22,7 +22,7 @@
         </div>
 
         <div>
-            <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+            <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
         </div>
 
         <div>
@@ -33,9 +33,6 @@
             <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
         </div>
 
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-        </div>
     </nav>
     </aside>
 
@@ -194,24 +191,18 @@
 
                 </div>
 
-                <div class="mt-8 flex"> <!-- Button Line -->
+                    <div class="flex w-full justify-between mt-6">
+                        <a href="/"
+                           class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                          Back</a>
 
-                    <div class="w-2/6">
-                        <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
-                    </div>
-
-                    <div class="ml-32 w-2/6">
-                        <a href="#" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                        <a href="#" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
                                 id="chooseGuest">
-                            load guest
+                           Load Guest
                         </a>
-                    </div>
 
-                    <div class="w-2/6 text-right">
-                        <button type="submit" class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">next</button>
+                        <button type="submit" class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Next</button>
                     </div>
-
-                </div>
 
             </form>
         </div>
@@ -242,7 +233,7 @@
                     <th class="w-1/12 border-2 py-2 border-blue-200">Country</th>
                     <th class="w-1/12 border-2 py-2 border-blue-200">Phone</th>
                     <th class="w-3/12 border-2 py-2 border-blue-200">Email</th>
-                    <th class="w-2/12 border-2 py-2 border-blue-200">Insert</th>
+                    <th class="w-2/12 border-2 py-2 border-blue-200">Select</th>
                 </tr>
 
                 <tr class="text-center m-4" th:each="guest : ${allGuests}">
@@ -259,11 +250,19 @@
             </table>
 
         </div>
+        <div class="flex w-full justify-around">
 
-        <a id="insertGuest" href="#"
-           class="mt-4 block w-1/5 mx-auto p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-            insert
-        </a>
+            <button id="cancelInsert"
+                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                Cancel
+            </button>
+
+            <button id="insertGuest"
+                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                Insert
+            </button>
+
+        </div>
 
     </div>
 </div>
@@ -272,9 +271,14 @@
     let popup = document.getElementById("popup");
     let chooseGuestButton = document.getElementById("chooseGuest");
     let insertGuest = document.getElementById("insertGuest");
+    let cancelInsert = document.getElementById("cancelInsert");
 
     chooseGuestButton.onclick = function() {
         popup.style.display = "block";
+    }
+
+    cancelInsert.onclick = function() {
+        popup.style.display = "none";
     }
 
     insertGuest.onclick = function() {

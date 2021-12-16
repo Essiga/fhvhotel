@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.application;
 
 import at.fhv.hotelsoftware.application.api.CreateInvoiceService;
+import at.fhv.hotelsoftware.application.dto.InvoiceDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.*;
@@ -25,7 +26,7 @@ public class CreateInvoiceServiceImpl implements CreateInvoiceService {
 
     @Override
     @Transactional
-    public void createInvoice(BookingId bookingId) throws BookingNotFoundException, GuestNotFoundException, InvoiceAlreadyCreatedException {
+    public InvoiceDTO createInvoice(BookingId bookingId) throws BookingNotFoundException, GuestNotFoundException, InvoiceAlreadyCreatedException {
         Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
 
         if(bookingOpt.isEmpty()){
@@ -40,6 +41,8 @@ public class CreateInvoiceServiceImpl implements CreateInvoiceService {
         }
 
         Guest guest = guestOpt.get();
-        booking.createInvoice(guest);
+        Invoice createdInvoice = booking.createInvoice(guest);
+
+        return InvoiceDTO.fromInvoice(createdInvoice);
     }
 }

@@ -36,6 +36,7 @@ public class ViewGuestServiceTests {
         //given
         GuestId guestId = new GuestId(UUID.randomUUID());
 
+        //TODO Test all fields
         Guest guest = Guest.builder().
                 guestId(guestId).
                 firstName("Fabian").

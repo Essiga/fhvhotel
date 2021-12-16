@@ -38,7 +38,7 @@ public class SplitInvoiceServiceTests {
     BookingRepository bookingRepository;
 
     @Test
-    public void given_existingbookingwithinvoice_when_invoicesplit_then_twoinvoices() throws InvoiceAlreadyCreatedException, BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException {
+    public void given_existingbookingwithinvoice_when_invoicesplit_then_twoinvoices() throws InvoiceAlreadyCreatedException, BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException {
         //given
         BookingId bookingId = new BookingId(UUID.randomUUID());
         Booking booking = Booking.builder().

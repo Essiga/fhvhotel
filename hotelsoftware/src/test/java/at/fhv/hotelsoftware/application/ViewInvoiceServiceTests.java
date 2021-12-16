@@ -61,7 +61,7 @@ public class ViewInvoiceServiceTests {
         Mockito.when(bookingRepository.findBookingById(booking.getBookingId())).thenReturn(Optional.of(booking));
 
         //when
-        List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoiceByBookingId(booking.getBookingId());
+        List<InvoiceDTO> invoiceDTOs = viewInvoiceService.findInvoicesByBookingId(booking.getBookingId());
 
         //then
         for (int i = 0; i < lineItemDTOs.size(); i++){
@@ -93,6 +93,6 @@ public class ViewInvoiceServiceTests {
         Mockito.when(bookingRepository.findBookingById(booking.getBookingId())).thenReturn(Optional.of(booking));
 
         //when...then
-        assertThrows(BookingNotFoundException.class, () -> viewInvoiceService.findInvoiceByBookingId(new BookingId(UUID.randomUUID())));
+        assertThrows(BookingNotFoundException.class, () -> viewInvoiceService.findInvoicesByBookingId(new BookingId(UUID.randomUUID())));
     }
 }

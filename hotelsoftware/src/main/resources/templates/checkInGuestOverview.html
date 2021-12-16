@@ -18,8 +18,7 @@
             </div>
 
             <div>
-                <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                    Overview</a>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
             </div>
 
             <div>
@@ -30,9 +29,6 @@
                 <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
 
         </nav>
     </aside>
@@ -41,15 +37,13 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Check-In</h1>
+            <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
+        <form th:action="@{checkInGuest}" th:object="${freeRoomListWrapper}" method="post" >
 
-            <form th:action="@{checkInGuest}" th:object="${freeRoomListWrapper}" method="post">
+            <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
-                <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
-
-                <tbody>
-
+            <tbody>
                 <tr th:each="freeRoom, stat : *{freeRoomList}">
                     <td>
                         <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
@@ -58,8 +52,7 @@
                         <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].bookingId.bookingId}"/>
                     </td>
                 </tr>
-                </tbody>
-
+            </tbody>
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
 
@@ -247,7 +240,7 @@
                             <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
                                 <td th:text="${freeRoom.roomNumber}"></td>
                                 <td th:text="${freeRoom.getRoomCategory()}"></td>
-                                <td><span th:text="${freeRoom.getRoomCategory().getPrice()}"></span> &#8364;</td>
+                                <td th:text="${freeRoom.getRoomCategory().getPrice()}"></td>
                             </tr>
 
                         </table>
@@ -257,21 +250,16 @@
                 </div>
 
 
-                <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+                <div class="flex w-full justify-between mt-6">
+                    <a href="/"
+                          class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        Back
+                    </a>
 
-
-                    <div class="w-2/6">
-                        <a href="/"
-                           class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
-                    </div>
-
-                    <div class="w-2/6 text-right">
-                        <button type="submit"
-                                class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Check-In
-                        </button>
-                    </div>
-
+                    <button type="submit"
+                          class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        Check-In
+                    </button>
                 </div>
             </form>
         </div>

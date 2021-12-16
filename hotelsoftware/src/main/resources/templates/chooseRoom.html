@@ -22,7 +22,7 @@
     </div>
 
     <div>
-      <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+      <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
     </div>
 
     <div>
@@ -32,11 +32,6 @@
     <div>
       <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
     </div>
-
-    <div>
-      <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-    </div>
-
   </nav>
   </aside>
 
@@ -47,7 +42,7 @@
       <h1 class="mb-4 font-semibold text-3xl text-blue-500">Create Booking</h1>
       <h2 class="mb-4 font-semibold text-xl">Step 2: choose rooms and determine length of stay</h2>
 
-      <form th:action="@{/extraService}" th:object="${bookingForm}"  method="post">
+      <form th:action="@{/bookingSummary}" th:object="${bookingForm}"  method="post">
 
         <input type="hidden" id="firstName" name="firstName" th:field="${guestForm.firstName}"/>
         <input type="hidden" id="lastName" name="lastName" th:field="${guestForm.lastName}"/>
@@ -142,17 +137,18 @@
 
         </div>
 
-        <div class="mt-8 flex row justify-between"> <!-- Button Line -->
+        <div class="flex row justify-between mt-6">
+            <a href="createGuest"
+                    class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                Back
+            </a>
 
-          <div class="w-2/6">
-            <a href="createGuest" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
-          </div>
-
-          <div class="w-2/6 text-right">
-            <button type="submit" class="w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">next</button>
-          </div>
-
+            <button type="submit"
+                    class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                Next
+            </button>
         </div>
+
       </form>
     </div>
   </div>

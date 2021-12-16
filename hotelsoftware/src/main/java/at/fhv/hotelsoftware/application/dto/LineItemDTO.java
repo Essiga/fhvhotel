@@ -1,21 +1,19 @@
 package at.fhv.hotelsoftware.application.dto;
 
 import at.fhv.hotelsoftware.domain.model.LineItem;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+@Data //setters required by Hibernate
 @NoArgsConstructor
 @EqualsAndHashCode
 public class LineItemDTO {
 
     private String name;
     private int amount;
+    private int splitAmount;
     private int duration;
     private double price;
     private double totalPrice;

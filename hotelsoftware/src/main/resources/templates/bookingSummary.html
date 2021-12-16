@@ -18,8 +18,7 @@
             </div>
 
             <div>
-                <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                    Overview</a>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
             </div>
 
             <div>
@@ -30,9 +29,6 @@
                 <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
 
         </nav>
     </aside>
@@ -184,38 +180,43 @@
                             <label for="superior" class="mt-2 block text-sm text-gray-500">Room Count</label>
                         </div>
 
-                    </div>
-
-                </div>
-
-                <div class="p-4 mb-2 border border-gray-300">   <!-- Logical Block -->
-
-                    <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
-
-                    <div class="flex row"> <!-- Form Line -->
-
-                        <div class="w-1/2">
-                            <input readonly type="date" id="checkInDate" class="p-2 border-2 border-gray-400 mb-2"
-                                   th:field="${bookingForm.checkInDate}">
-                            <label for="checkInDate" class="block text-sm text-gray-500">Check-In Date</label>
-                        </div>
-
-                        <div class="w-1/2">
-                            <input readonly type="date" id="checkOutDate" class="p-2 border-2 border-gray-400 mb-2"
-                                   th:field="${bookingForm.checkOutDate}">
-                            <label for="checkOutDate" class="block text-sm text-gray-500">Check-Out Date</label>
                         </div>
 
                     </div>
 
-                </div>
+                    <div class="p-4 mb-2 border border-gray-300">   <!-- Logical Block -->
 
-                <div class="mt-4 text-right"> <!-- Button Line -->
-                    <button type="submit"
-                            class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
-                        confirm
-                    </button>
-                </div>
+                        <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
+
+                        <div class="flex row"> <!-- Form Line -->
+
+                            <div class="w-1/2">
+                                <input readonly type="date" id="checkInDate" class="p-2 border-2 border-gray-400 mb-2"
+                                       th:field="${bookingForm.checkInDate}">
+                                <label for="checkInDate" class="block text-sm text-gray-500">Check-In Date</label>
+                            </div>
+
+                            <div class="w-1/2">
+                                <input readonly type="date" id="checkOutDate" class="p-2 border-2 border-gray-400 mb-2"
+                                       th:field="${bookingForm.checkOutDate}">
+                                <label for="checkOutDate" class="block text-sm text-gray-500">Check-Out</label>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flex w-full justify-between mt-6">
+                        <a href="createGuest"
+                                class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Back
+                        </a>
+
+                        <button type="submit"
+                                class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Create Booking
+                        </button>
+                    </div>
             </form>
         </div>
     </div>

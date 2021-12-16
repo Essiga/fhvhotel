@@ -5,6 +5,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.GuestData;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceStatus;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +13,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+
+//TODO: Thaler: setter in DTO ok for thymeleaf or should we use forms?
+@Data
 @NoArgsConstructor
 public class InvoiceDTO {
 

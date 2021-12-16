@@ -92,7 +92,7 @@
             </div>
 
             <div>
-                <a href="#" class="bg-green-600 block px-6 py-8 font-bold text-4xl text-white">Booking
+                <a href="bookingOverview" class="bg-green-600 block px-6 py-8 font-bold text-4xl text-white">Booking
                     Overview</a>
             </div>
 
@@ -155,21 +155,14 @@
                     </tr>
                     <tbody id="body">
                     <tr class="text-center m-4" th:each="bookings, stat : ${allBookings}">
-                        <td class="border py-2 px-4"
-                            th:text="${allGuests[__${stat.index}__].firstName} + ' ' + ${allGuests[__${stat.index}__].lastName}"></td>
+                        <td class="border py-2 px-4" th:text="${allGuests[__${stat.index}__].firstName} + ' ' + ${allGuests[__${stat.index}__].lastName}"></td>
                         <td class="border py-2 px-4" th:text="*{bookings.checkInDate}"></td>
                         <td class="border py-2 px-4" th:text="*{bookings.checkOutDate}"></td>
                         <td class="border py-2 px-20" th:text="*{bookings.bookingStatus}"></td>
                         <td class="border py-2 px-20" th:switch="*{bookings.bookingStatus}">
-                            <a th:href="@{confirmSummary(id=(*{bookings.bookingId.bookingId}))}"
-                               class="p-1 rounded-lg text-center bg-blue-400 hover:bg-blue-500 focus:bg-blue-600 text-2xl font-bold text-white px-5"
-                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).PENDING}">CONFIRM</a>
-                            <a th:href="@{checkInGuestOverview(id=(*{bookings.bookingId.bookingId}))}"
-                               class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white px-5"
-                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CONFIRMED}">CHECK-IN</a>
-                            <a th:href="@{checkOutGuestOverview(id=(*{bookings.bookingId.bookingId}))}"
-                               class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white px-2"
-                               th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CHECKEDIN}">CHECK-OUT</a>
+                            <a th:href="@{confirmSummary(id=(*{bookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-blue-400 hover:bg-blue-500 focus:bg-blue-600 text-2xl font-bold text-white px-5" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).PENDING}">Confirm</a>
+                            <a th:href="@{checkInGuestOverview(id=(*{bookings.bookingId.bookingId}))}" class="p-1 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-2xl font-bold text-white px-5" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CONFIRMED}">Check-In</a>
+                            <a th:href="@{checkOutGuestOverview(id=(*{bookings.bookingId.bookingId}))}"  class="p-1 rounded-lg text-center bg-red-400 hover:bg-red-500 focus:bg-red-600 text-2xl font-bold text-white px-2" th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus).CHECKEDIN}">Check-Out</a>
                         </td>
                     </tr>
                     </tbody>
