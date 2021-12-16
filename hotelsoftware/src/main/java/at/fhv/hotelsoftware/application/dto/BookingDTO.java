@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.VoucherCode;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+@Data
 @NoArgsConstructor
 public final class BookingDTO {
 

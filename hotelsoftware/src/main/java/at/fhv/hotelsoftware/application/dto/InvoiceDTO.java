@@ -4,8 +4,8 @@ import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestData;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceStatus;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,31 +13,46 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+
+//TODO: Thaler: setter in DTO ok for thymeleaf or should we use forms?
+@Data
 @NoArgsConstructor
 public class InvoiceDTO {
 
     private InvoiceNumber invoiceNumber;
     private LocalDate invoiceDate;
     private InvoiceStatus invoiceStatus;
-    private List<LineItem> lineItems;
+    private List<LineItemDTO> lineItemDTOs;
     private GuestData guestData;
     private double sum;
     private double tax;
-    private double totalPrice;
+    private double sumWithTax;
 
-    public InvoiceDTO(InvoiceNumber invoiceNumber, LocalDate invoiceDate, InvoiceStatus invoiceStatus, List<LineItem> lineItems, GuestData guestData, double sum, double tax, double totalPrice) {
-        this.invoiceNumber = invoiceNumber;
+    @Builder
+    public InvoiceDTO(InvoiceNumber invoiceNumber, LocalDate invoiceDate, InvoiceStatus invoiceStatus, List<LineItem> lineItems, GuestData guestData, double sum, double tax, double sumWithTax) {
+        List<LineItemDTO> lineItemDTOs = LineItemDTO.fromLineItemList(lineItems);
         this.invoiceDate = invoiceDate;
+
+        this.invoiceNumber = invoiceNumber;
         this.invoiceStatus = invoiceStatus;
-        this.lineItems = lineItems;
+        this.lineItemDTOs = lineItemDTOs;
         this.guestData = guestData;
         this.sum = sum;
         this.tax = tax;
-        this.totalPrice = totalPrice;
+        this.sumWithTax = sumWithTax;
     }
 
-    @Builder
+    public static InvoiceDTO fromInvoice(Invoice invoice) {
+        return new InvoiceDTO(invoice.getInvoiceNumber(),
+                invoice.getInvoiceDate(),
+                invoice.getInvoiceStatus(),
+                invoice.getLineItems(),
+                invoice.getGuestData(),
+                invoice.getSum(),
+                invoice.getTax(),
+                invoice.getSumWithTax());
+    }
+
     public static List<InvoiceDTO> fromInvoiceList(List<Invoice> invoices){
 
         return invoices
@@ -49,8 +64,8 @@ public class InvoiceDTO {
                                 invoice.getLineItems(),
                                 invoice.getGuestData(),
                                 invoice.getSum(),
-                                invoice.getTax(invoice.getSum()),
-                                invoice.getTotalPrice(invoice.getSum(), invoice.getTax(invoice.getSum()))))
+                                invoice.getTax(),
+                                invoice.getSumWithTax()))
                 .collect(Collectors.toList());
     }
 }
