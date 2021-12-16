@@ -21,7 +21,7 @@
             </div>
 
             <div>
-                <a href="bookingOverview.html" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
             </div>
 
             <div>
@@ -161,26 +161,19 @@
 
                 </div>
 
-                <div class="mt-16 flex w-full justify-around">
+                <div class="mt-16 flex w-full justify-between">
 
+                    <a href="#" th:href="@{checkOutGuestOverview(id=(${booking.bookingId.bookingId}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        Back
+                    </a>
 
-                        <a href="#" th:href="@{checkOutGuestOverview(id=(${booking.bookingId.bookingId}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Back
-                        </a>
+                    <a id="requestSplit" href="#" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        Split Invoice
+                    </a>
 
-
-
-                        <a id="requestSplit" href="#" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Split Invoice
-                        </a>
-
-
-
-
-                        <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}),invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            Generate PDF
-                        </a>
-
+                    <a href="#" th:href="@{pdfInvoice(id=(${booking.bookingId.bookingId}),invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                        Generate PDF
+                    </a>
 
                 </div>
 
@@ -234,17 +227,19 @@
 
             </table>
         </div>
-            <div class="flex w-full justify-around">
-            <button id="cancelSplit"
-                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                Cancel
-            </button>
 
-            <button id="confirmSplit" type="submit"
-                    class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                Split Invoice
-            </button>
+            <div class="flex w-full justify-around">
+                <a href="#" id="cancelSplit"
+                        class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                    Cancel
+                </a>
+
+                <button id="confirmSplit" type="submit"
+                        class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                    Split Invoice
+                </button>
             </div>
+
         </form>
     </div>
 </div>
