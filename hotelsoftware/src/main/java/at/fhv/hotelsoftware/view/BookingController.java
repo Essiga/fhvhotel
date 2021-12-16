@@ -471,7 +471,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping("/roomOverview")
+    @GetMapping(ROOM_OVERVIEW)
     public ModelAndView roomOverview(Model model) throws RoomNotFoundException {
 
         try {
@@ -481,7 +481,7 @@ public class BookingController {
         }catch (RoomNotFoundException e){
             redirectToErrorPage(e.getMessage());
         }
-        return new ModelAndView("roomOverview");
+        return new ModelAndView("cleanRoom");
     }
 
     @GetMapping(ERROR_URL)
@@ -496,6 +496,7 @@ public class BookingController {
 
     @GetMapping("/cleanRoom")
     public ModelAndView cleanRoom(@RequestParam("roomNumber") String roomNumberString, Model model){
+        viewRoomService.free(roomNumberString);
 
         return new ModelAndView("roomOverview");
     }
