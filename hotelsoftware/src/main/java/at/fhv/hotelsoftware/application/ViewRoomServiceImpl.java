@@ -53,11 +53,11 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
     @Override
     @Transactional
-    public void free(String roomNumberString) {
+    public void clean(String roomNumberString) {
         Integer roomNumber = Integer.parseInt(roomNumberString);
         Optional<Room> roomOpt = roomRepository.findRoomByRoomNumber(roomNumber);
         Room room  = roomOpt.get();
-        room.free();
+        room.clean();
     }
 
 

@@ -471,8 +471,8 @@ public class BookingController {
         }
     }
 
-    @GetMapping(ROOM_OVERVIEW)
-    public ModelAndView roomOverview(Model model) throws RoomNotFoundException {
+    @GetMapping("/roomOverview")
+    public ModelAndView roomOverview(Model model) {
 
         try {
             List<RoomDTO> allRooms = viewRoomService.findAllRooms();
@@ -481,7 +481,8 @@ public class BookingController {
         }catch (RoomNotFoundException e){
             redirectToErrorPage(e.getMessage());
         }
-        return new ModelAndView("cleanRoom");
+
+        return new ModelAndView("roomOverview");
     }
 
     @GetMapping(ERROR_URL)
@@ -495,9 +496,10 @@ public class BookingController {
     }
 
     @GetMapping("/cleanRoom")
-    public ModelAndView cleanRoom(@RequestParam("roomNumber") String roomNumberString, Model model){
-        viewRoomService.free(roomNumberString);
-
+    public ModelAndView cleanRoom(@RequestParam("roomNumber") String roomNumberString, Model model) throws RoomNotFoundException {
+        viewRoomService.clean(roomNumberString);
+        List<RoomDTO> allRooms = viewRoomService.findAllRooms();
+        model.addAttribute("allRooms", allRooms);
         return new ModelAndView("roomOverview");
     }
 }
