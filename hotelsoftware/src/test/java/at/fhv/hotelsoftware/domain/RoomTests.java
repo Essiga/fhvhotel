@@ -31,6 +31,23 @@ public class RoomTests {
     }
 
     @Test
+    public void given_room_when_clean_then_expectroomstatusfree(){
+        //given
+        Room room = Room.builder().
+                roomStatus(RoomStatus.CLEANING).
+                bookingId(null).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(100).build();
+
+        //when
+        room.clean();
+
+        //then
+        assertEquals(RoomStatus.FREE, room.getRoomStatus());
+
+    }
+
+    @Test
     public void given_existingalreadyoccupiedroom_when_occupy_then_throwroomalreadyoccupiedexception() {
         //given
         BookingId bookingId = new BookingId(UUID.randomUUID());

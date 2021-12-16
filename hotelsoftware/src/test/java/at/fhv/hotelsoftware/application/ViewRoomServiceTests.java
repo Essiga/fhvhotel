@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,6 +65,26 @@ public class ViewRoomServiceTests {
 
         //when...then
         assertThrows(RoomNotFoundException.class, () -> viewRoomService.findRoomsByBookingId(new BookingId(UUID.randomUUID())));
+    }
+
+    @Test
+    public void given_room_whrn_clean_then_expectroomstatusfree(){
+        //given
+        Room singleRoom = Room.builder().
+                roomStatus(RoomStatus.CLEANING).
+                bookingId(null).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(100).build();
+
+        Mockito.when(roomRepository.findRoomByRoomNumber(100)).thenReturn(Optional.of(singleRoom));
+
+        //when
+        viewRoomService.clean("100");
+
+        //then
+        assertEquals(RoomStatus.FREE, singleRoom.getRoomStatus());
+
+
     }
 
     @Test
