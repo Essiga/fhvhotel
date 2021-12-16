@@ -198,8 +198,6 @@ public class BookingController {
         bookingRepository.addBooking(booking2);
         bookingRepository.addBooking(booking3);
 
-
-
         return new ModelAndView("redirect:/");
     }
 
@@ -440,7 +438,6 @@ public class BookingController {
 
             GuestData guest = invoiceDTO.getGuestData();
             InvoiceDTO invoice = invoiceDTOs.get(0);
-            GuestData guest = invoiceDTOs.get(0).getGuestData();
             Integer duration = invoice.getLineItemDTOs().get(0).getDuration();
 
             LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
@@ -486,6 +483,8 @@ public class BookingController {
 
             InvoiceDTO invoiceDTO = findInvoiceByNumber(invoiceNumber, invoiceDTOs);
             GuestData guest = invoiceDTO.getGuestData();
+
+            Integer duration = invoiceDTO.getLineItemDTOs().get(0).getDuration();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest",guest);
