@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Check-Out</title>
+    <title>Confirm</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
@@ -37,7 +37,7 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="text-3xl mb-4 font-semibold">Booking Summary</h1>
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Booking Summary</h1>
 
             <form th:action="@{confirmBooking}" th:object="${booking}"  method="post" >
                       <div th:object="${guest}">

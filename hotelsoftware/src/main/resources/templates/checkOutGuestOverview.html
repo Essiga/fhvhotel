@@ -36,7 +36,8 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="text-3xl mb-4 font-semibold">Check-Out</h1>
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Check-Out</h1>
+
 
             <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="post" >
                 <div th:object="${booking}">
@@ -229,7 +230,7 @@
                             <tr class="text-center m-4" th:each="room : ${rooms}">
                                 <td th:text="${room.roomNumber}"></td>
                                 <td th:text="${room.roomCategory}"></td>
-                                <td th:text="${room.roomCategory.price}"></td>
+                                <td><span th:text="${room.roomCategory.price}"></span> &#8364;</td>
                             </tr>
 
                         </table>

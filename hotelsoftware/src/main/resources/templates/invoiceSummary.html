@@ -95,6 +95,12 @@
                         </div>
                     </div>
 
+                    <div>
+                        <div class="inline">Duration:
+                            <div class="font-semibold" id="duration" th:text="${duration}"></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div>
@@ -123,8 +129,8 @@
                             <td class="p-1 border-2 border-blue-100" th:text="${item.name}"></td>
                             <td class="p-1 border-2 border-blue-100" th:text="${item.amount}"></td>
                             <td class="p-1 border-2 border-blue-100" th:text="${item.duration}"></td>
-                            <td class="p-1 border-2 border-blue-100" th:text="${item.price}"></td>
-                            <td class="p-1 border-2 border-blue-100" th:text="${item.totalPrice}"></td>
+                            <td class="p-1 border-2 border-blue-100"><span th:text="${item.price}"></span> &#8364;</td>
+                            <td class="p-1 border-2 border-blue-100"><span th:text="${item.totalPrice}"></span> &#8364;</td>
                         </tr>
                     </table>
 
@@ -134,7 +140,7 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-base text-right font-semibold p-2">Net Price</th>
                             <td class="w-1/5 text-base">
-                                <div class="text-center border-gray-200 border-b-2 p-1" th:text="${invoice.sum}"></div>
+                                <div class="text-center border-gray-200 border-b-2 p-1"><span th:text="${invoice.sum}"></span> &#8364;</div>
                             </td>
 
                         </tr>
@@ -143,8 +149,7 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2">+ 20 % tax</th>
                             <td class="w-1/5">
-                                <div class="p-1 text-center border-gray-200 border-b-2 p-1"
-                                     th:text="${invoice.tax}"></div>
+                                <div class="text-center border-gray-200 border-b-2 p-1"><span th:text="${invoice.tax}"></span> &#8364;</div>
                             </td>
                         </tr>
 
@@ -152,8 +157,7 @@
                             <td class="w-3/5"></td>
                             <th class="w-1/5 text-right font-semibold p-2 font-bold">Total Price</th>
                             <td class="w-1/5">
-                                <div class="p-2 text-center font-bold border-black border-double border-b-4"
-                                     th:text="${invoice.sumWithTax}"></div>
+                                <div class="p-2 text-center font-bold border-black border-double border-b-4"><span th:text="${invoice.sumWithTax}"></span> &#8364;</div>
                             </td>
                         </tr>
 
@@ -221,7 +225,7 @@
                     <td class="border py-2 px-4" th:text="${item.name}"></td>
                     <td class="border py-2 px-4" th:text="${item.amount}"></td>
                     <td class="border py-2 px-4" th:text="${item.duration}"></td>
-                    <td class="border py-2 px-4" th:text="${item.price}"></td>
+                    <td> class="border py-2 px-4" th:text="${item.price}"></td>
                     <td class="border py-2 px-4"><input type="number" min="0" th:max="${item.amount}" value="0" th:field="*{lineItemList[__${stat.index}__].splitAmount}"/></td>
                 </tr>
 

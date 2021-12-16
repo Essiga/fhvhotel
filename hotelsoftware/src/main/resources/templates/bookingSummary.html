@@ -37,9 +37,13 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Create Booking</h1>
+            <h2 class="mb-4 font-semibold">Step 3: summary</h2>
+
             <form th:action="@{/writeBookingInDatabase}" th:object="${guestForm}" method="post">
 
                 <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+
 
                     <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
 

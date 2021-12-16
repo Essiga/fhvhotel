@@ -5,7 +5,7 @@
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-  <title>Dashboard</title>
+  <title>Room</title>
   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -40,6 +40,9 @@
   <div class="flex w-full"> <!-- Content -->
 
     <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+
+      <h1 class="mb-4 font-semibold text-3xl text-blue-500">Create Booking</h1>
+      <h2 class="mb-4 font-semibold">Step 2: choose rooms and determine length of stay</h2>
 
       <form th:action="@{/bookingSummary}" th:object="${bookingForm}"  method="post">
 

@@ -432,6 +432,8 @@ public class BookingController {
 
             GuestData guest = invoiceDTO.getGuestData();
 
+            Integer duration = invoiceDTO.getLineItemDTOs().get(0).getDuration();
+
             LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
 
             model.addAttribute("invoice", invoiceDTO);
@@ -439,6 +441,7 @@ public class BookingController {
             model.addAttribute("guest", guest);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("lineItemWrapper", lineItemWrapper);
+            model.addAttribute("duration", duration);
 
         } catch (BookingNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
@@ -472,11 +475,13 @@ public class BookingController {
 
             InvoiceDTO invoiceDTO = findInvoiceByNumber(invoiceNumber, invoiceDTOs);
             GuestData guest = invoiceDTO.getGuestData();
+            Integer duration = invoiceDTO.getLineItemDTOs().get(0).getDuration();
 
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest",guest);
             model.addAttribute("room", roomDTO);
             model.addAttribute("invoice", invoiceDTO);
+            model.addAttribute("duration", duration);
 
             ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
             templateResolver.setSuffix(".html");
@@ -490,6 +495,7 @@ public class BookingController {
             context.setVariable("guest", guest);
             context.setVariable("booking", bookingDTO);
             context.setVariable("invoice", invoiceDTO);
+            context.setVariable("duration", duration);
 
 
             String html = templateEngine.process("templates/invoice", context);
