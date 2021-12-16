@@ -39,7 +39,9 @@
         }
 
         /* The search field when it gets focus/clicked on */
-        #myInput:focus {outline: 3px solid #ddd;}
+        #myInput:focus {
+            outline: 3px solid #ddd;
+        }
 
         /* The container <div> - needed to position the dropdown content */
         .dropdown {
@@ -66,10 +68,14 @@
         }
 
         /* Change color of dropdown links on hover */
-        .dropdown-content button:hover {background-color: #f1f1f1}
+        .dropdown-content button:hover {
+            background-color: #f1f1f1
+        }
 
         /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-        .show {display:block;}
+        .show {
+            display: block;
+        }
     </style>
 
 </head>
@@ -86,7 +92,7 @@
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+                <a href="bookingOverview" class="bg-green-600 block px-6 py-8 font-bold text-4xl text-white">Booking
                     Overview</a>
             </div>
 
@@ -128,12 +134,12 @@
 
 
                 <div class="dropdown px-2">
-                        <button onclick="myFunction()" class="dropbtn">Filter Status</button>
-                        <div id="myDropdown" class="dropdown-content">
-                            <button id="pending" onclick="filterBookings('PENDING')">Pending</button>
-                            <button id="confirmed" onclick="filterBookings('CONFIRMED')">Confirmed</button>
-                            <button id="checkedIn" onclick="filterBookings('CHECKEDIN')">Checked-In</button>
-                            <button id="all" onclick="filterBookings('ALL')">All</button>
+                    <button onclick="myFunction()" class="dropbtn">Filter Status</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <button id="pending" onclick="filterBookings('PENDING')">Pending</button>
+                        <button id="confirmed" onclick="filterBookings('CONFIRMED')">Confirmed</button>
+                        <button id="checkedIn" onclick="filterBookings('CHECKEDIN')">Checked-In</button>
+                        <button id="all" onclick="filterBookings('ALL')">All</button>
                     </div>
                 </div>
             </div>

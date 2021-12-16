@@ -13,28 +13,22 @@
         <nav class="flex-row h-screen w-full bg-green-500">
             <!-- Navbar -->
 
-        <div>
-            <a href="/"
-               class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
-        </div>
-
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                    Overview</a>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest
-                    Overview</a>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
             </div>
 
             <div>
                 <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
 
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
 
         </nav>
     </aside>
@@ -42,6 +36,9 @@
     <div class="flex w-full">
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
+
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Create Booking</h1>
+            <h2 class="mb-4 font-semibold text-xl">Step 3: summary</h2>
 
             <form th:action="@{/writeBookingInDatabase}" th:object="${guestForm}" method="post">
 
@@ -156,32 +153,32 @@
                     </div>
                 </div>
 
-                    <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
-                        <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
+                    <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
 
-                        <div class="flex"> <!-- Form Line -->
+                    <div class="flex"> <!-- Form Line -->
 
-                            <div class="w-1/3">
-                                <h2 class="mb-2 font-semibold">Single </h2>
-                                <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
-                                       th:field="${bookingForm.singleRoomCount}">
-                                <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                            </div>
+                        <div class="w-1/3">
+                            <h2 class="mb-2 font-semibold">Single </h2>
+                            <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
+                                   th:field="${bookingForm.singleRoomCount}">
+                            <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                        </div>
 
-                            <div class="w-1/3">
-                                <h2 class="mb-2 font-semibold">Double</h2>
-                                <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
-                                       th:field="${bookingForm.doubleRoomCount}">
-                                <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                            </div>
+                        <div class="w-1/3">
+                            <h2 class="mb-2 font-semibold">Double</h2>
+                            <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
+                                   th:field="${bookingForm.doubleRoomCount}">
+                            <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                        </div>
 
-                            <div class="w-1/3">
-                                <h2 class="mb-2 font-semibold">Superior</h2>
-                                <input readonly type="number" id="superior" class="border-2 border-gray-400 w-16"
-                                       th:field="${bookingForm.superiorRoomCount}">
-                                <label for="superior" class="mt-2 block text-sm text-gray-500">Room Count</label>
-                            </div>
+                        <div class="w-1/3">
+                            <h2 class="mb-2 font-semibold">Superior</h2>
+                            <input readonly type="number" id="superior" class="border-2 border-gray-400 w-16"
+                                   th:field="${bookingForm.superiorRoomCount}">
+                            <label for="superior" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                        </div>
 
                         </div>
 
@@ -209,10 +206,15 @@
 
                     </div>
 
-                    <div class="mt-4 text-right"> <!-- Button Line -->
+                    <div class="flex w-full justify-between mt-6">
+                        <a href="createGuest"
+                                class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Back
+                        </a>
+
                         <button type="submit"
-                                class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-2xl text-black">
-                            confirm
+                                class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                            Create Booking
                         </button>
                     </div>
             </form>

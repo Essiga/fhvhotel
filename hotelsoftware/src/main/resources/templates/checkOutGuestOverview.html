@@ -14,28 +14,20 @@
             <!-- Navbar -->
 
             <div>
-                <a href="/"
-                   class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+                <a href="/" class="hover:bg-green-400 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
-                    Overview</a>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest
-                    Overview</a>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
             </div>
 
             <div>
                 <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
-
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">.<br>.<br>.</a>
-            </div>
-
         </nav>
     </aside>
 
@@ -43,9 +35,10 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
-            <h1 class="text-3xl mb-4 font-semibold">Check-Out</h1>
+            <h1 class="mb-4 font-semibold text-3xl text-blue-500">Check-Out</h1>
+            <h2 class="mb-4 font-semibold text-xl">Step 1: summary</h2>
 
-            <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="get" >
+            <form th:action="@{checkOutGuest}" th:object="${rooms}"  method="post" >
                 <div th:object="${booking}">
                     <div th:object="${guest}">
                         <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
@@ -234,13 +227,38 @@
                             </tr>
 
                             <tr class="text-center m-4" th:each="room : ${rooms}">
-                                <td th:text="${room.getRoomNumber()}"></td>
-                                <td th:text="${room.getRoomCategory()}"></td>
-                                <td th:text="${room.getRoomCategory().getPrice()}"></td>
+                                <td th:text="${room.roomNumber}"></td>
+                                <td th:text="${room.roomCategory}"></td>
+                                <td><span th:text="${room.roomCategory.price}"></span> &#8364;</td>
                             </tr>
 
+                        </table>
 
+                    </div>
+                </div>
 
+                <div class="overflow-auto p-4 mt-2 border border-gray-300"> <!-- Logical Block -->
+
+                    <h2 class="mb-6 text-xl font-semibold">Invoices</h2>  <!-- Block Description -->
+
+                    <div class="flex"> <!-- Form Line -->
+
+                        <table class="w-full table-fixed bg-white">
+
+                            <tr class="bg-blue-100 text-xs">
+                                <th class="w-2/5 border-2 py-2 border-blue-200">Invoice Number</th>
+                                <th class="w-1/5 border-2 py-2 border-blue-200">Invoice Date</th>
+                                <th class="w-1/5 border-2 py-2 border-blue-200">Status</th>
+                                <th class="w-1/5 border-2 py-2 border-blue-200">Action</th>
+
+                            </tr>
+
+                            <tr class="text-center m-4" th:each="invoice : ${invoices}">
+                                <td th:text="${invoice.invoiceNumber.invoiceNumber}"></td>
+                                <td th:text="${invoice.invoiceDate}"></td>
+                                <td th:text="${invoice.invoiceStatus}"></td>
+                                <td class="block m-2"><a th:href="@{invoiceSummary(bookingId=(${booking.bookingId.bookingId}), invoiceNumber=(${invoice.invoiceNumber.invoiceNumber}))}" class="p-1 pr-4 pl-4 rounded-lg text-center bg-green-400 hover:bg-green-500 focus:bg-green-600 text-sm font-bold text-white tracking-wide">View</a></td>
+                            </tr>
 
                         </table>
 
@@ -248,22 +266,14 @@
 
                 </div>
 
+                    <div class="flex row justify-between mt-6">
 
-                <div class="mt-4 flex row justify-between"> <!-- Button Line -->
+                        <a href="/" class="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Back</a>
 
-                    <div class="w-2/6">
-                        <a href="/" class="block w-3/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">back</a>
+                        <button type="submit" class="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">Check-Out</button>
+
                     </div>
 
-                    <div class="w-2/6 text-right mr-1" th:object="${booking}">
-                        <div class="w-3/5 p-1 ml-36 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                        <a th:href="@{createInvoice(id=(${booking.bookingId.bookingId}))}">
-                            Create Invoice
-                        </a>
-                        </div>
-                    </div>
-
-                </div>
                 </div>
                 </div>
             </form>
