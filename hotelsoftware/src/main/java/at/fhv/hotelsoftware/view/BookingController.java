@@ -252,8 +252,8 @@ public class BookingController {
 
     @PostMapping(CHOOSE_ROOM_URL)
     public ModelAndView submitGuestForm(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult result,
-                                         @ModelAttribute("bookingForm") BookingForm bookingForm,
-                                         Model model) {
+                                        @ModelAttribute("bookingForm") BookingForm bookingForm,
+                                        Model model) {
 
         if (result.hasErrors()) {
 
@@ -264,12 +264,18 @@ public class BookingController {
 
             } catch (GuestNotFoundException ignored) {
             }
-
-
         }
 
+        double singleRoomPrice = RoomCategory.SINGLE.getPrice();
+        double doubleRoomPrice = RoomCategory.DOUBLE.getPrice();
+        double superiorRoomPrice = RoomCategory.SUPERIOR.getPrice();
+
+        model.addAttribute("priceSingleRoom", singleRoomPrice);
+        model.addAttribute("priceDoubleRoom", doubleRoomPrice);
+        model.addAttribute("priceSuperiorRoom", superiorRoomPrice);
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("guestForm", guestForm);
+
 
         return new ModelAndView("chooseRoom");
     }
