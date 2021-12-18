@@ -5,7 +5,7 @@
     <meta charset='utf-8'>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
-    <title>Room</title>
+    <title>Guest</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
     <script type="text/javascript" th:src="@{search.js}"></script>
 </head>
@@ -40,9 +40,11 @@
 
         <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">  <!-- Form Block -->
 
+            <h1 class="text-3xl mb-4 font-semibold">Guest</h1>
+
             <form id="guestForm" th:action="@{/chooseRoom}" th:object="${guestForm}" method="post">
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
 
@@ -62,7 +64,7 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
 
@@ -92,7 +94,7 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
 
@@ -146,7 +148,7 @@
 
                 </div>
 
-                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
                     <div class="flex-row">  <!-- Block Descriptions -->
 
