@@ -237,7 +237,7 @@
 
                             <tr class="text-center m-4 border-2 border-blue-100" th:each="freeRoom, stat : *{freeRoomList}">
                                 <td class="p-1 border-2 border-blue-100">
-                                    <input type="text" class="text-center" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
+                                    <input type="number" min="0" max="999" class="text-center" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
                                 </td>
                                 <td class="p-1 border-2 border-blue-100" th:text="${freeRoom.roomCategory}"></td>
                                 <td class="p-1 border-2 border-blue-100" th:text="${freeRoom.roomCategory.price}"></td>

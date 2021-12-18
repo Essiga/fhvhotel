@@ -91,7 +91,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsnotenoughroomsexception() throws NotEnoughRoomsException, BookingNotFoundException {
+    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsnotenoughroomsexception() {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -139,7 +139,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsbookingnotfoundexception() throws NotEnoughRoomsException, BookingNotFoundException {
+    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsbookingnotfoundexception() {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -187,7 +187,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, RoomCategoryMismatchException, DoubleRoomNumberException {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -232,7 +232,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -272,7 +272,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -312,7 +312,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
