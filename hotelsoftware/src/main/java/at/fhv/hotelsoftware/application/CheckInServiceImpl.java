@@ -81,7 +81,7 @@ public class CheckInServiceImpl implements CheckInService {
             Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoom.getRoomNumber());
 
             if (optRoom.isEmpty()) {
-                throw new RoomNotFoundException("Room with room number: " + checkInRoom.getRoomNumber() + "not found");
+                throw new RoomNotFoundException("Room with room number: " + checkInRoom.getRoomNumber() + " not found");
             }
 
             Room room = optRoom.get();
