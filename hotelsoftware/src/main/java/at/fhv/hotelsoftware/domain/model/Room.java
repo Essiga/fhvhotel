@@ -6,6 +6,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -34,6 +35,13 @@ public class Room {
         } else {
             this.roomStatus = RoomStatus.OCCUPIED;
             this.bookingId = bookingId;
+        }
+    }
+
+
+    public void clean(){
+        if (this.roomStatus == RoomStatus.CLEANING){
+            this.roomStatus = RoomStatus.FREE;
         }
     }
 
