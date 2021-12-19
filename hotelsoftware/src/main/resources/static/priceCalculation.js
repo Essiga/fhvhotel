@@ -7,9 +7,7 @@ function Calculation(){
     const priceDoubleRoom = document.getElementById("priceDoubleRoom").value;
     const priceSuperiorRoom = document.getElementById("priceSuperiorRoom").value;
 
-    const checkInDate = document.getElementById("checkInDate").value;
-    const checkOutDate = document.getElementById("checkInDate").value;
-    const duration = getNumberOfDays(checkInDate, checkOutDate)
+    const duration = getNumberOfDays();
 
     if(isNaN(duration)){
         var price = 0;
