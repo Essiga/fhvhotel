@@ -98,6 +98,7 @@ public class BookingController {
     private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
     private static final String CONFIRM_BOOKING = "/confirmBooking";
     private static final String SPLIT_INVOICE = "/splitInvoice";
+    private static final String CLEAN_ROOM = "/cleanRoom";
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -140,9 +141,9 @@ public class BookingController {
 
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
-        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
         Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
-        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("alpi@students.fhv.at").build();
+        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
@@ -566,7 +567,7 @@ public class BookingController {
         return new ModelAndView("bookingOverview");
     }
 
-    @GetMapping("/cleanRoom")
+    @GetMapping(CLEAN_ROOM)
     public ModelAndView cleanRoom(@RequestParam("roomNumber") String roomNumberString, Model model) throws RoomNotFoundException {
         viewRoomService.clean(roomNumberString);
         List<RoomDTO> allRooms = viewRoomService.findAllRooms();
