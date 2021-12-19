@@ -46,7 +46,6 @@
             <tbody>
                 <tr th:each="freeRoom, stat : *{freeRoomList}">
                     <td>
-                        <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
                         <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomCategory}"/>
                         <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].roomStatus}"/>
                         <input type="hidden" th:field="*{freeRoomList[__${stat.index}__].bookingId.bookingId}"/>
@@ -54,19 +53,19 @@
                 </tr>
             </tbody>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
 
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="gname" class="border-2 border-gray-400 w-4/6">
+                            <input readonly type="text" id="gname" class="w-4/6">
                             <label for="gname" class="block text-sm text-gray-500">Name</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="voucher" class="border-2 border-gray-400 w-2/6"
+                            <input readonly type="text" id="voucher" class="w-2/6"
                                    th:value="${booking.voucherCode.voucherCode}">
                             <label for="voucher" class=" block text-sm text-gray-500">Voucher Code</label>
                         </div>
@@ -75,20 +74,20 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Full Name</h2>  <!-- Block Description -->
 
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="firstName" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="firstName" class="w-4/6"
                                    th:value="${guest.firstName}">
                             <label for="firstName" class="block text-sm text-gray-500">First Name</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="lastName" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="lastName" class="w-4/6"
                                    th:value="${guest.lastName}">
                             <label for="lastName" class=" block text-sm text-gray-500">Last Name</label>
                         </div>
@@ -97,20 +96,20 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Address</h2>  <!-- Block Description -->
 
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="streetAdr" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="streetAdr" class="w-4/6"
                                    th:value="${guest.streetAddress}">
                             <label for="streetAdr" class="block text-sm text-gray-500">Street Address</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="zip" class="border-2 border-gray-400 w-2/6"
+                            <input readonly type="text" id="zip" class="w-2/6"
                                    th:value="${guest.zip}">
                             <label for="zip" class=" block text-sm text-gray-500">ZIP Code</label>
                         </div>
@@ -120,13 +119,13 @@
                     <div class="mt-4 flex row"> <!-- Form Line -->
 
                         <div class="w-1/2 ">
-                            <input readonly type="text" id="city" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="city" class="w-4/6"
                                    th:value="${guest.city}">
                             <label for="city" class="block text-sm text-gray-500">City</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="country" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="country" class="w-4/6"
                                    th:value="${guest.country}">
                             <label for="country" class=" block text-sm text-gray-500">Country</label>
                         </div>
@@ -135,7 +134,7 @@
 
                 </div>
 
-                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
                     <div class="flex-row">  <!-- Block Descriptions -->
 
@@ -152,13 +151,13 @@
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="phone" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="phone" class="w-4/6"
                                    th:value="${guest.phoneNumber}">
                             <label for="phone" class="block text-sm text-gray-500">Number</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="text" id="email" class="border-2 border-gray-400 w-4/6"
+                            <input readonly type="text" id="email" class="w-4/6"
                                    th:value="${guest.email}">
                             <label for="email" class=" block text-sm text-gray-500">Email</label>
                         </div>
@@ -170,29 +169,29 @@
 
                 <div class="p-4 mt-2 border border-gray-300"> <!-- Logical Block -->
 
-                    <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
+                    <h2 class="mb-4 font-semibold">Category Selection</h2>  <!-- Block Description -->
 
                     <div class="flex"> <!-- Form Line -->
 
                         <div class="w-1/3">
-                            <h2 class="mb-2 font-semibold">Single </h2>
-                            <input readonly type="number" id="single" class="border-2 border-gray-400 w-16"
+                            <h2 class="font-semibold">Single </h2>
+                            <input readonly id="single" class="w-16"
                                    th:value="${booking.singleRoom}">
-                            <label for="single" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            <label for="single" class="block text-sm text-gray-500">Room Count</label>
                         </div>
 
                         <div class="w-1/3">
-                            <h2 class="mb-2 font-semibold">Double</h2>
-                            <input readonly type="number" id="double" class="border-2 border-gray-400 w-16"
+                            <h2 class="font-semibold">Double</h2>
+                            <input readonly id="double" class="w-16"
                                    th:value="${booking.doubleRoom}">
-                            <label for="double" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            <label for="double" class="block text-sm text-gray-500">Room Count</label>
                         </div>
 
                         <div class="w-1/3">
-                            <h2 class="mb-2 font-semibold">Superior</h2>
-                            <input readonly type="number" id="superior" class="border-2 border-gray-400 w-16"
+                            <h2 class="font-semibold">Superior</h2>
+                            <input readonly id="superior" class="w-16"
                                    th:value="${booking.superiorRoom}">
-                            <label for="superior" class="mt-2 block text-sm text-gray-500">Room Count</label>
+                            <label for="superior" class="block text-sm text-gray-500">Room Count</label>
                         </div>
 
                     </div>
@@ -201,20 +200,20 @@
 
                 <div class="p-4 mt-2 border border-gray-300">   <!-- Logical Block -->
 
-                    <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
+                    <h2 class="mb-4 font-semibold">Length of stay</h2>
 
                     <div class="flex row"> <!-- Form Line -->
 
                         <div class="w-1/2">
-                            <input readonly type="date" id="fromDate" class="p-2 border-2 border-gray-400 mb-2"
+                            <input readonly id="fromDate"
                                    th:value="${booking.checkInDate}">
-                            <label for="fromDate" class="block text-sm text-gray-500">From Date</label>
+                            <label for="fromDate" class="block text-sm text-gray-500">Check-In Date</label>
                         </div>
 
                         <div class="w-1/2">
-                            <input readonly type="date" id="toDate" class="p-2 border-2 border-gray-400 mb-2"
+                            <input readonly id="toDate"
                                    th:value="${booking.checkOutDate}">
-                            <label for="toDate" class="block text-sm text-gray-500">To Date</label>
+                            <label for="toDate" class="block text-sm text-gray-500">Check-Out Date</label>
                         </div>
 
                     </div>
@@ -222,9 +221,9 @@
                 </div>
 
 
-                <div class="overflow-auto p-4 mt-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="overflow-auto p-4 mt-2"> <!-- Logical Block -->
 
-                    <h2 class="mb-6 text-xl font-semibold">Room</h2>  <!-- Block Description -->
+                    <h2 class="mb-6 text-xl font-semibold">Rooms</h2>  <!-- Block Description -->
 
                     <div class="flex"> <!-- Form Line -->
 
@@ -234,13 +233,14 @@
                                 <th class="w-1/5 border-2 py-2 border-blue-200">Room Number</th>
                                 <th class="w-2/5 border-2 py-2 border-blue-200">Category</th>
                                 <th class="w-1/5 border-2 py-2 border-blue-200">Price</th>
-
                             </tr>
 
-                            <tr class="text-center m-4" th:each="freeRoom : *{freeRoomList}">
-                                <td th:text="${freeRoom.roomNumber}"></td>
-                                <td th:text="${freeRoom.getRoomCategory()}"></td>
-                                <td th:text="${freeRoom.getRoomCategory().getPrice()}"></td>
+                            <tr class="text-center m-4 border-2 border-blue-100" th:each="freeRoom, stat : *{freeRoomList}">
+                                <td class="p-1 border-2 border-blue-100">
+                                    <input type="number" min="0" max="999" class="text-center" th:field="*{freeRoomList[__${stat.index}__].roomNumber}"/>
+                                </td>
+                                <td class="p-1 border-2 border-blue-100" th:text="${freeRoom.roomCategory}"></td>
+                                <td class="p-1 border-2 border-blue-100" th:text="${freeRoom.roomCategory.price}"></td>
                             </tr>
 
                         </table>

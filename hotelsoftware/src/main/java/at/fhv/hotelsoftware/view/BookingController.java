@@ -185,7 +185,7 @@ public class BookingController {
                 build();
 
         Room room = Room.builder().
-                roomStatus(RoomStatus.FREE).
+                roomStatus(RoomStatus.OCCUPIED).
                 bookingId(booking3.getBookingId()).
                 roomCategory(RoomCategory.SINGLE).
                 roomNumber(999).build();
@@ -367,7 +367,7 @@ public class BookingController {
         try {
             checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
 
-        } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException e) {
+        } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException | RoomCategoryMismatchException | DoubleRoomNumberException e) {
             return redirectToErrorPage(e.getMessage());
         }
 

@@ -5,10 +5,7 @@ import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.*;
-import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NotEnoughRoomsException;
-import at.fhv.hotelsoftware.domain.model.exceptions.RoomAlreadyOccupiedException;
-import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomStatus;
@@ -16,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -74,28 +72,49 @@ public class CheckInServiceImpl implements CheckInService {
 
     @Override
     @Transactional
-    public void checkIn(BookingId bookingId, List<RoomDTO> checkInRooms) throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException {
+    public void checkIn(BookingId bookingId, List<RoomDTO> checkInRooms) throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, RoomCategoryMismatchException, DoubleRoomNumberException {
+
+        Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
+
+        if (booking.isEmpty())
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
+
+        List<Integer> checkInRoomNumbers = new ArrayList<>();
+
+        for (RoomDTO checkInRoom : checkInRooms)
+        {
+            Integer checkInRoomNumber = checkInRoom.getRoomNumber();
+
+            if (checkInRoomNumber == null)
+                throw new RoomNotFoundException("Room number must not be empty");
+
+            if (checkInRoomNumbers.contains(checkInRoomNumber))
+                throw new DoubleRoomNumberException("Room with number: " + checkInRoomNumber + " cannot be chosen twice");
+
+            checkInRoomNumbers.add(checkInRoomNumber);
+
+            Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoomNumber);
+
+            if (optRoom.isEmpty())
+                throw new RoomNotFoundException("Room with number: " + checkInRoomNumber + " not found");
+
+            Room room = optRoom.get();
+
+            if (RoomStatus.OCCUPIED.equals(room.getRoomStatus()))
+                throw new RoomAlreadyOccupiedException("Room with room number: " + checkInRoomNumber + " already occupied.");
+
+            if ( !(checkInRoom.getRoomCategory().equals(room.getRoomCategory())) )
+                throw new RoomCategoryMismatchException("Category of room with number: " + checkInRoomNumber + " does not match");
+        }
 
         for (RoomDTO checkInRoom : checkInRooms)
         {
             Optional<Room> optRoom = roomRepository.findRoomByRoomNumber(checkInRoom.getRoomNumber());
-
-            if (optRoom.isEmpty()) {
-                throw new RoomNotFoundException("Room with room number: " + checkInRoom.getRoomNumber() + "not found");
-            }
-
             Room room = optRoom.get();
-
             room.occupy(bookingId);
         }
 
-        Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
-
-        if (booking.isPresent()) {
-            booking.get().checkIn();
-        }
-        else
-            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
+        booking.get().checkIn();
     }
 }
 

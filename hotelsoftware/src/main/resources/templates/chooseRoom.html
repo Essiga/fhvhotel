@@ -42,6 +42,8 @@
 
     <div class="w-full bg-white m-40 p-16 rounded border border-gray-400">
 
+      <h1 class="text-3xl mb-4 font-semibold">Rooms + Duration</h1>
+
       <form th:action="@{/bookingSummary}" th:object="${bookingForm}"  method="post">
 
         <input type="hidden" id="firstName" name="firstName" th:field="${guestForm.firstName}"/>
@@ -61,7 +63,7 @@
 
         <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
-          <h2 class="mb-6 text-xl font-semibold">Category Selection</h2>  <!-- Block Description -->
+          <h2 class="mb-4 font-semibold">Category Selection</h2>  <!-- Block Description -->
 
           <div class="flex"> <!-- Form Line -->
 
@@ -107,9 +109,9 @@
 
         </div>
 
-        <div class="p-4 mt-12 border border-gray-300">   <!-- Logical Block -->
+        <div class="p-4 mt-2 border border-gray-300">   <!-- Logical Block -->
 
-          <h2 class="mb-6 text-xl font-semibold">Length of stay</h2>
+          <h2 class="mb-4 font-semibold">Length of stay</h2>
 
           <div class="flex row"> <!-- Form Line -->
 
