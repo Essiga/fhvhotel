@@ -91,7 +91,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsnotenoughroomsexception() throws NotEnoughRoomsException, BookingNotFoundException {
+    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsnotenoughroomsexception() {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -139,7 +139,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsbookingnotfoundexception() throws NotEnoughRoomsException, BookingNotFoundException {
+    void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsbookingnotfoundexception() {
         List<Room> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -187,7 +187,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_roomstatusis_occupied_and_bookingstatusis_checkedIn() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, RoomCategoryMismatchException, DoubleRoomNumberException {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -232,7 +232,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsroomnotfoundexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomnotfoundexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -272,7 +272,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_henexpectthrowsbookingnotfoundexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsbookingnotfoundexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -312,7 +312,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception() throws RoomNotFoundException, RoomAlreadyOccupiedException, BookingNotFoundException, NotEnoughRoomsException {
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomalreadyoccupiedexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -348,6 +348,91 @@ public class CheckInServiceTests {
 
         // when ... then
         assertThrows(RoomAlreadyOccupiedException.class, () -> checkInService.checkIn(bookingId, list));
+    }
+
+    @Test
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomacategorymismatchexception() {
+        List<RoomDTO> list = new ArrayList<>();
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        RoomDTO singleRoom = RoomDTO.builder().
+                roomstatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        Room doubleRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.DOUBLE).
+                roomNumber(101).build();
+
+        list.add(singleRoom);
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+        Mockito.when(roomRepository.findRoomByRoomNumber(101)).thenReturn(Optional.of(doubleRoom));
+
+
+        // when ... then
+        assertThrows(RoomCategoryMismatchException.class, () -> checkInService.checkIn(bookingId, list));
+    }
+
+    @Test
+    void given_roomsandbookingId_when_checkIn_then_expectthrowsdoubleroomnumberexception() {
+        List<RoomDTO> list = new ArrayList<>();
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        RoomDTO singleRoom = RoomDTO.builder().
+                roomstatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        RoomDTO singleRoom2 = RoomDTO.builder().
+                roomstatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        Room singleRoom3 = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        list.add(singleRoom);
+        list.add(singleRoom2);
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+        Mockito.when(roomRepository.findRoomByRoomNumber(101)).thenReturn(Optional.of(singleRoom3));
+
+
+        // when ... then
+        assertThrows(DoubleRoomNumberException.class, () -> checkInService.checkIn(bookingId, list));
     }
 
 }

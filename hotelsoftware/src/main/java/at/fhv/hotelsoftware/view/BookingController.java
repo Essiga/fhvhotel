@@ -83,6 +83,7 @@ public class BookingController {
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
+    private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
@@ -97,6 +98,7 @@ public class BookingController {
     private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
     private static final String CONFIRM_BOOKING = "/confirmBooking";
     private static final String SPLIT_INVOICE = "/splitInvoice";
+    private static final String CLEAN_ROOM = "/cleanRoom";
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -139,9 +141,9 @@ public class BookingController {
 
         Guest guest = Guest.builder().guestId(guestId).firstName("Adrian").lastName("Essig").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
         Guest guest2 = Guest.builder().guestId(guestId2).firstName("Fabian").lastName("Egartner").street("Jahngasse 1").city("Dornbirn").zip("6800").country("Austria").phoneNumber("06608371982").email("aes6270@students.fhv.at").build();
-        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
+        Guest guest3 = Guest.builder().guestId(guestId3).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
         Guest guest4 = Guest.builder().guestId(guestId4).firstName("Achim").lastName("Unterkofler").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("achim.unterkofler@students.fhv.at").build();
-        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Alp").lastName("Arslan").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("alpi@students.fhv.at").build();
+        Guest guest5 = Guest.builder().guestId(guestId5).firstName("Tobias").lastName("Kurz").street("Teststraße 1").city("Altach").zip("6844").country("Austria").phoneNumber("06608371982").email("tobias.kurz@students.fhv.at").build();
 
         guestRepository.addGuest(guest);
         guestRepository.addGuest(guest2);
@@ -183,7 +185,7 @@ public class BookingController {
                 build();
 
         Room room = Room.builder().
-                roomStatus(RoomStatus.FREE).
+                roomStatus(RoomStatus.OCCUPIED).
                 bookingId(booking3.getBookingId()).
                 roomCategory(RoomCategory.SINGLE).
                 roomNumber(999).build();
@@ -252,8 +254,8 @@ public class BookingController {
 
     @PostMapping(CHOOSE_ROOM_URL)
     public ModelAndView submitGuestForm(@ModelAttribute("guestForm") @Valid GuestForm guestForm, BindingResult result,
-                                         @ModelAttribute("bookingForm") BookingForm bookingForm,
-                                         Model model) {
+                                        @ModelAttribute("bookingForm") BookingForm bookingForm,
+                                        Model model) {
 
         if (result.hasErrors()) {
 
@@ -264,12 +266,18 @@ public class BookingController {
 
             } catch (GuestNotFoundException ignored) {
             }
-
-
         }
 
+        double singleRoomPrice = RoomCategory.SINGLE.getPrice();
+        double doubleRoomPrice = RoomCategory.DOUBLE.getPrice();
+        double superiorRoomPrice = RoomCategory.SUPERIOR.getPrice();
+
+        model.addAttribute("priceSingleRoom", singleRoomPrice);
+        model.addAttribute("priceDoubleRoom", doubleRoomPrice);
+        model.addAttribute("priceSuperiorRoom", superiorRoomPrice);
         model.addAttribute("bookingForm", bookingForm);
         model.addAttribute("guestForm", guestForm);
+
 
         return new ModelAndView("chooseRoom");
     }
@@ -360,7 +368,7 @@ public class BookingController {
         try {
             checkInService.checkIn(booking.getBookingId(), freeRoomListWrapper.getFreeRoomList());
 
-        } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException e) {
+        } catch (RoomNotFoundException | RoomAlreadyOccupiedException | BookingNotFoundException | RoomCategoryMismatchException | DoubleRoomNumberException e) {
             return redirectToErrorPage(e.getMessage());
         }
 
@@ -521,6 +529,20 @@ public class BookingController {
         return null;
     }
 
+    @GetMapping("/roomOverview")
+    public ModelAndView roomOverview(Model model) {
+
+        try {
+            List<RoomDTO> allRooms = viewRoomService.findAllRooms();
+            model.addAttribute("allRooms", allRooms);
+
+        }catch (RoomNotFoundException e){
+            redirectToErrorPage(e.getMessage());
+        }
+
+        return new ModelAndView("roomOverview");
+    }
+
     @GetMapping(ERROR_URL)
     private String displayError(@RequestParam("errorMessage") String errorMessage, Model model) {
         model.addAttribute("errorMessage", errorMessage);
@@ -550,6 +572,14 @@ public class BookingController {
         }
 
         return new ModelAndView("bookingOverview");
+    }
+
+    @GetMapping(CLEAN_ROOM)
+    public ModelAndView cleanRoom(@RequestParam("roomNumber") String roomNumberString, Model model) throws RoomNotFoundException {
+        viewRoomService.clean(roomNumberString);
+        List<RoomDTO> allRooms = viewRoomService.findAllRooms();
+        model.addAttribute("allRooms", allRooms);
+        return new ModelAndView("roomOverview");
     }
 
     @GetMapping(CONFIRM_BOOKING_SUMMARY)
