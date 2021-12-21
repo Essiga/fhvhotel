@@ -26,7 +26,7 @@ public class BookingForm {
     @DateNotNullOrEarlierThanToday(message = "Date must be in the future")
     private String checkOutDate;
 
-    private String voucherCode;
+    private String voucherCode = " ";
 
     private BookingId bookingId;
 

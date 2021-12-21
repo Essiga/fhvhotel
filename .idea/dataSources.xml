@@ -8,5 +8,13 @@
       <jdbc-url>jdbc:h2:tcp://localhost:9092/default</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="@elmo.hostingcenter.uclv.net" uuid="6dc9223e-0a2b-4dbe-9699-41b879042853">
+      <driver-ref>oracle.19</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//elmo.hostingcenter.uclv.net:1521/xepdb1</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

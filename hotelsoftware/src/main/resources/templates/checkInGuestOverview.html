@@ -22,7 +22,7 @@
             </div>
 
             <div>
-                <a href="" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
             </div>
 
             <div>
@@ -39,7 +39,7 @@
 
             <h1 class="text-3xl mb-4 font-semibold">Check-In</h1>
 
-        <form th:action="@{checkInGuest}" th:object="${freeRoomListWrapper}" method="post" >
+            <form th:action="@{checkInGuest}" th:object="${freeRoomListWrapper}" method="post">
 
             <input type="hidden" id="id" name="id" th:field="${booking.bookingId.bookingId}"/>
 
