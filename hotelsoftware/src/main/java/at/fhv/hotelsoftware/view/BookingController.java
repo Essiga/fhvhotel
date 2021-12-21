@@ -157,7 +157,7 @@ public class BookingController {
                 singleRoom(2).
                 doubleRoom(1).
                 superiorRoom(1).
-                voucherCode(new VoucherCode("")).
+                voucherCode(new VoucherCode(" ")).
                 build();
 
         Booking booking2 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
@@ -168,7 +168,7 @@ public class BookingController {
                 singleRoom(1).
                 doubleRoom(0).
                 superiorRoom(0).
-                voucherCode(new VoucherCode("")).
+                voucherCode(new VoucherCode(" ")).
                 build();
 
         Booking booking3 = Booking.builder().bookingId(new BookingId(UUID.randomUUID())).
@@ -179,7 +179,7 @@ public class BookingController {
                 singleRoom(1).
                 doubleRoom(0).
                 superiorRoom(0).
-                voucherCode(new VoucherCode("")).
+                voucherCode(new VoucherCode("Winter")).
                 build();
 
         Room room = Room.builder().
@@ -339,6 +339,7 @@ public class BookingController {
             BookingDTO bookingDTO = viewBookingService.findBookingById(bookingId);
             GuestDTO guestDTO = viewGuestService.findGuestById(bookingDTO.getGuestId());
 
+            model.addAttribute("voucherCode", bookingDTO.getVoucherCode().getVoucherCode());
             model.addAttribute("guest", guestDTO);
             model.addAttribute("freeRoomListWrapper", freeRoomListWrapper);
             model.addAttribute("booking", bookingDTO);
