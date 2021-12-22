@@ -19,6 +19,8 @@ function filterBookings(action) {
             }
         }
     }
+
+    document.getElementById("state").innerHTML = filter;
 }
 
 function myFunction() {

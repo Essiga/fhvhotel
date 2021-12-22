@@ -50,8 +50,12 @@
                             <div class="flex row"> <!-- Form Line -->
 
                                 <div class="w-1/2 ">
-                                    <input readonly type="text" id="gname" class="w-4/6">
-                                    <label for="gname" class="block text-sm text-gray-500">Name</label>
+                                   <span th:switch="${guest.guestType}">
+                                        <span th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.GuestType).REGULAR}"><br></span>
+                                        <span th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.GuestType).TRAVEL_AGENCY}"><span th:text="${guest.agencyName}"></span></span>
+                                        <span th:case="${T(at.fhv.hotelsoftware.domain.model.valueobjects.GuestType).COMPANY}"><span th:text="${guest.companyName}"></span> </span>
+                                    </span>
+                                    <label class="block text-sm text-gray-500">Name</label>
                                 </div>
 
                                 <div class="w-1/2">
