@@ -34,6 +34,11 @@ dependencies {
 	implementation group: 'org.ehcache', name: 'ehcache', version: '3.9.2'
 
 	implementation 'com.oracle.database.jdbc:ojdbc8:21.3.0.0'
+
+	testImplementation 'io.cucumber:cucumber-java:6.10.4'
+	testImplementation 'io.cucumber:cucumber-junit:6.10.4'
+	testImplementation group: 'io.cucumber', name: 'cucumber-spring', version: '6.10.4'
+	testImplementation 'com.h2database:h2'
 }
 
 test {
@@ -57,5 +62,23 @@ jacocoTestReport {
 	}
 }
 
+configurations {
+	cucumberRuntime {
+		extendsFrom testImplementation
+	}
+}
+
+task cucumber() {
+	dependsOn assemble, testClasses
+	doLast {
+		javaexec {
+			main = "io.cucumber.core.cli.Main"
+			classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+			args = ['--plugin', 'pretty',
+					'--plugin', 'html:build/cucumber/hotelsoftware.html',
+					'--glue', 'at.fhv.hotelsoftware.bdd', 'src/test/resources/features']
+		}
+	}
+}
 
 build.dependsOn jacocoTestReport

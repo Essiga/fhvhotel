@@ -4,23 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout">
+    <list default="true" id="572172ee-27e5-4923-a536-c4401288d91d" name="Changes" comment="Split invoices completed&#10;Additionally removed placeholder buttons&#10;Removed Extra Services html&#10;Updated Generate PDF function to work with multiple invoices">
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/bdd/CheckInSzenario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/bdd/runner/CucumberTestRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/bdd/runner/checkin.szenario" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hotelsoftware/src/test/resources/features/CheckIn.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/application/SplitInvoiceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/domain/model/Booking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingOverview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/bookingSummary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkInGuestOverview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/checkOutGuestOverview.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/chooseRoom.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/confirmSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/confirmSummary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createGuest.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createGuest.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createInvoice.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/createInvoice.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/dashboard.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/errorPage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/invoiceSummary.html" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/main/resources/templates/invoiceSummary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewGuestServiceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewGuestServiceTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hotelsoftware/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/hotelsoftware/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,8 +47,8 @@
       <list>
         <option value="Interface" />
         <option value="HTML File" />
-        <option value="Class" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -79,12 +69,9 @@
     </file-type-list>
   </component>
   <component name="GithubProjectSettings">
-    <option name="branchProtectionPatterns">
-      <list>
-        <option value="main" />
-        <option value="dev" />
-      </list>
-    </option>
+    <option name="CREATE_PULL_REQUEST_DEFAULT_BRANCH" value="dev" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_USER" value="Essiga" />
+    <option name="CREATE_PULL_REQUEST_DEFAULT_REPO_NAME" value="fhvhotel" />
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="recentNewPullRequestHead">
@@ -144,6 +131,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
@@ -156,7 +144,7 @@
       <recent name="C:\Users\User\IdeaProjects\fhvhotel\hotelsoftware\src\main\resources\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.main">
+  <component name="RunManager" selected="Cucumber Java.Scenario: Guest wants to check-in, rooms are free">
     <configuration name="main" type="Application" factoryName="Application">
       <option name="ALTERNATIVE_JRE_PATH" value="11" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -175,118 +163,120 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BookingTests.given_bookingwithoneinvoice_when_splitinvoicewithalllineitems_then_throwalllineitemsremovedexception" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="Scenario: Guest wants to check-in, rooms are free" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/hotelsoftware/src/test/resources/features/CheckIn.feature" />
+      <option name="GLUE" value="at.fhv.hotelsoftware.bdd" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="hotelsoftware.test" />
+      <option name="NAME_FILTER" value="^Guest wants to check\-in\, rooms are free$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Guest wants to check\-in\, rooms are free$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Guest wants to check-in, rooms are free" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [cucumber]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/.gradle/6.7" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.domain.BookingTests.given_bookingwithoneinvoice_when_splitinvoicewithalllineitems_then_throwalllineitemsremovedexception&quot;" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
+            <option value="cucumber" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="RoomRepositoryTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks -all]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/.gradle/6.7" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.infrastructure.RoomRepositoryTests.given_rooms_when_persistedflushedfetched_then_expectallrooms&quot;" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
+            <option value="tasks" />
+            <option value="-all" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="Tests in 'at.fhv.hotelsoftware'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/.gradle/6.7" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.*&quot;" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
+            <option value="tasks" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="ViewRoomServiceTests.given_room_when_findroomsbybookingid_then_returncorrectroom" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="hotelsoftware [cucumber]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewRoomServiceTests.given_room_when_findroomsbybookingid_then_returncorrectroom&quot;" />
+        <option name="scriptParameters" value="--scan" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value=":test" />
+            <option value="cucumber" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="ViewRoomServiceTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/hotelsoftware" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="--tests &quot;at.fhv.hotelsoftware.application.ViewRoomServiceTests.given_rooms_when_persistedflushedfetched_then_expectallrooms&quot;" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -300,20 +290,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.main" />
-      <item itemvalue="Gradle.RoomRepositoryTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" />
-      <item itemvalue="Gradle.ViewRoomServiceTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" />
-      <item itemvalue="Gradle.ViewRoomServiceTests.given_room_when_findroomsbybookingid_then_returncorrectroom" />
-      <item itemvalue="Gradle.Tests in 'at.fhv.hotelsoftware'" />
+      <item itemvalue="Gradle.hotelsoftware [cucumber]" />
       <item itemvalue="Spring Boot.HotelsoftwareApplication" />
-      <item itemvalue="Gradle.BookingTests.given_bookingwithoneinvoice_when_splitinvoicewithalllineitems_then_throwalllineitemsremovedexception" />
+      <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks]" />
+      <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks -all]" />
+      <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [cucumber]" />
+      <item itemvalue="Cucumber Java.Scenario: Guest wants to check-in, rooms are free" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.Tests in 'at.fhv.hotelsoftware'" />
-        <item itemvalue="Gradle.BookingTests.given_bookingwithoneinvoice_when_splitinvoicewithalllineitems_then_throwalllineitemsremovedexception" />
-        <item itemvalue="Gradle.ViewRoomServiceTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" />
-        <item itemvalue="Gradle.ViewRoomServiceTests.given_room_when_findroomsbybookingid_then_returncorrectroom" />
-        <item itemvalue="Gradle.RoomRepositoryTests.given_rooms_when_persistedflushedfetched_then_expectallrooms" />
+        <item itemvalue="Cucumber Java.Scenario: Guest wants to check-in, rooms are free" />
+        <item itemvalue="Gradle.hotelsoftware [cucumber]" />
+        <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [cucumber]" />
+        <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks -all]" />
+        <item itemvalue="Gradle.C:/Users/Adrian/IdeaProjects/fhvhotel/.gradle/6.7 [tasks]" />
       </list>
     </recent_temporary>
   </component>
@@ -339,7 +329,10 @@
       <workItem from="1638390102492" duration="1220000" />
       <workItem from="1638428587988" duration="1660000" />
       <workItem from="1638656487739" duration="3939000" />
-      <workItem from="1639385743303" duration="34982000" />
+      <workItem from="1639385743303" duration="39263000" />
+      <workItem from="1639920828638" duration="9456000" />
+      <workItem from="1640168904123" duration="5036000" />
+      <workItem from="1640175884019" duration="4885000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1635164750642</created>
@@ -530,7 +523,21 @@
       <option name="project" value="LOCAL" />
       <updated>1639430169672</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Split invoices completed&#10;Additionally removed placeholder buttons&#10;Removed Extra Services html&#10;Updated Generate PDF function to work with multiple invoices">
+      <created>1639497426087</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1639497426087</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Oracle DB done (password needs to be inserted in the properties file)">
+      <created>1640098759822</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1640098759822</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -677,7 +684,9 @@
     <MESSAGE value="fixed functions in invoice now sum and totalprice don't have to be passed as parameters&#10;Finished SplitInvoiceService and tests&#10;Updated InvoiceDTO&#10;Created LineItemDTO" />
     <MESSAGE value="Created invoiceSummary.html &#10;Implemented splitting in UI, function now gets called&#10;restructuring checkout/invoice WIP" />
     <MESSAGE value="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout" />
-    <option name="LAST_COMMIT_MESSAGE" value="restructuring checkout/invoice completed&#10;updated UI of load guest and split invoice popups&#10;Show invoices in list in the summary of a booking during checkout" />
+    <MESSAGE value="Split invoices completed&#10;Additionally removed placeholder buttons&#10;Removed Extra Services html&#10;Updated Generate PDF function to work with multiple invoices" />
+    <MESSAGE value="Oracle DB done (password needs to be inserted in the properties file)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Oracle DB done (password needs to be inserted in the properties file)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -689,12 +698,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/application/ViewRoomServiceTests.java</url>
-          <line>42</line>
+          <line>43</line>
           <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>495</line>
+          <line>469</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -704,17 +713,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>201</line>
+          <line>198</line>
           <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>462</line>
+          <line>448</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
-          <line>421</line>
+          <line>445</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -742,6 +751,21 @@
           <line>93</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/main/java/at/fhv/hotelsoftware/view/BookingController.java</url>
+          <line>393</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/bdd/CheckInSzenario.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/hotelsoftware/src/test/java/at/fhv/hotelsoftware/bdd/CheckInSzenario.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="91" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
@@ -751,6 +775,7 @@
         <PinnedItemInfo parentTag="java.util.LinkedHashMap$Entry" memberName="value" />
         <PinnedItemInfo parentTag="at.fhv.hotelsoftware.application.dto.BookingDTO" memberName="bookingId" />
         <PinnedItemInfo parentTag="at.fhv.hotelsoftware.domain.model.Booking" memberName="bookingId" />
+        <PinnedItemInfo parentTag="at.fhv.hotelsoftware.application.dto.BookingDTO" memberName="voucherCode" />
         <PinnedItemInfo parentTag="org.apache.catalina.connector.ResponseFacade" memberName="response" />
         <PinnedItemInfo parentTag="at.fhv.hotelsoftware.application.dto.InvoiceDTO" memberName="invoiceNumber" />
         <PinnedItemInfo parentTag="com.sun.proxy.$Proxy93" memberName="h" />
