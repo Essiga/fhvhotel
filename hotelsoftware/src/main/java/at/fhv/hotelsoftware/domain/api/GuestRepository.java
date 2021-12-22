@@ -11,5 +11,5 @@ public interface GuestRepository {
 
     void addGuest(Guest guest);
     Optional<Guest> findGuestById(GuestId guestId);
-    List<Guest> findAllGuest();
+    List<Guest> findAllGuests();
 }

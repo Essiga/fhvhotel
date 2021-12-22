@@ -31,7 +31,7 @@ public class ViewGuestServiceImpl implements ViewGuestService {
     }
 
     public List<GuestDTO> findAllGuest() throws GuestNotFoundException {
-        List<Guest> allGuests = guestRepository.findAllGuest();
+        List<Guest> allGuests = guestRepository.findAllGuests();
 
         if(allGuests.isEmpty()){
             throw new GuestNotFoundException("No guests have been found");
