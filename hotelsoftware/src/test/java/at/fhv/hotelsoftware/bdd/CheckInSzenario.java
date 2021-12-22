@@ -73,7 +73,7 @@ public class CheckInSzenario {
         Booking booking = Booking.builder()
                 .bookingId(new BookingId(UUID.randomUUID()))
                 .checkInDate(LocalDate.now())
-                .guestId(guestRepository.findAllGuest().get(0).getGuestId())
+                .guestId(guestRepository.findAllGuests().get(0).getGuestId())
                 .checkOutDate(LocalDate.now().plusDays(1))
                 .singleRoom(countSingleRooms)
                 .doubleRoom(countDoubleRooms)

@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -81,7 +80,7 @@ public class GuestRepositoryTests {
         guestRepository.addGuest(guestExpected);
         em.flush();
 
-        List<Guest> allGuests = guestRepository.findAllGuest();
+        List<Guest> allGuests = guestRepository.findAllGuests();
 
         //then
             assertEquals(idExpected.getGuestId(), allGuests.get(0).getGuestId().getGuestId());

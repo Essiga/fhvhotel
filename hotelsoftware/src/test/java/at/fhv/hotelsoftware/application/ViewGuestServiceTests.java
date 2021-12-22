@@ -4,9 +4,7 @@ import at.fhv.hotelsoftware.application.api.ViewGuestService;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.Guest;
-import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
-import at.fhv.hotelsoftware.domain.model.exceptions.NotEnoughRoomsException;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -93,7 +91,7 @@ public class ViewGuestServiceTests {
         list.add(guest1);
         list.add(guest2);
 
-        Mockito.when(guestRepository.findAllGuest()).thenReturn(list);
+        Mockito.when(guestRepository.findAllGuests()).thenReturn(list);
 
         // when
         List<GuestDTO> allGuests = viewGuestService.findAllGuest();
@@ -108,7 +106,7 @@ public class ViewGuestServiceTests {
     public void given_guestsexists_when_findallguest_then_expectguestnotfoundexception() throws GuestNotFoundException {
         List<Guest> list = new ArrayList<>();
 
-        Mockito.when(guestRepository.findAllGuest()).thenReturn(list);
+        Mockito.when(guestRepository.findAllGuests()).thenReturn(list);
 
         // when ... then
         assertThrows(GuestNotFoundException.class, () -> viewGuestService.findAllGuest());
