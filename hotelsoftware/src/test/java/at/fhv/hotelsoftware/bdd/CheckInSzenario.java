@@ -11,6 +11,8 @@ import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -29,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @CucumberContextConfiguration
 @SpringBootTest
-public class CheckInSzenario {
+public class CheckInSzenario extends SzenarioTxBoundary {
 
     @Autowired
     BookingRepository bookingRepository;
@@ -48,7 +50,16 @@ public class CheckInSzenario {
 
     private List<RoomDTO> freeRoomsList = new LinkedList<>();
 
-    @Transactional
+    @Before
+    public void beforeSzenario(){
+        this.beginTX();
+    }
+
+    @After
+    public void afterSzenario(){
+        this.rollbackTX();
+    }
+
     @Given("the guest is already created")
     public void setupGuest() {
         Guest guest = Guest.builder()
@@ -67,7 +78,6 @@ public class CheckInSzenario {
 
     }
 
-    @Transactional
     @Given("the booking is already created with {int} single and {int} double room and {int} superior room")
     public void setupBooking(Integer countSingleRooms, Integer countDoubleRooms, Integer countSuperiorRooms) {
         Booking booking = Booking.builder()
