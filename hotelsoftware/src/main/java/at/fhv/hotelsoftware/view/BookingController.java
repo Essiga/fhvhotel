@@ -31,7 +31,6 @@ import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -640,5 +639,13 @@ public class BookingController {
 
 
         return new ModelAndView("redirect:checkOutGuestOverview?id="+bookingDTO.getBookingId().getBookingId().toString());
+    }
+
+
+    @GetMapping ("/spa")
+    public ModelAndView spa(){
+
+        return new ModelAndView("spa");
+
     }
 }
