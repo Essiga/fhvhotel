@@ -21,5 +21,4 @@ public class BookingRestController {
     public List<RoomDTO> getAllRooms() throws RoomNotFoundException {
         return viewRoomService.findAllRooms();
     }
-
 }

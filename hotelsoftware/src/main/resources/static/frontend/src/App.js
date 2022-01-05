@@ -1,6 +1,4 @@
-import logo from './logo.svg';
-import './App.css'
-import BookingComponent from './BookingComponent.js'
+import BookingComponent from './components/BookingComponent.js'
 
 function App() {
   return (

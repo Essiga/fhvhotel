@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import BookingComponent from "./BookingComponent";
-import Router from './Router'
 import {BrowserRouter} from "react-router-dom";
+import reportWebVitals from './reportWebVitals';
+
+import Main from './components/Main'
 
 ReactDOM.render(
   <React.StrictMode>
       <BrowserRouter>
-          <Router/>
+          <Main/>
       </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
