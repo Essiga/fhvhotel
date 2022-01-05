@@ -5,6 +5,7 @@ import '../style.css';
 import HomeComponent from "./HomeComponent";
 import NavbarComponent from "./NavbarComponent";
 import RoomComponent from "./RoomComponent";
+import BookingComponent from "./BookingComponent";
 
 function Main(){
 
@@ -17,6 +18,7 @@ function Main(){
                     <Switch>
                         <Route exact path='/' component={HomeComponent}/>
                         <Route exact path='/allRooms' component={RoomComponent}/>
+                        <Route exact path='/roomSelection' component={BookingComponent}/>
                     </Switch>
                 </div>
             </div>
