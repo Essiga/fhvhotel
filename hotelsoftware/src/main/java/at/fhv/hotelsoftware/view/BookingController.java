@@ -82,7 +82,6 @@ public class BookingController {
     private static final String DASHBOARD_URL = "/";
     private static final String CREATE_GUEST_URL = "/createGuest";
     private static final String CHOOSE_ROOM_URL = "/chooseRoom";
-    private static final String EXTRA_SERVICE_URL = "/extraService";
     private static final String BOOKING_SUMMARY_URL = "/bookingSummary";
     private static final String WRITE_BOOKING_IN_DB = "/writeBookingInDatabase";
     private static final String CHECK_IN_GUEST_OVERVIEW = "/checkInGuestOverview";
@@ -98,6 +97,7 @@ public class BookingController {
     private static final String CONFIRM_BOOKING = "/confirmBooking";
     private static final String SPLIT_INVOICE = "/splitInvoice";
     private static final String CLEAN_ROOM = "/cleanRoom";
+    private static final String SINGLE_PAGE_APPLICATION = "/spa";
 
     private static final String ERROR_PAGE = "errorPage";
 
@@ -642,7 +642,7 @@ public class BookingController {
     }
 
 
-    @GetMapping ("/spa")
+    @GetMapping (SINGLE_PAGE_APPLICATION)
     public ModelAndView spa(){
         String redirectUrl = "http://localhost:3000";
         return new ModelAndView("redirect:" + redirectUrl);

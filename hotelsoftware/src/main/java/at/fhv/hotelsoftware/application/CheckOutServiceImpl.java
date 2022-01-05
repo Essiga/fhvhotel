@@ -35,7 +35,7 @@ public class CheckOutServiceImpl implements CheckOutService {
         Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
         if (optBooking.isEmpty()){
-            throw new BookingNotFoundException("BookingComponent not found");
+            throw new BookingNotFoundException("Booking not found");
         }
 
         Booking booking = optBooking.get();

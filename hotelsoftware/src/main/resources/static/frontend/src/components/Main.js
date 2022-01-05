@@ -4,18 +4,21 @@ import '../style.css';
 
 import HomeComponent from "./HomeComponent";
 import NavbarComponent from "./NavbarComponent";
-import BookingComponent from "./BookingComponent";
+import RoomComponent from "./RoomComponent";
 
 function Main(){
 
     return(
-        <div className="flex">
+        <div className="flex bg-gray-100">
             <NavbarComponent/>
-            <div className="flex-row w-full">
-                <Switch>
-                    <Route exact path='/' component={HomeComponent}/>
-                    <Route exact path='/roomSelection' component={BookingComponent}/>
-                </Switch>
+            <div className="flex w-full">
+                <div className="w-full bg-white m-40 p-16 rounded border border-gray-400">
+
+                    <Switch>
+                        <Route exact path='/' component={HomeComponent}/>
+                        <Route exact path='/allRooms' component={RoomComponent}/>
+                    </Switch>
+                </div>
             </div>
         </div>
     );

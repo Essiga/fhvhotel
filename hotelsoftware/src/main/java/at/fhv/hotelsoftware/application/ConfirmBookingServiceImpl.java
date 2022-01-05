@@ -30,7 +30,7 @@ public class ConfirmBookingServiceImpl implements ConfirmBookingService {
         if (booking.isPresent()) {
             booking.get().confirmBooking();
         } else {
-            throw new BookingNotFoundException("BookingComponent with ID: " + bookingId.getBookingId() + " not found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
         }
     }
 

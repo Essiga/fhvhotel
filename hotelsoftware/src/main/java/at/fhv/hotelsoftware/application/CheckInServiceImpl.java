@@ -37,7 +37,7 @@ public class CheckInServiceImpl implements CheckInService {
         Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
         if (optBooking.isEmpty()) {
-            throw new BookingNotFoundException("BookingComponent with ID: " + bookingId + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId + " not found");
         }
 
         Booking booking = optBooking.get();
@@ -77,7 +77,7 @@ public class CheckInServiceImpl implements CheckInService {
         Optional<Booking> booking = bookingRepository.findBookingById(bookingId);
 
         if (booking.isEmpty())
-            throw new BookingNotFoundException("BookingComponent with ID: " + bookingId.getBookingId() + " not found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId.getBookingId() + " not found");
 
         List<Integer> checkInRoomNumbers = new ArrayList<>();
 
