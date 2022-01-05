@@ -15,6 +15,9 @@ class GuestComponent extends React.Component {
         this.handleCountryChange = this.handleCountryChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
+
+        this.clearInputGuest = this.clearInputGuest.bind(this);
+        this.checkInputGuest = this.checkInputGuest.bind(this);
     }
 
     handleGnameChange(e) {
@@ -55,6 +58,16 @@ class GuestComponent extends React.Component {
 
     handleEmailChange(e) {
         this.props.onEmailChange(e.target.value);
+    }
+
+    clearInputGuest()
+    {
+        this.props.onClearInputGuest();
+    }
+
+    checkInputGuest()
+    {
+        this.props.onCheckInputGuest();
     }
 
     render() {
@@ -181,13 +194,14 @@ class GuestComponent extends React.Component {
 
                         <Link to="/"
                               className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            <button> Back</button>
+                            <button onClick={this.clearInputGuest}> Back </button>
                         </Link>
 
-                        <Link to="#"
-                              className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            <button> Next</button>
-                        </Link>
+                        <button className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                                onClick={this.checkInputGuest}>
+                            Next
+                        </button>
+
                     </div>
 
                 </form>

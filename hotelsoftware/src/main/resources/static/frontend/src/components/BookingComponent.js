@@ -33,6 +33,9 @@ class BookingComponent extends React.Component
         this.handleCountryChange = this.handleCountryChange.bind(this);
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
+
+        this.clearInputGuest = this.clearInputGuest.bind(this);
+        this.checkInputGuest = this.checkInputGuest.bind(this);
     }
 
     handleGnameChange(value)
@@ -85,6 +88,57 @@ class BookingComponent extends React.Component
         this.setState({email: value});
     }
 
+    clearInputGuest()
+    {
+        this.setState({gname: ''});
+        this.setState({voucher: ''});
+        this.setState({firstName: ''});
+        this.setState({lastName: ''});
+        this.setState({streetAdr: ''});
+        this.setState({zip: ''});
+        this.setState({city: ''});
+        this.setState({country: ''});
+        this.setState({phone: ''});
+        this.setState({email: ''});
+
+        this.setState({guestDataExists: false});
+    }
+
+    checkInputGuest()
+    {
+        if (this.state.gname === '')
+            return;
+
+        if (this.state.voucher === '')
+            return;
+
+        if (this.state.firstName === '')
+            return;
+
+        if (this.state.lastName === '')
+            return;
+
+        if (this.state.streetAdr === '')
+            return;
+
+        if (this.state.zip === '')
+            return;
+
+        if (this.state.city === '')
+            return;
+
+        if (this.state.country === '')
+            return;
+
+        if (this.state.phone === '')
+            return;
+
+        if (this.state.email === '')
+            return;
+
+        this.setState({guestDataExists: true});
+    }
+
     render()
     {
         const guestDataExists = this.state.guestDataExists;
@@ -110,6 +164,8 @@ class BookingComponent extends React.Component
                             onCountryChange = {this.handleCountryChange}
                             onPhoneChange = {this.handlePhoneChange}
                             onEmailChange = {this.handleEmailChange}
+                            onClearInputGuest = {this.clearInputGuest}
+                            onCheckInputGuest = {this.checkInputGuest}
                         />
 
         if (guestDataExists)
