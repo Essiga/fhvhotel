@@ -4,10 +4,7 @@ import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,7 @@ public class BookingRestController {
     @Autowired
     ViewRoomService viewRoomService;
 
+    @CrossOrigin(origins = "*")
     @GetMapping("/getAllRooms")
     public List<RoomDTO> getAllRooms() throws RoomNotFoundException {
         return viewRoomService.findAllRooms();
