@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import BookingComponent from "./BookingComponent";
+import Router from './Router'
+import {BrowserRouter} from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <BrowserRouter>
+          <Router/>
+      </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

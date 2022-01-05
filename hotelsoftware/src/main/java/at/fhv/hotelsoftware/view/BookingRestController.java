@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/rest/booking")
 public class BookingRestController {
@@ -15,7 +16,7 @@ public class BookingRestController {
     @Autowired
     ViewRoomService viewRoomService;
 
-    @CrossOrigin(origins = "*")
+
     @GetMapping("/getAllRooms")
     public List<RoomDTO> getAllRooms() throws RoomNotFoundException {
         return viewRoomService.findAllRooms();

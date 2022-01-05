@@ -1,5 +1,4 @@
 {
-  "proxy": "http://localhost:8080/spa",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -41,6 +40,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.8",
     "postcss": "^8.4.5",
+    "react-router-dom": "^5.2.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }

@@ -1,7 +1,9 @@
 import React from 'react'
 
-class Booking extends React.Component
+class BookingComponent extends React.Component
 {
+
+
     constructor(props)
     {
         super(props);
@@ -10,10 +12,10 @@ class Booking extends React.Component
 
     componentDidMount()
     {
-        fetch("http://localhost:8080/getAllRooms").then(res => res.json())
+        fetch("http://localhost:8080/rest/booking/getAllRooms").then(res => res.json())
             .then(result => {this.setState({rooms: result})})
     }
-//<meta http-equiv="Access-Control-Allow-Origin" content="*"/>
+
     render()
     {
         return (
@@ -29,4 +31,4 @@ class Booking extends React.Component
     }
 }
 
-export default Booking;
+export default BookingComponent;
