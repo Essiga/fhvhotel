@@ -187,12 +187,12 @@ class BookingSummaryComponent extends React.Component {
 
                     <div className="flex w-full justify-between mt-6">
 
-                        <div className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                        <button type="button" className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
                                 onClick={this.backBookingSummary}>
                             Back
-                        </div>
+                        </button>
 
-                        <button
+                        <button type="button"
                                 className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             Create Booking
                         </button>

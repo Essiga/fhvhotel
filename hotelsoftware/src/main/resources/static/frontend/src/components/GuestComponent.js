@@ -188,13 +188,13 @@ class GuestComponent extends React.Component {
 
                         <Link to="/"
                               className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            <button> Back </button>
+                            <button type="button"> Back </button>
                         </Link>
 
-                        <div className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                        <button type="button" className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
                                 onClick={this.checkInputGuest}>
                             Next
-                        </div>
+                        </button>
 
                     </div>
 

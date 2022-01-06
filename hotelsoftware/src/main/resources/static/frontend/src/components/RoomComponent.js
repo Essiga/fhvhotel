@@ -10,7 +10,7 @@ class RoomComponent extends React.Component
 
     componentDidMount()
     {
-        fetch("http://localhost:8080/rest/booking/getAllRooms").then(res => res.json())
+        fetch("http://localhost:8080/rest/booking/getAllRooms").then(abc => abc.json())
             .then(result => {this.setState({rooms: result})})
     }
 
