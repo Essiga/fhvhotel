@@ -191,9 +191,6 @@ class BookingComponent extends React.Component
 
     checkInputStay()
     {
-        if (this.state.singleRoomCount < 0 || this.state.doubleRoomCount < 0 || this.state.superiorRoomCount < 0)
-            return;
-
         if (this.state.singleRoomCount === 0 && this.state.doubleRoomCount === 0 && this.state.superiorRoomCount === 0)
             return
 
@@ -256,7 +253,23 @@ class BookingComponent extends React.Component
 
         if (guestDataExists && stayDataExists)
         {
-            component = <BookingSummaryComponent/>
+            component = <BookingSummaryComponent
+                            gname = {this.state.gname}
+                            voucher = {this.state.voucher}
+                            firstName = {this.state.firstName}
+                            lastName = {this.state.lastName}
+                            streetAdr = {this.state.streetAdr}
+                            zip = {this.state.zip}
+                            city = {this.state.city}
+                            country = {this.state.country}
+                            phone = {this.state.phone}
+                            email = {this.state.email}
+                            singleRoomCount = {this.state.singleRoomCount}
+                            doubleRoomCount = {this.state.doubleRoomCount}
+                            superiorRoomCount = {this.state.superiorRoomCount}
+                            checkInDate = {this.state.checkInDate}
+                            checkOutDate = {this.state.checkOutDate}
+                        />
         }
 
         return (
