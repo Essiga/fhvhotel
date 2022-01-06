@@ -11,7 +11,7 @@ class StayComponent extends React.Component {
         this.handleCheckInDateChange = this.handleCheckInDateChange.bind(this);
         this.handleCheckOutDateChange = this.handleCheckOutDateChange.bind(this);
 
-        this.clearInputStay = this.clearInputStay.bind(this);
+        this.backStay = this.backStay.bind(this);
         this.checkInputStay = this.checkInputStay.bind(this);
     }
 
@@ -40,9 +40,9 @@ class StayComponent extends React.Component {
         this.props.onCheckOutDateChange(e.target.value);
     }
 
-    clearInputStay()
+    backStay()
     {
-        this.props.onClearInputStay();
+        this.props.onBackStay();
     }
 
     checkInputStay()
@@ -112,17 +112,18 @@ class StayComponent extends React.Component {
 
                     <div className="flex row justify-between mt-6">
 
-                        <button className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
-                                onClick={this.clearInputStay}>
+                        <div className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                            onClick={this.backStay}>
                             Back
-                        </button>
+                        </div>
 
-                        <button type="submit"
+                        <div
                                 className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
                                 onClick={this.checkInputStay}>
                             Next
-                        </button>
+                        </div>
                     </div>
+
                 </form>
             </React.Fragment>
         );
