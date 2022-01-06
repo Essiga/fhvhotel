@@ -10,7 +10,7 @@ class BookingComponent extends React.Component
         super(props);
         this.state = {
             guestDataExists: false,
-            roomDataExists: false,
+            stayDataExists: false,
             gname: '',
             voucher: '',
             firstName: '',
@@ -20,7 +20,12 @@ class BookingComponent extends React.Component
             city: '',
             country: '',
             phone: '',
-            email: ''
+            email: '',
+            singleRoomCount: 0,
+            doubleRoomCount: 0,
+            superiorRoomCount: 0,
+            checkInDate: null,
+            checkOutDate: null
         };
 
         this.handleGnameChange = this.handleGnameChange.bind(this);
@@ -34,8 +39,17 @@ class BookingComponent extends React.Component
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
 
+        this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
+        this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
+        this.handleSuperiorRoomCountChange = this.handleSuperiorRoomCountChange.bind(this);
+        this.handleCheckInDateChange = this.handleCheckInDateChange.bind(this);
+        this.handleCheckOutDateChange = this.handleCheckOutDateChange.bind(this);
+
         this.clearInputGuest = this.clearInputGuest.bind(this);
         this.checkInputGuest = this.checkInputGuest.bind(this);
+
+        this.clearInputStay = this.clearInputStay.bind(this);
+        this.checkInputStay = this.checkInputStay.bind(this);
     }
 
     handleGnameChange(value)
@@ -88,6 +102,31 @@ class BookingComponent extends React.Component
         this.setState({email: value});
     }
 
+    handleSingleRoomCountChange(value)
+    {
+        this.setState({singleRoomCount: value});
+    }
+
+    handleDoubleRoomCountChange(value)
+    {
+        this.setState({doubleRoomCount: value});
+    }
+
+    handleSuperiorRoomCountChange(value)
+    {
+        this.setState({superiorRoomCount: value});
+    }
+
+    handleCheckInDateChange(value)
+    {
+        this.setState({checkInDate: value});
+    }
+
+    handleCheckOutDateChange(value)
+    {
+        this.setState({checkOutDate: value});
+    }
+
     clearInputGuest()
     {
         this.setState({gname: ''});
@@ -102,6 +141,17 @@ class BookingComponent extends React.Component
         this.setState({email: ''});
 
         this.setState({guestDataExists: false});
+    }
+
+    clearInputStay()
+    {
+        this.setState({singleRoomCount: 0});
+        this.setState({doubleRoomCount: 0});
+        this.setState({superiorRoomCount: 0});
+        this.setState({checkInDate: null});
+        this.setState({checkOutDate: null});
+
+        this.setState({stayDataExists: false});
     }
 
     checkInputGuest()
@@ -139,10 +189,28 @@ class BookingComponent extends React.Component
         this.setState({guestDataExists: true});
     }
 
+    checkInputStay()
+    {
+        if (this.state.singleRoomCount < 0 || this.state.doubleRoomCount < 0 || this.state.superiorRoomCount < 0)
+            return;
+
+        if (this.state.singleRoomCount === 0 && this.state.doubleRoomCount === 0 && this.state.superiorRoomCount === 0)
+            return
+
+        if (this.state.checkInDate === null || this.state.checkOutDate === null)
+            return;
+
+        if (this.state.checkOutDate === null || this.state.checkOutDate === null)
+            return;
+
+        this.setState({stayDataExists: true});
+    }
+
     render()
     {
         const guestDataExists = this.state.guestDataExists;
-        const roomDataExists = this.state.roomDataExists;
+        const stayDataExists = this.state.stayDataExists;
+
         let component = <GuestComponent
                             gname = {this.state.gname}
                             voucher = {this.state.voucher}
@@ -170,10 +238,23 @@ class BookingComponent extends React.Component
 
         if (guestDataExists)
         {
-            component = <StayComponent/>
+            component = <StayComponent
+                            singleRoomCount = {this.state.singleRoomCount}
+                            doubleRoomCount = {this.state.doubleRoomCount}
+                            superiorRoomCount = {this.state.superiorRoomCount}
+                            checkInDate = {this.state.checkInDate}
+                            checkOutDate = {this.state.checkOutDate}
+                            onSingleRoomCountChange = {this.handleSingleRoomCountChange}
+                            onDoubleRoomCountChange = {this.handleDoubleRoomCountChange}
+                            onSuperiorRoomCountChange = {this.handleSuperiorRoomCountChange}
+                            onCheckInDateChange = {this.handleCheckInDateChange}
+                            onCheckOutDateChange = {this.handleCheckOutDateChange}
+                            onClearInputStay = {this.clearInputStay}
+                            onCheckInputStay = {this.checkInputStay}
+                        />
         }
 
-        if (guestDataExists && roomDataExists)
+        if (guestDataExists && stayDataExists)
         {
             component = <BookingSummaryComponent/>
         }
