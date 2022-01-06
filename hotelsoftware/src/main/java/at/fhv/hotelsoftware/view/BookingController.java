@@ -644,7 +644,6 @@ public class BookingController {
 
     @GetMapping (SINGLE_PAGE_APPLICATION)
     public ModelAndView spa(){
-        String redirectUrl = "http://localhost:3000";
-        return new ModelAndView("redirect:" + redirectUrl);
+        return new ModelAndView("redirect:http://localhost:3000");
     }
 }

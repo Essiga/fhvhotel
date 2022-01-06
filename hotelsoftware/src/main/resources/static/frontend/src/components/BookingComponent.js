@@ -2,6 +2,7 @@ import React from 'react'
 import GuestComponent from "./GuestComponent";
 import StayComponent from "./StayComponent";
 import BookingSummaryComponent from "./BookingSummaryComponent";
+import CreateBookingComponent from "./CreateBookingComponent";
 
 class BookingComponent extends React.Component
 {
@@ -11,6 +12,7 @@ class BookingComponent extends React.Component
         this.state = {
             guestDataExists: false,
             stayDataExists: false,
+            bookingReadyToCreate: false,
             gname: '',
             voucher: '',
             firstName: '',
@@ -51,6 +53,8 @@ class BookingComponent extends React.Component
         this.checkInputStay = this.checkInputStay.bind(this);
 
         this.backBookingSummary = this.backBookingSummary.bind(this);
+
+        this.createBooking = this.createBooking.bind(this);
     }
 
     handleGnameChange(value)
@@ -185,10 +189,16 @@ class BookingComponent extends React.Component
         this.setState({stayDataExists: true});
     }
 
+    createBooking()
+    {
+        this.setState({bookingReadyToCreate: true});
+    }
+
     render()
     {
         const guestDataExists = this.state.guestDataExists;
         const stayDataExists = this.state.stayDataExists;
+        const bookingReadyToCreate = this.state.bookingReadyToCreate;
 
         let component = <GuestComponent
                             gname = {this.state.gname}
@@ -251,6 +261,28 @@ class BookingComponent extends React.Component
                             checkInDate = {this.state.checkInDate}
                             checkOutDate = {this.state.checkOutDate}
                             onBackBookingSummary = {this.backBookingSummary}
+                            onCreateBooking = {this.createBooking}
+                        />
+        }
+
+        if (guestDataExists && stayDataExists && bookingReadyToCreate)
+        {
+            component = <CreateBookingComponent
+                            gname = {this.state.gname}
+                            voucher = {this.state.voucher}
+                            firstName = {this.state.firstName}
+                            lastName = {this.state.lastName}
+                            streetAdr = {this.state.streetAdr}
+                            zip = {this.state.zip}
+                            city = {this.state.city}
+                            country = {this.state.country}
+                            phone = {this.state.phone}
+                            email = {this.state.email}
+                            singleRoomCount = {this.state.singleRoomCount}
+                            doubleRoomCount = {this.state.doubleRoomCount}
+                            superiorRoomCount = {this.state.superiorRoomCount}
+                            checkInDate = {this.state.checkInDate}
+                            checkOutDate = {this.state.checkOutDate}
                         />
         }
 

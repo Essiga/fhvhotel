@@ -6,11 +6,17 @@ class BookingSummaryComponent extends React.Component {
         super(props);
 
         this.backBookingSummary = this.backBookingSummary.bind(this);
+        this.createBooking = this.createBooking.bind(this);
     }
 
     backBookingSummary()
     {
         this.props.onBackBookingSummary();
+    }
+
+    createBooking()
+    {
+        this.props.onCreateBooking();
     }
 
     render() {
@@ -192,7 +198,7 @@ class BookingSummaryComponent extends React.Component {
                             Back
                         </button>
 
-                        <button type="button"
+                        <button type="button" onClick={this.createBooking}
                                 className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                             Create Booking
                         </button>
