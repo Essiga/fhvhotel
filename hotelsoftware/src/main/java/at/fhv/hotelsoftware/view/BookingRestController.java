@@ -3,14 +3,13 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.application.api.ViewRoomService;
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
-import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.BookingStatus;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.VoucherCode;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -42,11 +41,24 @@ public class BookingRestController {
 
     private static final String GET_ALL_ROOMS = "/getAllRooms";
     private static final String CREATE_BOOKING = "/createBooking";
+    private static final String GET_ALL_ROOM_PRICES = "/getRoomPrices";
 
 
     @GetMapping(GET_ALL_ROOMS)
     public List<RoomDTO> getAllRooms() throws RoomNotFoundException {
         return viewRoomService.findAllRooms();
+    }
+
+    @GetMapping(GET_ALL_ROOM_PRICES)
+    public RoomPriceDTO getRoomPrices() {
+
+        RoomPriceDTO roomPriceDTO = new RoomPriceDTO(
+                                            RoomCategory.SINGLE.getPrice(),
+                                            RoomCategory.DOUBLE.getPrice(),
+                                            RoomCategory.SUPERIOR.getPrice()
+                                            );
+
+        return roomPriceDTO;
     }
 
     @PostMapping(CREATE_BOOKING)

@@ -5,6 +5,8 @@ class StayComponent extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {prices: null};
+
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
         this.handleSuperiorRoomCountChange = this.handleSuperiorRoomCountChange.bind(this);
@@ -13,6 +15,12 @@ class StayComponent extends React.Component {
 
         this.backStay = this.backStay.bind(this);
         this.checkInputStay = this.checkInputStay.bind(this);
+    }
+
+    componentDidMount()
+    {
+        fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
+            .then(result => {this.setState({prices: result})})
     }
 
     handleSingleRoomCountChange(e)
@@ -51,6 +59,11 @@ class StayComponent extends React.Component {
     }
 
     render() {
+
+        const prices = this.state.prices;
+        console.log(prices);
+
+
         return (
             <React.Fragment>
                 <h1 className="text-3xl mb-4 font-semibold">Rooms + Duration</h1>
