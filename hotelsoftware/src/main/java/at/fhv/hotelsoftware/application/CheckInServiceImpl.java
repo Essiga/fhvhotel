@@ -37,7 +37,7 @@ public class CheckInServiceImpl implements CheckInService {
         Optional<Booking> optBooking = bookingRepository.findBookingById(bookingId);
 
         if (optBooking.isEmpty()) {
-            throw new BookingNotFoundException("Booking with ID: " + bookingId + " Not Found");
+            throw new BookingNotFoundException("Booking with ID: " + bookingId + " not found");
         }
 
         Booking booking = optBooking.get();
