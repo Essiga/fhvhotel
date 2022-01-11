@@ -5,7 +5,7 @@ class StayComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {prices: null};
+        this.state = {prices: ""};
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -26,26 +26,146 @@ class StayComponent extends React.Component {
     handleSingleRoomCountChange(e)
     {
         this.props.onSingleRoomCountChange(e.target.value);
+
+        const singleRooms = document.getElementById("single").value;
+        const doubleRooms = document.getElementById("double").value;
+        const superiorRooms = document.getElementById("superior").value;
+
+        const date1 = new Date(document.getElementById("checkInDate").value);
+        const date2 = new Date(document.getElementById("checkOutDate").value);
+
+        // One day in milliseconds
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        // Calculating the time difference between two dates
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between two dates
+        const duration = Math.round(diffInTime / oneDay);
+
+        if(isNaN(duration)){
+            var price = 0;
+        } else {
+            var price = ((singleRooms * 40) + (doubleRooms * 60) + (superiorRooms * 100)) * duration;
+        }
+
+        document.getElementById("totalPrice").innerHTML = price;
     }
 
     handleDoubleRoomCountChange(e)
     {
         this.props.onDoubleRoomCountChange(e.target.value);
+
+        const singleRooms = document.getElementById("single").value;
+        const doubleRooms = document.getElementById("double").value;
+        const superiorRooms = document.getElementById("superior").value;
+
+        const date1 = new Date(document.getElementById("checkInDate").value);
+        const date2 = new Date(document.getElementById("checkOutDate").value);
+
+        // One day in milliseconds
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        // Calculating the time difference between two dates
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between two dates
+        const duration = Math.round(diffInTime / oneDay);
+
+        if(isNaN(duration)){
+            var price = 0;
+        } else {
+            var price = ((singleRooms * 40) + (doubleRooms * 60) + (superiorRooms * 100)) * duration;
+        }
+
+        document.getElementById("totalPrice").innerHTML = price;
     }
 
     handleSuperiorRoomCountChange(e)
     {
         this.props.onSuperiorRoomCountChange(e.target.value);
+
+        const singleRooms = document.getElementById("single").value;
+        const doubleRooms = document.getElementById("double").value;
+        const superiorRooms = document.getElementById("superior").value;
+
+        const date1 = new Date(document.getElementById("checkInDate").value);
+        const date2 = new Date(document.getElementById("checkOutDate").value);
+
+        // One day in milliseconds
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        // Calculating the time difference between two dates
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between two dates
+        const duration = Math.round(diffInTime / oneDay);
+
+        if(isNaN(duration)){
+            var price = 0;
+        } else {
+            var price = ((singleRooms * 40) + (doubleRooms * 60) + (superiorRooms * 100)) * duration;
+        }
+
+        document.getElementById("totalPrice").innerHTML = price;
     }
 
     handleCheckInDateChange(e)
     {
         this.props.onCheckInDateChange(e.target.value);
+
+        const singleRooms = document.getElementById("single").value;
+        const doubleRooms = document.getElementById("double").value;
+        const superiorRooms = document.getElementById("superior").value;
+
+        const date1 = new Date(document.getElementById("checkInDate").value);
+        const date2 = new Date(document.getElementById("checkOutDate").value);
+
+        // One day in milliseconds
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        // Calculating the time difference between two dates
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between two dates
+        const duration = Math.round(diffInTime / oneDay);
+
+        if(isNaN(duration)){
+            var price = 0;
+        } else {
+            var price = ((singleRooms * 40) + (doubleRooms * 60) + (superiorRooms * 100)) * duration;
+        }
+
+        document.getElementById("totalPrice").innerHTML = price;
     }
 
     handleCheckOutDateChange(e)
     {
         this.props.onCheckOutDateChange(e.target.value);
+
+        const singleRooms = document.getElementById("single").value;
+        const doubleRooms = document.getElementById("double").value;
+        const superiorRooms = document.getElementById("superior").value;
+
+        const date1 = new Date(document.getElementById("checkInDate").value);
+        const date2 = new Date(document.getElementById("checkOutDate").value);
+
+        // One day in milliseconds
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        // Calculating the time difference between two dates
+        const diffInTime = date2.getTime() - date1.getTime();
+
+        // Calculating the no. of days between two dates
+        const duration = Math.round(diffInTime / oneDay);
+
+        if(isNaN(duration)){
+            var price = 0;
+        } else {
+            var price = ((singleRooms * 40) + (doubleRooms * 60) + (superiorRooms * 100)) * duration;
+        }
+
+        document.getElementById("totalPrice").innerHTML = price;
     }
 
     backStay()
@@ -60,9 +180,14 @@ class StayComponent extends React.Component {
 
     render() {
 
-        const prices = this.state.prices;
-        console.log(prices);
+        let prices = Object.values(this.state.prices);
+        let singleRoomPrice = prices[0];
+        let doubleRoomPrice = prices[1];
+        let superiorRoomPrice = prices[2];
 
+        console.log(singleRoomPrice);
+        console.log(doubleRoomPrice);
+        console.log(superiorRoomPrice);
 
         return (
             <React.Fragment>
@@ -120,6 +245,12 @@ class StayComponent extends React.Component {
                             </div>
 
                         </div>
+
+                    </div>
+
+                    <div className="p-4 mt-4 border border-gray-300">
+
+                        <h2 className="mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice"> </span> </h2>
 
                     </div>
 
