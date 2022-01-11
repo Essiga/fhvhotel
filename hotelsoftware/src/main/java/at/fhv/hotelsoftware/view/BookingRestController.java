@@ -52,13 +52,11 @@ public class BookingRestController {
     @GetMapping(GET_ALL_ROOM_PRICES)
     public RoomPriceDTO getRoomPrices() {
 
-        RoomPriceDTO roomPriceDTO = new RoomPriceDTO(
-                                            RoomCategory.SINGLE.getPrice(),
-                                            RoomCategory.DOUBLE.getPrice(),
-                                            RoomCategory.SUPERIOR.getPrice()
-                                            );
-
-        return roomPriceDTO;
+        return new RoomPriceDTO(
+                RoomCategory.SINGLE.getPrice(),
+                RoomCategory.DOUBLE.getPrice(),
+                RoomCategory.SUPERIOR.getPrice()
+                );
     }
 
     @PostMapping(CREATE_BOOKING)
