@@ -5,7 +5,12 @@ class StayComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {prices: ""};
+        this.state = {
+            prices: "",
+            singleRoomPrice: 0,
+            doubleRoomPrice: 0,
+            superiorRoomPrice: 0
+            };
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -21,6 +26,11 @@ class StayComponent extends React.Component {
     {
         fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
             .then(result => {this.setState({prices: result})})
+
+        let prices = Object.values(this.state.prices);
+        this.setState({singleRoomPrice: prices[0]});
+        this.setState({doubleRoomPrice: prices[1]});
+        this.setState({superiorRoomPrice: prices[2]});
     }
 
     handleSingleRoomCountChange(e)
@@ -179,15 +189,15 @@ class StayComponent extends React.Component {
     }
 
     render() {
-
-        let prices = Object.values(this.state.prices);
-        let singleRoomPrice = prices[0];
-        let doubleRoomPrice = prices[1];
-        let superiorRoomPrice = prices[2];
-
-        console.log(singleRoomPrice);
-        console.log(doubleRoomPrice);
-        console.log(superiorRoomPrice);
+        //
+        // let prices = Object.values(this.state.prices);
+        // let singleRoomPrice = prices[0];
+        // let doubleRoomPrice = prices[1];
+        // let superiorRoomPrice = prices[2];
+        //
+        // console.log(singleRoomPrice);
+        // console.log(doubleRoomPrice);
+        // console.log(superiorRoomPrice);
 
         return (
             <React.Fragment>
