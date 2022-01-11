@@ -54,7 +54,7 @@ class StayComponent extends React.Component {
             price = ((singleRooms * singleRoomPrice) + (doubleRooms * doubleRoomPrice) + (superiorRooms * superiorRoomPrice)) * duration;
         }
 
-        document.getElementById("totalPrice").innerHTML = price;
+        document.getElementById("totalPrice").innerHTML = price + "€";
     }
 
     handleSingleRoomCountChange(e)
@@ -160,7 +160,7 @@ class StayComponent extends React.Component {
 
                     <div className="p-4 mt-4 border border-gray-300">
 
-                        <h2 className="mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice"> </span> </h2>
+                        <h2 className="mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span> </h2>
 
                     </div>
 
