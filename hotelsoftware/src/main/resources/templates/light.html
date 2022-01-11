@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <title>Dashboard</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{search.js}"></script>
+</head>
+
+<body class="bg-gray-100">
+
+<div class="flex">
+    <aside class="h-screen sticky top-0 w-1/6">
+
+        <nav class="flex-row h-screen w-full bg-green-500"> <!-- Navbar -->
+
+            <div>
+                <a href="/" class="bg-green-600 block px-6 py-16 font-bold text-4xl text-white">Dashboard</a>
+            </div>
+
+            <div>
+                <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking
+                    Overview</a>
+            </div>
+
+            <div>
+                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
+            </div>
+
+            <div>
+                <a href="roomOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room
+                    Overview</a>
+            </div>
+
+        </nav>
+    </aside>
+
+    <div class="flex w-full"> <!-- Content -->
+
+        <div class="w-full bg-white m-5 p-5 rounded border border-gray-400">  <!-- Form Block -->
+            <h1 class="pl-3 font-extrabold text-4xl text-blue-500 ">Room 101</h1>
+            <div class="flex justify-around">
+                <iframe src="http://194.208.88.232/" width="800" height="1000"
+                        title="W3Schools Free Online Web Tutorials">
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

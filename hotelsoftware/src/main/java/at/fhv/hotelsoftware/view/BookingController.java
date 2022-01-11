@@ -646,4 +646,11 @@ public class BookingController {
     public ModelAndView spa(){
         return new ModelAndView("redirect:http://localhost:3000");
     }
+
+    @GetMapping ("/light")
+    public ModelAndView lamp(){
+
+        return new ModelAndView("light");
+
+    }
 }
