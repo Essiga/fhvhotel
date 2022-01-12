@@ -4,6 +4,7 @@ import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
 import at.fhv.hotelsoftware.domain.model.Booking;
@@ -60,52 +61,44 @@ public class BookingRestController {
     }
 
     @PostMapping(CREATE_BOOKING)
-    public String createBooking(@RequestBody String jsonString) throws JSONException {
+    public String createBooking(@RequestBody BookingDataDTO bookingData) {
 
-        JSONObject bookingData = new JSONObject(jsonString);
-
-        String gname = bookingData.getString("gname");
-        String voucher = bookingData.getString("voucher");
-        String firstName = bookingData.getString("firstName");
-        String lastName = bookingData.getString("lastName");
-        String streetAdr = bookingData.getString("streetAdr");
-        String zip = bookingData.getString("zip");
-        String city = bookingData.getString("city");
-        String country = bookingData.getString("country");
-        String phone = bookingData.getString("phone");
-        String email = bookingData.getString("email");
-        int singleRoomCount = bookingData.getInt("singleRoomCount");
-        int doubleRoomCount = bookingData.getInt("doubleRoomCount");
-        int superiorRoomCount = bookingData.getInt("superiorRoomCount");
-        String checkInDate = bookingData.getString("checkInDate");
-        String checkOutDate = bookingData.getString("checkOutDate");
-
-        // create Guest
-        GuestForm guestForm = new GuestForm();
-
-        guestForm.setFirstName(firstName);
-        guestForm.setLastName(lastName);
-        guestForm.setStreetAdr(streetAdr);
-        guestForm.setZip(zip);
-        guestForm.setCity(city);
-        guestForm.setCountry(country);
-        guestForm.setPhoneNumber(phone);
-        guestForm.setEmail(email);
-
+        GuestForm guestForm = guestFormFromBookingData(bookingData);
         GuestId guestId = createGuestService.createGuest(guestForm);
 
-        // create Booking
-        BookingForm bookingForm = new BookingForm();
-
-        bookingForm.setVoucherCode(voucher);
-        bookingForm.setCheckInDate(checkInDate);
-        bookingForm.setCheckOutDate(checkOutDate);
-        bookingForm.setSingleRoomCount(singleRoomCount);
-        bookingForm.setDoubleRoomCount(doubleRoomCount);
-        bookingForm.setSuperiorRoomCount(superiorRoomCount);
-
+        BookingForm bookingForm = bookingFormFromBookingData(bookingData);
         createBookingService.createBooking(bookingForm, guestId);
 
         return "booking created successfully";
+    }
+
+    private BookingForm bookingFormFromBookingData(BookingDataDTO bookingData) {
+
+        BookingForm bookingForm = new BookingForm();
+
+        bookingForm.setVoucherCode(bookingData.getVoucher());
+        bookingForm.setCheckInDate(bookingData.getCheckInDate());
+        bookingForm.setCheckOutDate(bookingData.getCheckOutDate());
+        bookingForm.setSingleRoomCount(bookingData.getSingleRoomCount());
+        bookingForm.setDoubleRoomCount(bookingData.getDoubleRoomCount());
+        bookingForm.setSuperiorRoomCount(bookingData.getSuperiorRoomCount());
+
+        return bookingForm;
+    }
+
+    private GuestForm guestFormFromBookingData(BookingDataDTO bookingData) {
+
+        GuestForm guestForm = new GuestForm();
+
+        guestForm.setFirstName(bookingData.getFirstName());
+        guestForm.setLastName(bookingData.getLastName());
+        guestForm.setStreetAdr(bookingData.getStreetAdr());
+        guestForm.setZip(bookingData.getZip());
+        guestForm.setCity(bookingData.getCity());
+        guestForm.setCountry(bookingData.getCountry());
+        guestForm.setPhoneNumber(bookingData.getPhone());
+        guestForm.setEmail(bookingData.getEmail());
+
+        return guestForm;
     }
 }

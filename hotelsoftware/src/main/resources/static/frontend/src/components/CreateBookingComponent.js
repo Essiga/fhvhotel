@@ -32,7 +32,7 @@ class CreateBookingComponent extends React.Component
 
         fetch("http://localhost:8080/rest/booking/createBooking",
         {method: 'POST',
-            header: {'Content-Type': 'application/json'},
+            headers: {'content-type': 'application/json'},
             body: JSON.stringify(bookingData)
             })
             .then(response => response.text())
