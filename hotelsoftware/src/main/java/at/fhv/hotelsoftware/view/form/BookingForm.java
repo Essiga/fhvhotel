@@ -45,7 +45,6 @@ public class BookingForm {
 
         BookingForm bookingForm = new BookingForm();
 
-        bookingForm.setVoucherCode(bookingData.getVoucher());
         bookingForm.setCheckInDate(bookingData.getCheckInDate());
         bookingForm.setCheckOutDate(bookingData.getCheckOutDate());
         bookingForm.setSingleRoomCount(bookingData.getSingleRoomCount());

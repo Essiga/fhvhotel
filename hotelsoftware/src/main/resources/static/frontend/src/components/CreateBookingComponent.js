@@ -6,22 +6,32 @@ class CreateBookingComponent extends React.Component
     constructor(props)
     {
         super(props);
+        this.state = {guestId: ""};
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
+        const guestData = {
+            gname: this.props.gname,
+            voucher: this.props.voucher,
+            firstName: this.props.firstName,
+            lastName: this.props.lastName,
+            streetAdr: this.props.streetAdr,
+            zip: this.props.zip,
+            city: this.props.city,
+            country: this.props.country,
+            phone: this.props.phone,
+            email: this.props.email,
+        };
+
+
+        this.createGuest(guestData).then(res => res.json())
+            .then(res => {
+                this.setState({guestId: res})
+            });
+
         const bookingData =
             {
-                gname: this.props.gname,
-                voucher: this.props.voucher,
-                firstName: this.props.firstName,
-                lastName: this.props.lastName,
-                streetAdr: this.props.streetAdr,
-                zip: this.props.zip,
-                city: this.props.city,
-                country: this.props.country,
-                phone: this.props.phone,
-                email: this.props.email,
+                guestId: this.state.guestId,
                 singleRoomCount: this.props.singleRoomCount,
                 doubleRoomCount: this.props.doubleRoomCount,
                 superiorRoomCount: this.props.superiorRoomCount,
@@ -30,9 +40,10 @@ class CreateBookingComponent extends React.Component
             };
 
         fetch("http://localhost:8080/rest/booking/createBooking",
-        {method: 'POST',
-            headers: {'content-type': 'application/json'},
-            body: JSON.stringify(bookingData)
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(bookingData)
             });
     }
 
@@ -53,6 +64,15 @@ class CreateBookingComponent extends React.Component
                 </div>
             </div>
         );
+    }
+
+    async createGuest(guestData){
+        return await Promise.resolve(fetch("http://localhost:8080/rest/booking/createGuest",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(guestData)
+            }));
     }
 }
 

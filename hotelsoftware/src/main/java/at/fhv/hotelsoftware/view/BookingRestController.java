@@ -3,12 +3,15 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
+import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -23,6 +26,7 @@ public class BookingRestController {
 
 
     private static final String CREATE_BOOKING = "/createBooking";
+    private static final String CREATE_GUEST = "/createGuest";
     private static final String GET_ALL_ROOM_PRICES = "/getRoomPrices";
 
 
@@ -36,13 +40,18 @@ public class BookingRestController {
                 );
     }
 
+    @PostMapping(CREATE_GUEST)
+    public GuestId createGuest(@RequestBody GuestDTO guestDTO) {
+
+        GuestForm guestForm = GuestForm.fromGuestDTO(guestDTO);
+        return createGuestService.createGuest(guestForm);
+    }
+
     @PostMapping(CREATE_BOOKING)
     public void createBooking(@RequestBody BookingDataDTO bookingData) {
 
-        GuestForm guestForm = GuestForm.fromBookingData(bookingData);
-        GuestId guestId = createGuestService.createGuest(guestForm);
-
         BookingForm bookingForm = BookingForm.fromBookingData(bookingData);
-        createBookingService.createBooking(bookingForm, guestId);
+        createBookingService.createBooking(bookingForm, new GuestId(UUID.fromString(bookingData.getGuestId())));
     }
+
 }
