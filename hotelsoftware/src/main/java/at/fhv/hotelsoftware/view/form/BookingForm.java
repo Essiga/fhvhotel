@@ -41,7 +41,7 @@ public class BookingForm {
     private Boolean validCategoryCount = true;
 
 
-    public static BookingForm bookingFormFromBookingData(BookingDataDTO bookingData) {
+    public static BookingForm fromBookingData(BookingDataDTO bookingData) {
 
         BookingForm bookingForm = new BookingForm();
 

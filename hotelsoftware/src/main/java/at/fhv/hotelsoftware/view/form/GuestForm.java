@@ -35,7 +35,7 @@ public class GuestForm {
     @Email(message = "Invalid syntax")
     private String email;
 
-    public static GuestForm guestFormFromBookingData(BookingDataDTO bookingData) {
+    public static GuestForm fromBookingData(BookingDataDTO bookingData) {
 
         GuestForm guestForm = new GuestForm();
 
