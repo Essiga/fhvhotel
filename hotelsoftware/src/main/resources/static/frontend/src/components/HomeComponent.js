@@ -1,4 +1,6 @@
 import React from 'react'
+import hotel from '../images/hotel.png'
+
 import {Link} from "react-router-dom";
 
 class HomeComponent extends React.Component{
@@ -7,6 +9,8 @@ class HomeComponent extends React.Component{
         return (
             <div>
                 <h1 className="pl-3 font-extrabold text-4xl text-blue-500 text-center">Welcome to Alp's Hotel</h1>
+
+                <div> <img src={hotel} className="mx-auto pt-6"/> </div>
 
                 <div className="mt-8 text-center">
                     <Link to="/createBooking">

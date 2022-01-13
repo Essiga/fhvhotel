@@ -22,7 +22,26 @@ class BookingSummaryComponent extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1 className="text-3xl mb-4 font-semibold">Booking Summary</h1>
+                <div className="p-4 border border-gray-300 mb-10">
+                    <div className="w-full px-4 mb-8">
+                        <div className="h-2px w-full bg-gray-400 relative">
+                            <div className="absolute top-1/2 left-0 h-1 bg-blue-400 w-2/3">
+                                <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
+                            </div>
+                        </div>
+                        <div className="mt-3 pt-2 relative hidden sm:block">
+                            <div className="absolute left-0"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Stay</span>
+                            </div>
+                            <div className="absolute left-1/3"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Personal Data</span>
+                            </div>
+                            <div className="absolute left-2/3"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Summary</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <form>
 

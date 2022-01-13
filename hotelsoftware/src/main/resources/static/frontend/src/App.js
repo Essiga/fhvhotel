@@ -1,4 +1,3 @@
-import BookingComponent from './components/RoomComponent.js'
 
 function App() {
   return (

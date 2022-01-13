@@ -49,7 +49,7 @@ class BookingComponent extends React.Component
 
         this.checkInputGuest = this.checkInputGuest.bind(this);
 
-        this.backStay = this.backStay.bind(this);
+        this.backGuest = this.backGuest.bind(this);
         this.checkInputStay = this.checkInputStay.bind(this);
 
         this.backBookingSummary = this.backBookingSummary.bind(this);
@@ -132,7 +132,7 @@ class BookingComponent extends React.Component
         this.setState({checkOutDate: value});
     }
 
-    backStay()
+    backGuest()
     {
         this.setState({guestDataExists: false});
         this.setState({stayDataExists: false});
@@ -180,10 +180,10 @@ class BookingComponent extends React.Component
 
     checkInputStay()
     {
-        if (this.state.singleRoomCount == 0 && this.state.doubleRoomCount == 0 && this.state.superiorRoomCount == 0)
+        if (this.state.singleRoomCount == 0 && this.state.doubleRoomCount == 0 && this.state.superiorRoomCount == 0) //here
             return;
 
-        if (this.state.checkInDate === null || this.state.checkOutDate === null)
+        if (this.state.checkInDate == null || this.state.checkOutDate == null ||  this.state.checkInDate === "" || this.state.checkOutDate === "")
             return;
 
         this.setState({stayDataExists: true});
@@ -200,46 +200,45 @@ class BookingComponent extends React.Component
         const stayDataExists = this.state.stayDataExists;
         const bookingReadyToCreate = this.state.bookingReadyToCreate;
 
-        let component = <GuestComponent
-                            gname = {this.state.gname}
-                            voucher = {this.state.voucher}
-                            firstName = {this.state.firstName}
-                            lastName = {this.state.lastName}
-                            streetAdr = {this.state.streetAdr}
-                            zip = {this.state.zip}
-                            city = {this.state.city}
-                            country = {this.state.country}
-                            phone = {this.state.phone}
-                            email = {this.state.email}
-                            onGnameChange = {this.handleGnameChange}
-                            onVoucherChange = {this.handleVoucherChange}
-                            onFirstNameChange = {this.handleFirstNameChange}
-                            onLastNameChange = {this.handleLastNameChange}
-                            onStreetAdrChange = {this.handleStreetAdrChange}
-                            onZipChange = {this.handleZipChange}
-                            onCityChange = {this.handleCityChange}
-                            onCountryChange = {this.handleCountryChange}
-                            onPhoneChange = {this.handlePhoneChange}
-                            onEmailChange = {this.handleEmailChange}
-                            onCheckInputGuest = {this.checkInputGuest}
-                        />
+        let component = <StayComponent
+                singleRoomCount = {this.state.singleRoomCount}
+                doubleRoomCount = {this.state.doubleRoomCount}
+                superiorRoomCount = {this.state.superiorRoomCount}
+                checkInDate = {this.state.checkInDate}
+                checkOutDate = {this.state.checkOutDate}
+                onSingleRoomCountChange = {this.handleSingleRoomCountChange}
+                onDoubleRoomCountChange = {this.handleDoubleRoomCountChange}
+                onSuperiorRoomCountChange = {this.handleSuperiorRoomCountChange}
+                onCheckInDateChange = {this.handleCheckInDateChange}
+                onCheckOutDateChange = {this.handleCheckOutDateChange}
+                onCheckInputStay = {this.checkInputStay}
+            />
 
-        if (guestDataExists)
-        {
-            component = <StayComponent
-                            singleRoomCount = {this.state.singleRoomCount}
-                            doubleRoomCount = {this.state.doubleRoomCount}
-                            superiorRoomCount = {this.state.superiorRoomCount}
-                            checkInDate = {this.state.checkInDate}
-                            checkOutDate = {this.state.checkOutDate}
-                            onSingleRoomCountChange = {this.handleSingleRoomCountChange}
-                            onDoubleRoomCountChange = {this.handleDoubleRoomCountChange}
-                            onSuperiorRoomCountChange = {this.handleSuperiorRoomCountChange}
-                            onCheckInDateChange = {this.handleCheckInDateChange}
-                            onCheckOutDateChange = {this.handleCheckOutDateChange}
-                            onBackStay = {this.backStay}
-                            onCheckInputStay = {this.checkInputStay}
-                        />
+        if(stayDataExists) {
+            component = <GuestComponent
+                gname = {this.state.gname}
+                voucher = {this.state.voucher}
+                firstName = {this.state.firstName}
+                lastName = {this.state.lastName}
+                streetAdr = {this.state.streetAdr}
+                zip = {this.state.zip}
+                city = {this.state.city}
+                country = {this.state.country}
+                phone = {this.state.phone}
+                email = {this.state.email}
+                onGnameChange = {this.handleGnameChange}
+                onVoucherChange = {this.handleVoucherChange}
+                onFirstNameChange = {this.handleFirstNameChange}
+                onLastNameChange = {this.handleLastNameChange}
+                onStreetAdrChange = {this.handleStreetAdrChange}
+                onZipChange = {this.handleZipChange}
+                onCityChange = {this.handleCityChange}
+                onCountryChange = {this.handleCountryChange}
+                onPhoneChange = {this.handlePhoneChange}
+                onEmailChange = {this.handleEmailChange}
+                onBackGuest = {this.backGuest}
+                onCheckInputGuest = {this.checkInputGuest}
+            />
         }
 
         if (guestDataExists && stayDataExists)
