@@ -16,6 +16,7 @@ class GuestComponent extends React.Component {
         this.handlePhoneChange = this.handlePhoneChange.bind(this);
         this.handleEmailChange = this.handleEmailChange.bind(this);
 
+        this.backGuest= this.backGuest.bind(this);
         this.checkInputGuest = this.checkInputGuest.bind(this);
     }
 
@@ -59,6 +60,10 @@ class GuestComponent extends React.Component {
         this.props.onEmailChange(e.target.value);
     }
 
+    backGuest() {
+        this.props.onBackGuest();
+    }
+
     checkInputGuest()
     {
         this.props.onCheckInputGuest();
@@ -67,7 +72,27 @@ class GuestComponent extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1 className="text-3xl mb-4 font-semibold">Guest</h1>
+                <div className="p-4 border border-gray-300 mb-10">
+                    <div className="w-full px-4 mb-8">
+                        <div className="h-2px w-full bg-gray-400 relative">
+                            <div className="absolute top-1/2 left-0 h-1 bg-blue-400 w-1/3">
+                                <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
+                            </div>
+                        </div>
+                        <div className="mt-3 pt-2 relative hidden sm:block">
+                            <div className="absolute left-0"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Stay</span>
+                            </div>
+                            <div className="absolute left-1/3"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Personal Data</span>
+                            </div>
+                            <div className="absolute left-2/3"><span
+                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Summary</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <form>
 
@@ -186,10 +211,11 @@ class GuestComponent extends React.Component {
 
                     <div className="flex w-full justify-between mt-6">
 
-                        <Link to="/"
-                              className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
-                            <button type="button"> Back </button>
-                        </Link>
+                        <button type="button"
+                                className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                                onClick={this.backGuest}>
+                            Back
+                        </button>
 
                         <button type="button" className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
                                 onClick={this.checkInputGuest}>
