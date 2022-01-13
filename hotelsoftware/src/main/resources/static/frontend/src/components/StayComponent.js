@@ -1,12 +1,20 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import SingleRoomComponent from "./SingleRoomComponent";
+import DoubleRoomComponent from "./DoubleRoomComponent";
+import SuperiorRoomComponent from "./SuperiorRoomComponent";
 
 class StayComponent extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {prices: ""};
+        this.state = {
+            prices: "",
+            singleRoomSelected: false,
+            doubleRoomSelected: false,
+            superiorRoomSelected: false
+        };
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -57,20 +65,50 @@ class StayComponent extends React.Component {
         document.getElementById("totalPrice").innerHTML = price + "€";
     }
 
+    checkRoomView(stateType, value){
+        if (value > 0) {
+            this.setState({stateType: true})
+        } else {
+            this.setState({stateType: false})
+        }
+    }
+
     handleSingleRoomCountChange(e) {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+        this.checkRoomView(this.singleRoomSelected, e.target.value );
+
+        if (e.target.value > 0) {
+            this.setState({singleRoomSelected: true})
+
+        } else {
+            this.setState({singleRoomSelected: false})
+        }
     }
 
     handleDoubleRoomCountChange(e) {
         this.props.onDoubleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+
+       if (e.target.value > 0) {
+            this.setState({doubleRoomSelected: true})
+        } else {
+            this.setState({doubleRoomSelected: false})
+        }
     }
 
     handleSuperiorRoomCountChange(e) {
         this.props.onSuperiorRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+        this.checkRoomView(this.superiorRoomSelected, e.target.value );
+
+       if (e.target.value > 0) {
+            this.setState({superiorRoomSelected : true})
+       } else {
+            this.setState({superiorRoomSelected : false})
+       }
     }
+
 
     handleCheckInDateChange(e) {
         this.props.onCheckInDateChange(e.target.value);
@@ -87,6 +125,10 @@ class StayComponent extends React.Component {
     }
 
     render() {
+
+        const showSingleRoom = this.state.singleRoomSelected;
+        const showDoubleRoom = this.state.doubleRoomSelected;
+        const showSuperiorRoom = this.state.singleRoomSelected;
 
         return (
             <React.Fragment>
@@ -181,6 +223,11 @@ class StayComponent extends React.Component {
                         </div>
                     </div>
 
+                    {this.state.singleRoomSelected && <SingleRoomComponent /> }
+                    {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
+                    {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+
+
                     <div className="p-4 mt-4 border border-gray-300">
 
                         <h2 className="mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span></h2>
@@ -202,6 +249,7 @@ class StayComponent extends React.Component {
                     </div>
 
                 </form>
+
             </React.Fragment>
         );
     }
