@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import lombok.*;
 
 import javax.validation.constraints.Email;
@@ -33,4 +34,20 @@ public class GuestForm {
     @NotEmpty(message = "Email cannot be empty")
     @Email(message = "Invalid syntax")
     private String email;
+
+    public static GuestForm guestFormFromBookingData(BookingDataDTO bookingData) {
+
+        GuestForm guestForm = new GuestForm();
+
+        guestForm.setFirstName(bookingData.getFirstName());
+        guestForm.setLastName(bookingData.getLastName());
+        guestForm.setStreetAdr(bookingData.getStreetAdr());
+        guestForm.setZip(bookingData.getZip());
+        guestForm.setCity(bookingData.getCity());
+        guestForm.setCountry(bookingData.getCountry());
+        guestForm.setPhoneNumber(bookingData.getPhone());
+        guestForm.setEmail(bookingData.getEmail());
+
+        return guestForm;
+    }
 }

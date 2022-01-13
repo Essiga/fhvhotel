@@ -32,23 +32,15 @@ import java.util.UUID;
 public class BookingRestController {
 
     @Autowired
-    ViewRoomService viewRoomService;
-
-    @Autowired
     CreateGuestService createGuestService;
 
     @Autowired
     CreateBookingService createBookingService;
 
-    private static final String GET_ALL_ROOMS = "/getAllRooms";
+
     private static final String CREATE_BOOKING = "/createBooking";
     private static final String GET_ALL_ROOM_PRICES = "/getRoomPrices";
 
-
-    @GetMapping(GET_ALL_ROOMS)
-    public List<RoomDTO> getAllRooms() throws RoomNotFoundException {
-        return viewRoomService.findAllRooms();
-    }
 
     @GetMapping(GET_ALL_ROOM_PRICES)
     public RoomPriceDTO getRoomPrices() {
@@ -61,44 +53,12 @@ public class BookingRestController {
     }
 
     @PostMapping(CREATE_BOOKING)
-    public String createBooking(@RequestBody BookingDataDTO bookingData) {
+    public void createBooking(@RequestBody BookingDataDTO bookingData) {
 
-        GuestForm guestForm = guestFormFromBookingData(bookingData);
+        GuestForm guestForm = GuestForm.guestFormFromBookingData(bookingData);
         GuestId guestId = createGuestService.createGuest(guestForm);
 
-        BookingForm bookingForm = bookingFormFromBookingData(bookingData);
+        BookingForm bookingForm = BookingForm.bookingFormFromBookingData(bookingData);
         createBookingService.createBooking(bookingForm, guestId);
-
-        return "booking created successfully";
-    }
-
-    private BookingForm bookingFormFromBookingData(BookingDataDTO bookingData) {
-
-        BookingForm bookingForm = new BookingForm();
-
-        bookingForm.setVoucherCode(bookingData.getVoucher());
-        bookingForm.setCheckInDate(bookingData.getCheckInDate());
-        bookingForm.setCheckOutDate(bookingData.getCheckOutDate());
-        bookingForm.setSingleRoomCount(bookingData.getSingleRoomCount());
-        bookingForm.setDoubleRoomCount(bookingData.getDoubleRoomCount());
-        bookingForm.setSuperiorRoomCount(bookingData.getSuperiorRoomCount());
-
-        return bookingForm;
-    }
-
-    private GuestForm guestFormFromBookingData(BookingDataDTO bookingData) {
-
-        GuestForm guestForm = new GuestForm();
-
-        guestForm.setFirstName(bookingData.getFirstName());
-        guestForm.setLastName(bookingData.getLastName());
-        guestForm.setStreetAdr(bookingData.getStreetAdr());
-        guestForm.setZip(bookingData.getZip());
-        guestForm.setCity(bookingData.getCity());
-        guestForm.setCountry(bookingData.getCountry());
-        guestForm.setPhoneNumber(bookingData.getPhone());
-        guestForm.setEmail(bookingData.getEmail());
-
-        return guestForm;
     }
 }

@@ -1,12 +1,16 @@
 package at.fhv.hotelsoftware.view.form;
 
+import at.fhv.hotelsoftware.application.dto.BookingDTO;
+import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.view.annotations.DateNotNullOrEarlierThanToday;
 import lombok.*;
 
 import javax.validation.constraints.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 public class BookingForm {
@@ -35,4 +39,19 @@ public class BookingForm {
     private Boolean validDuration = true;
 
     private Boolean validCategoryCount = true;
+
+
+    public static BookingForm bookingFormFromBookingData(BookingDataDTO bookingData) {
+
+        BookingForm bookingForm = new BookingForm();
+
+        bookingForm.setVoucherCode(bookingData.getVoucher());
+        bookingForm.setCheckInDate(bookingData.getCheckInDate());
+        bookingForm.setCheckOutDate(bookingData.getCheckOutDate());
+        bookingForm.setSingleRoomCount(bookingData.getSingleRoomCount());
+        bookingForm.setDoubleRoomCount(bookingData.getDoubleRoomCount());
+        bookingForm.setSuperiorRoomCount(bookingData.getSuperiorRoomCount());
+
+        return bookingForm;
+    }
 }

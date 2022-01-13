@@ -6,7 +6,6 @@ class CreateBookingComponent extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {response: ""};
     }
 
     componentDidMount()
@@ -34,9 +33,7 @@ class CreateBookingComponent extends React.Component
         {method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(bookingData)
-            })
-            .then(response => response.text())
-            .then(text => {this.setState({response: text})})
+            });
     }
 
     render()
