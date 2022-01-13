@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class BookingDataDTO {
 
-    private String guestId;
+    private GuestId guestId;
     private Integer singleRoomCount;
     private Integer doubleRoomCount;
     private Integer superiorRoomCount;

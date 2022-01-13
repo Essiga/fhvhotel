@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.view.form;
 
 import at.fhv.hotelsoftware.application.dto.BookingDTO;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
+import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
+@NoArgsConstructor
 public class BookingForm {
 
     @Min(value = 0, message = "Value cannot be less than 0")
@@ -40,17 +42,22 @@ public class BookingForm {
 
     private Boolean validCategoryCount = true;
 
+    @Builder
+    public BookingForm(Integer singleRoomCount, Integer doubleRoomCount, Integer superiorRoomCount, String checkInDate, String checkOutDate) {
+        this.singleRoomCount = singleRoomCount;
+        this.doubleRoomCount = doubleRoomCount;
+        this.superiorRoomCount = superiorRoomCount;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+    }
 
-    public static BookingForm fromBookingData(BookingDataDTO bookingData) {
-
-        BookingForm bookingForm = new BookingForm();
-
-        bookingForm.setCheckInDate(bookingData.getCheckInDate());
-        bookingForm.setCheckOutDate(bookingData.getCheckOutDate());
-        bookingForm.setSingleRoomCount(bookingData.getSingleRoomCount());
-        bookingForm.setDoubleRoomCount(bookingData.getDoubleRoomCount());
-        bookingForm.setSuperiorRoomCount(bookingData.getSuperiorRoomCount());
-
-        return bookingForm;
+    public static BookingForm fromBookingDataDTO (BookingDataDTO bookingDataDTO) {
+        return BookingForm.builder()
+                .singleRoomCount(bookingDataDTO.getSingleRoomCount())
+                .doubleRoomCount(bookingDataDTO.getDoubleRoomCount())
+                .superiorRoomCount(bookingDataDTO.getSuperiorRoomCount())
+                .checkInDate(bookingDataDTO.getCheckInDate())
+                .checkOutDate(bookingDataDTO.getCheckOutDate())
+                .build();
     }
 }

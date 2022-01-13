@@ -6,10 +6,7 @@ class CreateBookingComponent extends React.Component
     constructor(props)
     {
         super(props);
-        this.state = {
-            guestId: "",
-            response: ""
-        };
+        this.state = {guestId: ""};
     }
 
     componentDidMount() {
@@ -19,11 +16,11 @@ class CreateBookingComponent extends React.Component
             voucher: this.props.voucher,
             firstName: this.props.firstName,
             lastName: this.props.lastName,
-            streetAdr: this.props.streetAdr,
+            streetAddress: this.props.streetAdr,
             zip: this.props.zip,
             city: this.props.city,
             country: this.props.country,
-            phone: this.props.phone,
+            phoneNumber: this.props.phone,
             email: this.props.email,
         };
 
@@ -33,8 +30,9 @@ class CreateBookingComponent extends React.Component
                 headers: {'content-type': 'application/json'},
                 body: JSON.stringify(guestData)
             })
-            .then(res => res.text())
-            .then(res => {this.setState({guestId: res})
+            .then(res => res.json())
+            .then(res => {
+                this.setState({guestId: res})
 
                 const bookingData =
                     {
@@ -52,11 +50,7 @@ class CreateBookingComponent extends React.Component
                         headers: {'content-type': 'application/json'},
                         body: JSON.stringify(bookingData)
                     })
-                    .then(res => res.text())
-                    .then(text => {this.setState({response: text})})
             });
-
-
     }
 
     render()
@@ -65,7 +59,6 @@ class CreateBookingComponent extends React.Component
             <div>
                 <h1 className="pl-3 font-extrabold text-4xl text-blue-500 text-center">
                     We are looking forward to welcoming you
-                    {this.state.response}
                 </h1>
 
                 <div className="mt-8 text-center">
@@ -78,15 +71,6 @@ class CreateBookingComponent extends React.Component
             </div>
         );
     }
-
-    // async createGuest(guestData){
-    //     return await Promise.resolve(fetch("http://localhost:8080/rest/booking/createGuest",
-    //         {
-    //             method: 'POST',
-    //             headers: {'content-type': 'application/json'},
-    //             body: JSON.stringify(guestData)
-    //         }));
-    // }
 }
 
 export default CreateBookingComponent;

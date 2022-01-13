@@ -49,22 +49,6 @@ public class GuestForm {
         this.email = email;
     }
 
-    //    public static GuestForm fromBookingData(BookingDataDTO bookingData) {
-//
-//        GuestForm guestForm = new GuestForm();
-//
-//        guestForm.setFirstName(bookingData.getFirstName());
-//        guestForm.setLastName(bookingData.getLastName());
-//        guestForm.setStreetAdr(bookingData.getStreetAdr());
-//        guestForm.setZip(bookingData.getZip());
-//        guestForm.setCity(bookingData.getCity());
-//        guestForm.setCountry(bookingData.getCountry());
-//        guestForm.setPhoneNumber(bookingData.getPhone());
-//        guestForm.setEmail(bookingData.getEmail());
-//
-//        return guestForm;
-//    }
-
     public static GuestForm fromGuestDTO(GuestDTO guestDTO) {
         return GuestForm.builder()
                 .firstName(guestDTO.getFirstName())
@@ -74,6 +58,7 @@ public class GuestForm {
                 .city(guestDTO.getCity())
                 .country(guestDTO.getCountry())
                 .phoneNumber(guestDTO.getPhoneNumber())
-                .email(guestDTO.getEmail()).build();
+                .email(guestDTO.getEmail())
+                .build();
     }
 }

@@ -41,19 +41,16 @@ public class BookingRestController {
     }
 
     @PostMapping(CREATE_GUEST)
-    public String createGuest(@RequestBody GuestDTO guestDTO) {
+    public GuestId createGuest(@RequestBody GuestDTO guestDTO) {
 
         GuestForm guestForm = GuestForm.fromGuestDTO(guestDTO);
-        return createGuestService.createGuest(guestForm).getGuestId().toString();
+        return createGuestService.createGuest(guestForm);
     }
 
     @PostMapping(CREATE_BOOKING)
-    public String createBooking(@RequestBody BookingDataDTO bookingData) {
+    public void createBooking(@RequestBody BookingDataDTO bookingDataDTO) {
 
-        BookingForm bookingForm = BookingForm.fromBookingData(bookingData);
-        createBookingService.createBooking(bookingForm, new GuestId(UUID.fromString(bookingData.getGuestId())));
-
-        return "working";
+        BookingForm bookingForm = BookingForm.fromBookingDataDTO(bookingDataDTO);
+        createBookingService.createBooking(bookingForm, bookingDataDTO.getGuestId());
     }
-
 }
