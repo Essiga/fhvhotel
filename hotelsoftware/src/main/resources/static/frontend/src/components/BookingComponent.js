@@ -180,10 +180,10 @@ class BookingComponent extends React.Component
 
     checkInputStay()
     {
-        if (this.state.singleRoomCount === 0 && this.state.doubleRoomCount === 0 && this.state.superiorRoomCount === 0)
+        if (this.state.singleRoomCount == 0 && this.state.doubleRoomCount == 0 && this.state.superiorRoomCount == 0) //here
             return;
 
-        if (this.state.checkInDate == null || this.state.checkOutDate === null)
+        if (this.state.checkInDate == null || this.state.checkOutDate == null ||  this.state.checkInDate === "" || this.state.checkOutDate === "")
             return;
 
         this.setState({stayDataExists: true});
@@ -201,17 +201,17 @@ class BookingComponent extends React.Component
         const bookingReadyToCreate = this.state.bookingReadyToCreate;
 
         let component = <StayComponent
-        singleRoomCount = {this.state.singleRoomCount}
-        doubleRoomCount = {this.state.doubleRoomCount}
-        superiorRoomCount = {this.state.superiorRoomCount}
-        checkInDate = {this.state.checkInDate}
-        checkOutDate = {this.state.checkOutDate}
-        onSingleRoomCountChange = {this.handleSingleRoomCountChange}
-        onDoubleRoomCountChange = {this.handleDoubleRoomCountChange}
-        onSuperiorRoomCountChange = {this.handleSuperiorRoomCountChange}
-        onCheckInDateChange = {this.handleCheckInDateChange}
-        onCheckOutDateChange = {this.handleCheckOutDateChange}
-        onCheckInputStay = {this.checkInputStay}
+                singleRoomCount = {this.state.singleRoomCount}
+                doubleRoomCount = {this.state.doubleRoomCount}
+                superiorRoomCount = {this.state.superiorRoomCount}
+                checkInDate = {this.state.checkInDate}
+                checkOutDate = {this.state.checkOutDate}
+                onSingleRoomCountChange = {this.handleSingleRoomCountChange}
+                onDoubleRoomCountChange = {this.handleDoubleRoomCountChange}
+                onSuperiorRoomCountChange = {this.handleSuperiorRoomCountChange}
+                onCheckInDateChange = {this.handleCheckInDateChange}
+                onCheckOutDateChange = {this.handleCheckOutDateChange}
+                onCheckInputStay = {this.checkInputStay}
             />
 
         if(stayDataExists) {

@@ -15,10 +15,6 @@ class NavbarComponent extends React.Component{
                     <div>
                         <Link to="/createBooking"> <span className="bg-green-500 block px-6 py-8 font-bold text-4xl text-white">Create Booking</span> </Link>
                     </div>
-
-                    <div>
-                        <Link to="/allRooms"> <span className="bg-green-500 block px-6 py-8 font-bold text-4xl text-white">Room Overview</span> </Link>
-                    </div>
                 </nav>
             </aside>
 

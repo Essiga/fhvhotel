@@ -44,7 +44,7 @@ class CreateBookingComponent extends React.Component
         return (
             <div>
                 <h1 className="pl-3 font-extrabold text-4xl text-blue-500 text-center">
-                    {this.state.response}
+                    We are looking forward to welcoming you
                 </h1>
 
                 <div className="mt-8 text-center">

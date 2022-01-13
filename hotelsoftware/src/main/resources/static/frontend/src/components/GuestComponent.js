@@ -60,7 +60,7 @@ class GuestComponent extends React.Component {
         this.props.onEmailChange(e.target.value);
     }
 
-    onBackGuest() {
+    backGuest() {
         this.props.onBackGuest();
     }
 

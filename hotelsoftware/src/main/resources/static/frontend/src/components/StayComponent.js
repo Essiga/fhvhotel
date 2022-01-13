@@ -14,6 +14,7 @@ class StayComponent extends React.Component {
         this.handleCheckInDateChange = this.handleCheckInDateChange.bind(this);
         this.handleCheckOutDateChange = this.handleCheckOutDateChange.bind(this);
 
+        this.checkInputStay = this.checkInputStay.bind(this);
     }
 
     componentDidMount() {
