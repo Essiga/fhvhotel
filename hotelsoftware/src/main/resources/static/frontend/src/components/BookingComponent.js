@@ -140,17 +140,11 @@ class BookingComponent extends React.Component
 
     backBookingSummary()
     {
-        this.setState({stayDataExists: false});
+        this.setState({guestDataExists: false});
     }
 
     checkInputGuest()
     {
-        if (this.state.gname === '')
-            return;
-
-        if (this.state.voucher === '')
-            return;
-
         if (this.state.firstName === '')
             return;
 
