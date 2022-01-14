@@ -12,17 +12,17 @@ class SingleRoomComponent extends React.Component {
                        <img src={singleRoom} className=""/>
                    </div>
                    <div>
-                       <div className="text-2xl font-bold">Single Room</div>
-                       <div className="text-xl">Stylish timeless furnishings with warm colors - on 18 square meters.
-                           Simple room in pastel tones with a view of the local mountain</div>
+                       <h2 className="font-bold mb-2">Single Room</h2>
+                       <p>Stylish timeless furnishings with warm colors - on 18 square meters.
+                           Simple room in pastel tones with a view of the local mountain</p>
 
-                       <div className="mt-5 text-xl font-bold">Room details:</div>
+                       <h2 class="font-bold mt-6 mb-2">Room Details</h2>
 
                        <ul className="list-disc ml-8">
-                           <li className="text-xl">balcony</li>
-                           <li className="text-xl">bathtub / WC</li>
-                           <li className="text-xl">flat screen tv</li>
-                           <li className="text-xl">WLAN</li>
+                           <li>balcony</li>
+                           <li>bathtub / WC</li>
+                           <li>flat screen tv</li>
+                           <li>WLAN</li>
                        </ul>
 
                    </div>

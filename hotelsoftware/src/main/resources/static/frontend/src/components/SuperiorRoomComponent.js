@@ -1,5 +1,5 @@
 import React from 'react';
-import singleRoom from "../images/singleRoom.jpg"
+import superiorRoom from "../images/superiorRoom.jpg"
 
 
 class SingleRoomComponent extends React.Component {
@@ -9,7 +9,7 @@ class SingleRoomComponent extends React.Component {
             <React.Fragment>
                 <div className="grid grid-cols-2 gap-4 mt-5">
                    <div>
-                       <img src={singleRoom} className=""/>
+                       <img src={superiorRoom} className=""/>
                    </div>
                    <div>
                        <div className="text-2xl font-bold">Superior Room</div>

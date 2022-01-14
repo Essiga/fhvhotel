@@ -125,7 +125,6 @@ class StayComponent extends React.Component {
     }
 
     render() {
-
         const showSingleRoom = this.state.singleRoomSelected;
         const showDoubleRoom = this.state.doubleRoomSelected;
         const showSuperiorRoom = this.state.singleRoomSelected;
