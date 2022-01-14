@@ -2,9 +2,18 @@ package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
+import at.fhv.hotelsoftware.application.api.ViewGuestService;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
+import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
+import at.fhv.hotelsoftware.domain.api.BookingRepository;
+import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.model.Booking;
+import at.fhv.hotelsoftware.domain.model.Guest;
+import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
+import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
 import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
@@ -15,41 +24,37 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.times;
 
 import java.net.URI;
+import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Transactional
 public class RestApiTests
 {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @MockBean
-    private CreateBookingService createBookingService;
+    @Autowired
+    private GuestRepository guestRepository;
 
-    @MockBean
-    private CreateGuestService createGuestService;
+    @Autowired
+    private BookingRepository bookingRepository;
 
     @LocalServerPort
     private int port;
 
-//    public void given_notes_when_fetchallnotesthroughrest_then_returnequalsnotes() throws Exception {
-//        // given
-//        List<NoteDTO> noteDTOs = Arrays.asList(NoteDTO.create(...), NoteDTO.create(...));
-//        Mockito.when(viewNoteService.allNotes()).thenReturn(noteDTOs);
-//        // when
-//        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
-//                .path("/rest/note/all").build().encode().toUri();
-//        NoteDTO[] restNoteTitles = this.restTemplate.getForObject(uri, NoteDTO[].class);
-//        // then
-//        for (int i = 0; i < restNoteTitles.length; i++) {
-//            assertEquals(noteDTOs.get(i), restNoteTitles[i]);
-//        }
-//    }
 
     @Test
     public void given_nothing_when_getroomprices_then_returnroomprices() {
@@ -65,40 +70,71 @@ public class RestApiTests
         assertEquals(RoomCategory.SUPERIOR.getPrice(), roomPriceDTO.getSuperiorRoomPrice());
     }
 
-//    @Test
-//    public void given_bookingdata_when_createbooking_then_bookingcreated() {
-//
-//        //given
-//        BookingDataDTO bookingData = new BookingDataDTO(
-//            "Company Name",
-//            "123456",
-//            "Adrian",
-//            "Essig",
-//            "street",
-//            "6850",
-//            "Dornbirn",
-//            "Austria",
-//            "0555555",
-//            "test@test.at",
-//            1,
-//            2,
-//            3,
-//            "2022-01-13",
-//            "2022-01-14"
-//        );
-//
-//        BookingForm bookingForm = BookingForm.fromBookingData(bookingData);
-//        GuestForm guestForm = GuestForm.fromBookingData(bookingData);
-//
-//        //when
-//        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
-//                .path("/rest/booking/createBooking").build().encode().toUri();
-//        this.restTemplate.postForObject(uri, bookingData, Void.class);
-//
-//        GuestId guestId = new GuestId(UUID.randomUUID());
-//
-//        // then
-//        Mockito.verify(createGuestService, times(1)).createGuest(guestForm);
-//        Mockito.verify(createBookingService, times(1)).createBooking(bookingForm, guestId);
-//    }
+    @Test
+    public void given_guestdto_when_createGuest_then_guestcreated() {
+        //given
+        GuestDTO guestExpected = GuestDTO.builder()
+            .firstName("Max")
+            .lastName("Mustermann")
+            .streetAddress("Musterstraße 1")
+            .zip("6850")
+            .city("Dornbirn")
+            .country("Austria")
+            .phoneNumber("85525")
+            .email("max.mustermann@gmail.com")
+            .build();
+
+        //when
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
+                .path("/rest/booking/createGuest").build().encode().toUri();
+        GuestId guestIdActual = this.restTemplate.postForObject(uri, guestExpected, GuestId.class);
+
+        Optional<Guest> actualGuestOpt = guestRepository.findGuestById(guestIdActual);
+
+        //then
+        assertTrue(actualGuestOpt.isPresent());
+        Guest actualGuest = actualGuestOpt.get();
+
+        assertEquals(guestIdActual.getGuestId(), actualGuest.getGuestId().getGuestId());
+        assertEquals(guestExpected.getFirstName(), actualGuest.getFirstName());
+        assertEquals(guestExpected.getLastName(), actualGuest.getLastName());
+        assertEquals(guestExpected.getStreetAddress(), actualGuest.getAddress().getStreet());
+        assertEquals(guestExpected.getZip(), actualGuest.getAddress().getZip());
+        assertEquals(guestExpected.getCity(), actualGuest.getAddress().getCity());
+        assertEquals(guestExpected.getCountry(), actualGuest.getAddress().getCountry());
+        assertEquals(guestExpected.getPhoneNumber(), actualGuest.getPhoneNumber());
+        assertEquals(guestExpected.getEmail(), actualGuest.getEmail());
+    }
+
+    @Test
+    public void given_bookingdatadto_when_createbooking_then_bookingcreated() {
+
+        //given
+        BookingDataDTO bookingExpected = BookingDataDTO.builder()
+            .guestId(new GuestId(UUID.randomUUID()))
+            .singleRoomCount(1)
+            .doubleRoomCount(2)
+            .superiorRoomCount(3)
+            .checkInDate("2022-01-14")
+            .checkOutDate("2022-01-15")
+            .build();
+
+        //when
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
+                .path("/rest/booking/createBooking").build().encode().toUri();
+        BookingId bookingIdActual = this.restTemplate.postForObject(uri, bookingExpected, BookingId.class);
+
+        Optional<Booking> actualBookingOpt = bookingRepository.findBookingById(bookingIdActual);
+
+        // then
+        assertTrue(actualBookingOpt.isPresent());
+        Booking actualBooking = actualBookingOpt.get();
+
+        assertEquals(bookingIdActual.getBookingId(), actualBooking.getBookingId().getBookingId());
+        assertEquals(bookingExpected.getSingleRoomCount(), actualBooking.getSingleRoom());
+        assertEquals(bookingExpected.getDoubleRoomCount(), actualBooking.getDoubleRoom());
+        assertEquals(bookingExpected.getSuperiorRoomCount(), actualBooking.getSuperiorRoom());
+        assertEquals(LocalDate.parse(bookingExpected.getCheckInDate()), actualBooking.getCheckInDate());
+        assertEquals(LocalDate.parse(bookingExpected.getCheckOutDate()), actualBooking.getCheckOutDate());
+    }
 }

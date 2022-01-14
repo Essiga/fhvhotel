@@ -24,10 +24,9 @@ public class BookingRestController {
     @Autowired
     CreateBookingService createBookingService;
 
-
-    private static final String CREATE_BOOKING = "/createBooking";
-    private static final String CREATE_GUEST = "/createGuest";
     private static final String GET_ALL_ROOM_PRICES = "/getRoomPrices";
+    private static final String CREATE_GUEST = "/createGuest";
+    private static final String CREATE_BOOKING = "/createBooking";
 
 
     @GetMapping(GET_ALL_ROOM_PRICES)
@@ -48,9 +47,9 @@ public class BookingRestController {
     }
 
     @PostMapping(CREATE_BOOKING)
-    public void createBooking(@RequestBody BookingDataDTO bookingDataDTO) {
+    public BookingId createBooking(@RequestBody BookingDataDTO bookingDataDTO) {
 
         BookingForm bookingForm = BookingForm.fromBookingDataDTO(bookingDataDTO);
-        createBookingService.createBooking(bookingForm, bookingDataDTO.getGuestId());
+        return createBookingService.createBooking(bookingForm, bookingDataDTO.getGuestId());
     }
 }

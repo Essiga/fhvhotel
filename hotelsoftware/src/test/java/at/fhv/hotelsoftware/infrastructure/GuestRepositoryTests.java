@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 @Transactional
@@ -82,9 +83,16 @@ public class GuestRepositoryTests {
 
         List<Guest> allGuests = guestRepository.findAllGuests();
 
+        Guest guestActual = null;
+
+        for (Guest guest : allGuests) {
+            if (guest.getGuestId().getGuestId().equals(idExpected.getGuestId()))
+                guestActual = guest;
+        }
+
         //then
-            assertEquals(idExpected.getGuestId(), allGuests.get(0).getGuestId().getGuestId());
-            assertEquals(firstNameExpected, allGuests.get(0).getFirstName());
-            assertEquals(lastNameExpected, allGuests.get(0).getLastName());
+        assertNotNull(guestActual);
+        assertEquals(firstNameExpected, guestActual.getFirstName());
+        assertEquals(lastNameExpected, guestActual.getLastName());
     }
 }

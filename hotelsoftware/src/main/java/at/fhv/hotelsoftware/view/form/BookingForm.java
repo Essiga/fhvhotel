@@ -52,6 +52,7 @@ public class BookingForm {
     }
 
     public static BookingForm fromBookingDataDTO (BookingDataDTO bookingDataDTO) {
+
         return BookingForm.builder()
                 .singleRoomCount(bookingDataDTO.getSingleRoomCount())
                 .doubleRoomCount(bookingDataDTO.getDoubleRoomCount())

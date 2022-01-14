@@ -31,8 +31,8 @@ class CreateBookingComponent extends React.Component
                 body: JSON.stringify(guestData)
             })
             .then(res => res.json())
-            .then(res => {
-                this.setState({guestId: res})
+            .then(guestId => {
+                this.setState({guestId: guestId})
 
                 const bookingData =
                     {

@@ -50,6 +50,7 @@ public class GuestForm {
     }
 
     public static GuestForm fromGuestDTO(GuestDTO guestDTO) {
+
         return GuestForm.builder()
                 .firstName(guestDTO.getFirstName())
                 .lastName(guestDTO.getLastName())

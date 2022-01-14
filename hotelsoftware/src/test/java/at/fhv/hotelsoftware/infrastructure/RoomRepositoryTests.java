@@ -36,11 +36,13 @@ public class RoomRepositoryTests {
 
     @Test
     public void given_rooms_when_findallrooms_then_expectallrooms() {
+        int roomsAlreadyExisting = roomRepository.findAllRooms().size();
+
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
 
-        int expectedNumberOfRooms = 30;
+        int expectedNumberOfRooms = 30 + roomsAlreadyExisting;
 
         for (int i = 0; i < singleRoom.length; i++) {
             singleRoom[i] = Room.builder().
@@ -97,6 +99,8 @@ public class RoomRepositoryTests {
     @Test
     void given_roomspersisted_when_findallfreerooms_then_returnallrooms() {
         //given
+        int roomsAlreadyExisting = roomRepository.findAllFreeRooms().size();
+
         Room roomExpected1 = new Room().builder().
                 roomNumber(101).
                 roomStatus(RoomStatus.FREE).
@@ -111,14 +115,13 @@ public class RoomRepositoryTests {
 
         Room roomExpected3 = new Room().builder().
                 roomNumber(201).
-                roomStatus(RoomStatus.FREE).
+                roomStatus(RoomStatus.OCCUPIED).
                 roomCategory(RoomCategory.DOUBLE).
                 build();
 
         List<Room> expectedRooms = new LinkedList<>();
         expectedRooms.add(roomExpected1);
         expectedRooms.add(roomExpected2);
-        expectedRooms.add(roomExpected3);
 
         roomRepository.addRoom(roomExpected1);
 
@@ -131,11 +134,11 @@ public class RoomRepositoryTests {
         List<Room> rooms = roomRepository.findAllFreeRooms();
 
         //then
-        assertEquals(expectedRooms.size(), rooms.size());
-        for(int i = 0; i < rooms.size(); i++) {
-            assertEquals(expectedRooms.get(i), rooms.get(i));
-        }
+        assertEquals(expectedRooms.size(), rooms.size() - roomsAlreadyExisting);
 
+        for (Room room : rooms) {
+            assertEquals(room.getRoomStatus(), RoomStatus.FREE);
+        }
     }
 
     @Test
@@ -190,6 +193,7 @@ public class RoomRepositoryTests {
 
         //then
         assertEquals(expectedRooms.size(), rooms.size());
+
         for(int i = 0; i < rooms.size(); i++) {
             assertEquals(expectedRooms.get(i), rooms.get(i));
         }
