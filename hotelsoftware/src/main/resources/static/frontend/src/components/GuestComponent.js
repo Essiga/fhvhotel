@@ -106,14 +106,14 @@ class GuestComponent extends React.Component {
                         <div className="flex row">
 
                             <div className="w-1/2 ">
-                                <input type="text" id="gname" name="gname" className="border-2 border-gray-400 w-4/6"
+                                <input type="text" id="gname" name="gname" className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.gname} onChange={this.handleGnameChange}/>
                                 <label htmlFor="gname" className="block text-sm text-gray-500">Name</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="voucher" name="voucher"
-                                       className="border-2 border-gray-400 w-2/6"
+                                       className="p-1 border-2 border-gray-400 w-2/6"
                                        value={this.props.voucher} onChange={this.handleVoucherChange}/>
                                 <label htmlFor="voucher" className=" block text-sm text-gray-500">Voucher Code</label>
                             </div>
@@ -129,14 +129,14 @@ class GuestComponent extends React.Component {
                         <div className="flex row">
                             <div className="w-1/2 ">
                                 <input type="text" id="firstName" name="firstName"
-                                       className="border-2 border-gray-400 w-4/6"
+                                       className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.firstName} onChange={this.handleFirstNameChange}/>
                                 <label htmlFor="firstName" className="block text-sm text-gray-500">First Name</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="lastName" name="lastName"
-                                       className="border-2 border-gray-400 w-4/6"
+                                       className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.lastName} onChange={this.handleLastNameChange}/>
                                 <label htmlFor="lastName" className=" block text-sm text-gray-500">Last Name</label>
                             </div>
@@ -152,14 +152,14 @@ class GuestComponent extends React.Component {
                         <div className="flex row">
                             <div className="w-1/2 ">
                                 <input type="text" id="streetAdr" name="streetAdr"
-                                       className="border-2 border-gray-400 w-4/6"
+                                       className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.streetAdr} onChange={this.handleStreetAdrChange}/>
                                 <label htmlFor="streetAdr" className="block text-sm text-gray-500">Street
                                     Address</label>
                             </div>
 
                             <div className="w-1/2">
-                                <input type="text" id="zip" name="zip" className="border-2 border-gray-400 w-2/6"
+                                <input type="text" id="zip" name="zip" className="p-1 border-2 border-gray-400 w-2/6"
                                        value={this.props.zip} onChange={this.handleZipChange}/>
                                 <label htmlFor="zip" className=" block text-sm text-gray-500">ZIP Code</label>
                             </div>
@@ -167,14 +167,14 @@ class GuestComponent extends React.Component {
 
                         <div className="mt-4 flex row">
                             <div className="w-1/2 ">
-                                <input type="text" id="city" name="city" className="border-2 border-gray-400 w-4/6"
+                                <input type="text" id="city" name="city" className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.city} onChange={this.handleCityChange}/>
                                 <label htmlFor="city" className="block text-sm text-gray-500">City</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="country" name="country"
-                                       className="border-2 border-gray-400 w-4/6"
+                                       className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.country} onChange={this.handleCountryChange}/>
                                 <label htmlFor="country" className=" block text-sm text-gray-500">Country</label>
                             </div>
@@ -197,13 +197,13 @@ class GuestComponent extends React.Component {
 
                         <div className="flex row">
                             <div className="w-1/2">
-                                <input type="text" id="phone" name="phone" className="border-2 border-gray-400 w-4/6"
+                                <input type="text" id="phone" name="phone" className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.phone} onChange={this.handlePhoneChange}/>
                                 <label htmlFor="phone" className="block text-sm text-gray-500">Number</label>
                             </div>
 
                             <div className="w-1/2">
-                                <input type="text" id="email" name="email" className="border-2 border-gray-400 w-4/6"
+                                <input type="text" id="email" name="email" className="p-1 border-2 border-gray-400 w-4/6"
                                        value={this.props.email} onChange={this.handleEmailChange}/>
                                 <label htmlFor="email" className=" block text-sm text-gray-500">Email</label>
                             </div>

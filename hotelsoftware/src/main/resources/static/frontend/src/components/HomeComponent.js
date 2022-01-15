@@ -8,7 +8,7 @@ class HomeComponent extends React.Component{
     {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-90" style={{backgroundImage: `url(${hotel})`}}>
-                <h1 className="mt-40 mb-16 font-extrabold text-4xl text-blue-500 text-center">Welcome to Alp's Hotel</h1>
+                <h1 className="mt-40 mb-16 font-extrabold text-4xl text-blue-400 text-center">Welcome to Alp's Hotel</h1>
 
                 {/*<div> <img src={hotel} className="mx-auto mt-6 border-4 object-cover border-gray-500"/> </div>*/}
 
