@@ -91,6 +91,7 @@ class StayComponent extends React.Component {
 
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${vacation})`}}>
+
                 <div className="p-2 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                     <div className="w-full px-4 mb-8">
                         <div className="w-full bg-gray-400 relative">
@@ -117,7 +118,7 @@ class StayComponent extends React.Component {
                 </div>
 
                 <form className="h-full w-full">
-                    <div className="h-1/3 p-16 border4 border-blue-200 rounded bg-gray-100 opacity-90">
+                    <div className="h-1/3 p-16 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
@@ -188,15 +189,15 @@ class StayComponent extends React.Component {
 
                     </div>
 
-                    <div className="flex row justify-between mt-12">
+                    <div className="flex row justify-between mt-8">
 
                         <Link to="/"
-                              className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
+                              className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-90">
                             <button type="button"> Back </button>
                         </Link>
 
                         <button type="button"
-                                className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
+                                className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-90"
                                 onClick={this.checkInputStay}>
                             Next
                         </button>

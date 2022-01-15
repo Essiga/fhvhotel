@@ -1,5 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import pool from "../images/pool.jpg";
+import vacation from "../images/vacation.jpg";
 
 class GuestComponent extends React.Component {
     constructor(props) {
@@ -71,23 +73,24 @@ class GuestComponent extends React.Component {
 
     render() {
         return (
-            <div className="p-16">
-                <div className="p-4 border border-gray-300 mb-10">
+            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${pool})`}}>
+
+                <div className="p-2 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                     <div className="w-full px-4 mb-8">
-                        <div className="h-2px w-full bg-gray-400 relative">
-                            <div className="absolute top-1/2 left-0 h-1 bg-blue-400 w-1/3">
+                        <div className="w-full bg-gray-400 relative">
+                            <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
                                 <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                         </div>
-                        <div className="mt-3 pt-2 relative hidden sm:block">
+                        <div className="ml-32 mt-3 pt-2 relative hidden sm:block">
                             <div className="absolute left-0"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Stay</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Stay</span>
                             </div>
                             <div className="absolute left-1/3"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Personal Data</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Personal Data</span>
                             </div>
                             <div className="absolute left-2/3"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Summary</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Summary</span>
                             </div>
                         </div>
                     </div>
@@ -96,7 +99,7 @@ class GuestComponent extends React.Component {
 
                 <form>
 
-                    <div className="p-4 mb-2 border border-gray-300">
+                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <h2 className="mb-4 font-semibold">Group/Company</h2>
 
@@ -120,7 +123,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-4 mb-2 border border-gray-300">
+                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                         <h2 className="mb-4 font-semibold">Full Name</h2>
 
                         <div className="flex row">
@@ -142,7 +145,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-4 mb-2 border border-gray-300">
+                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <h2 className="mb-4 font-semibold">Address</h2>
 
@@ -180,7 +183,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-4 border border-gray-300">
+                    <div className="p-4 mb-6 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <div className="flex-row">
                             <div className="w-3/6 inline-block">
@@ -209,7 +212,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="flex w-full justify-between mt-6">
+                    <div className="flex w-full justify-between mt-8">
 
                         <button type="button"
                                 className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black"
