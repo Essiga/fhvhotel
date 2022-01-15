@@ -92,7 +92,7 @@ class StayComponent extends React.Component {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${vacation})`}}>
 
-                <div className="p-2 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
+                <div className="py-4 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
                     <div className="w-full px-4 mb-8">
                         <div className="w-full bg-gray-400 relative">
                             <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
@@ -103,10 +103,10 @@ class StayComponent extends React.Component {
                             <div className="absolute left-0"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Stay</span>
                             </div>
-                            <div className="absolute left-1/3"><span
+                            <div className="absolute left-1/3 pl-8"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Personal Data</span>
                             </div>
-                            <div className="absolute left-2/3"><span
+                            <div className="absolute left-2/3 pl-20"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Summary</span>
                             </div>
                         </div>
@@ -118,7 +118,7 @@ class StayComponent extends React.Component {
                 </div>
 
                 <form className="h-full w-full">
-                    <div className="h-1/3 p-16 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
+                    <div className="h-1/3 p-16 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
@@ -183,7 +183,7 @@ class StayComponent extends React.Component {
                         </div>
                     </div>
 
-                    <div className="h-1/8 p-4 mt-12 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
+                    <div className="h-1/8 p-6 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <h2 className="text-center mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span></h2>
 

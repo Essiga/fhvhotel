@@ -24,7 +24,7 @@ class BookingSummaryComponent extends React.Component {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${bed})`}}>
 
-                <div className="py-4 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                <div className="py-4 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
                     <div className="w-full px-4 mb-8">
                         <div className="h-2px w-full bg-gray-400 relative">
                             <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-2/3">
@@ -35,10 +35,10 @@ class BookingSummaryComponent extends React.Component {
                             <div className="absolute left-0"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Stay</span>
                             </div>
-                            <div className="absolute left-1/3"><span
+                            <div className="absolute left-1/3 pl-8"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Personal Data</span>
                             </div>
-                            <div className="absolute left-2/3"><span
+                            <div className="absolute left-2/3 pl-20"><span
                                 className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Summary</span>
                             </div>
                         </div>
@@ -47,13 +47,13 @@ class BookingSummaryComponent extends React.Component {
 
                 <form>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <h2 className="mb-4 font-semibold">Group/Company</h2>
 
                         <div className="flex row">
 
-                            <div className="w-1/2 ">
+                            <div className="w-1/2">
                                 <input readOnly type="text" id="gname" className="p-1 w-4/6"
                                 value={this.props.gname}/>
                                 <label htmlFor="gname" className="p-1 block text-sm text-gray-500">Name</label>
@@ -69,7 +69,7 @@ class BookingSummaryComponent extends React.Component {
 
                     </div>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <h2 className="mb-4 font-semibold">Full Name</h2>
 
@@ -91,7 +91,7 @@ class BookingSummaryComponent extends React.Component {
 
                     </div>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <h2 className="mb-4 font-semibold">Address</h2>
 
@@ -129,7 +129,7 @@ class BookingSummaryComponent extends React.Component {
 
                     </div>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <div className="flex-row">
 
@@ -159,7 +159,7 @@ class BookingSummaryComponent extends React.Component {
                         </div>
                     </div>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <h2 className="mb-4 font-semibold">Category Selection</h2>
 
@@ -190,7 +190,7 @@ class BookingSummaryComponent extends React.Component {
 
                     </div>
 
-                    <div className="p-4 mb-4 border-2 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
 
                         <h2 className="mb-4 font-semibold">Length of stay</h2>
 
@@ -212,7 +212,7 @@ class BookingSummaryComponent extends React.Component {
 
                     </div>
 
-                    <div className="flex w-full justify-between mt-6">
+                    <div className="flex w-full justify-between mt-8">
 
                         <button type="button" className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-90"
                                 onClick={this.backBookingSummary}>
