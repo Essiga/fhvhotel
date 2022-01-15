@@ -21,8 +21,8 @@ class BookingSummaryComponent extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <div className="p-4 border border-gray-300 mb-10">
+            <div className="p-16">
+                <div className="p-4 border border-gray-300 mb-10 w-full">
                     <div className="w-full px-4 mb-8">
                         <div className="h-2px w-full bg-gray-400 relative">
                             <div className="absolute top-1/2 left-0 h-1 bg-blue-400 w-2/3">
@@ -224,7 +224,7 @@ class BookingSummaryComponent extends React.Component {
                     </div>
 
                 </form>
-            </React.Fragment>
+            </div>
         );
     }
 }

@@ -71,7 +71,7 @@ class GuestComponent extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <div className="p-16">
                 <div className="p-4 border border-gray-300 mb-10">
                     <div className="w-full px-4 mb-8">
                         <div className="h-2px w-full bg-gray-400 relative">
@@ -225,7 +225,7 @@ class GuestComponent extends React.Component {
                     </div>
 
                 </form>
-            </React.Fragment>
+            </div>
         );
     }
 }

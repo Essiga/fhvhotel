@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import vacation from '../images/vacation.jpg'
 
 class StayComponent extends React.Component {
 
@@ -89,23 +90,23 @@ class StayComponent extends React.Component {
     render() {
 
         return (
-            <React.Fragment>
-                <div className="p-4 border border-gray-300 mb-10">
+            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${vacation})`}}>
+                <div className="p-2 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                     <div className="w-full px-4 mb-8">
-                        <div className="h-2px w-full bg-gray-400 relative">
-                            <div className="absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
+                        <div className="w-full bg-gray-400 relative">
+                            <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
                                 <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                         </div>
-                        <div className="mt-3 pt-2 relative hidden sm:block">
+                        <div className="ml-32 mt-3 pt-2 relative hidden sm:block">
                             <div className="absolute left-0"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Stay</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Stay</span>
                             </div>
                             <div className="absolute left-1/3"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Personal Data</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Personal Data</span>
                             </div>
                             <div className="absolute left-2/3"><span
-                                className="inline-block transform -translate-x-1/2 text-sm font-medium text-blue-400">Summary</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Summary</span>
                             </div>
                         </div>
                     </div>
@@ -115,8 +116,8 @@ class StayComponent extends React.Component {
 
                 </div>
 
-                <form>
-                    <div className="p-4 border border-gray-300">
+                <form className="h-full w-full">
+                    <div className="h-1/3 p-16 border4 border-blue-200 rounded bg-gray-100 opacity-90">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
@@ -145,7 +146,7 @@ class StayComponent extends React.Component {
 
                                 <div className="flex">
 
-                                    <div className="w-1/3">
+                                    <div className="pl-24 w-1/3">
                                         <h2 className="mb-4 font-semibold">Single </h2>
                                         <input type="number" id="single" min="0"
                                                className="border-2 p-1.5 border-gray-400 w-16"
@@ -155,7 +156,7 @@ class StayComponent extends React.Component {
                                             Count</label>
                                     </div>
 
-                                    <div className="w-1/3">
+                                    <div className="pl-16 w-1/3">
                                         <h2 className="mb-4 font-semibold">Double</h2>
                                         <input type="number" id="double" min="0"
                                                className="border-2 p-1.5 border-gray-400 w-16"
@@ -165,7 +166,7 @@ class StayComponent extends React.Component {
                                             Count</label>
                                     </div>
 
-                                    <div className="w-1/3">
+                                    <div className="pl-8 w-1/3">
                                         <h2 className="mb-4 font-semibold">Superior</h2>
                                         <input type="number" id="superior" min="0"
                                                className="border-2 p-1.5 border-gray-400 w-16"
@@ -181,13 +182,13 @@ class StayComponent extends React.Component {
                         </div>
                     </div>
 
-                    <div className="p-4 mt-4 border border-gray-300">
+                    <div className="h-1/8 p-4 mt-12 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
 
-                        <h2 className="mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span></h2>
+                        <h2 className="text-center mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span></h2>
 
                     </div>
 
-                    <div className="flex row justify-between mt-6">
+                    <div className="flex row justify-between mt-12">
 
                         <Link to="/"
                               className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
@@ -202,7 +203,7 @@ class StayComponent extends React.Component {
                     </div>
 
                 </form>
-            </React.Fragment>
+            </div>
         );
     }
 }
