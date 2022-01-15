@@ -75,10 +75,10 @@ class GuestComponent extends React.Component {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${pool})`}}>
 
-                <div className="p-2 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
+                <div className="py-4 h-1/12 mb-10 border-2 border-blue-200 rounded bg-gray-100 opacity-90">
                     <div className="w-full px-4 mb-8">
-                        <div className="w-full bg-gray-400 relative">
-                            <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
+                        <div className="h-2px w-full bg-gray-400 relative">
+                            <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-1/3">
                                 <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
                             </div>
                         </div>
