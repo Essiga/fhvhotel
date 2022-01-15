@@ -126,7 +126,6 @@ class BookingSummaryComponent extends React.Component {
                             </div>
 
                         </div>
-
                     </div>
 
                     <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
