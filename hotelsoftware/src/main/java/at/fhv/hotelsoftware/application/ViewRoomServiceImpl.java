@@ -44,13 +44,6 @@ public class ViewRoomServiceImpl implements ViewRoomService {
         return RoomDTO.fromRoomList(rooms);
     }
 
-
-    @Override
-    @Transactional
-    public void createRoom(Room room) {
-        roomRepository.addRoom(room);
-    }
-
     @Override
     @Transactional
     public void clean(String roomNumberString) {

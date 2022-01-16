@@ -18,11 +18,6 @@ public class RoomRepositoryImpl implements RoomRepository {
     private EntityManager em;
 
     @Override
-    public void addRoom(Room room) {
-        this.em.persist(room);
-    }
-
-    @Override
     public List<Room> findAllFreeRooms() {
         TypedQuery<Room> query = this.em.createQuery("FROM Room WHERE room_status = 'FREE'", Room.class);
         List<Room> resultList = query.getResultList();
@@ -37,9 +32,6 @@ public class RoomRepositoryImpl implements RoomRepository {
 
         return resultList;
     }
-
-
-
 
     @Override
     public List<Room> findRoomsByBookingId(BookingId bookingId) {
