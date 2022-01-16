@@ -90,10 +90,10 @@ class StayComponent extends React.Component {
     render() {
 
         return (
-            <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${vacation})`}}>
+            <div className="pt-20 overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${vacation})`}}>
 
-                <div className="py-4 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
-                    <div className="w-full px-4 mb-8">
+                <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-90">
+                    <div className="w-full px-4 mb-6">
                         <div className="w-full bg-gray-400 relative">
                             <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-0">
                                 <div className="w-3 h-3 bg-blue-800 rounded-full absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2"></div>
@@ -101,13 +101,13 @@ class StayComponent extends React.Component {
                         </div>
                         <div className="ml-32 mt-3 pt-2 relative hidden sm:block">
                             <div className="absolute left-0"><span
-                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Stay</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-semibold text-blue-400 tracking-wider">Stay</span>
                             </div>
                             <div className="absolute left-1/3 pl-8"><span
-                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Personal Data</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-semibold text-blue-400 tracking-wider">Personal Data</span>
                             </div>
                             <div className="absolute left-2/3 pl-20"><span
-                                className="inline-block transform -translate-x-1/2 text-m font-bold text-blue-400">Summary</span>
+                                className="inline-block transform -translate-x-1/2 text-m font-semibold text-blue-400 tracking-wider">Summary</span>
                             </div>
                         </div>
                     </div>
@@ -118,27 +118,25 @@ class StayComponent extends React.Component {
                 </div>
 
                 <form className="h-full w-full">
-                    <div className="h-1/3 p-16 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                    <div className="h-1/4 p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
-                                <h2 className="mb-4 font-semibold">Length of stay</h2>
+                                <h2 className="mb-2 font-semibold tracking-wider">Length of Stay</h2>
                                 <div className="flex row">
                                     <div className="w-1/2">
                                         <input type="date" id="checkInDate"
-                                               className="p-2 border-2 border-gray-400 mb-2"
+                                               className="p-2 border-2 border-gray-400 mb-0.5"
                                                value={this.props.checkInDate} onChange={this.handleCheckInDateChange}/>
-                                        <label htmlFor="checkInDate" className="block text-sm text-gray-500">Check-In
-                                            Date</label>
+                                        <label htmlFor="checkInDate" className="block text-xs text-gray-500 tracking-tighter">CHECK-IN DATE</label>
                                     </div>
 
                                     <div className="w-1/2">
                                         <input type="date" id="checkOutDate"
-                                               className="p-2 border-2 border-gray-400 mb-2"
+                                               className="p-2 border-2 border-gray-400 mb-0.5"
                                                value={this.props.checkOutDate}
                                                onChange={this.handleCheckOutDateChange}/>
-                                        <label htmlFor="checkOutDate" className="block text-sm text-gray-500">Check-Out
-                                            Date</label>
+                                        <label htmlFor="checkOutDate" className="block text-xs text-gray-500 tracking-tighter">CHECK-OUT DATE</label>
                                     </div>
                                 </div>
                             </div>
@@ -148,33 +146,30 @@ class StayComponent extends React.Component {
                                 <div className="flex">
 
                                     <div className="pl-24 w-1/3">
-                                        <h2 className="mb-4 font-semibold">Single </h2>
+                                        <h2 className="mb-2 font-semibold tracking-wider">Single</h2>
                                         <input type="number" id="single" min="0"
-                                               className="border-2 p-1.5 border-gray-400 w-16"
+                                               className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>
-                                        <label htmlFor="single" className="mt-2 block text-sm text-gray-500">Room
-                                            Count</label>
+                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
                                     </div>
 
-                                    <div className="pl-16 w-1/3">
-                                        <h2 className="mb-4 font-semibold">Double</h2>
+                                    <div className="pl-12 w-1/3">
+                                        <h2 className="mb-2 font-semibold tracking-wider">Double</h2>
                                         <input type="number" id="double" min="0"
-                                               className="border-2 p-1.5 border-gray-400 w-16"
+                                               className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.doubleRoomCount}
                                                onChange={this.handleDoubleRoomCountChange}/>
-                                        <label htmlFor="double" className="mt-2 block text-sm text-gray-500">Room
-                                            Count</label>
+                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
                                     </div>
 
-                                    <div className="pl-8 w-1/3">
-                                        <h2 className="mb-4 font-semibold">Superior</h2>
+                                    <div className="w-1/3">
+                                        <h2 className="mb-2 font-semibold tracking-wider">Superior</h2>
                                         <input type="number" id="superior" min="0"
-                                               className="border-2 p-1.5 border-gray-400 w-16"
+                                               className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.superiorRoomCount}
                                                onChange={this.handleSuperiorRoomCountChange}/>
-                                        <label htmlFor="superior" className="mt-2 block text-sm text-gray-500">Room
-                                            Count</label>
+                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
                                     </div>
                                 </div>
                             </div>
@@ -183,21 +178,21 @@ class StayComponent extends React.Component {
                         </div>
                     </div>
 
-                    <div className="h-1/8 p-6 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                    <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 
-                        <h2 className="text-center mb-0 text-xl font-semibold">Price for stay: <span id="totalPrice">0€</span></h2>
+                        <h2 className="text-center text-xl font-semibold">Price for Stay: <span id="totalPrice">0€</span></h2>
 
                     </div>
 
-                    <div className="flex row justify-between mt-8">
+                    <div className="flex justify-between mt-8">
 
                         <Link to="/"
-                              className="block w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-95">
+                              className="block w-1/5 p-1 rounded-lg border-2 border-blue-200 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-95">
                             <button type="button"> Back </button>
                         </Link>
 
                         <button type="button"
-                                className="w-1/5 p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-95"
+                                className="w-1/5 p-1 rounded-lg border-2 border-blue-200 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-95"
                                 onClick={this.checkInputStay}>
                             Next
                         </button>

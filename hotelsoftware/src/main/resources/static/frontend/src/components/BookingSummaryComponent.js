@@ -22,7 +22,7 @@ class BookingSummaryComponent extends React.Component {
 
     render() {
         return (
-            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-80" style={{backgroundImage: `url(${bed})`}}>
+            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${bed})`}}>
 
                 <div className="py-4 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
                     <div className="w-full px-4 mb-8">

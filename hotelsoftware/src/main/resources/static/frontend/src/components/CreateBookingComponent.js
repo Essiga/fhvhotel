@@ -57,7 +57,7 @@ class CreateBookingComponent extends React.Component
     render()
     {
         return (
-            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover opacity-90" style={{backgroundImage: `url(${lobby})`}}>
+            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${lobby})`}}>
                 <h1 className="mt-40 mb-16 font-extrabold text-4xl text-blue-400 text-center">
                     We are looking forward to welcoming you
                 </h1>
