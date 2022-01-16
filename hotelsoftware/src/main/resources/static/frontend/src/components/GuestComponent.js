@@ -1,7 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
 import pool from "../images/pool.jpg";
-import vacation from "../images/vacation.jpg";
 
 class GuestComponent extends React.Component {
     constructor(props) {
