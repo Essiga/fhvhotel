@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import vacation from '../images/vacation.jpg'
+import snow from '../images/snow.jpg'
 
 class StayComponent extends React.Component {
 
@@ -90,7 +90,7 @@ class StayComponent extends React.Component {
     render() {
 
         return (
-            <div className="pt-20 overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${vacation})`}}>
+            <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
 
                 <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-90">
                     <div className="w-full px-4 mb-6">
@@ -111,10 +111,6 @@ class StayComponent extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-
-
                 </div>
 
                 <form className="h-full w-full">

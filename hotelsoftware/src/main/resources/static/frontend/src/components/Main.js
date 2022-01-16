@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Switch, withRouter} from 'react-router-dom'
 import '../style.css';
-import vacation from '../images/vacation.jpg'
+import mountain from '../images/mountain.webp'
 
 import HomeComponent from "./HomeComponent";
 import NavbarComponent from "./NavbarComponent";
@@ -10,7 +10,7 @@ import BookingComponent from "./BookingComponent";
 function Main(){
 
     return(
-        <div className="flex bg-gray-100 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${vacation})`}}>
+        <div className="flex bg-gray-100 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${mountain})`}}>
             <NavbarComponent/>
             <div className="flex w-full">
                 <Switch>
