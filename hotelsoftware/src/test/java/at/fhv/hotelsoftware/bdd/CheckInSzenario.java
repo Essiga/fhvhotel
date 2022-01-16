@@ -95,38 +95,38 @@ public class CheckInSzenario extends SzenarioTxBoundary {
     }
 
 
-    @Given("there is at least {int} free single room, {int} free double room and {int} free superior room")
-    public void setupRooms(int countSingleRooms, int countDoubleRooms, int countSuperiorRooms) {
-        for (int i = 0; i < countSingleRooms; i++) {
-            Room singleRoom = Room.builder().
-                    roomStatus(RoomStatus.FREE).
-                    bookingId(null).
-                    roomCategory(RoomCategory.SINGLE).
-                    roomNumber(100 + i).build();
-
-            viewRoomService.createRoom(singleRoom);
-        }
-
-        for (int i = 0; i < countDoubleRooms; i++) {
-            Room doubleRoom = Room.builder().
-                    roomStatus(RoomStatus.FREE).
-                    bookingId(null).
-                    roomCategory(RoomCategory.DOUBLE).
-                    roomNumber(200 + i).build();
-
-            viewRoomService.createRoom(doubleRoom);
-        }
-
-        for (int i = 0; i < countSuperiorRooms; i++) {
-            Room superiorRoom = Room.builder().
-                    roomStatus(RoomStatus.FREE).
-                    bookingId(null).
-                    roomCategory(RoomCategory.SUPERIOR).
-                    roomNumber(300 + i).build();
-
-            viewRoomService.createRoom(superiorRoom);
-        }
-    }
+//    @Given("there is at least {int} free single room, {int} free double room and {int} free superior room")
+//    public void setupRooms(int countSingleRooms, int countDoubleRooms, int countSuperiorRooms) {
+//        for (int i = 0; i < countSingleRooms; i++) {
+//            Room singleRoom = Room.builder().
+//                    roomStatus(RoomStatus.FREE).
+//                    bookingId(null).
+//                    roomCategory(RoomCategory.SINGLE).
+//                    roomNumber(100 + i).build();
+//
+//            viewRoomService.createRoom(singleRoom);
+//        }
+//
+//        for (int i = 0; i < countDoubleRooms; i++) {
+//            Room doubleRoom = Room.builder().
+//                    roomStatus(RoomStatus.FREE).
+//                    bookingId(null).
+//                    roomCategory(RoomCategory.DOUBLE).
+//                    roomNumber(200 + i).build();
+//
+//            viewRoomService.createRoom(doubleRoom);
+//        }
+//
+//        for (int i = 0; i < countSuperiorRooms; i++) {
+//            Room superiorRoom = Room.builder().
+//                    roomStatus(RoomStatus.FREE).
+//                    bookingId(null).
+//                    roomCategory(RoomCategory.SUPERIOR).
+//                    roomNumber(300 + i).build();
+//
+//            viewRoomService.createRoom(superiorRoom);
+//        }
+//    }
 
 
     @Given("a list of free rooms is already generated")
