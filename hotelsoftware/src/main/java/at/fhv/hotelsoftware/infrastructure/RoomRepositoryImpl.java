@@ -55,9 +55,9 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public Integer [] findFreeContingentOfRooms(Date checkIn, Date checkOut){
+    public List<Booking> findFreeContingentOfRooms(Date checkIn, Date checkOut){
         TypedQuery<Long> allSingleRooms = this.em.createQuery(
-                "Select count(id) From Room Where room_category = 'SINGLE'", Long.class);
+                "Select count (id) From Room Where room_category = 'SINGLE'", Long.class);
         int allSingleRoomsCount = Math.toIntExact(allSingleRooms.getSingleResult());
 
         TypedQuery<Long> allDoubleRooms = this.em.createQuery(
@@ -68,17 +68,11 @@ public class RoomRepositoryImpl implements RoomRepository {
                 "Select count (id) From Room Where room_category = 'SUPERIOR'", Long.class);
         int allSuperiorRoomsCount = Math.toIntExact(allSuperiorRooms.getSingleResult());
 
+        TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN '2022-01-15' AND '2022-01-21') AND (Check_out_date BETWEEN '2022-01-15' AND '2022-01-21') AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
+       // new AggregateJourneyFoodOrder()   TypedQuery<Room> query = this.em.createQuery("Select  SUM(single_room), SUM(double_room), SUM(superior_room) From Booking Where (check_in_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (check_out_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (booking_status NOT LIKE 'COMPLETED'\n)", Room.class);
 
-
-        TypedQuery<Booking> query = this.em.createQuery("From Booking From Booking Where (check_in_date between :checkIn and :checkOut)", Booking.class);
-       // TypedQuery<Room> query = this.em.createQuery("Select  SUM(single_room), SUM(double_room), SUM(superior_room) From Booking Where (check_in_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (check_out_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (booking_status NOT LIKE 'COMPLETED'\n)", Room.class);
-
-
-        Integer [] result = new Integer[3];
+        List<Booking> result = query.getResultList();
 
         return result;
-
-
-
     }
 }

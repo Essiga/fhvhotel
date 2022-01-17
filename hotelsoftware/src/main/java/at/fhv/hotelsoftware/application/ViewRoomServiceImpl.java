@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,23 +56,23 @@ public class ViewRoomServiceImpl implements ViewRoomService {
     }
 
     @Override
-    public Integer findAllFreeSingleRoomByDate(Date checkIn, Date checkOut) {
-        return null;
-    }
+    public List<Integer> findFreeContingentOfRooms(Date checkIn, Date checkOut) {
+        int totalSingleRoomCount = 0;
+        int totalDoubleRoomCount = 0;
+        int totalSuperiorRoomCount = 0;
+        List<Booking> list = roomRepository.findFreeContingentOfRooms(checkIn, checkOut);
 
-    @Override
-    public Integer findAllFreeDoubleRoomByDate(Date checkIn, Date checkOut) {
-        return null;
-    }
+        for (int i = 0; i < list.size(); i++) {
+            totalSingleRoomCount += list.get(i).getSingleRoom();
+            totalDoubleRoomCount += list.get(i).getDoubleRoom();
+            totalSuperiorRoomCount += list.get(i).getSuperiorRoom();
+        }
 
-    @Override
-    public Integer findAllFreeSuperiorRoomByDate(Date checkIn, Date checkOut) {
-        return null;
-    }
+        List<Integer> resultList = new LinkedList<>();
+        resultList.add(totalSingleRoomCount);
+        resultList.add(totalDoubleRoomCount);
+        resultList.add(totalSuperiorRoomCount);
 
-    @Override
-    public Integer[] findFreeContingentOfRooms(Date checkIn, Date checkOut) {
-        Integer [] result = roomRepository.findFreeContingentOfRooms(checkIn, checkOut);
-        return result;
+        return resultList;
     }
 }
