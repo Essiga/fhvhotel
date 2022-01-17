@@ -24,7 +24,7 @@ class BookingSummaryComponent extends React.Component {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${bed})`}}>
 
-                <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
+                <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 bg-opacity-90">
                     <div className="w-full px-4 mb-6">
                         <div className="w-full bg-gray-400 relative">
                             <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-2/3">
@@ -47,7 +47,7 @@ class BookingSummaryComponent extends React.Component {
 
                 <form>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Group/Company</h2>
 
@@ -56,20 +56,20 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2">
                                 <input readOnly type="text" id="gname" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.gname}/>
-                                <label htmlFor="gname" className="p-1 block text-xs text-gray-500 tracking-tight">NAME</label>
+                                <label htmlFor="gname" className="block text-xs text-gray-500 tracking-tight">NAME</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly type="text" id="voucher" className="p-1 w-2/6 mb-0.5"
                                 value={this.props.voucher}/>
-                                <label htmlFor="voucher" className="p-1 block text-xs text-gray-500 tracking-tight">VOUCHER CODE</label>
+                                <label htmlFor="voucher" className="block text-xs text-gray-500 tracking-tight">VOUCHER CODE</label>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Full Name</h2>
 
@@ -78,20 +78,20 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2 ">
                                 <input readOnly type="text" id="firstName" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.firstName}/>
-                                <label htmlFor="firstName" className="p-1 block text-xs text-gray-500 tracking-tight">FIRST NAME</label>
+                                <label htmlFor="firstName" className="block text-xs text-gray-500 tracking-tight">FIRST NAME</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly type="text" id="lastName" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.lastName}/>
-                                <label htmlFor="lastName" className="p-1 block text-xs text-gray-500 tracking-tight">LAST NAME</label>
+                                <label htmlFor="lastName" className="block text-xs text-gray-500 tracking-tight">LAST NAME</label>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Address</h2>
 
@@ -100,13 +100,13 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2 ">
                                 <input readOnly type="text" id="streetAdr" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.streetAdr}/>
-                                    <label htmlFor="streetAdr" className="p-1 block text-xs text-gray-500 tracking-tight">STREET ADDRESS</label>
+                                    <label htmlFor="streetAdr" className="block text-xs text-gray-500 tracking-tight">STREET ADDRESS</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly type="text" id="zip" className="p-1 w-2/6 mb-0.5"
                                 value={this.props.zip}/>
-                                <label htmlFor="zip" className="p-1 block text-xs text-gray-500 tracking-tight">ZIP</label>
+                                <label htmlFor="zip" className="block text-xs text-gray-500 tracking-tight">ZIP</label>
                             </div>
 
                         </div>
@@ -116,19 +116,19 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2 ">
                                 <input readOnly type="text" id="city" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.city}/>
-                                <label htmlFor="city" className="p-1 block text-xs text-gray-500 tracking-tight">CITY</label>
+                                <label htmlFor="city" className="block text-xs text-gray-500 tracking-tight">CITY</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly type="text" id="country" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.country}/>
-                                <label htmlFor="country" className="p-1 block text-xs text-gray-500 tracking-tight">COUNTRY</label>
+                                <label htmlFor="country" className="block text-xs text-gray-500 tracking-tight">COUNTRY</label>
                             </div>
 
                         </div>
                     </div>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <div className="flex-row">
 
@@ -147,18 +147,18 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2">
                                 <input readOnly type="text" id="phone" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.phone}/>
-                                <label htmlFor="phone" className="p-1 block text-xs text-gray-500 tracking-tight">NUMBER</label>
+                                <label htmlFor="phone" className="block text-xs text-gray-500 tracking-tight">NUMBER</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly type="text" id="email" className="p-1 w-4/6 mb-0.5"
                                 value={this.props.email}/>
-                                <label htmlFor="email" className="p-1 block text-xs text-gray-500 tracking-tight">EMAIL</label>
+                                <label htmlFor="email" className="block text-xs text-gray-500 tracking-tight">EMAIL</label>
                             </div>
                         </div>
                     </div>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Category Selection</h2>
 
@@ -168,28 +168,28 @@ class BookingSummaryComponent extends React.Component {
                                 <h2 className="font-semibold mb-1">Single </h2>
                                 <input readOnly id="single" className="p-1 w-16 mb-0.5"
                                 value={this.props.singleRoomCount}/>
-                                <label htmlFor="single" className="p-1 block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                <label htmlFor="single" className="block text-xs text-gray-500 tracking-tight">ROOMS</label>
                             </div>
 
                             <div className="w-1/3">
                                 <h2 className="font-semibold mb-1">Double</h2>
                                 <input readOnly id="double" className="p-1 w-16 mb-0.5"
                                 value={this.props.doubleRoomCount}/>
-                                <label htmlFor="double" className="p-1 block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                <label htmlFor="double" className="block text-xs text-gray-500 tracking-tight">ROOMS</label>
                             </div>
 
                             <div className="w-1/3">
                                 <h2 className="font-semibold mb-1">Superior</h2>
                                 <input readOnly id="superior" className="p-1 w-16 mb-0.5"
                                 value={this.props.superiorRoomCount}/>
-                                <label htmlFor="superior" className="p-1 block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                <label htmlFor="superior" className=" block text-xs text-gray-500 tracking-tight">ROOMS</label>
                             </div>
 
                         </div>
 
                     </div>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-200 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Length of Stay</h2>
 
@@ -198,13 +198,13 @@ class BookingSummaryComponent extends React.Component {
                             <div className="w-1/2">
                                 <input readOnly id="checkInDate" className="p-1 mb-0.5"
                                 value={this.props.checkInDate}/>
-                                <label htmlFor="checkInDate" className="p-1 block text-xs text-gray-500 tracking-tight">CHECK-IN DATE</label>
+                                <label htmlFor="checkInDate" className="block text-xs text-gray-500 tracking-tight">CHECK-IN DATE</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input readOnly id="checkOutDate" className="p-1 mb-0.5"
                                 value={this.props.checkOutDate}/>
-                                <label htmlFor="checkOutDate" className="p-1 block text-xs text-gray-500 tracking-tight">CHECK-OUT DATE</label>
+                                <label htmlFor="checkOutDate" className="block text-xs text-gray-500 tracking-tight">CHECK-OUT DATE</label>
                             </div>
 
                         </div>

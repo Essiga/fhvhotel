@@ -73,7 +73,7 @@ class GuestComponent extends React.Component {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${pool})`}}>
 
-                <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
+                <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 bg-opacity-90">
                     <div className="w-full px-4 mb-6">
                         <div className="w-full bg-gray-400 relative">
                             <div className="ml-32 absolute top-1/2 left-0 h-1 bg-blue-400 w-1/3">
@@ -97,7 +97,7 @@ class GuestComponent extends React.Component {
 
                 <form>
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Group/Company</h2>
 
@@ -121,7 +121,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 bg-opacity-90">
                         <h2 className="mb-2 font-semibold tracking-wider">Full Name</h2>
 
                         <div className="flex row">
@@ -143,7 +143,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-4 border-4 border-blue-200 rounded bg-gray-100 bg-opacity-90">
 
                         <h2 className="mb-2 font-semibold tracking-wider">Address</h2>
 
@@ -180,7 +180,7 @@ class GuestComponent extends React.Component {
                     </div>
 
 
-                    <div className="p-6 mb-6 border-4 border-blue-200 rounded bg-gray-100 opacity-95">
+                    <div className="p-6 mb-6 border-4 border-blue-200 rounded bg-gray-100 bg-opacity-90">
 
                         <div className="flex-row">
                             <div className="w-3/6 inline-block">
