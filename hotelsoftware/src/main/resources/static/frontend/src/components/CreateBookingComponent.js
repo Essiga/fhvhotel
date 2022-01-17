@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from "react-router-dom";
+import lobby from "../images/lobby.jpg";
 
 class CreateBookingComponent extends React.Component
 {
@@ -56,8 +57,8 @@ class CreateBookingComponent extends React.Component
     render()
     {
         return (
-            <div>
-                <h1 className="pl-3 font-extrabold text-4xl text-blue-500 text-center">
+            <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${lobby})`}}>
+                <h1 className="mt-60 mb-10 font-serif font-extrabold text-4xl text-blue-600 text-center">
                     We are looking forward to welcoming you
                 </h1>
 
