@@ -1,0 +1,19 @@
+{
+  "name": "fhvhotel",
+  "version": "1.0.0",
+  "main": "package.json",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Essiga/fhvhotel.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Essiga/fhvhotel/issues"
+  },
+  "homepage": "https://github.com/Essiga/fhvhotel#readme",
+  "description": ""
+}

@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,7 +26,18 @@ public class RoomController {
     private static final String ERROR_URL = "/showErrorPage";
 
     @GetMapping(ROOM_OVERVIEW)
-    public ModelAndView roomOverview(Model model) {
+    public ModelAndView roomOverview(Model model) throws ParseException {
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
+        String inputcheckIn = "2022-01-15";
+        String inputcheckOut = "2022-01-21";
+        Date checkIn;
+        Date checkOut;
+
+        checkIn = ft.parse(inputcheckIn);
+        checkOut = ft.parse(inputcheckOut);
+
+        viewRoomService.findFreeContingentOfRooms(checkIn, checkOut);
+
 
         try {
             List<RoomDTO> allRooms = viewRoomService.findAllRooms();

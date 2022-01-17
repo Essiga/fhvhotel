@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +52,33 @@ public class RoomRepositoryImpl implements RoomRepository {
         Optional<Room> room = query.getResultStream().findFirst();
 
         return room;
+    }
+
+    @Override
+    public Integer [] findFreeContingentOfRooms(Date checkIn, Date checkOut){
+        TypedQuery<Long> allSingleRooms = this.em.createQuery(
+                "Select count(id) From Room Where room_category = 'SINGLE'", Long.class);
+        int allSingleRoomsCount = Math.toIntExact(allSingleRooms.getSingleResult());
+
+        TypedQuery<Long> allDoubleRooms = this.em.createQuery(
+                "Select count (id) From Room Where room_category= 'DOUBLE'", Long.class);
+        int allDoubleRoomsCount = Math.toIntExact(allDoubleRooms.getSingleResult());
+
+        TypedQuery<Long> allSuperiorRooms = this.em.createQuery(
+                "Select count (id) From Room Where room_category = 'SUPERIOR'", Long.class);
+        int allSuperiorRoomsCount = Math.toIntExact(allSuperiorRooms.getSingleResult());
+
+
+
+        TypedQuery<Booking> query = this.em.createQuery("From Booking From Booking Where (check_in_date between :checkIn and :checkOut)", Booking.class);
+       // TypedQuery<Room> query = this.em.createQuery("Select  SUM(single_room), SUM(double_room), SUM(superior_room) From Booking Where (check_in_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (check_out_date BETWEEN check_in_date = :checkIn AND check_out_date = :checkOut) AND (booking_status NOT LIKE 'COMPLETED'\n)", Room.class);
+
+
+        Integer [] result = new Integer[3];
+
+        return result;
+
+
+
     }
 }

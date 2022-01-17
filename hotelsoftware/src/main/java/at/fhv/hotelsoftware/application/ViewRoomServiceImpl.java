@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,5 +54,24 @@ public class ViewRoomServiceImpl implements ViewRoomService {
         room.clean();
     }
 
+    @Override
+    public Integer findAllFreeSingleRoomByDate(Date checkIn, Date checkOut) {
+        return null;
+    }
 
+    @Override
+    public Integer findAllFreeDoubleRoomByDate(Date checkIn, Date checkOut) {
+        return null;
+    }
+
+    @Override
+    public Integer findAllFreeSuperiorRoomByDate(Date checkIn, Date checkOut) {
+        return null;
+    }
+
+    @Override
+    public Integer[] findFreeContingentOfRooms(Date checkIn, Date checkOut) {
+        Integer [] result = roomRepository.findFreeContingentOfRooms(checkIn, checkOut);
+        return result;
+    }
 }
