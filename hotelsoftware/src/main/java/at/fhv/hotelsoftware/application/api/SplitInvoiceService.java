@@ -12,4 +12,5 @@ import java.util.List;
 
 public interface SplitInvoiceService {
     InvoiceDTO splitInvoice(BookingId bookingId, InvoiceNumber invoiceNumber, List<LineItem> lineItems) throws BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException;
+    InvoiceDTO splitInvoiceWithoutRecipient(BookingId bookingId, InvoiceNumber invoiceNumber, List<LineItem> lineItems) throws BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException;
 }

@@ -8,13 +8,19 @@ import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
-@NoArgsConstructor
 public class Address {
 
     private String street;
     private String zip;
     private String city;
     private String country;
+
+    public Address() {
+        this.street = "";
+        this.zip = "";
+        this.city = "";
+        this.country = "";
+    }
 
     @Override
     public boolean equals(Object o) {

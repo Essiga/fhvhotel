@@ -95,23 +95,11 @@ public class Booking {
             throw new NoLineItemsException("Line items must not be empty.");
         }
 
-        Invoice originalInvoice = null;
-        for (Invoice i : invoices) {
-            if(i.getInvoiceNumber().getInvoiceNumber().equals(invoiceNumber.getInvoiceNumber())){
-                originalInvoice = i;
-                break;
-            }
-        }
-
-        if(originalInvoice == null){
-            throw new InvoiceNotFoundException("Invoice with invoice number: " + invoiceNumber.getInvoiceNumber().toString() + " not found.");
-        }
+        Invoice originalInvoice = getOriginalInvoice(invoiceNumber);
 
         if(containsAllLineItems(lineItemsToSplit, originalInvoice.getLineItems())){
 
             updateOriginalInvoice(lineItemsToSplit, originalInvoice);
-
-
 
             Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), nonEmptyLineItems, originalInvoice.getGuestData());
 
@@ -122,6 +110,46 @@ public class Booking {
             throw new LineItemsMismatchException("At least one line item not found in invoice.");
         }
 
+    }
+
+    public Invoice splitInvoiceWithoutRecipient(InvoiceNumber invoiceNumber, List<LineItem> lineItemsToSplit) throws InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
+
+        List<LineItem> nonEmptyLineItems = removeEmptyLineItems(lineItemsToSplit);
+
+        if(nonEmptyLineItems.isEmpty()){
+            throw new NoLineItemsException("Line items must not be empty.");
+        }
+
+        Invoice originalInvoice = getOriginalInvoice(invoiceNumber);
+
+        if(containsAllLineItems(lineItemsToSplit, originalInvoice.getLineItems())){
+
+            updateOriginalInvoice(lineItemsToSplit, originalInvoice);
+
+            Invoice splitInvoice = new Invoice(new InvoiceNumber(UUID.randomUUID()), nonEmptyLineItems, new GuestData());
+
+            invoices.add(splitInvoice);
+            return splitInvoice;
+        }
+        else{
+            throw new LineItemsMismatchException("At least one line item not found in invoice.");
+        }
+
+    }
+
+    private Invoice getOriginalInvoice(InvoiceNumber invoiceNumber) throws InvoiceNotFoundException {
+        Invoice originalInvoice = null;
+        for (Invoice i : invoices) {
+            if (i.getInvoiceNumber().getInvoiceNumber().equals(invoiceNumber.getInvoiceNumber())) {
+                originalInvoice = i;
+                break;
+            }
+        }
+
+        if (originalInvoice == null) {
+            throw new InvoiceNotFoundException("Invoice with invoice number: " + invoiceNumber.getInvoiceNumber().toString() + " not found.");
+        }
+        return originalInvoice;
     }
 
     private List<LineItem> removeEmptyLineItems(List<LineItem> lineItems) {

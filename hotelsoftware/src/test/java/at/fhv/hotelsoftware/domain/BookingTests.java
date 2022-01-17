@@ -105,6 +105,7 @@ public class BookingTests {
                 bookingId(bookingId).
                 build();
         Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        GuestData guestData = GuestData.fromGuest(guest);
         Invoice invoice = booking.createInvoice(guest);
 
         List<LineItem> lineItems = new LinkedList<>();
@@ -120,6 +121,51 @@ public class BookingTests {
 
         //then
         assertEquals(splitSum, splitInvoice.getSum());
+        assertEquals(guestData, splitInvoice.getGuestData());
+
+
+        for (int i = 0; i < lineItems.size(); i++){
+            assertEquals(lineItems.get(i), splitInvoice.getLineItems().get(i));
+        }
+
+
+    }
+
+    @Test
+    public void given_bookingwithoneinvoice_when_splitinvoicewithoutrecipient_then_newinvoicewithoutrecipient() throws InvoiceAlreadyCreatedException, InvoiceNotFoundException, LineItemsMismatchException, NoLineItemsException, AllLineItemsRemovedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(4).
+                doubleRoom(2).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 2, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+        double splitSum = lineItems.get(0).getTotalPrice() + lineItems.get(1).getTotalPrice() + lineItems.get(2).getTotalPrice();
+
+
+        //when
+        Invoice splitInvoice = booking.splitInvoiceWithoutRecipient(invoice.getInvoiceNumber(), lineItems);
+
+        //then
+        assertEquals(splitSum, splitInvoice.getSum());
+        assertEquals("", splitInvoice.getGuestData().getFirstName());
+        assertEquals("", splitInvoice.getGuestData().getLastName());
+        assertEquals("", splitInvoice.getGuestData().getEmail());
+        assertEquals("", splitInvoice.getGuestData().getPhoneNumber());
+        assertEquals("", splitInvoice.getGuestData().getAddress().getCity());
+        assertEquals("", splitInvoice.getGuestData().getAddress().getStreet());
+        assertEquals("", splitInvoice.getGuestData().getAddress().getZip());
 
         for (int i = 0; i < lineItems.size(); i++){
             assertEquals(lineItems.get(i), splitInvoice.getLineItems().get(i));
