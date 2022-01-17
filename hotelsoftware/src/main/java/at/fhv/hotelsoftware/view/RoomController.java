@@ -27,17 +27,6 @@ public class RoomController {
 
     @GetMapping(ROOM_OVERVIEW)
     public ModelAndView roomOverview(Model model) throws ParseException {
-        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
-        String inputcheckIn = "2022-01-15";
-        String inputcheckOut = "2022-01-21";
-        Date checkIn;
-        Date checkOut;
-
-        checkIn = ft.parse(inputcheckIn);
-        checkOut = ft.parse(inputcheckOut);
-
-        viewRoomService.findFreeContingentOfRooms(checkIn, checkOut);
-
 
         try {
             List<RoomDTO> allRooms = viewRoomService.findAllRooms();
