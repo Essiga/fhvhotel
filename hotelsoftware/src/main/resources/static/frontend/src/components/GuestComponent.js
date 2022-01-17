@@ -129,14 +129,14 @@ class GuestComponent extends React.Component {
                                 <input type="text" id="firstName" name="firstName"
                                        className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.firstName} onChange={this.handleFirstNameChange}/>
-                                <label htmlFor="firstName" className="block text-xs text-gray-500 tracking-tighter">FIRST NAME</label>
+                                <label htmlFor="firstName" className="block text-xs text-gray-500 tracking-tight">FIRST NAME</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="lastName" name="lastName"
                                        className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.lastName} onChange={this.handleLastNameChange}/>
-                                <label htmlFor="lastName" className=" block text-xs text-gray-500 tracking-tighter">LAST NAME</label>
+                                <label htmlFor="lastName" className=" block text-xs text-gray-500 tracking-tight">LAST NAME</label>
                             </div>
                         </div>
 
@@ -152,13 +152,13 @@ class GuestComponent extends React.Component {
                                 <input type="text" id="streetAdr" name="streetAdr"
                                        className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.streetAdr} onChange={this.handleStreetAdrChange}/>
-                                <label htmlFor="streetAdr" className="block text-xs text-gray-500 tracking-tighter">STREET ADDRESS</label>
+                                <label htmlFor="streetAdr" className="block text-xs text-gray-500 tracking-tight">STREET ADDRESS</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="zip" name="zip" className="p-1 border-2 border-gray-400 w-2/6 mb-0.5"
                                        value={this.props.zip} onChange={this.handleZipChange}/>
-                                <label htmlFor="zip" className=" block text-xs text-gray-500 tracking-tighter">ZIP</label>
+                                <label htmlFor="zip" className=" block text-xs text-gray-500 tracking-tight">ZIP</label>
                             </div>
                         </div>
 
@@ -166,14 +166,14 @@ class GuestComponent extends React.Component {
                             <div className="w-1/2 ">
                                 <input type="text" id="city" name="city" className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.city} onChange={this.handleCityChange}/>
-                                <label htmlFor="city" className="block text-xs text-gray-500 tracking-tighter">CITY</label>
+                                <label htmlFor="city" className="block text-xs text-gray-500 tracking-tight">CITY</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="country" name="country"
                                        className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.country} onChange={this.handleCountryChange}/>
-                                <label htmlFor="country" className=" block text-xs text-gray-500 tracking-tighter">COUNTRY</label>
+                                <label htmlFor="country" className=" block text-xs text-gray-500 tracking-tight">COUNTRY</label>
                             </div>
                         </div>
 
@@ -196,13 +196,13 @@ class GuestComponent extends React.Component {
                             <div className="w-1/2">
                                 <input type="text" id="phone" name="phone" className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.phone} onChange={this.handlePhoneChange}/>
-                                <label htmlFor="phone" className="block text-xs text-gray-500">NUMBER</label>
+                                <label htmlFor="phone" className="block text-xs text-gray-500 tracking-tight">NUMBER</label>
                             </div>
 
                             <div className="w-1/2">
                                 <input type="text" id="email" name="email" className="p-1 border-2 border-gray-400 w-4/6 mb-0.5"
                                        value={this.props.email} onChange={this.handleEmailChange}/>
-                                <label htmlFor="email" className=" block text-xs text-gray-500">EMAIL</label>
+                                <label htmlFor="email" className=" block text-xs text-gray-500 tracking-tight">EMAIL</label>
                             </div>
                         </div>
 
