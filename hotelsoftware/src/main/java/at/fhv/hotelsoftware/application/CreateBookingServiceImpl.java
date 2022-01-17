@@ -22,10 +22,12 @@ public class CreateBookingServiceImpl implements CreateBookingService {
     private BookingRepository bookingRepository;
 
     @Transactional
-    public void createBooking(BookingForm bookingForm, GuestId guestId) {
+    public BookingId createBooking(BookingForm bookingForm, GuestId guestId) {
+
+        BookingId bookingId = new BookingId(UUID.randomUUID());
 
         Booking booking = Booking.builder().
-                                bookingId(new BookingId(UUID.randomUUID())).
+                                bookingId(bookingId).
                                 cancellationDeadLine(null).
                                 guestId(guestId).
                                 bookingStatus(BookingStatus.PENDING).
@@ -38,5 +40,7 @@ public class CreateBookingServiceImpl implements CreateBookingService {
                                 build();
 
         bookingRepository.addBooking(booking);
+
+        return bookingId;
     }
 }
