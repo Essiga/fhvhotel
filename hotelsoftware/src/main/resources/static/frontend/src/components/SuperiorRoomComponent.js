@@ -1,39 +1,37 @@
 import React from 'react';
 import superiorRoom from "../images/superiorRoom.jpg"
 
-
 class SingleRoomComponent extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
-                <div className="grid grid-cols-2 gap-4 mt-5">
-                   <div>
-                       <img src={superiorRoom} className=""/>
-                   </div>
-                   <div>
-                       <div className="text-2xl font-bold">Superior Room</div>
-                       <div className="text-xl">
-                           Room with space to dream - on 30 square meters.
-                           All Superior Rooms allow a view of the entire Lech mountain panorama.</div>
-
-                       <div className="mt-5 text-xl font-bold">Room details:</div>
-
-                       <ul className="list-disc ml-8">
-                           <li className="text-xl">balcony</li>
-                           <li className="text-xl">bathtub / WC</li>
-                           <li className="text-xl">flat screen tv</li>
-                           <li className="text-xl">WLAN</li>
-                           <li className="text-xl">hairdryer and bath basket</li>
-                           <li className="text-xl">Safe</li>
-                       </ul>
-
-                   </div>
-
+        <React.Fragment>
+            <div className="grid grid-cols-3 gap-1 my-4">
+                <div>
+                    <img src={superiorRoom} className="h-64"/>
                 </div>
-            </React.Fragment>
+                <div className="h-64">
+                    <h2 className="font-bold mb-2">Superior Room</h2>
+                    <p>Room with space to dream - on 30 square meters.
+                        All Superior Rooms allow a view of the entire Lech mountain panorama.</p>
+
+                    <h2 class="font-bold mt-6 mb-2">Room Details</h2>
+
+                    <ul className="list-disc ml-8">
+                        <li>balcony</li>
+                        <li>bathtub / WC</li>
+                        <li>flat screen tv</li>
+                        <li>WLAN</li>
+                        <li>hairdryer and bath basket</li>
+                    </ul>
+                </div>
+            </div>
+
+        </React.Fragment>
         );
     }
-
 }
 export default SingleRoomComponent;
+
+
+

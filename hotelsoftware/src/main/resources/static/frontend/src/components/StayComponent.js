@@ -69,7 +69,6 @@ class StayComponent extends React.Component {
     handleSingleRoomCountChange(e) {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
-        this.checkRoomView(this.singleRoomSelected, e.target.value );
 
         if (e.target.value > 0) {
             this.setState({singleRoomSelected: true})
@@ -93,7 +92,6 @@ class StayComponent extends React.Component {
     handleSuperiorRoomCountChange(e) {
         this.props.onSuperiorRoomCountChange(e.target.value);
         this.calculateRoomPrices();
-        this.checkRoomView(this.superiorRoomSelected, e.target.value );
 
        if (e.target.value > 0) {
             this.setState({superiorRoomSelected : true})
@@ -117,11 +115,8 @@ class StayComponent extends React.Component {
     }
 
     render() {
-        const showSingleRoom = this.state.singleRoomSelected;
-        const showDoubleRoom = this.state.doubleRoomSelected;
-        const showSuperiorRoom = this.state.singleRoomSelected;
-
         return (
+
             <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
 
                 <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-90">
@@ -145,8 +140,9 @@ class StayComponent extends React.Component {
                     </div>
                 </div>
 
+
                 <form className="h-full w-full">
-                    <div className="h-1/4 p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
+                    <div className=" p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
@@ -201,18 +197,17 @@ class StayComponent extends React.Component {
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
 
                     <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
-                    {this.state.singleRoomSelected && <SingleRoomComponent /> }
-                    {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
-                    {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
+                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
+                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+                    </div>
 
 
-                    <div className="p-4 mt-4 border border-gray-300">
+                    <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <h2 className="text-center text-xl font-semibold">Price for Stay: <span id="totalPrice">0€</span></h2>
 
@@ -232,10 +227,11 @@ class StayComponent extends React.Component {
                         </button>
                     </div>
 
+
                 </form>
             </div>
 
-            </React.Fragment>
+
         );
     }
 }
