@@ -69,8 +69,21 @@ public class BookingRepositoryTests {
         List<Booking> bookingsActual = bookingRepository.findAllBookings();
 
         //then
-        assertEquals(idExpected.getBookingId(), bookingsActual.get(0).getBookingId().getBookingId());
-        assertEquals(idExpected2.getBookingId(), bookingsActual.get(1).getBookingId().getBookingId());
+        boolean bookingExpectedExists = false;
+        boolean bookingExpected2Exists = false;
+
+        for (Booking booking : bookingsActual) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                bookingExpectedExists = true;
+            }
+
+            if (booking.getBookingId().getBookingId().equals(idExpected2.getBookingId())) {
+                bookingExpected2Exists = true;
+            }
+        }
+
+        assertTrue(bookingExpectedExists);
+        assertTrue(bookingExpected2Exists);
     }
 
     @Test
@@ -111,8 +124,6 @@ public class BookingRepositoryTests {
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
         GuestId guestId3 = new GuestId(UUID.randomUUID());
-
-        int expectedSize = 1;
 
         Booking bookingExpected = new Booking().builder().
                 bookingId(idExpected).
@@ -156,8 +167,16 @@ public class BookingRepositoryTests {
         List<Booking> actualCheckIns = bookingRepository.findTodaysCheckIns();
 
         assertFalse(actualCheckIns.isEmpty());
-        assertEquals(expectedSize, actualCheckIns.size());
-        assertEquals(idExpected.getBookingId(), actualCheckIns.get(0).getBookingId().getBookingId());
+
+        boolean expectedBookingExists = false;
+
+        for (Booking booking : actualCheckIns) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                expectedBookingExists = true;
+            }
+        }
+
+        assertTrue(expectedBookingExists);
     }
 
     @Test
@@ -170,8 +189,6 @@ public class BookingRepositoryTests {
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
         GuestId guestId3 = new GuestId(UUID.randomUUID());
-
-        int expectedSize = 1;
 
         Booking bookingExpected = new Booking().builder().
                 bookingId(idExpected).
@@ -215,7 +232,15 @@ public class BookingRepositoryTests {
         List<Booking> actualCheckOuts = bookingRepository.findTodaysCheckOuts();
 
         assertFalse(actualCheckOuts.isEmpty());
-        assertEquals(expectedSize, actualCheckOuts.size());
-        assertEquals(idExpected.getBookingId(), actualCheckOuts.get(0).getBookingId().getBookingId());
+
+        boolean expectedBookingExists = false;
+
+        for (Booking booking : actualCheckOuts) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                expectedBookingExists = true;
+            }
+        }
+
+        assertTrue(expectedBookingExists);
     }
 }
