@@ -7,7 +7,7 @@ class StayComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {prices: ""};
+        this.state = {prices: "", rooms: ""};
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -22,6 +22,13 @@ class StayComponent extends React.Component {
         fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
             .then(result => {
                 this.setState({prices: Object.values(result)})
+            })
+    }
+
+    componentDidMount() {
+        fetch("http://localhost:8080/rest/booking/getTotalRoom").then(res => res.json())
+            .then(result => {
+                this.setState({rooms: Object.values(result)})
             })
     }
 
@@ -147,7 +154,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>
-                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
+                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[0]}</label>
                                     </div>
 
                                     <div className="pl-12 w-1/3">
@@ -156,7 +163,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.doubleRoomCount}
                                                onChange={this.handleDoubleRoomCountChange}/>
-                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
+                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[1]}</label>
                                     </div>
 
                                     <div className="w-1/3">
@@ -165,7 +172,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.superiorRoomCount}
                                                onChange={this.handleSuperiorRoomCountChange}/>
-                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tighter">ROOMS</label>
+                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[2]}</label>
                                     </div>
                                 </div>
                             </div>

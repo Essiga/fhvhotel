@@ -15,5 +15,11 @@
     "url": "https://github.com/Essiga/fhvhotel/issues"
   },
   "homepage": "https://github.com/Essiga/fhvhotel#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "react-scripts": "^5.0.0"
+  },
+  "devDependencies": {
+    "web-vitals": "^2.1.3"
+  }
 }

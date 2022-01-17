@@ -69,9 +69,9 @@ public class ViewRoomServiceImpl implements ViewRoomService {
         }
 
         List<Integer> resultList = new LinkedList<>();
-        resultList.add(totalSingleRoomCount);
-        resultList.add(totalDoubleRoomCount);
-        resultList.add(totalSuperiorRoomCount);
+        resultList.add(roomRepository.findAllSingleRoomCount() - totalSingleRoomCount);
+        resultList.add(roomRepository.findAllDoubleRoomCount() - totalDoubleRoomCount);
+        resultList.add(roomRepository.findAllSuperiorRoomCount() - totalSuperiorRoomCount);
 
         return resultList;
     }

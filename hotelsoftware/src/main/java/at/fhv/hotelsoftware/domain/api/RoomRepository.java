@@ -15,4 +15,7 @@ public interface RoomRepository {
     List<Room> findRoomsByBookingId(BookingId bookingid);
     Optional<Room> findRoomByRoomNumber(int roomNumber);
     List<Booking> findFreeContingentOfRooms(Date checkIn, Date checkOut);
+    Integer findAllSingleRoomCount();
+    Integer findAllDoubleRoomCount();
+    Integer findAllSuperiorRoomCount();
 }
