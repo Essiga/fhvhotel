@@ -58,9 +58,10 @@ class CreateBookingComponent extends React.Component
     {
         return (
             <div className="p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${lobby})`}}>
-                <h1 className="mt-60 mb-10 font-serif font-extrabold text-4xl text-blue-600 text-center">
-                    We are looking forward to welcoming you
-                </h1>
+
+                <div className="p-1 mt-60 mb-10 bg-black bg-opacity-50 text-center">
+                    <h1 className="font-serif font-extrabold text-4xl text-gray-50 text-center">We are looking forward to welcoming you</h1>
+                </div>
 
                 <div className="mt-8 text-center">
                     <Link to="/">
