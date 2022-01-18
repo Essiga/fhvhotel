@@ -56,9 +56,8 @@ public class RoomRepositoryImpl implements RoomRepository {
 
     @Override
     public List<Booking> findFreeContingentOfRooms(Date checkIn, Date checkOut){
-        TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN '2022-01-15' AND '2022-01-21') AND (Check_out_date BETWEEN '2022-01-15' AND '2022-01-21') AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN :checkIn AND :checkOut) AND (Check_out_date BETWEEN :checkIn AND :checkOut) AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
         List<Booking> result = query.getResultList();
-
         return result;
     }
 

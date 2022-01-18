@@ -22,15 +22,24 @@ class StayComponent extends React.Component {
         fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
             .then(result => {
                 this.setState({prices: Object.values(result)})
-            })
+            });
     }
 
-    componentDidMount() {
-        fetch("http://localhost:8080/rest/booking/getTotalRoom").then(res => res.json())
-            .then(result => {
-                this.setState({rooms: Object.values(result)})
-            })
+    handleDates(){
+        const stayDates =
+            {
+                checkIn: this.props.checkInDate,
+                checkOut: this.props.checkOutDate
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
     }
+
 
     calculateRoomPrices() {
         let prices = this.state.prices;
@@ -68,16 +77,19 @@ class StayComponent extends React.Component {
     handleSingleRoomCountChange(e) {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+        this.handleDates();
     }
 
     handleDoubleRoomCountChange(e) {
         this.props.onDoubleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+        this.handleDates();
     }
 
     handleSuperiorRoomCountChange(e) {
         this.props.onSuperiorRoomCountChange(e.target.value);
         this.calculateRoomPrices();
+        this.handleDates();
     }
 
     handleCheckInDateChange(e) {

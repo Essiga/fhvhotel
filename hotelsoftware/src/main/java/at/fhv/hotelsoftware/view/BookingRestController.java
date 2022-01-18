@@ -24,25 +24,23 @@ import java.util.UUID;
 public class BookingRestController {
 
     @Autowired
-    CreateGuestService createGuestService;
+    private CreateGuestService createGuestService;
 
     @Autowired
-    CreateBookingService createBookingService;
+    private CreateBookingService createBookingService;
 
     @Autowired
-    ViewRoomService viewRoomService;
+    private ViewRoomService viewRoomService;
 
     private static final String GET_ALL_ROOM_PRICES = "/getRoomPrices";
     private static final String CREATE_GUEST = "/createGuest";
     private static final String CREATE_BOOKING = "/createBooking";
     private static final String GET_TOTAL_ROOM = "/getTotalRoom";
 
-    @GetMapping(GET_TOTAL_ROOM)
-    public List<Integer> getTotalRoom() {
-        List<Integer> resultList = new LinkedList<>();
-        Date checkIn = new Date();
-        Date checkOut = new Date();
-        return resultList = viewRoomService.findFreeContingentOfRooms(checkIn,checkOut);
+    @PostMapping(GET_TOTAL_ROOM)
+    public List<Integer> getTotalRoom(Date checkIn, Date checkOut) {
+
+        return viewRoomService.findFreeContingentOfRooms(checkIn,checkOut);
     }
 
     @GetMapping(GET_ALL_ROOM_PRICES)
