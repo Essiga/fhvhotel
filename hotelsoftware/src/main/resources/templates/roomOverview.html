@@ -11,28 +11,8 @@
 </head>
 
 <body class="bg-gray-100">
-<script>
 
-    const starWarsTheme = "https://ia600304.us.archive.org/30/items/StarWarsTheImperialMarchDarthVadersTheme/Star%20Wars-%20The%20Imperial%20March%20%28Darth%20Vader%27s%20Theme%29.mp3";
-
-    $(document).ready(() => {
-        $('#starwars').on('click', function(e) {
-            if(e.ctrlKey && e.altKey){
-                if (document.getElementById('music').src === starWarsTheme ) {
-                    document.getElementById('music').src = "";
-                }
-                else{
-                    document.getElementById('music').src = starWarsTheme;
-                }
-
-            }
-        })
-    });
-
-
-</script>
 <div class="flex">
-    <iframe id="music" style="position: absolute;width:0;height:0;border:0;" src="" allow="autoplay"></iframe>
     <aside class="h-screen sticky top-0 w-1/6">
 
         <nav class="flex-row h-screen w-full bg-green-500"> <!-- Navbar -->
@@ -43,10 +23,6 @@
 
             <div>
                 <a href="bookingOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Booking Overview</a>
-            </div>
-
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
             </div>
 
             <div>
@@ -62,7 +38,7 @@
         <div class="pl-2 py-6 h-full border">  <!-- Check-Ins -->
 
             <!-- Check-Ins -->
-            <h1 id="starwars" class="pl-3 font-extrabold text-4xl text-blue-500 ">Room Overview</h1>
+            <h1 class="pl-3 font-extrabold text-4xl text-blue-500 ">Room Overview</h1>
 
             <div class="flex pt-4">
                 <div class="px-2">
