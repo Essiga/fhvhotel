@@ -9,10 +9,7 @@ import at.fhv.hotelsoftware.domain.model.Guest;
 import at.fhv.hotelsoftware.domain.model.Invoice;
 import at.fhv.hotelsoftware.domain.model.LineItem;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
-import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
-import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +72,50 @@ public class SplitInvoiceServiceTests {
     }
 
     @Test
+    public void given_existingbookingwithinvoice_when_invoicesplitwithoutrecipient_then_newinvoicewithoutrecipient() throws InvoiceAlreadyCreatedException, BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(4).
+                doubleRoom(2).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 2, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+        List<LineItemDTO> lineItemDTOs = LineItemDTO.fromLineItemList(lineItems);
+        double splitSum = lineItems.get(0).getTotalPrice() + lineItems.get(1).getTotalPrice() + lineItems.get(2).getTotalPrice();
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+
+        //when
+        InvoiceDTO splitInvoiceDTO = splitInvoiceService.splitInvoiceWithoutRecipient(bookingId, invoice.getInvoiceNumber(), lineItems);
+
+        //then
+        assertEquals(splitSum, splitInvoiceDTO.getSum());
+        assertEquals("", splitInvoiceDTO.getGuestData().getFirstName());
+        assertEquals("", splitInvoiceDTO.getGuestData().getLastName());
+        assertEquals("", splitInvoiceDTO.getGuestData().getEmail());
+        assertEquals("", splitInvoiceDTO.getGuestData().getPhoneNumber());
+        assertEquals("", splitInvoiceDTO.getGuestData().getAddress().getCity());
+        assertEquals("", splitInvoiceDTO.getGuestData().getAddress().getStreet());
+        assertEquals("", splitInvoiceDTO.getGuestData().getAddress().getZip());
+
+        for (int i = 0; i < lineItemDTOs.size(); i++){
+            assertEquals(lineItemDTOs.get(i), splitInvoiceDTO.getLineItemDTOs().get(i));
+        }
+
+    }
+
+    @Test
     public void given_existingbookingwithinvoice_when_invoicesplitwithwrongbookingid_then_throwbookingnotfoundexception() throws InvoiceAlreadyCreatedException {
         //given
         BookingId bookingId = new BookingId(UUID.randomUUID());
@@ -98,6 +139,34 @@ public class SplitInvoiceServiceTests {
 
         //when...then
         assertThrows(BookingNotFoundException.class, () -> splitInvoiceService.splitInvoice(new BookingId(UUID.randomUUID()), invoice.getInvoiceNumber(), lineItems));
+
+
+    }
+
+    @Test
+    public void given_existingbookingwithinvoice_when_invoicesplitwithoutrecipientwithwrongbookingid_then_throwbookingnotfoundexception() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(4).
+                doubleRoom(2).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 2, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+
+        //when...then
+        assertThrows(BookingNotFoundException.class, () -> splitInvoiceService.splitInvoiceWithoutRecipient(new BookingId(UUID.randomUUID()), invoice.getInvoiceNumber(), lineItems));
 
 
     }

@@ -127,4 +127,17 @@ public class ViewRoomServiceTests {
         assertEquals(expectedNumberOfRooms, rooms.size());
 
     }
+
+    @Test
+    public void given_norooms_when_findallrooms_then_throwroomnotfoundexception() {
+
+        //given
+        List <Room> rooms = new LinkedList();
+
+        Mockito.when(roomRepository.findAllRooms()).thenReturn(rooms);
+
+        //when..then
+        assertThrows(RoomNotFoundException.class, () -> viewRoomService.findAllRooms());
+
+    }
 }

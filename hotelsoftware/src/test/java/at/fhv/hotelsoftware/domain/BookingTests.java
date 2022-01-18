@@ -226,6 +226,62 @@ public class BookingTests {
         //when..then
         assertThrows(LineItemsMismatchException.class, () -> booking.splitInvoice(invoice.getInvoiceNumber(), lineItems));
 
+    }
+
+    @Test
+    public void given_bookingwithoneinvoice_when_splitinvoicewithoutrecipientwithwronglineitems_then_throwlineitemsmismatchexception() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 2, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+
+        //when..then
+        assertThrows(LineItemsMismatchException.class, () -> booking.splitInvoiceWithoutRecipient(invoice.getInvoiceNumber(), lineItems));
+
+    }
+
+    @Test
+    public void given_bookingwithoneinvoice_when_splitinvoicewithtoomanylineitems_then_throwlineitemsmismatchexception() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
+        Guest guest = new Guest(new GuestId(UUID.randomUUID()), "Fabian", "Egartner", "Jahngasse 1", "6850", "Dornbirn", "Austria", "066023874", "abc@test.de");
+        Invoice invoice = booking.createInvoice(guest);
+
+        List<LineItem> lineItems = new LinkedList<>();
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SINGLE.toString(), 1, 2, RoomCategory.SINGLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.DOUBLE.toString(), 1, 2, RoomCategory.DOUBLE.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+        lineItems.add(new LineItem(RoomCategory.SUPERIOR.toString(), 1, 2, RoomCategory.SUPERIOR.getPrice()));
+
+
+        //when..then
+        assertThrows(LineItemsMismatchException.class, () -> booking.splitInvoice(invoice.getInvoiceNumber(), lineItems));
+
 
 
     }
@@ -271,15 +327,29 @@ public class BookingTests {
 
         List<LineItem> lineItems = new LinkedList<>();
 
-
-
         //when..then
         assertThrows(NoLineItemsException.class, () -> booking.splitInvoice(new InvoiceNumber(UUID.randomUUID()), lineItems));
 
-
-
     }
 
+    @Test
+    public void given_bookingwithoneinvoice_when_splitinvoicewithoutrecipientwithemptylineitems_then_thrownolineitemsexception() throws InvoiceAlreadyCreatedException {
+        //given
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+        Booking booking = Booking.builder().
+                singleRoom(4).
+                doubleRoom(2).
+                superiorRoom(1).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now().plusDays(2)).
+                bookingId(bookingId).
+                build();
 
+        List<LineItem> lineItems = new LinkedList<>();
+
+        //when..then
+        assertThrows(NoLineItemsException.class, () -> booking.splitInvoiceWithoutRecipient(new InvoiceNumber(UUID.randomUUID()), lineItems));
+
+    }
 
 }

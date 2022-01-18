@@ -201,7 +201,7 @@ public class Booking {
                 }
             }
         }
-        if(count < lineItems.size()){
+        if(count > invoiceLineItems.size()){
             return false;
         }
 
