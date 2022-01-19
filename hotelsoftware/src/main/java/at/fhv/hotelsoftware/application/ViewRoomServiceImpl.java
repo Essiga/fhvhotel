@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,7 +57,7 @@ public class ViewRoomServiceImpl implements ViewRoomService {
     }
 
     @Override
-    public List<Integer> findFreeContingentOfRooms(Date checkIn, Date checkOut) {
+    public List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut) {
         int totalSingleRoomCount = 0;
         int totalDoubleRoomCount = 0;
         int totalSuperiorRoomCount = 0;

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -37,10 +38,17 @@ public class BookingRestController {
     private static final String CREATE_BOOKING = "/createBooking";
     private static final String GET_TOTAL_ROOM = "/getTotalRoom";
 
-    @PostMapping(GET_TOTAL_ROOM)
-    public List<Integer> getTotalRoom(Date checkIn, Date checkOut) {
+    @PostMapping(GET_TOTAL_ROOM)    //find me: @RequestBody was missing, object receiving input necessary, Data = String -> needs to be parsed to LocalDate
+    public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) {
 
-        return viewRoomService.findFreeContingentOfRooms(checkIn,checkOut);
+        LocalDate checkInDate = LocalDate.parse(bookingForm.getCheckInDate());
+        LocalDate checkOutDate = LocalDate.parse(bookingForm.getCheckOutDate());
+
+        List<Integer> contingent = viewRoomService.findFreeContingentOfRooms(checkInDate, checkOutDate);
+
+        System.out.println("Contingent: " + contingent);
+
+        return viewRoomService.findFreeContingentOfRooms(checkInDate, checkOutDate);
     }
 
     @GetMapping(GET_ALL_ROOM_PRICES)

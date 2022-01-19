@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -55,8 +56,10 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<Booking> findFreeContingentOfRooms(Date checkIn, Date checkOut){
+    public List<Booking> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut){
         TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN :checkIn AND :checkOut) AND (Check_out_date BETWEEN :checkIn AND :checkOut) AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
+        query.setParameter("checkIn", checkIn); //find me: parameter were not set
+        query.setParameter("checkOut", checkOut);
         List<Booking> result = query.getResultList();
         return result;
     }
