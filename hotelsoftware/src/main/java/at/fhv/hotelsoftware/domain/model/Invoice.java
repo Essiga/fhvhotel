@@ -32,6 +32,13 @@ public class Invoice {
         this.invoiceDate = LocalDate.now();
     }
 
+    public Invoice(InvoiceNumber invoiceNumber, List<LineItem> lineItems) {
+        this.invoiceNumber = invoiceNumber;
+        this.lineItems = lineItems;
+        this.invoiceStatus = InvoiceStatus.OPEN;
+        this.invoiceDate = LocalDate.now();
+    }
+
     public double getSum() {
 
         double sum = 0.0;

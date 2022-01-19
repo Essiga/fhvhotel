@@ -89,6 +89,108 @@ public class CheckInServiceTests {
         }
     }
 
+    @Test
+    void given_onlydoublerooms_when_findfreeroomsforbooking_thenexpectfreeroomsforbooking() throws NotEnoughRoomsException, BookingNotFoundException {
+        List<Room> list = new ArrayList<>();
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(0).
+                doubleRoom(1).
+                superiorRoom(0).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        Room singleRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        Room doubleRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.DOUBLE).
+                roomNumber(102).build();
+
+        Room superiorRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SUPERIOR).
+                roomNumber(103).build();
+
+        list.add(singleRoom);
+        list.add(doubleRoom);
+        list.add(superiorRoom);
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+        Mockito.when(roomRepository.findAllFreeRooms()).thenReturn(list);
+
+
+        //when
+        List<RoomDTO> rooms = checkInService.findFreeRoomsForBooking(bookingId);
+
+
+        //then
+        assertEquals(doubleRoom.getRoomNumber(), rooms.get(0).getRoomNumber());
+
+    }
+
+    @Test
+    void given_onlysuperiorroom_when_findfreeroomsforbooking_thenexpectfreeroomsforbooking() throws NotEnoughRoomsException, BookingNotFoundException {
+        List<Room> list = new ArrayList<>();
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(0).
+                doubleRoom(0).
+                superiorRoom(1).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        Room singleRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SINGLE).
+                roomNumber(101).build();
+
+        Room doubleRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.DOUBLE).
+                roomNumber(102).build();
+
+        Room superiorRoom = Room.builder().
+                roomStatus(RoomStatus.FREE).
+                bookingId(bookingId).
+                roomCategory(RoomCategory.SUPERIOR).
+                roomNumber(103).build();
+
+        list.add(singleRoom);
+        list.add(doubleRoom);
+        list.add(superiorRoom);
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+        Mockito.when(roomRepository.findAllFreeRooms()).thenReturn(list);
+
+
+        //when
+        List<RoomDTO> rooms = checkInService.findFreeRoomsForBooking(bookingId);
+
+
+        //then
+        assertEquals(superiorRoom.getRoomNumber(), rooms.get(0).getRoomNumber());
+    }
 
     @Test
     void given_bookingId_when_findfreeroomsforbooking_thenexpectthrowsnotenoughroomsexception() {
@@ -232,7 +334,7 @@ public class CheckInServiceTests {
 
 
     @Test
-    void given_roomsandbookingId_when_checkIn_then_expectthrowsroomnotfoundexception() {
+    void given_roomswithoutroomnumber_when_checkIn_then_expectthrowsroomnotfoundexception() {
         List<RoomDTO> list = new ArrayList<>();
         BookingId bookingId = new BookingId(UUID.randomUUID());
 
@@ -252,10 +354,36 @@ public class CheckInServiceTests {
                 roomstatus(RoomStatus.FREE).
                 bookingId(bookingId).
                 roomCategory(RoomCategory.SINGLE).
-                roomNumber(102).build();
+                roomNumber(null).build();
 
-        Room singleRoom2 = Room.builder().
-                roomStatus(RoomStatus.FREE).
+        list.add(singleRoom);
+
+        Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
+
+
+        // when ... then
+        assertThrows(RoomNotFoundException.class, () -> checkInService.checkIn(bookingId, list));
+    }
+
+    @Test
+    void given_noroomindatabase_when_checkIn_then_expectthrowsroomnotfoundexception() {
+        List<RoomDTO> list = new ArrayList<>();
+        BookingId bookingId = new BookingId(UUID.randomUUID());
+
+        Booking booking = Booking.builder().
+                bookingId(bookingId).
+                guestId(new GuestId()).
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now()).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                voucherCode(new VoucherCode("")).
+                build();
+
+        RoomDTO singleRoom = RoomDTO.builder().
+                roomstatus(RoomStatus.FREE).
                 bookingId(bookingId).
                 roomCategory(RoomCategory.SINGLE).
                 roomNumber(101).build();
@@ -263,7 +391,6 @@ public class CheckInServiceTests {
         list.add(singleRoom);
 
         Mockito.when(bookingRepository.findBookingById(bookingId)).thenReturn(Optional.of(booking));
-        Mockito.when(roomRepository.findRoomByRoomNumber(101)).thenReturn(Optional.of(singleRoom2));
 
 
         // when ... then

@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import java.util.Objects;
 
 @Getter
-@NoArgsConstructor
 public class GuestData {
 
     private GuestId guestId;
@@ -21,6 +20,14 @@ public class GuestData {
     private GuestType guestType;
     private String agencyName;
     private String companyName;
+
+    public GuestData() {
+        firstName = "";
+        lastName = "";
+        address = new Address();
+        phoneNumber = "";
+        email = "";
+    }
 
     @Builder
     public GuestData(GuestId guestId, String firstName, String lastName, String street, String zip, String city, String country, String phoneNumber, String email, GuestType guestType, String agencyName, String companyName) {
