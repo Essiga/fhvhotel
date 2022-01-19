@@ -25,18 +25,7 @@ class StayComponent extends React.Component {
             });
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps !== this.props.value) {
-            console.log("true")
-            return true;
-        }
-        else {
-            console.log("false")
-            return false;
-        }
-    }
-
-    handleMaxRooms() {
+    updateMaxRooms() {
         const stayDates =
             {
                 checkInDate: this.props.checkInDate,
@@ -50,7 +39,6 @@ class StayComponent extends React.Component {
                 body: JSON.stringify(stayDates)
             }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
     }
-
 
     calculateRoomPrices() {
         let prices = this.state.prices;
@@ -91,7 +79,7 @@ class StayComponent extends React.Component {
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" && //find me: call function only when both checkInDate and checkOutDate are not null
             this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.handleMaxRooms();
+            this.updateMaxRooms();
     }
 
     handleDoubleRoomCountChange(e) {
@@ -100,7 +88,7 @@ class StayComponent extends React.Component {
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.handleMaxRooms();
+            this.updateMaxRooms();
     }
 
     handleSuperiorRoomCountChange(e) {
@@ -109,7 +97,7 @@ class StayComponent extends React.Component {
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.handleMaxRooms();
+            this.updateMaxRooms();
     }
 
     handleCheckInDateChange(e) {
@@ -118,7 +106,7 @@ class StayComponent extends React.Component {
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.handleMaxRooms();
+            this.updateMaxRooms();
     }
 
     handleCheckOutDateChange(e) {
@@ -127,7 +115,7 @@ class StayComponent extends React.Component {
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.handleMaxRooms();
+            this.updateMaxRooms();
     }
 
     checkInputStay() {
