@@ -1,13 +1,23 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import snow from '../images/snow.jpg'
+import SingleRoomComponent from "./SingleRoomComponent";
+import DoubleRoomComponent from "./DoubleRoomComponent";
+import SuperiorRoomComponent from "./SuperiorRoomComponent";
 
 class StayComponent extends React.Component {
 
     constructor(props) {
         super(props);
 
-        this.state = {prices: "", rooms: ""};
+        this.state = {
+            prices: "",
+            rooms: "",
+            singleRoomSelected: false,
+            doubleRoomSelected: false,
+            superiorRoomSelected: false
+        };
+
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -80,6 +90,13 @@ class StayComponent extends React.Component {
         if (this.props.checkInDate != null && this.props.checkInDate != "" && //find me: call function only when both checkInDate and checkOutDate are not null
             this.props.checkOutDate != null && this.props.checkOutDate != "")
             this.updateMaxRooms();
+
+        if (e.target.value > 0) {
+            this.setState({singleRoomSelected: true})
+
+        } else {
+            this.setState({singleRoomSelected: false})
+        }
     }
 
     handleDoubleRoomCountChange(e) {
@@ -89,6 +106,12 @@ class StayComponent extends React.Component {
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
             this.updateMaxRooms();
+
+       if (e.target.value > 0) {
+            this.setState({doubleRoomSelected: true})
+        } else {
+            this.setState({doubleRoomSelected: false})
+        }
     }
 
     handleSuperiorRoomCountChange(e) {
@@ -98,6 +121,12 @@ class StayComponent extends React.Component {
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
             this.updateMaxRooms();
+
+       if (e.target.value > 0) {
+            this.setState({superiorRoomSelected : true})
+       } else {
+            this.setState({superiorRoomSelected : false})
+       }
     }
 
     handleCheckInDateChange(e) {
@@ -125,6 +154,7 @@ class StayComponent extends React.Component {
     render() {
 
         return (
+
             <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
 
                 <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-90">
@@ -149,7 +179,7 @@ class StayComponent extends React.Component {
                 </div>
 
                 <form className="h-full w-full">
-                    <div className="h-1/4 p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
+                    <div className=" p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
                         <div className="grid grid-cols-2 gap-8">
 
                             <div className="border-r-2">
@@ -158,9 +188,8 @@ class StayComponent extends React.Component {
                                     <div className="w-1/2">
                                         <input type="date" id="checkInDate"
                                                className="p-2 border-2 border-gray-400 mb-0.5"
-                                               value={this.props.checkInDate}
-                                               onChange={this.handleCheckInDateChange}/>
-                                        <label htmlFor="checkInDate" className="block text-xs text-gray-500 tracking-tighter">CHECK-IN DATE</label>
+                                               value={this.props.checkInDate} onChange={this.handleCheckInDateChange}/>
+                                        <label htmlFor="checkInDate" className="block text-xs text-gray-500 tracking-tight">CHECK-IN DATE</label>
                                     </div>
 
                                     <div className="w-1/2">
@@ -168,7 +197,7 @@ class StayComponent extends React.Component {
                                                className="p-2 border-2 border-gray-400 mb-0.5"
                                                value={this.props.checkOutDate}
                                                onChange={this.handleCheckOutDateChange}/>
-                                        <label htmlFor="checkOutDate" className="block text-xs text-gray-500 tracking-tighter">CHECK-OUT DATE</label>
+                                        <label htmlFor="checkOutDate" className="block text-xs text-gray-500 tracking-tight">CHECK-OUT DATE</label>
                                     </div>
                                 </div>
                             </div>
@@ -183,7 +212,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>
-                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[0]}</label>
+                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[0]}</label>
                                     </div>
 
                                     <div className="pl-12 w-1/3">
@@ -192,7 +221,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.doubleRoomCount}
                                                onChange={this.handleDoubleRoomCountChange}/>
-                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[1]}</label>
+                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[1]}</label>
                                     </div>
 
                                     <div className="w-1/3">
@@ -201,7 +230,7 @@ class StayComponent extends React.Component {
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.superiorRoomCount}
                                                onChange={this.handleSuperiorRoomCountChange}/>
-                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tighter">ROOMS {this.state.rooms[2]}</label>
+                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[2]}</label>
                                     </div>
                                 </div>
                             </div>
@@ -209,6 +238,13 @@ class StayComponent extends React.Component {
 
                         </div>
                     </div>
+
+                    <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
+                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
+                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+                    </div>
+
 
                     <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 

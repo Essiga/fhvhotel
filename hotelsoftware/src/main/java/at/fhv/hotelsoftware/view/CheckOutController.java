@@ -9,6 +9,7 @@ import at.fhv.hotelsoftware.domain.model.valueobjects.GuestData;
 import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.LineItemWrapper;
+import at.fhv.hotelsoftware.view.form.RecipientState;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -131,12 +132,14 @@ public class CheckOutController {
             GuestData guest = invoiceDTO.getGuestData();
 
             LineItemWrapper lineItemWrapper = new LineItemWrapper(invoiceDTO.getLineItemDTOs());
+            RecipientState recipientState =  new RecipientState();
 
             model.addAttribute("invoice", invoiceDTO);
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest", guest);
             model.addAttribute("rooms", roomDTOs);
             model.addAttribute("lineItemWrapper", lineItemWrapper);
+            model.addAttribute("recipientState",recipientState);
 
         } catch (BookingNotFoundException e) {
             return redirectToErrorPage(e.getMessage());
@@ -221,7 +224,8 @@ public class CheckOutController {
     @PostMapping (SPLIT_INVOICE)
     public ModelAndView splitInvoice(@ModelAttribute("lineItemWrapper") LineItemWrapper lineItemWrapper,
                                      @ModelAttribute("booking") BookingDTO bookingDTO,
-                                     @ModelAttribute("invoice") InvoiceDTO invoiceDTO) {
+                                     @ModelAttribute("invoice") InvoiceDTO invoiceDTO,
+                                     @ModelAttribute("recipientState") RecipientState recipientState) {
 
         List<LineItemDTO> lineItemDTOs = lineItemWrapper.getLineItemList();
 
@@ -233,13 +237,23 @@ public class CheckOutController {
                                 lineItemDTO.getDuration(),
                                 lineItemDTO.getPrice()))
                 .collect(Collectors.toList());
-
-
-        try {
-            splitInvoiceService.splitInvoice(bookingDTO.getBookingId(), invoiceDTO.getInvoiceNumber(), lineItemsToSplit);
-        } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException | AllLineItemsRemovedException e) {
-            return redirectToErrorPage(e.getMessage());
+        if(recipientState.isAnonymous())
+        {
+            try {
+                splitInvoiceService.splitInvoiceWithoutRecipient(bookingDTO.getBookingId(), invoiceDTO.getInvoiceNumber(), lineItemsToSplit);
+            } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException | AllLineItemsRemovedException e) {
+                return redirectToErrorPage(e.getMessage());
+            }
         }
+        else{
+            try {
+                splitInvoiceService.splitInvoice(bookingDTO.getBookingId(), invoiceDTO.getInvoiceNumber(), lineItemsToSplit);
+            } catch (BookingNotFoundException | InvoiceNotFoundException | NoLineItemsException | LineItemsMismatchException | AllLineItemsRemovedException e) {
+                return redirectToErrorPage(e.getMessage());
+            }
+        }
+
+
 
 
         return new ModelAndView("redirect:checkOutGuestOverview?id="+bookingDTO.getBookingId().getBookingId().toString());

@@ -1,13 +1,9 @@
 package at.fhv.hotelsoftware.application;
 
-import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
-import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
-import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Room;
-import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
@@ -79,7 +75,7 @@ public class ViewRoomServiceTests {
     }
 
     @Test
-    public void given_room_when_clean_then_expectroomstatusfree() {
+    public void given_room_when_clean_then_expectroomstatusfree(){
         //given
         Room singleRoom = Room.builder().
                 roomStatus(RoomStatus.CLEANING).
@@ -101,7 +97,7 @@ public class ViewRoomServiceTests {
         Room singleRoom[] = new Room[10];
         Room doubleRoom[] = new Room[10];
         Room luxusRoom[] = new Room[10];
-        List<Room> room = new LinkedList();
+        List <Room> room = new LinkedList();
 
         int expectedNumberOfRooms = 30;
 
@@ -112,21 +108,21 @@ public class ViewRoomServiceTests {
                     bookingId(null).
                     roomCategory(RoomCategory.SINGLE).
                     roomNumber(100 + i).build();
-            room.add(singleRoom[i]);
+                    room.add(singleRoom[i]);
 
             doubleRoom[i] = Room.builder().
                     roomStatus(RoomStatus.FREE).
                     bookingId(null).
                     roomCategory(RoomCategory.DOUBLE).
                     roomNumber(200 + i).build();
-            room.add(doubleRoom[i]);
+                    room.add(doubleRoom[i]);
 
             luxusRoom[i] = Room.builder().
                     roomStatus(RoomStatus.FREE).
                     bookingId(null).
                     roomCategory(RoomCategory.SUPERIOR).
                     roomNumber(300 + i).build();
-            room.add(luxusRoom[i]);
+                    room.add(luxusRoom[i]);
         }
 
         Mockito.when(roomRepository.findAllRooms()).thenReturn(room);
@@ -136,6 +132,19 @@ public class ViewRoomServiceTests {
 
         //then
         assertEquals(expectedNumberOfRooms, rooms.size());
+
+    }
+
+    @Test
+    public void given_norooms_when_findallrooms_then_throwroomnotfoundexception() {
+
+        //given
+        List <Room> rooms = new LinkedList();
+
+        Mockito.when(roomRepository.findAllRooms()).thenReturn(rooms);
+
+        //when..then
+        assertThrows(RoomNotFoundException.class, () -> viewRoomService.findAllRooms());
 
     }
 
