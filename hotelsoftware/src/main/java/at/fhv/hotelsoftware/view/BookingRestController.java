@@ -41,7 +41,7 @@ public class BookingRestController {
     private static final String GET_TOTAL_ROOM = "/getTotalRoom";
 
     @PostMapping(GET_TOTAL_ROOM)    //find me: @RequestBody was missing, object receiving input necessary, Data = String -> needs to be parsed to LocalDate
-    public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) throws BookingNotFoundException, RoomNotFoundException {
+    public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) throws BookingNotFoundException {
 
         LocalDate checkInDate = LocalDate.parse(bookingForm.getCheckInDate());
         LocalDate checkOutDate = LocalDate.parse(bookingForm.getCheckOutDate());
