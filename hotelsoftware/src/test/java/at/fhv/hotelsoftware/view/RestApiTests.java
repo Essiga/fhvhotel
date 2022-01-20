@@ -61,6 +61,9 @@ public class RestApiTests
     @Autowired
     private RoomRepository roomRepository;
 
+    @Autowired
+    private CreateBookingService createBookingService;
+
     @PersistenceContext
     private EntityManager em;
 
@@ -196,13 +199,19 @@ public class RestApiTests
                 .bookingStatus(BookingStatus.CONFIRMED)
                 .build();
 
+        BookingForm bookingForm2 = new BookingForm();
+
+        bookingForm2.setSingleRoomCount(0);
+        bookingForm2.setDoubleRoomCount(1);
+        bookingForm2.setSuperiorRoomCount(0);
+        bookingForm2.setCheckInDate(LocalDate.now().plusDays(1).toString());
+        bookingForm2.setCheckOutDate(LocalDate.now().plusDays(3).toString());
+
         em.persist(singleRoom);
         em.persist(doubleRoom);
         em.persist(doubleRoom2);
         em.persist(superiorRoom);
-        em.flush();
-
-        em.persist(booking);
+        createBookingService.createBooking(bookingForm2, new GuestId(UUID.randomUUID()));
         em.flush();
 
         int single = roomRepository.findAllSingleRoomCount();
