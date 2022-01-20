@@ -317,18 +317,6 @@ class StayComponent extends React.Component {
                         :""
                     }
 
-                    {/*{this.state.singleRoomSelected | this.state.doubleRoomSelected | this.state.superiorRoomSelected */}
-                    {/*    ?<div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">*/}
-                    {/*        {this.state.singleRoomSelected && <SingleRoomComponent /> }*/}
-                    {/*        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }*/}
-                    {/*        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }*/}
-                    {/*    </div>*/}
-                    {/*    :""*/}
-                    {/*}*/}
-
-
-
-
                 </form>
             </div>
         );
