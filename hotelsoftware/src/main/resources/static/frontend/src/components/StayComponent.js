@@ -34,12 +34,41 @@ class StayComponent extends React.Component {
                 this.setState({prices: Object.values(result)})
             });
     }
-
     updateMaxRooms() {
         const stayDates =
             {
                 checkInDate: this.props.checkInDate,
                 checkOutDate: this.props.checkOutDate
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+    }
+
+    updateMaxRoomsCheckIn(e) {
+        const stayDates =
+            {
+                checkInDate: e.target.value,
+                checkOutDate: this.props.checkOutDate
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+    }
+
+    updateMaxRoomsCheckOut(e) {
+        const stayDates =
+            {
+                checkInDate: this.props.checkInDate,
+                checkOutDate: e.target.value
             };
 
         fetch("http://localhost:8080/rest/booking/getTotalRoom",
@@ -134,8 +163,12 @@ class StayComponent extends React.Component {
         this.calculateRoomPrices();
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
-            this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.updateMaxRooms();
+            this.props.checkOutDate != null && this.props.checkOutDate != ""){
+            this.updateMaxRoomsCheckIn(e);
+        }
+
+
+
     }
 
     handleCheckOutDateChange(e) {
@@ -143,8 +176,12 @@ class StayComponent extends React.Component {
         this.calculateRoomPrices();
 
         if (this.props.checkInDate != null && this.props.checkInDate != "" &&
-            this.props.checkOutDate != null && this.props.checkOutDate != "")
-            this.updateMaxRooms();
+            this.props.checkOutDate != null && this.props.checkOutDate != ""){
+            this.updateMaxRoomsCheckOut(e);
+        }
+
+
+
     }
 
     checkInputStay() {
@@ -240,13 +277,6 @@ class StayComponent extends React.Component {
                     </div>
 
                     <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
-                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
-                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
-                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
-                    </div>
-
-
-                    <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 
                         <h2 className="text-center text-xl font-semibold">Price for Stay: <span id="totalPrice">0€</span></h2>
 
@@ -265,6 +295,15 @@ class StayComponent extends React.Component {
                             Next
                         </button>
                     </div>
+
+                    {this.state.singleRoomSelected | this.state.doubleRoomSelected | this.state.superiorRoomSelected  &&<div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
+                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
+                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+                    </div>}
+
+
+
 
                 </form>
             </div>

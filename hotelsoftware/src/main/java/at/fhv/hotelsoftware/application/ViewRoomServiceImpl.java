@@ -68,14 +68,12 @@ public class ViewRoomServiceImpl implements ViewRoomService {
 
         List<Booking> bookings = bookingRepository.findBookingsByDate(checkIn, checkOut);
 
-        if (bookings.isEmpty()){
-            throw new BookingNotFoundException("No bookings found");
-        }
-
-        for (int i = 0; i < bookings.size(); i++) {
-            occupiedSingleRoomCount += bookings.get(i).getSingleRoom();
-            occupiedDoubleRoomCount += bookings.get(i).getDoubleRoom();
-            occupiedSuperiorRoomCount += bookings.get(i).getSuperiorRoom();
+        if (!bookings.isEmpty()){
+            for (int i = 0; i < bookings.size(); i++) {
+                occupiedSingleRoomCount += bookings.get(i).getSingleRoom();
+                occupiedDoubleRoomCount += bookings.get(i).getDoubleRoom();
+                occupiedSuperiorRoomCount += bookings.get(i).getSuperiorRoom();
+            }
         }
 
         List<Integer> resultList = new LinkedList<>();

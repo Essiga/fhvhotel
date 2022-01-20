@@ -185,25 +185,25 @@ public class ViewRoomServiceTests {
         assertEquals(expectedNumberOfRooms, rooms);
     }
 
-
-    @Test
-    public void given_nobooking_when_findFreeContingentOfRooms_then_throwbookingnotfoundexception()  {
-        List<Integer> expectedNumberOfRooms = new LinkedList<>();
-        expectedNumberOfRooms.add(9);
-        expectedNumberOfRooms.add(9);
-        expectedNumberOfRooms.add(9);
-
-
-        LocalDate checkIn = LocalDate.now();
-        LocalDate checkOut = LocalDate.now().plusDays(1);
-
-
-        Mockito.when(roomRepository.findAllSingleRoomCount()).thenReturn(10);
-        Mockito.when(roomRepository.findAllDoubleRoomCount()).thenReturn(10);
-        Mockito.when(roomRepository.findAllSuperiorRoomCount()).thenReturn(10);
-
-        //when then
-        assertThrows(BookingNotFoundException.class, () -> viewRoomService.findFreeContingentOfRooms(checkIn, checkOut));
-
-    }
+//
+//    @Test
+//    public void given_nobooking_when_findFreeContingentOfRooms_then_throwbookingnotfoundexception()  {
+//        List<Integer> expectedNumberOfRooms = new LinkedList<>();
+//        expectedNumberOfRooms.add(9);
+//        expectedNumberOfRooms.add(9);
+//        expectedNumberOfRooms.add(9);
+//
+//
+//        LocalDate checkIn = LocalDate.now();
+//        LocalDate checkOut = LocalDate.now().plusDays(1);
+//
+//
+//        Mockito.when(roomRepository.findAllSingleRoomCount()).thenReturn(10);
+//        Mockito.when(roomRepository.findAllDoubleRoomCount()).thenReturn(10);
+//        Mockito.when(roomRepository.findAllSuperiorRoomCount()).thenReturn(10);
+//
+//        //when then
+//        assertThrows(BookingNotFoundException.class, () -> viewRoomService.findFreeContingentOfRooms(checkIn, checkOut));
+//
+//    }
 }
