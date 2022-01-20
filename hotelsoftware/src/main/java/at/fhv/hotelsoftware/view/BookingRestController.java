@@ -40,15 +40,11 @@ public class BookingRestController {
     private static final String CREATE_BOOKING = "/createBooking";
     private static final String GET_TOTAL_ROOM = "/getTotalRoom";
 
-    @PostMapping(GET_TOTAL_ROOM)    //find me: @RequestBody was missing, object receiving input necessary, Data = String -> needs to be parsed to LocalDate
+    @PostMapping(GET_TOTAL_ROOM)
     public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) throws BookingNotFoundException, RoomNotFoundException {
 
         LocalDate checkInDate = LocalDate.parse(bookingForm.getCheckInDate());
         LocalDate checkOutDate = LocalDate.parse(bookingForm.getCheckOutDate());
-
-        List<Integer> contingent = viewRoomService.findFreeContingentOfRooms(checkInDate, checkOutDate);
-
-        System.out.println("Contingent: " + contingent);
 
         return viewRoomService.findFreeContingentOfRooms(checkInDate, checkOutDate);
     }

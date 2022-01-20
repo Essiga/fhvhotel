@@ -116,7 +116,7 @@ class StayComponent extends React.Component {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
 
-        if (this.props.checkInDate != null && this.props.checkInDate != "" && //find me: call function only when both checkInDate and checkOutDate are not null
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
             this.updateMaxRooms();
 
@@ -245,7 +245,7 @@ class StayComponent extends React.Component {
 
                                     <div className="pl-24 w-1/3">
                                         <h2 className="mb-2 font-semibold tracking-wider">Single</h2>
-                                        <input type="number" id="single" min="0" max={this.state.rooms[0]}  //find me: set max
+                                        <input type="number" id="single" min="0" max={this.state.rooms[0]}
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>

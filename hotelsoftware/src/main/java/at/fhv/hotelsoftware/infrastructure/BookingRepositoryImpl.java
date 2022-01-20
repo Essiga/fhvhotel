@@ -59,7 +59,7 @@ public class BookingRepositoryImpl implements BookingRepository {
     @Override
     public List<Booking> findBookingsByDate(LocalDate checkIn, LocalDate checkOut){
         TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN :checkIn AND :checkOut) AND (Check_out_date BETWEEN :checkIn AND :checkOut) AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
-        query.setParameter("checkIn", checkIn); //find me: parameter were not set
+        query.setParameter("checkIn", checkIn);
         query.setParameter("checkOut", checkOut);
         List<Booking> result = query.getResultList();
         return result;

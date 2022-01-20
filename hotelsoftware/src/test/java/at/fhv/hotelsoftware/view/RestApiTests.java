@@ -3,18 +3,19 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.application.api.ViewGuestService;
+import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Guest;
+import at.fhv.hotelsoftware.domain.model.Invoice;
+import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
-import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
-import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.junit.jupiter.api.Test;
@@ -36,6 +37,8 @@ import static org.mockito.Mockito.times;
 
 import java.net.URI;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -51,6 +54,15 @@ public class RestApiTests
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private ViewRoomService viewRoomService;
+
+    @Autowired
+    private RoomRepository roomRepository;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @LocalServerPort
     private int port;
@@ -136,5 +148,84 @@ public class RestApiTests
         assertEquals(bookingExpected.getSuperiorRoomCount(), actualBooking.getSuperiorRoom());
         assertEquals(LocalDate.parse(bookingExpected.getCheckInDate()), actualBooking.getCheckInDate());
         assertEquals(LocalDate.parse(bookingExpected.getCheckOutDate()), actualBooking.getCheckOutDate());
+    }
+
+    @Test
+    public void given_bookingformandroomsandbookings_when_gettotalroom_then_returntotalroom() {
+
+        //given
+        BookingForm bookingForm = BookingForm.builder()
+                .checkInDate(LocalDate.now().toString())
+                .checkOutDate(LocalDate.now().plusDays(7).toString())
+                .build();
+
+        Room singleRoom = Room.builder()
+                .roomCategory(RoomCategory.SINGLE)
+                .roomNumber(100)
+                .roomStatus(RoomStatus.FREE)
+                .bookingId(null)
+                .build();
+
+        Room doubleRoom = Room.builder()
+                .roomCategory(RoomCategory.DOUBLE)
+                .roomNumber(200)
+                .roomStatus(RoomStatus.FREE)
+                .bookingId(null)
+                .build();
+
+        Room doubleRoom2 = Room.builder()
+                .roomCategory(RoomCategory.DOUBLE)
+                .roomNumber(201)
+                .roomStatus(RoomStatus.FREE)
+                .bookingId(null)
+                .build();
+
+        Room superiorRoom = Room.builder()
+                .roomCategory(RoomCategory.SUPERIOR)
+                .roomNumber(300)
+                .roomStatus(RoomStatus.FREE)
+                .bookingId(null)
+                .build();
+
+        Booking booking = Booking.builder()
+                .checkInDate(LocalDate.now().plusDays(1))
+                .checkOutDate(LocalDate.now().plusDays(3))
+                .singleRoom(0)
+                .doubleRoom(1)
+                .superiorRoom(0)
+                .bookingStatus(BookingStatus.CONFIRMED)
+                .build();
+
+        em.persist(singleRoom);
+        em.persist(doubleRoom);
+        em.persist(doubleRoom2);
+        em.persist(superiorRoom);
+        em.flush();
+
+        em.persist(booking);
+        em.flush();
+
+        int single = roomRepository.findAllSingleRoomCount();
+        int doubleRooms = roomRepository.findAllDoubleRoomCount();
+        int superior = roomRepository.findAllSuperiorRoomCount();
+        List<Booking> bookings = bookingRepository.findBookingsByDate(LocalDate.now(), LocalDate.now().plusDays(7));
+
+        //when
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
+                .path("/rest/booking/getTotalRoom").build().encode().toUri();
+        List<Integer> roomContingents = this.restTemplate.postForObject(uri, bookingForm, List.class);
+
+//        Optional<Booking> actualBookingOpt = bookingRepository.findBookingById(bookingIdActual);
+//
+//        // then
+//        assertTrue(actualBookingOpt.isPresent());
+//        Booking actualBooking = actualBookingOpt.get();
+//
+//        assertEquals(bookingIdActual.getBookingId(), actualBooking.getBookingId().getBookingId());
+//        assertEquals(bookingExpected.getSingleRoomCount(), actualBooking.getSingleRoom());
+//        assertEquals(bookingExpected.getDoubleRoomCount(), actualBooking.getDoubleRoom());
+//        assertEquals(bookingExpected.getSuperiorRoomCount(), actualBooking.getSuperiorRoom());
+//        assertEquals(LocalDate.parse(bookingExpected.getCheckInDate()), actualBooking.getCheckInDate());
+//        assertEquals(LocalDate.parse(bookingExpected.getCheckOutDate()), actualBooking.getCheckOutDate());
     }
 }
