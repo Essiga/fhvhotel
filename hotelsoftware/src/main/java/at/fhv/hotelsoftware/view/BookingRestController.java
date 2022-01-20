@@ -6,6 +6,8 @@ import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
+import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
@@ -39,7 +41,7 @@ public class BookingRestController {
     private static final String GET_TOTAL_ROOM = "/getTotalRoom";
 
     @PostMapping(GET_TOTAL_ROOM)    //find me: @RequestBody was missing, object receiving input necessary, Data = String -> needs to be parsed to LocalDate
-    public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) {
+    public List<Integer> getTotalRoom(@RequestBody BookingForm bookingForm) throws BookingNotFoundException, RoomNotFoundException {
 
         LocalDate checkInDate = LocalDate.parse(bookingForm.getCheckInDate());
         LocalDate checkOutDate = LocalDate.parse(bookingForm.getCheckOutDate());

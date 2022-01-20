@@ -2,6 +2,7 @@ package at.fhv.hotelsoftware.application.api;
 
 import at.fhv.hotelsoftware.application.dto.RoomDTO;
 import at.fhv.hotelsoftware.domain.model.Room;
+import at.fhv.hotelsoftware.domain.model.exceptions.BookingNotFoundException;
 import at.fhv.hotelsoftware.domain.model.exceptions.RoomNotFoundException;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 
@@ -15,5 +16,5 @@ public interface ViewRoomService {
     List<RoomDTO> findRoomsByBookingId(BookingId bookingId) throws RoomNotFoundException;
     List<RoomDTO> findAllRooms() throws RoomNotFoundException;
     void clean(String roomNumberString);
-    List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut);
+    List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut) throws RoomNotFoundException, BookingNotFoundException;
 }

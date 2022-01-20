@@ -56,15 +56,6 @@ public class RoomRepositoryImpl implements RoomRepository {
     }
 
     @Override
-    public List<Booking> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut){
-        TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN :checkIn AND :checkOut) AND (Check_out_date BETWEEN :checkIn AND :checkOut) AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
-        query.setParameter("checkIn", checkIn); //find me: parameter were not set
-        query.setParameter("checkOut", checkOut);
-        List<Booking> result = query.getResultList();
-        return result;
-    }
-
-    @Override
     public Integer findAllSingleRoomCount() {
         TypedQuery<Long> allSingleRooms = this.em.createQuery(
                 "Select count (id) From Room Where room_category = 'SINGLE'", Long.class);
