@@ -16,5 +16,5 @@ public interface ViewRoomService {
     List<RoomDTO> findRoomsByBookingId(BookingId bookingId) throws RoomNotFoundException;
     List<RoomDTO> findAllRooms() throws RoomNotFoundException;
     void clean(String roomNumberString);
-    List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut) throws RoomNotFoundException, BookingNotFoundException;
+    List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut) throws BookingNotFoundException;
 }
