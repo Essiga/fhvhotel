@@ -200,4 +200,130 @@ public class RoomRepositoryTests {
         }
 
     }
+
+    @Test
+    void given_rooms_when_findallsingleroomcount(){
+        //given
+        Integer expectedRoomCount = 2;
+
+        Room roomExpected1 = Room.builder().
+                roomNumber(101).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SINGLE).
+                build();
+
+        Room roomExpected2 = Room.builder().
+                roomNumber(102).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SINGLE).
+                build();
+
+        Room roomNotExpected1 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.DOUBLE).
+                build();
+
+        Room roomNotExpected2 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SUPERIOR).
+                build();
+
+        this.em.persist(roomExpected1);
+        this.em.persist(roomExpected2);
+        this.em.persist(roomNotExpected1);
+        this.em.persist(roomNotExpected2);
+        this.em.flush();
+
+        //when
+        Integer singleRoomCount = roomRepository.findAllSingleRoomCount();
+
+        //then
+        assertEquals(expectedRoomCount, singleRoomCount);
+    }
+
+    @Test
+    void given_rooms_when_findalldoubleroomcount(){
+        //given
+        Integer expectedRoomCount = 2;
+
+        Room roomExpected1 = Room.builder().
+                roomNumber(101).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.DOUBLE).
+                build();
+
+        Room roomExpected2 = Room.builder().
+                roomNumber(102).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.DOUBLE).
+                build();
+
+        Room roomNotExpected1 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SINGLE).
+                build();
+
+        Room roomNotExpected2 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SUPERIOR).
+                build();
+
+        this.em.persist(roomExpected1);
+        this.em.persist(roomExpected2);
+        this.em.persist(roomNotExpected1);
+        this.em.persist(roomNotExpected2);
+        this.em.flush();
+
+        //when
+        Integer singleRoomCount = roomRepository.findAllDoubleRoomCount();
+
+        //then
+        assertEquals(expectedRoomCount, singleRoomCount);
+    }
+
+    @Test
+    void given_rooms_when_findallsuperiorroomcount(){
+        //given
+        Integer expectedRoomCount = 2;
+
+        Room roomExpected1 = Room.builder().
+                roomNumber(101).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SUPERIOR).
+                build();
+
+        Room roomExpected2 = Room.builder().
+                roomNumber(102).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SUPERIOR).
+                build();
+
+        Room roomNotExpected1 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.SINGLE).
+                build();
+
+        Room roomNotExpected2 = Room.builder().
+                roomNumber(201).
+                roomStatus(RoomStatus.FREE).
+                roomCategory(RoomCategory.DOUBLE).
+                build();
+
+        this.em.persist(roomExpected1);
+        this.em.persist(roomExpected2);
+        this.em.persist(roomNotExpected1);
+        this.em.persist(roomNotExpected2);
+        this.em.flush();
+
+        //when
+        Integer singleRoomCount = roomRepository.findAllSuperiorRoomCount();
+
+        //then
+        assertEquals(expectedRoomCount, singleRoomCount);
+    }
 }

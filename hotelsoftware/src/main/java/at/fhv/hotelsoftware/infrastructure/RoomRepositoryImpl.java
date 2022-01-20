@@ -1,6 +1,7 @@
 package at.fhv.hotelsoftware.infrastructure;
 
 import at.fhv.hotelsoftware.domain.api.RoomRepository;
+import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
 import at.fhv.hotelsoftware.domain.model.Room;
 import org.springframework.stereotype.Component;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,5 +53,26 @@ public class RoomRepositoryImpl implements RoomRepository {
         Optional<Room> room = query.getResultStream().findFirst();
 
         return room;
+    }
+
+    @Override
+    public Integer findAllSingleRoomCount() {
+        TypedQuery<Long> allSingleRooms = this.em.createQuery(
+                "Select count (id) From Room Where room_category = 'SINGLE'", Long.class);
+        return Math.toIntExact(allSingleRooms.getSingleResult());
+    }
+
+    @Override
+    public Integer findAllDoubleRoomCount() {
+        TypedQuery<Long> allDoubleRooms = this.em.createQuery(
+                "Select count (id) From Room Where room_category= 'DOUBLE'", Long.class);
+        return Math.toIntExact(allDoubleRooms.getSingleResult());
+    }
+
+    @Override
+    public Integer findAllSuperiorRoomCount() {
+        TypedQuery<Long> allSuperiorRooms = this.em.createQuery(
+                "Select count (id) From Room Where room_category = 'SUPERIOR'", Long.class);
+        return Math.toIntExact(allSuperiorRooms.getSingleResult());
     }
 }

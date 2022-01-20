@@ -13,10 +13,12 @@ class StayComponent extends React.Component {
 
         this.state = {
             prices: "",
+            rooms: "",
             singleRoomSelected: false,
             doubleRoomSelected: false,
             superiorRoomSelected: false
         };
+
 
         this.handleSingleRoomCountChange = this.handleSingleRoomCountChange.bind(this);
         this.handleDoubleRoomCountChange = this.handleDoubleRoomCountChange.bind(this);
@@ -37,6 +39,54 @@ class StayComponent extends React.Component {
             }
         })
 
+        fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
+            .then(result => {
+                this.setState({prices: Object.values(result)})
+            });
+    }
+    updateMaxRooms() {
+        const stayDates =
+            {
+                checkInDate: this.props.checkInDate,
+                checkOutDate: this.props.checkOutDate
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+    }
+
+    updateMaxRoomsCheckIn(e) {
+        const stayDates =
+            {
+                checkInDate: e.target.value,
+                checkOutDate: this.props.checkOutDate
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+    }
+
+    updateMaxRoomsCheckOut(e) {
+        const stayDates =
+            {
+                checkInDate: this.props.checkInDate,
+                checkOutDate: e.target.value
+            };
+
+        fetch("http://localhost:8080/rest/booking/getTotalRoom",
+            {
+                method: 'POST',
+                headers: {'content-type': 'application/json'},
+                body: JSON.stringify(stayDates)
+            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
     }
 
     calculateRoomPrices() {
@@ -76,6 +126,10 @@ class StayComponent extends React.Component {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
 
+        if (this.props.checkInDate != null && this.props.checkInDate != "" && //find me: call function only when both checkInDate and checkOutDate are not null
+            this.props.checkOutDate != null && this.props.checkOutDate != "")
+            this.updateMaxRooms();
+
         if (e.target.value > 0) {
             this.setState({singleRoomSelected: true})
 
@@ -88,6 +142,10 @@ class StayComponent extends React.Component {
         this.props.onDoubleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
 
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
+            this.props.checkOutDate != null && this.props.checkOutDate != "")
+            this.updateMaxRooms();
+
        if (e.target.value > 0) {
             this.setState({doubleRoomSelected: true})
         } else {
@@ -99,6 +157,10 @@ class StayComponent extends React.Component {
         this.props.onSuperiorRoomCountChange(e.target.value);
         this.calculateRoomPrices();
 
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
+            this.props.checkOutDate != null && this.props.checkOutDate != "")
+            this.updateMaxRooms();
+
        if (e.target.value > 0) {
             this.setState({superiorRoomSelected : true})
        } else {
@@ -109,11 +171,27 @@ class StayComponent extends React.Component {
     handleCheckInDateChange(e) {
         this.props.onCheckInDateChange(e.target.value);
         this.calculateRoomPrices();
+
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
+            this.props.checkOutDate != null && this.props.checkOutDate != ""){
+            this.updateMaxRoomsCheckIn(e);
+        }
+
+
+
     }
 
     handleCheckOutDateChange(e) {
         this.props.onCheckOutDateChange(e.target.value);
         this.calculateRoomPrices();
+
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
+            this.props.checkOutDate != null && this.props.checkOutDate != ""){
+            this.updateMaxRoomsCheckOut(e);
+        }
+
+
+
     }
 
     checkInputStay() {
@@ -121,6 +199,7 @@ class StayComponent extends React.Component {
     }
 
     render() {
+
         return (
 
             <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
@@ -145,7 +224,6 @@ class StayComponent extends React.Component {
                         </div>
                     </div>
                 </div>
-
 
                 <form className="h-full w-full">
                     <div className=" p-16 border-4 border-blue-200 rounded bg-gray-50 opacity-95">
@@ -177,41 +255,36 @@ class StayComponent extends React.Component {
 
                                     <div className="pl-24 w-1/3">
                                         <h2 className="mb-2 font-semibold tracking-wider">Single</h2>
-                                        <input type="number" id="single" min="0"
+                                        <input type="number" id="single" min="0" max={this.state.rooms[0]}  //find me: set max
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>
-                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                        <label htmlFor="single" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[0]}</label>
                                     </div>
 
                                     <div className="pl-12 w-1/3">
                                         <h2 className="mb-2 font-semibold tracking-wider">Double</h2>
-                                        <input type="number" id="double" min="0"
+                                        <input type="number" id="double" min="0" max={this.state.rooms[1]}
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.doubleRoomCount}
                                                onChange={this.handleDoubleRoomCountChange}/>
-                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                        <label htmlFor="double" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[1]}</label>
                                     </div>
 
                                     <div className="w-1/3">
                                         <h2 className="mb-2 font-semibold tracking-wider">Superior</h2>
-                                        <input type="number" id="superior" min="0"
+                                        <input type="number" id="superior" min="0" max={this.state.rooms[2]}
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.superiorRoomCount}
                                                onChange={this.handleSuperiorRoomCountChange}/>
-                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tight">ROOMS</label>
+                                        <label htmlFor="superior" className="block text-xs text-gray-500 tracking-tight">ROOMS {this.state.rooms[2]}</label>
                                     </div>
                                 </div>
                             </div>
+
+
                         </div>
                     </div>
-
-                    <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
-                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
-                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
-                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
-                    </div>
-
 
                     <div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
 
@@ -232,6 +305,14 @@ class StayComponent extends React.Component {
                             Next
                         </button>
                     </div>
+
+                    {this.state.singleRoomSelected | this.state.doubleRoomSelected | this.state.superiorRoomSelected  &&<div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
+                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
+                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
+                    </div>}
+
+
 
 
                 </form>
