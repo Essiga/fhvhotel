@@ -37,10 +37,7 @@ import static org.mockito.Mockito.times;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -52,13 +49,10 @@ public class RestApiTests
     @Autowired
     private GuestRepository guestRepository;
 
-    @Autowired
+    @MockBean
     private BookingRepository bookingRepository;
 
-    @Autowired
-    private ViewRoomService viewRoomService;
-
-    @Autowired
+    @MockBean
     private RoomRepository roomRepository;
 
     @Autowired
@@ -162,35 +156,16 @@ public class RestApiTests
                 .checkOutDate(LocalDate.now().plusDays(7).toString())
                 .build();
 
-        Room singleRoom = Room.builder()
-                .roomCategory(RoomCategory.SINGLE)
-                .roomNumber(100)
-                .roomStatus(RoomStatus.FREE)
-                .bookingId(null)
+        Booking bookingExpected = Booking.builder()
+                .checkInDate(LocalDate.now().plusDays(1))
+                .checkOutDate(LocalDate.now().plusDays(3))
+                .singleRoom(1)
+                .doubleRoom(1)
+                .superiorRoom(1)
+                .bookingStatus(BookingStatus.CONFIRMED)
                 .build();
 
-        Room doubleRoom = Room.builder()
-                .roomCategory(RoomCategory.DOUBLE)
-                .roomNumber(200)
-                .roomStatus(RoomStatus.FREE)
-                .bookingId(null)
-                .build();
-
-        Room doubleRoom2 = Room.builder()
-                .roomCategory(RoomCategory.DOUBLE)
-                .roomNumber(201)
-                .roomStatus(RoomStatus.FREE)
-                .bookingId(null)
-                .build();
-
-        Room superiorRoom = Room.builder()
-                .roomCategory(RoomCategory.SUPERIOR)
-                .roomNumber(300)
-                .roomStatus(RoomStatus.FREE)
-                .bookingId(null)
-                .build();
-
-        Booking booking = Booking.builder()
+        Booking bookingExpected2 = Booking.builder()
                 .checkInDate(LocalDate.now().plusDays(1))
                 .checkOutDate(LocalDate.now().plusDays(3))
                 .singleRoom(0)
@@ -199,42 +174,22 @@ public class RestApiTests
                 .bookingStatus(BookingStatus.CONFIRMED)
                 .build();
 
-        BookingForm bookingForm2 = new BookingForm();
+        List<Integer> expectedResults = new LinkedList<>();
+        expectedResults.add(9);
+        expectedResults.add(8);
+        expectedResults.add(9);
 
-        bookingForm2.setSingleRoomCount(0);
-        bookingForm2.setDoubleRoomCount(1);
-        bookingForm2.setSuperiorRoomCount(0);
-        bookingForm2.setCheckInDate(LocalDate.now().plusDays(1).toString());
-        bookingForm2.setCheckOutDate(LocalDate.now().plusDays(3).toString());
-
-        em.persist(singleRoom);
-        em.persist(doubleRoom);
-        em.persist(doubleRoom2);
-        em.persist(superiorRoom);
-        createBookingService.createBooking(bookingForm2, new GuestId(UUID.randomUUID()));
-        em.flush();
-
-        int single = roomRepository.findAllSingleRoomCount();
-        int doubleRooms = roomRepository.findAllDoubleRoomCount();
-        int superior = roomRepository.findAllSuperiorRoomCount();
-        List<Booking> bookings = bookingRepository.findBookingsByDate(LocalDate.now(), LocalDate.now().plusDays(7));
+        Mockito.when(bookingRepository.findBookingsByDate(LocalDate.now(), LocalDate.now().plusDays(7))).thenReturn(List.of(bookingExpected, bookingExpected2));
+        Mockito.when(roomRepository.findAllSingleRoomCount()).thenReturn(10);
+        Mockito.when(roomRepository.findAllDoubleRoomCount()).thenReturn(10);
+        Mockito.when(roomRepository.findAllSuperiorRoomCount()).thenReturn(10);
 
         //when
         URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
                 .path("/rest/booking/getTotalRoom").build().encode().toUri();
         List<Integer> roomContingents = this.restTemplate.postForObject(uri, bookingForm, List.class);
 
-//        Optional<Booking> actualBookingOpt = bookingRepository.findBookingById(bookingIdActual);
-//
-//        // then
-//        assertTrue(actualBookingOpt.isPresent());
-//        Booking actualBooking = actualBookingOpt.get();
-//
-//        assertEquals(bookingIdActual.getBookingId(), actualBooking.getBookingId().getBookingId());
-//        assertEquals(bookingExpected.getSingleRoomCount(), actualBooking.getSingleRoom());
-//        assertEquals(bookingExpected.getDoubleRoomCount(), actualBooking.getDoubleRoom());
-//        assertEquals(bookingExpected.getSuperiorRoomCount(), actualBooking.getSuperiorRoom());
-//        assertEquals(LocalDate.parse(bookingExpected.getCheckInDate()), actualBooking.getCheckInDate());
-//        assertEquals(LocalDate.parse(bookingExpected.getCheckOutDate()), actualBooking.getCheckOutDate());
+        //then
+        assertEquals(expectedResults, roomContingents);
     }
 }
