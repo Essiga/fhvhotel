@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from "react-router-dom";
 import lobby from "../images/lobby.jpg";
+import {BookingRestControllerApi} from "./api/src";
 
 class CreateBookingComponent extends React.Component
 {
@@ -11,9 +12,11 @@ class CreateBookingComponent extends React.Component
     }
 
     componentDidMount() {
-
+        const bookingRestControllerApi = new BookingRestControllerApi();
         const guestData = {
-            gname: this.props.gname,
+            // gname: this.props.gname,
+            id: null,
+            guestId: null,
             voucher: this.props.voucher,
             firstName: this.props.firstName,
             lastName: this.props.lastName,
@@ -23,35 +26,28 @@ class CreateBookingComponent extends React.Component
             country: this.props.country,
             phoneNumber: this.props.phone,
             email: this.props.email,
+            guestType: null,
+            companyName: null,
+            agencyName: null,
         };
 
-        fetch("http://localhost:8080/rest/booking/createGuest",
-            {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(guestData)
-            })
-            .then(res => res.json())
-            .then(guestId => {
-                this.setState({guestId: guestId})
+        bookingRestControllerApi.createGuest(guestData, (error, data, response) =>{
+            this.setState({guestId: data.guestId})
+            console.log(data.guestId);
+            const bookingData =
+                {
+                    guestId: this.state.guestId,
+                    singleRoomCount: this.props.singleRoomCount,
+                    doubleRoomCount: this.props.doubleRoomCount,
+                    superiorRoomCount: this.props.superiorRoomCount,
+                    checkInDate: this.props.checkInDate,
+                    checkOutDate: this.props.checkOutDate
+                };
 
-                const bookingData =
-                    {
-                        guestId: this.state.guestId,
-                        singleRoomCount: this.props.singleRoomCount,
-                        doubleRoomCount: this.props.doubleRoomCount,
-                        superiorRoomCount: this.props.superiorRoomCount,
-                        checkInDate: this.props.checkInDate,
-                        checkOutDate: this.props.checkOutDate
-                    };
+            bookingRestControllerApi.createBooking(bookingData, () => {})
 
-                fetch("http://localhost:8080/rest/booking/createBooking",
-                    {
-                        method: 'POST',
-                        headers: {'content-type': 'application/json'},
-                        body: JSON.stringify(bookingData)
-                    })
-            });
+        })
+
     }
 
     render()

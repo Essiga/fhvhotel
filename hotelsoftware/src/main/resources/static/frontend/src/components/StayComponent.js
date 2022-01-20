@@ -4,6 +4,7 @@ import snow from '../images/snow.jpg'
 import SingleRoomComponent from "./SingleRoomComponent";
 import DoubleRoomComponent from "./DoubleRoomComponent";
 import SuperiorRoomComponent from "./SuperiorRoomComponent";
+import {BookingRestControllerApi} from "./api/src";
 
 class StayComponent extends React.Component {
 
@@ -27,10 +28,15 @@ class StayComponent extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
-            .then(result => {
-                this.setState({prices: Object.values(result)})
-            })
+
+        const bookingRestControllerApi = new BookingRestControllerApi();
+
+        bookingRestControllerApi.getRoomPrices((error, data, response) => {
+            if(response.statusCode === 200){
+                this.setState({prices: Object.values(data)})
+            }
+        })
+
     }
 
     calculateRoomPrices() {
