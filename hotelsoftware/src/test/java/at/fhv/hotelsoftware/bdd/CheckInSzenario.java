@@ -108,7 +108,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
         {
             Room singleRoom = Room.builder()
                     .roomCategory(RoomCategory.SINGLE)
-                    .roomNumber(100 + i)
+                    .roomNumber(700 + i)
                     .roomStatus(RoomStatus.FREE)
                     .bookingId(null)
                     .build();
@@ -120,7 +120,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
         {
             Room doubleRoom = Room.builder()
                     .roomCategory(RoomCategory.DOUBLE)
-                    .roomNumber(200 + i)
+                    .roomNumber(800 + i)
                     .roomStatus(RoomStatus.FREE)
                     .bookingId(null)
                     .build();
@@ -132,7 +132,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
         {
             Room superiorRoom = Room.builder()
                     .roomCategory(RoomCategory.SUPERIOR)
-                    .roomNumber(300 + i)
+                    .roomNumber(900 + i)
                     .roomStatus(RoomStatus.FREE)
                     .bookingId(null)
                     .build();

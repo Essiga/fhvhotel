@@ -45,7 +45,7 @@ public class ViewRoomServiceImpl implements ViewRoomService {
         List<Room> rooms = roomRepository.findAllRooms();
 
         if (rooms.isEmpty()){
-            throw new RoomNotFoundException("No Rooms exist (CreateDummyData)");
+            throw new RoomNotFoundException("No Rooms exist");
         }
 
         return RoomDTO.fromRoomList(rooms);
