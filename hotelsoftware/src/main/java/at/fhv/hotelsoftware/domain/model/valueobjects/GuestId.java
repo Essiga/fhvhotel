@@ -14,4 +14,7 @@ public class GuestId {
     public GuestId(UUID guestId) {
         this.guestId = guestId;
     }
+    public GuestId(String guestId) {
+        this.guestId = UUID.fromString(guestId);
+    }
 }
