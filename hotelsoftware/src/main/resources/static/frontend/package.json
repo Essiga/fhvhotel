@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.4.25",
     "autoprefixer": "^9.8.8",
     "postcss": "^8.4.5",
     "react-router-dom": "^5.2.0",

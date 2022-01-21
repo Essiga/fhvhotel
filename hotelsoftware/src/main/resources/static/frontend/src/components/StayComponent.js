@@ -4,6 +4,7 @@ import snow from '../images/snow.jpg'
 import SingleRoomComponent from "./SingleRoomComponent";
 import DoubleRoomComponent from "./DoubleRoomComponent";
 import SuperiorRoomComponent from "./SuperiorRoomComponent";
+import {BookingRestControllerApi} from "./api/src";
 
 class StayComponent extends React.Component {
 
@@ -29,54 +30,54 @@ class StayComponent extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:8080/rest/booking/getRoomPrices").then(res => res.json())
-            .then(result => {
-                this.setState({prices: Object.values(result)})
-            });
+
+        const bookingRestControllerApi = new BookingRestControllerApi();
+
+        bookingRestControllerApi.getRoomPrices((error, data, response) => {
+            if(response.statusCode === 200){
+                this.setState({prices: Object.values(data)})
+            }
+        })
+
     }
     updateMaxRooms() {
+        const bookingRestControllerApi = new BookingRestControllerApi();
         const stayDates =
             {
                 checkInDate: this.props.checkInDate,
                 checkOutDate: this.props.checkOutDate
             };
 
-        fetch("http://localhost:8080/rest/booking/getTotalRoom",
-            {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(stayDates)
-            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+        bookingRestControllerApi.getTotalRoom(stayDates, (error, data, response) =>{
+            this.setState({rooms: data});
+        })
+
     }
 
     updateMaxRoomsCheckIn(e) {
+        const bookingRestControllerApi = new BookingRestControllerApi();
         const stayDates =
             {
                 checkInDate: e.target.value,
                 checkOutDate: this.props.checkOutDate
             };
 
-        fetch("http://localhost:8080/rest/booking/getTotalRoom",
-            {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(stayDates)
-            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+        bookingRestControllerApi.getTotalRoom(stayDates, (error, data, response) =>{
+            this.setState({rooms: data});
+        })
     }
 
     updateMaxRoomsCheckOut(e) {
+        const bookingRestControllerApi = new BookingRestControllerApi();
         const stayDates =
             {
                 checkInDate: this.props.checkInDate,
                 checkOutDate: e.target.value
             };
 
-        fetch("http://localhost:8080/rest/booking/getTotalRoom",
-            {
-                method: 'POST',
-                headers: {'content-type': 'application/json'},
-                body: JSON.stringify(stayDates)
-            }).then(res => res.json()).then(result => { this.setState({rooms: Object.values(result)})})
+        bookingRestControllerApi.getTotalRoom(stayDates, (error, data, response) =>{
+            this.setState({rooms: data});
+        })
     }
 
     calculateRoomPrices() {
@@ -319,6 +320,8 @@ class StayComponent extends React.Component {
 
                 </form>
             </div>
+
+
         );
     }
 }
