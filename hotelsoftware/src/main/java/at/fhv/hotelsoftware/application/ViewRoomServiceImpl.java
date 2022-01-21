@@ -61,6 +61,7 @@ public class ViewRoomServiceImpl implements ViewRoomService {
     }
 
     @Override
+    @Transactional
     public List<Integer> findFreeContingentOfRooms(LocalDate checkIn, LocalDate checkOut) throws BookingNotFoundException {
         int occupiedSingleRoomCount = 0;
         int occupiedDoubleRoomCount = 0;

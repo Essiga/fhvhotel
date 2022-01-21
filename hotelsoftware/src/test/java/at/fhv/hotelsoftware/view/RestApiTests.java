@@ -3,18 +3,19 @@ package at.fhv.hotelsoftware.view;
 import at.fhv.hotelsoftware.application.api.CreateBookingService;
 import at.fhv.hotelsoftware.application.api.CreateGuestService;
 import at.fhv.hotelsoftware.application.api.ViewGuestService;
+import at.fhv.hotelsoftware.application.api.ViewRoomService;
 import at.fhv.hotelsoftware.application.dto.BookingDataDTO;
 import at.fhv.hotelsoftware.application.dto.GuestDTO;
 import at.fhv.hotelsoftware.application.dto.RoomPriceDTO;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.api.GuestRepository;
+import at.fhv.hotelsoftware.domain.api.RoomRepository;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.model.Guest;
+import at.fhv.hotelsoftware.domain.model.Invoice;
+import at.fhv.hotelsoftware.domain.model.Room;
 import at.fhv.hotelsoftware.domain.model.exceptions.GuestNotFoundException;
-import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestId;
-import at.fhv.hotelsoftware.domain.model.valueobjects.GuestType;
-import at.fhv.hotelsoftware.domain.model.valueobjects.RoomCategory;
+import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
 import org.junit.jupiter.api.Test;
@@ -36,8 +37,7 @@ import static org.mockito.Mockito.times;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Transactional
@@ -49,8 +49,17 @@ public class RestApiTests
     @Autowired
     private GuestRepository guestRepository;
 
-    @Autowired
+    @MockBean
     private BookingRepository bookingRepository;
+
+    @MockBean
+    private RoomRepository roomRepository;
+
+    @Autowired
+    private CreateBookingService createBookingService;
+
+    @PersistenceContext
+    private EntityManager em;
 
     @LocalServerPort
     private int port;
@@ -136,5 +145,51 @@ public class RestApiTests
         assertEquals(bookingExpected.getSuperiorRoomCount(), actualBooking.getSuperiorRoom());
         assertEquals(LocalDate.parse(bookingExpected.getCheckInDate()), actualBooking.getCheckInDate());
         assertEquals(LocalDate.parse(bookingExpected.getCheckOutDate()), actualBooking.getCheckOutDate());
+    }
+
+    @Test
+    public void given_bookingformandroomsandbookings_when_gettotalroom_then_returntotalroom() {
+
+        //given
+        BookingForm bookingForm = BookingForm.builder()
+                .checkInDate(LocalDate.now().toString())
+                .checkOutDate(LocalDate.now().plusDays(7).toString())
+                .build();
+
+        Booking bookingExpected = Booking.builder()
+                .checkInDate(LocalDate.now().plusDays(1))
+                .checkOutDate(LocalDate.now().plusDays(3))
+                .singleRoom(1)
+                .doubleRoom(1)
+                .superiorRoom(1)
+                .bookingStatus(BookingStatus.CONFIRMED)
+                .build();
+
+        Booking bookingExpected2 = Booking.builder()
+                .checkInDate(LocalDate.now().plusDays(1))
+                .checkOutDate(LocalDate.now().plusDays(3))
+                .singleRoom(0)
+                .doubleRoom(1)
+                .superiorRoom(0)
+                .bookingStatus(BookingStatus.CONFIRMED)
+                .build();
+
+        List<Integer> expectedResults = new LinkedList<>();
+        expectedResults.add(9);
+        expectedResults.add(8);
+        expectedResults.add(9);
+
+        Mockito.when(bookingRepository.findBookingsByDate(LocalDate.now(), LocalDate.now().plusDays(7))).thenReturn(List.of(bookingExpected, bookingExpected2));
+        Mockito.when(roomRepository.findAllSingleRoomCount()).thenReturn(10);
+        Mockito.when(roomRepository.findAllDoubleRoomCount()).thenReturn(10);
+        Mockito.when(roomRepository.findAllSuperiorRoomCount()).thenReturn(10);
+
+        //when
+        URI uri = UriComponentsBuilder.fromUriString("http://localhost:" + port)
+                .path("/rest/booking/getTotalRoom").build().encode().toUri();
+        List<Integer> roomContingents = this.restTemplate.postForObject(uri, bookingForm, List.class);
+
+        //then
+        assertEquals(expectedResults, roomContingents);
     }
 }

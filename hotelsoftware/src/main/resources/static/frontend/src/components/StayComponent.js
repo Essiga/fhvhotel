@@ -117,7 +117,7 @@ class StayComponent extends React.Component {
         this.props.onSingleRoomCountChange(e.target.value);
         this.calculateRoomPrices();
 
-        if (this.props.checkInDate != null && this.props.checkInDate != "" && //find me: call function only when both checkInDate and checkOutDate are not null
+        if (this.props.checkInDate != null && this.props.checkInDate != "" &&
             this.props.checkOutDate != null && this.props.checkOutDate != "")
             this.updateMaxRooms();
 
@@ -193,7 +193,7 @@ class StayComponent extends React.Component {
 
         return (
 
-            <div className="overflow-scroll p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
+            <div className="overflow-hidden p-16 bg-gray-50 h-full w-full bg-no-repeat bg-cover" style={{backgroundImage: `url(${snow})`}}>
 
                 <div className="py-2 h-1/12 mb-10 border-4 border-blue-200 rounded bg-gray-50 opacity-90">
                     <div className="w-full px-4 mb-6">
@@ -246,7 +246,7 @@ class StayComponent extends React.Component {
 
                                     <div className="pl-24 w-1/3">
                                         <h2 className="mb-2 font-semibold tracking-wider">Single</h2>
-                                        <input type="number" id="single" min="0" max={this.state.rooms[0]}  //find me: set max
+                                        <input type="number" id="single" min="0" max={this.state.rooms[0]}
                                                className="border-2 p-1.5 border-gray-400 w-16 mb-0.5"
                                                value={this.props.singleRoomCount}
                                                onChange={this.handleSingleRoomCountChange}/>
@@ -283,7 +283,7 @@ class StayComponent extends React.Component {
 
                     </div>
 
-                    <div className="flex justify-between mt-8">
+                    <div className="flex justify-between mt-8 mb-12">
 
                         <Link to="/"
                               className="block w-1/5 p-1 rounded-lg border-2 border-blue-200 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black opacity-95">
@@ -297,14 +297,26 @@ class StayComponent extends React.Component {
                         </button>
                     </div>
 
-                    {this.state.singleRoomSelected | this.state.doubleRoomSelected | this.state.superiorRoomSelected  &&<div className="p-1 mt-12 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
-                        {this.state.singleRoomSelected && <SingleRoomComponent /> }
-                        {this.state.doubleRoomSelected && <DoubleRoomComponent /> }
-                        {this.state.superiorRoomSelected && <SuperiorRoomComponent /> }
-                    </div>}
+                    {this.state.singleRoomSelected
+                        ?<div className="p-1 mt-2 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                            <SingleRoomComponent />
+                        </div>
+                        :""
+                    }
 
+                    {this.state.doubleRoomSelected
+                        ?<div className="p-1 mt-2 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                            <DoubleRoomComponent />
+                        </div>
+                        :""
+                    }
 
-
+                    {this.state.superiorRoomSelected
+                        ?<div className="p-1 mt-2 border-4 border-blue-200 rounded bg-gray-100 opacity-90">
+                            <SuperiorRoomComponent />
+                        </div>
+                        :""
+                    }
 
                 </form>
             </div>
