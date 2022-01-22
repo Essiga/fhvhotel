@@ -1,0 +1,13 @@
+apply plugin: 'com.github.node-gradle.node'
+apply plugin: 'base'
+
+node {
+	download = true
+	version = "12.18.2"
+}
+
+task appNpmBuild(type: NpmTask) {
+	args = ["run", "build"]
+}
+
+assemble.dependsOn(appNpmBuild)

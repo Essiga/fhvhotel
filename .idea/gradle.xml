@@ -10,6 +10,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/hotelsoftware" />
+            <option value="$PROJECT_DIR$/hotelsoftware/Backend" />
+            <option value="$PROJECT_DIR$/hotelsoftware/Frontend" />
           </set>
         </option>
       </GradleProjectSettings>
