@@ -63,6 +63,7 @@ public class BookingController {
     private static final String CONFIRM_BOOKING_SUMMARY  = "/confirmSummary";
     private static final String CONFIRM_BOOKING = "/confirmBooking";
     private static final String SINGLE_PAGE_APPLICATION = "/spa";
+    private static final String SPA = "build/index.html";
     private static final String LIGHT = "/light";
     private static final String ERROR_PAGE = "errorPage";
 
@@ -269,7 +270,7 @@ public class BookingController {
 
     @GetMapping (SINGLE_PAGE_APPLICATION)
     public ModelAndView spa(){
-        return new ModelAndView("redirect:http://localhost:3000");
+        return new ModelAndView("redirect:" + SPA);
     }
 
     @GetMapping (LIGHT)
