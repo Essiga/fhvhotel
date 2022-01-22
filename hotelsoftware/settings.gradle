@@ -1,2 +1,2 @@
 rootProject.name = 'hotelsoftware'
-include ':Frontend', ':Backend'
+include ':Frontend'
