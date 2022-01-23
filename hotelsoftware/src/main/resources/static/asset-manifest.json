@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.92fb0439.css",
+    "main.js": "/static/js/main.6ce48af1.js",
+    "static/js/787.774729bc.chunk.js": "/static/js/787.774729bc.chunk.js",
+    "static/media/superiorRoom.jpg": "/static/media/superiorRoom.0e16b5a0e8d68dd31b2b.jpg",
+    "static/media/doubleRoom.jpg": "/static/media/doubleRoom.e41483d3f50729faf99b.jpg",
+    "static/media/singleRoom.jpg": "/static/media/singleRoom.101a8988b7d882098098.jpg",
+    "static/media/hotel.png": "/static/media/hotel.e7bdba3f125802edf821.png",
+    "static/media/mountain.webp": "/static/media/mountain.5969d61b677219379b9f.webp",
+    "static/media/bed.jpg": "/static/media/bed.29210453efedeaec2919.jpg",
+    "static/media/lobby.jpg": "/static/media/lobby.42c50ba67453f4b2670a.jpg",
+    "static/media/pool.jpg": "/static/media/pool.15592428010ceddced8a.jpg",
+    "static/media/snow.jpg": "/static/media/snow.bb9353b1eb9925efe28b.jpg",
+    "index.html": "/index.html",
+    "main.92fb0439.css.map": "/static/css/main.92fb0439.css.map",
+    "main.6ce48af1.js.map": "/static/js/main.6ce48af1.js.map",
+    "787.774729bc.chunk.js.map": "/static/js/787.774729bc.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.92fb0439.css",
+    "static/js/main.6ce48af1.js"
+  ]
+}

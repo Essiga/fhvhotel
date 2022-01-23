@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
-//TODO: try again without setter
-@Data //setters required by Hibernate
+
+@Data //required by Hibernate
 @NoArgsConstructor
 public class Room {
 
