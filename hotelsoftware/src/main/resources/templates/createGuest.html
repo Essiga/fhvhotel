@@ -26,11 +26,7 @@
         </div>
 
         <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest Overview</a>
-        </div>
-
-        <div>
-            <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+            <a href="roomOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
         </div>
 
     </nav>
@@ -45,9 +41,11 @@
             <h1 class="mb-4 font-semibold text-3xl text-blue-500">Create Booking</h1>
             <h2 class="mb-4 font-semibold text-xl">Step 1: create or choose guest</h2>
 
+            <h1 class="text-3xl mb-4 font-semibold">Guest</h1>
+
             <form id="guestForm" th:action="@{/chooseRoom}" th:object="${guestForm}" method="post">
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Group/Company</h2>  <!-- Block Description -->
 
@@ -67,7 +65,7 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Full Name *</h2>  <!-- Block Description -->
 
@@ -97,7 +95,7 @@
 
                 </div>
 
-                <div class="p-2 mb-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 mb-2 border border-gray-300"> <!-- Logical Block -->
 
                     <h2 class="mb-4 font-semibold">Address *</h2>  <!-- Block Description -->
 
@@ -151,7 +149,7 @@
 
                 </div>
 
-                <div class="p-2 border border-gray-300"> <!-- Logical Block -->
+                <div class="p-4 border border-gray-300"> <!-- Logical Block -->
 
                     <div class="flex-row">  <!-- Block Descriptions -->
 

@@ -33,7 +33,7 @@ public class GuestRepositoryImpl implements GuestRepository {
     }
 
     @Override
-    public List<Guest> findAllGuest(){
+    public List<Guest> findAllGuests(){
         TypedQuery<Guest> query = this.em.createQuery("FROM Guest", Guest.class);
         List<Guest> resultList = query.getResultList();
         return resultList;

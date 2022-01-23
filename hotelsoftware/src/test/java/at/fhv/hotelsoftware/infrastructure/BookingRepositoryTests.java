@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -69,8 +70,21 @@ public class BookingRepositoryTests {
         List<Booking> bookingsActual = bookingRepository.findAllBookings();
 
         //then
-        assertEquals(idExpected.getBookingId(), bookingsActual.get(0).getBookingId().getBookingId());
-        assertEquals(idExpected2.getBookingId(), bookingsActual.get(1).getBookingId().getBookingId());
+        boolean bookingExpectedExists = false;
+        boolean bookingExpected2Exists = false;
+
+        for (Booking booking : bookingsActual) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                bookingExpectedExists = true;
+            }
+
+            if (booking.getBookingId().getBookingId().equals(idExpected2.getBookingId())) {
+                bookingExpected2Exists = true;
+            }
+        }
+
+        assertTrue(bookingExpectedExists);
+        assertTrue(bookingExpected2Exists);
     }
 
     @Test
@@ -111,8 +125,6 @@ public class BookingRepositoryTests {
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
         GuestId guestId3 = new GuestId(UUID.randomUUID());
-
-        int expectedSize = 1;
 
         Booking bookingExpected = new Booking().builder().
                 bookingId(idExpected).
@@ -156,8 +168,16 @@ public class BookingRepositoryTests {
         List<Booking> actualCheckIns = bookingRepository.findTodaysCheckIns();
 
         assertFalse(actualCheckIns.isEmpty());
-        assertEquals(expectedSize, actualCheckIns.size());
-        assertEquals(idExpected.getBookingId(), actualCheckIns.get(0).getBookingId().getBookingId());
+
+        boolean expectedBookingExists = false;
+
+        for (Booking booking : actualCheckIns) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                expectedBookingExists = true;
+            }
+        }
+
+        assertTrue(expectedBookingExists);
     }
 
     @Test
@@ -170,8 +190,6 @@ public class BookingRepositoryTests {
         GuestId guestId = new GuestId(UUID.randomUUID());
         GuestId guestId2 = new GuestId(UUID.randomUUID());
         GuestId guestId3 = new GuestId(UUID.randomUUID());
-
-        int expectedSize = 1;
 
         Booking bookingExpected = new Booking().builder().
                 bookingId(idExpected).
@@ -215,7 +233,63 @@ public class BookingRepositoryTests {
         List<Booking> actualCheckOuts = bookingRepository.findTodaysCheckOuts();
 
         assertFalse(actualCheckOuts.isEmpty());
-        assertEquals(expectedSize, actualCheckOuts.size());
-        assertEquals(idExpected.getBookingId(), actualCheckOuts.get(0).getBookingId().getBookingId());
+
+        boolean expectedBookingExists = false;
+
+        for (Booking booking : actualCheckOuts) {
+            if (booking.getBookingId().getBookingId().equals(idExpected.getBookingId())) {
+                expectedBookingExists = true;
+            }
+        }
+
+        assertTrue(expectedBookingExists);
+    }
+
+    @Test
+    void given_bookings_when_findbookingsbydate_then_returncorrectbookings(){
+        //given
+        Booking bookingExpected = new Booking().builder().
+                bookingStatus(BookingStatus.CHECKEDIN).
+                checkInDate(LocalDate.now().minusDays(5)).
+                checkOutDate(LocalDate.now()).
+                singleRoom(1).
+                doubleRoom(1).
+                superiorRoom(1).
+                build();
+
+        Booking bookingExpected2 = new Booking().builder().
+                bookingStatus(BookingStatus.CONFIRMED).
+                checkInDate(LocalDate.now().minusDays(3)).
+                checkOutDate(LocalDate.now()).
+                singleRoom(2).
+                doubleRoom(2).
+                superiorRoom(2).
+                build();
+
+        Booking bookingNotExpected = new Booking().builder().
+                bookingStatus(BookingStatus.CHECKEDIN).
+                checkInDate(LocalDate.now().plusDays(1)).
+                checkOutDate(LocalDate.now().plusDays(5)).
+                singleRoom(3).
+                doubleRoom(3).
+                superiorRoom(3).
+                build();
+
+        List<Booking> expectedBookings = new LinkedList<>();
+        expectedBookings.add(bookingExpected);
+        expectedBookings.add(bookingExpected2);
+
+        bookingRepository.addBooking(bookingExpected);
+        bookingRepository.addBooking(bookingExpected2);
+        bookingRepository.addBooking(bookingNotExpected);
+        em.flush();
+
+
+        //when
+        List<Booking> bookings = bookingRepository.findBookingsByDate(LocalDate.now().minusDays(5), LocalDate.now());
+
+        //then
+        assertEquals(expectedBookings.size(), bookings.size());
+        assertEquals(expectedBookings, bookings);
     }
 }

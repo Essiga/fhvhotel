@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,7 +26,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = CURRENT_DATE() and booking_status = 'CONFIRMED'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = trunc(current_date()) and booking_status = 'CONFIRMED'", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;
@@ -42,7 +43,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckOuts() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_out_date = CURRENT_DATE() and booking_status = 'CHECKEDIN'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_out_date = trunc(current_date()) and booking_status = 'CHECKEDIN'", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;
@@ -55,5 +56,13 @@ public class BookingRepositoryImpl implements BookingRepository {
         return resultList;
     }
 
+    @Override
+    public List<Booking> findBookingsByDate(LocalDate checkIn, LocalDate checkOut){
+        TypedQuery<Booking> query = this.em.createQuery("From Booking Where (Check_in_date BETWEEN :checkIn AND :checkOut) AND (Check_out_date BETWEEN :checkIn AND :checkOut) AND Booking_status NOT LIKE 'COMPLETED'", Booking.class);
+        query.setParameter("checkIn", checkIn);
+        query.setParameter("checkOut", checkOut);
+        List<Booking> result = query.getResultList();
+        return result;
+    }
 }
 

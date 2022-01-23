@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Create Invoice</title>
+    <title>Summary</title>
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -25,12 +25,7 @@
             </div>
 
             <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Guest
-                    Overview</a>
-            </div>
-
-            <div>
-                <a href="#" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
+                <a href="roomOverview" class="hover:bg-green-400 block px-6 py-8 font-bold text-4xl text-white">Room Overview</a>
             </div>
 
         </nav>
@@ -64,12 +59,12 @@
                 <div class="p-2 mb-8 border border-gray-300">
 
                     <div>
-                        <div class="inline" id="fName" th:text="${guest.firstName}"></div>
-                        <div class="inline" id="lName" th:text="${guest.lastName}"></div>
-                        <div id="streetAdr" th:text="${guest.address.street}"></div>
-                        <div class="inline" id="zip" th:text="${guest.address.zip}"></div>
-                        <div class="inline" id="city" th:text="${guest.address.city}"></div>
-                        <div id="country" th:text="${guest.address.country}"></div>
+                        <div class="inline" id="fName" th:text="${guest?.firstName}"></div>
+                        <div class="inline" id="lName" th:text="${guest?.lastName}"></div>
+                        <div id="streetAdr" th:text="${guest?.address?.street}"></div>
+                        <div class="inline" id="zip" th:text="${guest?.address?.zip}"></div>
+                        <div class="inline" id="city" th:text="${guest?.address?.city}"></div>
+                        <div id="country" th:text="${guest?.address?.country}"></div>
                     </div>
 
                 </div>
@@ -187,7 +182,7 @@
 <div class="fixed hidden inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full" id="popup">
 
     <!-- popup -->
-    <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-3/5 border shadow-lg rounded-md bg-white">
+    <div class="p-4 relative top-20 left-20 mx-auto w-5/6 h-4/6 border shadow-lg rounded-md bg-white">
         <form class="h-full" th:action="@{splitInvoice}" th:object="${lineItemWrapper}" method="post">
 
         <tbody>
@@ -238,8 +233,17 @@
                         class="mt-4 w-1/5 center p-1 rounded-lg border-2 border-opacity-75 border-blue-50 text-center bg-blue-300 hover:bg-blue-400 focus:bg-blue-500 text-xl text-black">
                     Split Invoice
                 </button>
-            </div>
 
+            </div>
+            <div class="flex w-5/6 justify-end mt-2">
+                <div>
+                    <input class="h-4 w-4 mt-1 float-left mr-2 cursor-pointer" type="checkbox" th:field="${recipientState.anonymous}" th:checked="${recipientState.anonymous}" id="flexCheckDefault">
+                    <label class="form-check-label inline-block text-gray-800" for="flexCheckDefault">
+                        Create invoice without recipient
+                    </label>
+                </div>
+
+            </div>
         </form>
     </div>
 </div>

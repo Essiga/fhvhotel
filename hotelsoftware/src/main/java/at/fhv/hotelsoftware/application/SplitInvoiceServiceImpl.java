@@ -38,4 +38,22 @@ public class SplitInvoiceServiceImpl implements SplitInvoiceService {
         return InvoiceDTO.fromInvoice(splitInvoice);
 
     }
+
+    @Transactional
+    @Override
+    public InvoiceDTO splitInvoiceWithoutRecipient(BookingId bookingId, InvoiceNumber invoiceNumber, List<LineItem> lineItems) throws BookingNotFoundException, InvoiceNotFoundException, NoLineItemsException, LineItemsMismatchException, AllLineItemsRemovedException {
+        Optional<Booking> bookingOpt = bookingRepository.findBookingById(bookingId);
+
+        if(bookingOpt.isEmpty()){
+            throw new BookingNotFoundException("Booking with ID: " +bookingId.getBookingId().toString()+ " not found.");
+        }
+
+        Booking booking = bookingOpt.get();
+
+
+        Invoice splitInvoice = booking.splitInvoiceWithoutRecipient(invoiceNumber, lineItems);
+
+        return InvoiceDTO.fromInvoice(splitInvoice);
+
+    }
 }

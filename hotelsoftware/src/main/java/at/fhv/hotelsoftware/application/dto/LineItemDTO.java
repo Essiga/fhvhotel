@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Data //setters required by Hibernate
+@Data //required by Hibernate
 @NoArgsConstructor
 @EqualsAndHashCode
 public class LineItemDTO {

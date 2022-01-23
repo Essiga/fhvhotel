@@ -20,11 +20,15 @@ import java.util.Optional;
 public class CheckOutServiceImpl implements CheckOutService {
 
     @Autowired
-    BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
 
     @Autowired
-    RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
 
+    public CheckOutServiceImpl(BookingRepository bookingRepository, RoomRepository roomRepository) {
+        this.bookingRepository = bookingRepository;
+        this.roomRepository = roomRepository;
+    }
     @Transactional
     @Override
     public void checkOut(BookingId bookingId) throws RoomNotFoundException, BookingNotFoundException, RoomNotOccupiedException {

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VoucherCode {
 
-    private String voucherCode;
+    private String voucherCode = " ";
 
     public VoucherCode(String string) {
         this.voucherCode = string;
