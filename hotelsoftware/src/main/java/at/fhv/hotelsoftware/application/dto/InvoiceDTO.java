@@ -13,8 +13,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-//TODO: Thaler: setter in DTO ok for thymeleaf or should we use forms?
 @Data
 @NoArgsConstructor
 public class InvoiceDTO {

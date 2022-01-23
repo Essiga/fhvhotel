@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-//TODO: Jonathan: Required by thymeleaf or else the invoicenumber is empty
 @Data
 @NoArgsConstructor
 public class InvoiceNumber {

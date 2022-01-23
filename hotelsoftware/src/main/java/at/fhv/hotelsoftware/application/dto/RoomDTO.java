@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Data //setters required by Hibernate
+@Data //required by Hibernate
 @NoArgsConstructor
 public final class RoomDTO {
 
