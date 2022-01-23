@@ -21,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -48,7 +50,12 @@ public class CheckInSzenario extends SzenarioTxBoundary {
     @Autowired
     ViewRoomService viewRoomService;
 
+    @PersistenceContext
+    EntityManager em;
+
+
     private List<RoomDTO> freeRoomsList = new LinkedList<>();
+    private final BookingId bookingId = new BookingId(UUID.randomUUID());
 
     @Before
     public void beforeSzenario(){
@@ -81,7 +88,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
     @Given("the booking is already created with {int} single and {int} double room and {int} superior room")
     public void setupBooking(Integer countSingleRooms, Integer countDoubleRooms, Integer countSuperiorRooms) {
         Booking booking = Booking.builder()
-                .bookingId(new BookingId(UUID.randomUUID()))
+                .bookingId(bookingId)
                 .checkInDate(LocalDate.now())
                 .guestId(guestRepository.findAllGuests().get(0).getGuestId())
                 .checkOutDate(LocalDate.now().plusDays(1))
@@ -94,51 +101,58 @@ public class CheckInSzenario extends SzenarioTxBoundary {
         bookingRepository.addBooking(booking);
     }
 
+    @Given("rooms already exist")
+    public void setupRooms() {
 
-//    @Given("there is at least {int} free single room, {int} free double room and {int} free superior room")
-//    public void setupRooms(int countSingleRooms, int countDoubleRooms, int countSuperiorRooms) {
-//        for (int i = 0; i < countSingleRooms; i++) {
-//            Room singleRoom = Room.builder().
-//                    roomStatus(RoomStatus.FREE).
-//                    bookingId(null).
-//                    roomCategory(RoomCategory.SINGLE).
-//                    roomNumber(100 + i).build();
-//
-//            viewRoomService.createRoom(singleRoom);
-//        }
-//
-//        for (int i = 0; i < countDoubleRooms; i++) {
-//            Room doubleRoom = Room.builder().
-//                    roomStatus(RoomStatus.FREE).
-//                    bookingId(null).
-//                    roomCategory(RoomCategory.DOUBLE).
-//                    roomNumber(200 + i).build();
-//
-//            viewRoomService.createRoom(doubleRoom);
-//        }
-//
-//        for (int i = 0; i < countSuperiorRooms; i++) {
-//            Room superiorRoom = Room.builder().
-//                    roomStatus(RoomStatus.FREE).
-//                    bookingId(null).
-//                    roomCategory(RoomCategory.SUPERIOR).
-//                    roomNumber(300 + i).build();
-//
-//            viewRoomService.createRoom(superiorRoom);
-//        }
-//    }
+        for (int i = 0; i < 10; i++)
+        {
+            Room singleRoom = Room.builder()
+                    .roomCategory(RoomCategory.SINGLE)
+                    .roomNumber(700 + i)
+                    .roomStatus(RoomStatus.FREE)
+                    .bookingId(null)
+                    .build();
 
+            this.em.persist(singleRoom);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            Room doubleRoom = Room.builder()
+                    .roomCategory(RoomCategory.DOUBLE)
+                    .roomNumber(800 + i)
+                    .roomStatus(RoomStatus.FREE)
+                    .bookingId(null)
+                    .build();
+
+            this.em.persist(doubleRoom);
+        }
+
+        for (int i = 0; i < 10; i++)
+        {
+            Room superiorRoom = Room.builder()
+                    .roomCategory(RoomCategory.SUPERIOR)
+                    .roomNumber(900 + i)
+                    .roomStatus(RoomStatus.FREE)
+                    .bookingId(null)
+                    .build();
+
+            this.em.persist(superiorRoom);
+        }
+
+        this.em.flush();
+    }
 
     @Given("a list of free rooms is already generated")
     public void generateRooms() throws NotEnoughRoomsException, BookingNotFoundException {
-        Booking booking = bookingRepository.findAllBookings().get(0);
+        Booking booking = bookingRepository.findBookingById(bookingId).get();
         this.freeRoomsList = checkInService.findFreeRoomsForBooking(booking.getBookingId());
     }
 
 
     @When("I check in the booking")
     public void checkIn() throws RoomCategoryMismatchException, RoomAlreadyOccupiedException, DoubleRoomNumberException, BookingNotFoundException, RoomNotFoundException {
-        checkInService.checkIn(bookingRepository.findAllBookings().get(0).getBookingId(), freeRoomsList);
+        checkInService.checkIn(bookingRepository.findBookingById(bookingId).get().getBookingId(), freeRoomsList);
     }
 
 
@@ -158,7 +172,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
 
     @Then("the booking status should change from confirmed to checkedin")
     public void expectCorrectBookingStatus() {
-        Booking booking = bookingRepository.findAllBookings().get(0);
+        Booking booking = bookingRepository.findBookingById(bookingId).get();
 
         assertEquals(BookingStatus.CHECKEDIN, booking.getBookingStatus());
     }
@@ -166,7 +180,7 @@ public class CheckInSzenario extends SzenarioTxBoundary {
     @Then("the room is assigned to the correct booking")
     public void expectCorrectBookingIdInRoom() throws RoomNotFoundException {
         List<RoomDTO> roomDTOs = viewRoomService.findAllRooms();
-        Booking booking = bookingRepository.findAllBookings().get(0);
+        Booking booking = bookingRepository.findBookingById(bookingId).get();
 
         for (RoomDTO roomDTO : roomDTOs) {
             if (freeRoomsList.contains(roomDTO)) {
