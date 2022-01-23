@@ -2,37 +2,21 @@ package at.fhv.hotelsoftware.view;
 
 import at.fhv.hotelsoftware.application.api.*;
 import at.fhv.hotelsoftware.application.dto.*;
-import at.fhv.hotelsoftware.domain.api.BookingRepository;
-import at.fhv.hotelsoftware.domain.api.GuestRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
-import at.fhv.hotelsoftware.domain.model.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
-import at.fhv.hotelsoftware.view.form.FreeRoomListWrapper;
 import at.fhv.hotelsoftware.view.form.BookingForm;
 import at.fhv.hotelsoftware.view.form.GuestForm;
-import at.fhv.hotelsoftware.view.form.LineItemWrapper;
-import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.TemplateEngine;
-import org.thymeleaf.context.Context;
-import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Controller
 public class BookingController {
@@ -267,9 +251,14 @@ public class BookingController {
         return new ModelAndView("redirect:"+"/");
     }
 
+//    @GetMapping (SINGLE_PAGE_APPLICATION)
+//    public ModelAndView spa(){
+//        return new ModelAndView("redirect:http://localhost:3000");
+//    }
+
     @GetMapping (SINGLE_PAGE_APPLICATION)
     public ModelAndView spa(){
-        return new ModelAndView("redirect:http://localhost:3000");
+        return new ModelAndView("index.html");
     }
 
     @GetMapping (LIGHT)
