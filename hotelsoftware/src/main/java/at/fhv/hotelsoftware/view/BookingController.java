@@ -48,7 +48,10 @@ public class BookingController {
     private static final String CONFIRM_BOOKING = "/confirmBooking";
     private static final String SINGLE_PAGE_APPLICATION = "/spa";
     private static final String LIGHT = "/light";
+    private static final String INDEX = "index.html";
+
     private static final String ERROR_PAGE = "errorPage";
+
 
     @GetMapping(DASHBOARD_URL)
     public ModelAndView showDashboard(Model model) {
@@ -258,7 +261,7 @@ public class BookingController {
 
     @GetMapping (SINGLE_PAGE_APPLICATION)
     public ModelAndView spa(){
-        return new ModelAndView("index.html");
+        return new ModelAndView("redirect:" + INDEX);
     }
 
     @GetMapping (LIGHT)
