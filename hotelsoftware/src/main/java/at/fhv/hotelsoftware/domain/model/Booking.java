@@ -1,5 +1,6 @@
 package at.fhv.hotelsoftware.domain.model;
 
+import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.exceptions.*;
 import at.fhv.hotelsoftware.domain.model.valueobjects.*;
 import lombok.Builder;

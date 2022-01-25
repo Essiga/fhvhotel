@@ -3,6 +3,7 @@ package at.fhv.hotelsoftware.infrastructure;
 import at.fhv.hotelsoftware.domain.model.Booking;
 import at.fhv.hotelsoftware.domain.api.BookingRepository;
 import at.fhv.hotelsoftware.domain.model.valueobjects.BookingId;
+import at.fhv.hotelsoftware.domain.model.valueobjects.InvoiceNumber;
 import org.springframework.stereotype.Component;
 
 
@@ -26,7 +27,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckIns() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_in_date = trunc(current_date()) and booking_status = 'CONFIRMED'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE trunc(check_in_date) = trunc(current_date()) and booking_status = 'CONFIRMED'", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;
@@ -43,7 +44,7 @@ public class BookingRepositoryImpl implements BookingRepository {
 
     @Override
     public List<Booking> findTodaysCheckOuts() {
-        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE check_out_date = trunc(current_date()) and booking_status = 'CHECKEDIN'", Booking.class);
+        TypedQuery<Booking> query = this.em.createQuery("FROM Booking WHERE trunc(check_out_date) = trunc(current_date()) and booking_status = 'CHECKEDIN'", Booking.class);
         List<Booking> resultList = query.getResultList();
 
         return resultList;

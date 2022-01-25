@@ -174,6 +174,10 @@ public class CheckOutController {
             InvoiceDTO invoiceDTO = findInvoiceByNumber(invoiceNumber, invoiceDTOs);
             GuestData guest = invoiceDTO.getGuestData();
 
+            if(guest == null){
+                guest = new GuestData();
+            }
+
             model.addAttribute("booking", bookingDTO);
             model.addAttribute("guest",guest);
             model.addAttribute("room", roomDTO);
